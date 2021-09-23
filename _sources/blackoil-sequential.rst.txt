@@ -1,0 +1,26 @@
+`blackoil-sequential`: Sequential implicit black-oil solvers
+*******************************************
+
+.. include:: mrst/blackoil_sequential/README.txt
+
+Models
+===============================
+
+Base classes
+-------------------------------
+.. automodule:: blackoil_sequential.models
+	:members:
+	:show-inheritance:
+
+.. automodule:: blackoil_sequential.models.equations
+	:members:
+
+Utilities
+===============================
+.. automodule:: blackoil_sequential.utils
+	:members:
+
+
+Examples
+===============================
+.. include:: examples/examples_blackoil_sequential.txt

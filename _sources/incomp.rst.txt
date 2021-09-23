@@ -1,0 +1,22 @@
+`incomp`: Solvers for incompressible flow and transport
+*******************************************
+.. include:: mrst/incomp/README
+
+.. automodule:: incomp
+	:members:
+
+.. automodule:: incomp.fluid
+	:members:
+
+.. automodule:: incomp.fluid.utils
+	:members:
+
+.. automodule:: incomp.fluid.incompressible
+	:members:
+
+.. automodule:: incomp.transport
+	:members:
+
+Examples
+===============================
+.. include:: examples/examples_incomp.txt

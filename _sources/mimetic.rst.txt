@@ -1,0 +1,13 @@
+`mimetic`: Mimetic solvers for pressure problems
+*******************************************
+.. include:: mrst/mimetic/README
+
+.. automodule:: mimetic
+	:members:
+
+.. automodule:: mimetic.utils
+	:members:
+
+Examples
+===============================
+.. include:: examples/examples_mimetic.txt

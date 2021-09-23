@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>spe10: Access to the SPE10 benchmark case &mdash; The Matlab Reservoir Simulation Toolbox 2019b documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="steady-state Steady-state upscaling of functions" href="steady-state.html" />
+    <link rel="prev" title="solvent: Solvent solvers" href="solvent.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> The Matlab Reservoir Simulation Toolbox
+            <img src="_static/mrstlogo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                2019b
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="core.html">Core functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-core.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-core</span></code>: Automatic Differentiation Core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-props.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-props</span></code>: PVT, fluid models and other properties for the AD-solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-blackoil.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-blackoil</span></code>: Black-oil solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-eor.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-eor</span></code>: Enhanced oil recovery solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-mechanics.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-mechanics</span></code>: Coupled flow and mechanics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adjoint.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">adjoint</span></code>: Two-phase, incompressible adjoint solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agglom.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">agglom</span></code>: Flow and property-based coarse-grid generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="blackoil-sequential.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">blackoil-sequential</span></code>: Sequential implicit black-oil solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">book</span></code>: Book examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coarsegrid.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">coarsegrid</span></code>: Generation of coarse grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compositional.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">compositional</span></code>: Equation-of-state compositional solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="co2lab.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">co2lab</span></code>: Numerical CO<sub>2</sub> laboratory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deckformat.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">deckformat</span></code>: Reading and conversion of input decks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dfm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dfm</span></code>: Discrete fracture matrix implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dg.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dg</span></code>: Discontinous Galerkin discretizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="diagnostics.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">diagnostics</span></code>: Flow diagnostics functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dual_porosity.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dual-porosity</span></code>: Dual porosity/permeability model for fractures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fvbiot.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">fvbiot</span></code>: Consistent finite-volume discretizations for poroelasticity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geochemistry.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">geochemistry</span></code>: Surface geochemistry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heterogeneity.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">heterogeneity</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="hfm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">hfm</span></code>: Hierarchical and embedded fractures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="incomp.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">incomp</span></code>: Solvers for incompressible flow and transport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgeometry.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">libgeometry</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linearsolvers.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">linearsolvers</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab_bgl.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">matlab_bgl</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mimetic.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mimetic</span></code>: Mimetic solvers for pressure problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpfa.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mpfa</span></code>: Multi-point flux approximation solvers for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mrst_api.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mrst_api</span></code>: API for writing C/C++ for MRST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mrst-gui.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mrst-gui</span></code>: Graphical user-interfaces for MRST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msfvm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msfvm</span></code>: Multiscale Finite-Volume method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msmfem.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msmfem</span></code>: Multiscale Mixed Finite-Element method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msrsb.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msrsb</span></code>: Multiscale Restriction-Smoothed Basis method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nwm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">nwm</span></code>: Near Wellbore Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opm_gridprocessing.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">opm_gridprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimization.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">optimization</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="re-mpfa.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">re-mpfa</span></code>: Richards’ equation with multi-point flux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvent.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">solvent</span></code>: Solvent solvers</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">spe10</span></code>: Access to the SPE10 benchmark case</a></li>
+<li class="toctree-l1"><a class="reference internal" href="steady-state.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">steady-state</span></code> Steady-state upscaling of functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="streamlines.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">streamlines</span></code>: Compute streamlines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triangle.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">triangle</span></code>: Triangular grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upscaling.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">upscaling</span></code>: Upscaling of reservoir problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vem.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">vem</span></code>: Virtual element method on general grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vemmech.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">vemmech</span></code>: Mechanics for general grids using the virtual element method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wellpaths.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">wellpaths</span></code>: Generation of wells using general curves</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">The Matlab Reservoir Simulation Toolbox</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><code class="xref mat mat-func docutils literal notranslate"><span class="pre">spe10</span></code>: Access to the SPE10 benchmark case</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/spe10.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="spe10-access-to-the-spe10-benchmark-case">
+<h1><a class="reference internal" href="#spe10.base_case.spe10" title="spe10.base_case.spe10"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">spe10</span></code></a>: Access to the SPE10 benchmark case<a class="headerlink" href="#spe10-access-to-the-spe10-benchmark-case" title="Permalink to this headline"></a></h1>
+<p>Functions and utilities for creating and manipulating test cases based on the 10th SPE Comparative Solution Project (SPE10). Both the model 1 and the model 2 subproblems are available for download, with routines for setting up and working the grid and petrophysical properties.</p>
+<span class="target" id="module-spe10"></span><dl class="mat script">
+<dt class="sig sig-object mat" id="spe10.Contents">
+<span class="sig-name descname"><span class="pre">Contents</span></span><a class="headerlink" href="#spe10.Contents" title="Permalink to this definition"></a></dt>
+<dd><p>SPE10</p>
+<dl class="simple">
+<dt>Files</dt><dd><p>getSPE10_model_1_fluid   - Construct ADI Fluid Object for Model 1 of Tenth SPE CSP
+getSPE10_model_1_relperm - Define Oil/Gas Relative Permeability Properties for Model 1 of tenth SPE CSP
+getSPE10_model_1_rock    - Define rock properties for Model 1 of tenth SPE CSP
+getSPE10rock             - Define rock properties for Model 2 of tenth SPE CSP
+getSPE10setup            - Initialise properties for Model 2 of tenth SPE Comparative Solution Project
+grdeclBox                - Make a GRDECL structure for simple corner-point grid, possibly faulted.
+make_spe10_data          - Create on-disk (MAT file) representation of SPE 10 ‘rock’ data.
+setupSPE10_AD            - Undocumented Utility Function
+SPE10_rock               - Define rock properties for Model 2 of tenth SPE CSP
+SPE10_setup              - Initialise properties for Model 2 of tenth SPE Comparative Solution Project</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="spe10.SPE10_rock">
+<span class="sig-name descname"><span class="pre">SPE10_rock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#spe10.SPE10_rock" title="Permalink to this definition"></a></dt>
+<dd><p>Define rock properties for Model 2 of tenth SPE CSP</p>
+<p>This function is DEPRECATED and will be removed in a future version of
+MRST.  Please switch to using function getSPE10rock instead.</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">rock</span> <span class="p">=</span> <span class="n">SPE10_rock</span>
+<span class="n">rock</span> <span class="p">=</span> <span class="n">SPE10_rock</span><span class="p">(</span><span class="n">layers</span><span class="p">)</span>
+<span class="n">rock</span> <span class="p">=</span> <span class="n">SPE10_rock</span><span class="p">(</span><span class="no">I</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>layers</strong> – <p>Which of the 85 model layers to include in a specific test.
+OPTIONAL.  If unspecified, all 85 layers (for a total of
+60-by-220-by-85 == 1,122,000 cells) are included.</p>
+<dl class="simple">
+<dt>Some possible values are</dt><dd><p>layers = ( 1 : 35).’;  %  Tarbert formation
+layers = (36 : 85).’;  %  Upper Ness formation</p>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>I</strong> – <p>Global Cartesian indices identifying subset of rock data.
+Useful, e.g., in extracting lateral sections.  Arrays must
+satisfy</p>
+<blockquote>
+<div><p>ALL((0 &lt; I) &amp; (I &lt;=  60)) &amp;&amp; …
+ALL((0 &lt; J) &amp; (J &lt;= 220)) &amp;&amp; …
+ALL((0 &lt; K) &amp; (K &lt;=  85))</p>
+</div></blockquote>
+<p>OPTIONAL.  If unspecified, treated as I=1:60,J=1:220,K=1:85
+(i.e., the entire model; 1,122,000 cells).  In other words,
+equivalently to an unspecified ‘layers’ input.</p>
+</p></li>
+<li><p><strong>J</strong> – <p>Global Cartesian indices identifying subset of rock data.
+Useful, e.g., in extracting lateral sections.  Arrays must
+satisfy</p>
+<blockquote>
+<div><p>ALL((0 &lt; I) &amp; (I &lt;=  60)) &amp;&amp; …
+ALL((0 &lt; J) &amp; (J &lt;= 220)) &amp;&amp; …
+ALL((0 &lt; K) &amp; (K &lt;=  85))</p>
+</div></blockquote>
+<p>OPTIONAL.  If unspecified, treated as I=1:60,J=1:220,K=1:85
+(i.e., the entire model; 1,122,000 cells).  In other words,
+equivalently to an unspecified ‘layers’ input.</p>
+</p></li>
+<li><p><strong>K</strong> – <p>Global Cartesian indices identifying subset of rock data.
+Useful, e.g., in extracting lateral sections.  Arrays must
+satisfy</p>
+<blockquote>
+<div><p>ALL((0 &lt; I) &amp; (I &lt;=  60)) &amp;&amp; …
+ALL((0 &lt; J) &amp; (J &lt;= 220)) &amp;&amp; …
+ALL((0 &lt; K) &amp; (K &lt;=  85))</p>
+</div></blockquote>
+<p>OPTIONAL.  If unspecified, treated as I=1:60,J=1:220,K=1:85
+(i.e., the entire model; 1,122,000 cells).  In other words,
+equivalently to an unspecified ‘layers’ input.</p>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>rock</strong> – Rock structure having fields ‘perm’ and ‘poro’ pertaining to
+the specified layers or cell subset.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The permeability data is returned in units of milli*darcy.</p>
+<p>It is the caller’s responsibility to convert this data into MRST’s
+strict SI-only unit conventions.  Function ‘convertFrom’ provides one
+conversion method.</p>
+</div>
+<p class="rubric">Example:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">rock</span> <span class="p">=</span> <span class="n">SPE10_rock</span><span class="p">(</span><span class="mi">85</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#spe10.getSPE10rock" title="spe10.getSPE10rock"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">getSPE10rock</span></code></a>, <a class="reference internal" href="#spe10.SPE10_setup" title="spe10.SPE10_setup"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">SPE10_setup</span></code></a>, <a class="reference internal" href="core.html#core.utils.units.convertFrom" title="core.utils.units.convertFrom"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">convertFrom</span></code></a>, <a class="reference internal" href="core.html#core.utils.units.milli" title="core.utils.units.milli"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">milli</span></code></a>, <a class="reference internal" href="core.html#core.utils.units.darcy" title="core.utils.units.darcy"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">darcy</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="spe10.SPE10_setup">
+<span class="sig-name descname"><span class="pre">SPE10_setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#spe10.SPE10_setup" title="Permalink to this definition"></a></dt>
+<dd><p>Initialise properties for Model 2 of tenth SPE Comparative Solution Project</p>
+<p>This function is DEPRECATED and will be removed in a future version of
+MRST.  Please switch to using function getSPE10setup instead.</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">G</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">rock</span><span class="p">]</span> <span class="p">=</span> <span class="n">SPE10_setup</span>
+<span class="p">[</span><span class="n">G</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">rock</span><span class="p">]</span> <span class="p">=</span> <span class="n">SPE10_setup</span><span class="p">(</span><span class="n">layers</span><span class="p">)</span>
+<span class="p">[</span><span class="n">G</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">rock</span><span class="p">]</span> <span class="p">=</span> <span class="n">SPE10_setup</span><span class="p">(</span><span class="n">layers</span><span class="p">,</span> <span class="n">wloc</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>layers</strong> – <p>Which of the 85 model layers to include in a specific test.
+OPTIONAL.  If unspecified or empty, all 85 layers (a total of
+60-by-220-by-85 == 1,122,000 cells) are included.</p>
+<dl class="simple">
+<dt>Some possible values are</dt><dd><p>layers = ( 1 : 35).’;  %  Tarbert formation
+layers = (36 : 85).’;  %  Upper Ness formation</p>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>wloc</strong> – <p>Location of the five wells. OPTIONAL. If unspecified, we use
+the default location</p>
+<blockquote>
+<div><dl class="simple">
+<dt>wloc     = [  1,   60,     1,   60,   30;</dt><dd><p>1,    1,   220,  220,  110];</p>
+</dd>
+</dl>
+</div></blockquote>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>G</strong> – MRST grid structure as described in grid_structure.</p></li>
+<li><p><strong>W</strong> – Well structure.  Injector at 500 Bar, producers at 200 Bar.
+Inner product ‘ip_tpf’.</p></li>
+<li><p><strong>rock</strong> – Rock structure having fields ‘perm’ and ‘poros’ pertaining to
+the specified layers.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">G</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">rock</span><span class="p">]</span> <span class="p">=</span> <span class="n">SPE10_setup</span><span class="p">(</span><span class="mi">85</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#spe10.SPE10_rock" title="spe10.SPE10_rock"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">SPE10_rock</span></code></a>, <a class="reference internal" href="core.html#core.gridprocessing.computeGeometry" title="core.gridprocessing.computeGeometry"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">computeGeometry</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="spe10.getSPE10_model_1_fluid">
+<span class="sig-name descname"><span class="pre">getSPE10_model_1_fluid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#spe10.getSPE10_model_1_fluid" title="Permalink to this definition"></a></dt>
+<dd><p>Construct ADI Fluid Object for Model 1 of Tenth SPE CSP</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">fluid</span> <span class="p">=</span> <span class="n">getSPE10_model_1_fluid</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>None.</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>fluid</strong> – Simplified ADI fluid object, suitable for use with simulator
+function simulateScheduleAD, that represents the petrochemical
+properties of the fluids in Model 1 of the Tenth SPE CSP.  The
+fluids are immiscible and incompressible with constant
+viscosities, but there is a non-trivial relative permeability
+relation between the oil and gas phases.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#spe10.getSPE10_model_1_relperm" title="spe10.getSPE10_model_1_relperm"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">getSPE10_model_1_relperm</span></code></a>, <a class="reference internal" href="ad-props.html#ad_props.initSimpleADIFluid" title="ad_props.initSimpleADIFluid"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">initSimpleADIFluid</span></code></a>, <a class="reference internal" href="ad-props.html#ad_props.props.initDeckADIFluid" title="ad_props.props.initDeckADIFluid"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">initDeckADIFluid</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="spe10.getSPE10_model_1_relperm">
+<span class="sig-name descname"><span class="pre">getSPE10_model_1_relperm</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#spe10.getSPE10_model_1_relperm" title="Permalink to this definition"></a></dt>
+<dd><p>Define Oil/Gas Relative Permeability Properties for Model 1 of tenth SPE CSP</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">kr_deck</span> <span class="p">=</span> <span class="n">getSPE10_model_1_relperm</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>None.</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>kr_deck</strong> – Stripped-down simulation deck for ADI-fluid (relperm)
+construction.  This input-deck contains just enough basic
+information to form relative permeability curves from the CSP
+benchmark data through the use of module ‘ad-props’s function
+initDeckADIFluid.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#spe10.getSPE10_model_1_rock" title="spe10.getSPE10_model_1_rock"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">getSPE10_model_1_rock</span></code></a>, <a class="reference internal" href="ad-props.html#ad_props.props.initDeckADIFluid" title="ad_props.props.initDeckADIFluid"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">initDeckADIFluid</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="spe10.getSPE10_model_1_rock">
+<span class="sig-name descname"><span class="pre">getSPE10_model_1_rock</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#spe10.getSPE10_model_1_rock" title="Permalink to this definition"></a></dt>
+<dd><p>Define rock properties for Model 1 of tenth SPE CSP</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">rock</span> <span class="p">=</span> <span class="n">getSPE10_model_1_rock</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>None.</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>rock</strong> – Rock structure having fields ‘perm’ and ‘poro’ for the entire
+100-by-1-by-20 cell geometry of the first benchmark dataset of
+the tenth SPE comparative solution project.  The permeability
+distribution is a correlated geostatistically generated field
+whereas the porosity is homogenous (phi=0.2) throughout the
+formation.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The permeability data is returned in strict SI units (metres squared).</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#spe10.getSPE10rock" title="spe10.getSPE10rock"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">getSPE10rock</span></code></a>, <a class="reference internal" href="#spe10.make_spe10_data" title="spe10.make_spe10_data"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">make_spe10_data</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="spe10.getSPE10rock">
+<span class="sig-name descname"><span class="pre">getSPE10rock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#spe10.getSPE10rock" title="Permalink to this definition"></a></dt>
+<dd><p>Define rock properties for Model 2 of tenth SPE CSP</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">rock</span> <span class="p">=</span> <span class="n">getSPE10rock</span>
+<span class="n">rock</span> <span class="p">=</span> <span class="n">getSPE10rock</span><span class="p">(</span><span class="n">layers</span><span class="p">)</span>
+<span class="n">rock</span> <span class="p">=</span> <span class="n">getSPE10rock</span><span class="p">(</span><span class="no">I</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>layers</strong> – <p>Which of the 85 model layers to include in a specific test.
+OPTIONAL.  If unspecified, all 85 layers (for a total of
+60-by-220-by-85 == 1,122,000 cells) are included.</p>
+<dl class="simple">
+<dt>Some possible values are</dt><dd><p>layers = ( 1 : 35).’;  %  Tarbert formation
+layers = (36 : 85).’;  %  Upper Ness formation</p>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>I</strong> – <p>Global Cartesian indices identifying subset of rock data.
+Useful, e.g., in extracting lateral sections.  Arrays must
+satisfy</p>
+<blockquote>
+<div><p>ALL((0 &lt; I) &amp; (I &lt;=  60)) &amp;&amp; …
+ALL((0 &lt; J) &amp; (J &lt;= 220)) &amp;&amp; …
+ALL((0 &lt; K) &amp; (K &lt;=  85))</p>
+</div></blockquote>
+<p>OPTIONAL.  If unspecified, treated as I=1:60,J=1:220,K=1:85
+(i.e., the entire model; 1,122,000 cells).  In other words,
+equivalently to an unspecified ‘layers’ input.</p>
+</p></li>
+<li><p><strong>J</strong> – <p>Global Cartesian indices identifying subset of rock data.
+Useful, e.g., in extracting lateral sections.  Arrays must
+satisfy</p>
+<blockquote>
+<div><p>ALL((0 &lt; I) &amp; (I &lt;=  60)) &amp;&amp; …
+ALL((0 &lt; J) &amp; (J &lt;= 220)) &amp;&amp; …
+ALL((0 &lt; K) &amp; (K &lt;=  85))</p>
+</div></blockquote>
+<p>OPTIONAL.  If unspecified, treated as I=1:60,J=1:220,K=1:85
+(i.e., the entire model; 1,122,000 cells).  In other words,
+equivalently to an unspecified ‘layers’ input.</p>
+</p></li>
+<li><p><strong>K</strong> – <p>Global Cartesian indices identifying subset of rock data.
+Useful, e.g., in extracting lateral sections.  Arrays must
+satisfy</p>
+<blockquote>
+<div><p>ALL((0 &lt; I) &amp; (I &lt;=  60)) &amp;&amp; …
+ALL((0 &lt; J) &amp; (J &lt;= 220)) &amp;&amp; …
+ALL((0 &lt; K) &amp; (K &lt;=  85))</p>
+</div></blockquote>
+<p>OPTIONAL.  If unspecified, treated as I=1:60,J=1:220,K=1:85
+(i.e., the entire model; 1,122,000 cells).  In other words,
+equivalently to an unspecified ‘layers’ input.</p>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>rock</strong> – Rock structure having fields ‘perm’ and ‘poro’ pertaining to
+the specified layers or cell subset.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The permeability data is returned in strict SI units (metres squared).</p>
+</div>
+<p class="rubric">Example:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">rock</span> <span class="p">=</span> <span class="n">getSPE10rock</span><span class="p">(</span><span class="mi">85</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#spe10.getSPE10setup" title="spe10.getSPE10setup"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">getSPE10setup</span></code></a>, <a class="reference internal" href="#spe10.make_spe10_data" title="spe10.make_spe10_data"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">make_spe10_data</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="spe10.getSPE10setup">
+<span class="sig-name descname"><span class="pre">getSPE10setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#spe10.getSPE10setup" title="Permalink to this definition"></a></dt>
+<dd><p>Initialise properties for Model 2 of tenth SPE Comparative Solution Project</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">G</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">rock</span><span class="p">]</span> <span class="p">=</span> <span class="n">getSPE10setup</span>
+<span class="p">[</span><span class="n">G</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">rock</span><span class="p">]</span> <span class="p">=</span> <span class="n">getSPE10setup</span><span class="p">(</span><span class="n">layers</span><span class="p">)</span>
+<span class="p">[</span><span class="n">G</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">rock</span><span class="p">]</span> <span class="p">=</span> <span class="n">getSPE10setup</span><span class="p">(</span><span class="n">layers</span><span class="p">,</span> <span class="n">wloc</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>layers</strong> – <p>Which of the 85 model layers to include in a specific test.
+OPTIONAL.  If unspecified or empty, all 85 layers (a total of
+60-by-220-by-85 == 1,122,000 cells) are included.</p>
+<dl class="simple">
+<dt>Some possible values are</dt><dd><p>layers = ( 1 : 35).’;  %  Tarbert formation
+layers = (36 : 85).’;  %  Upper Ness formation</p>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>wloc</strong> – <p>Location of the five wells. OPTIONAL. If unspecified, we use
+the default location</p>
+<blockquote>
+<div><dl class="simple">
+<dt>wloc     = [  1,   60,     1,   60,   30;</dt><dd><p>1,    1,   220,  220,  110];</p>
+</dd>
+</dl>
+</div></blockquote>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>G</strong> – MRST grid structure as described in grid_structure.</p></li>
+<li><p><strong>W</strong> – Well structure.  Injector at 500 Bar, producers at 200 Bar.
+Inner product ‘ip_tpf’.</p></li>
+<li><p><strong>rock</strong> – Rock structure having fields ‘perm’ and ‘poro’ pertaining to
+the specified layers.  Permeability values are in strict SI
+(metres squared).</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">G</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">rock</span><span class="p">]</span> <span class="p">=</span> <span class="n">getSPE10setup</span><span class="p">(</span><span class="mi">85</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#spe10.getSPE10rock" title="spe10.getSPE10rock"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">getSPE10rock</span></code></a>, <code class="xref mat mat-func docutils literal notranslate"><span class="pre">makeSPE10DataAvailable</span></code>.</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="spe10.grdeclBox">
+<span class="sig-name descname"><span class="pre">grdeclBox</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">dims</span></em>, <em class="sig-param"><span class="pre">physDims</span></em>, <em class="sig-param"><span class="pre">drop</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#spe10.grdeclBox" title="Permalink to this definition"></a></dt>
+<dd><p>Make a GRDECL structure for simple corner-point grid, possibly faulted.</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">grdeclBox</span><span class="p">(</span><span class="n">dims</span><span class="p">,</span> <span class="n">physDims</span><span class="p">)</span>
+<span class="n">grdecl</span> <span class="p">=</span> <span class="n">simpleGrdecl</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">grdecl</span> <span class="p">=</span> <span class="n">simpleGrdecl</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">drop</span><span class="p">)</span>
+<span class="n">grdecl</span> <span class="p">=</span> <span class="n">simpleGrdecl</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">drop</span><span class="p">,</span> <span class="s">&#39;pn1&#39;</span><span class="p">,</span> <span class="n">pv1</span><span class="p">,</span> <span class="p">...)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>This function creates a nx-by-ny-by-nz cell corner-point grid.  The
+resulting geometry discretises the physical domain</p>
+<blockquote>
+<div><p>[0,1] x [0,1] x [0,0.5].</p>
+</div></blockquote>
+<p>which is deformed by adding sin(x) and sin(x*y) perturbations.  In
+addition, the pillars are skewed.  If a second input parameter is
+provided, a single fault of given drop size is added in the model at
+approximately x=0.5.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> – Three-element vector, [nx, ny, nz], specifying the number of
+cells in the ‘x’, ‘y’, and ‘z’ coordinate directions
+respectively.</p></li>
+<li><p><strong>drop</strong> – Length of fault drop (i.e., the physical length (in metres) by
+which the two blocks should be offset (along the fault)).
+The drop size can be a numeric value or a handle to a function
+of a spatial coordinate along the fault.
+OPTIONAL.  Default value: drop = 0 (no fault).</p></li>
+<li><p><strong>'pn'/pv</strong> – <p>List of ‘key’/value pairs defining optional paramters.  The
+supported options are:</p>
+<blockquote>
+<div><ul>
+<li><dl class="simple">
+<dt>flat –</dt><dd><p>Flag indicating if the sine perturbations should <em>NOT</em>
+be added.  Default: FALSE (add perturbations).</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>undisturbed –</dt><dd><p>Flag indicating that skew pillars should not be created.
+Default: FALSE (make skew pillars)</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>grdecl</strong> – A GRDECL structure suitable for further processing by
+function ‘processGRDECL’ or for permanent storage on disk by
+function ‘writeGRDECL’.</p>
+</dd>
+</dl>
+<p class="rubric">Example:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="c">% 1) Create a 20-by-20-by-5 faulted grid with a fault drop of 0.15 (m).</span>
+<span class="n">grdecl</span> <span class="p">=</span> <span class="n">simpleGrdecl</span><span class="p">([</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="mf">0.15</span><span class="p">);</span>
+
+<span class="c">% Create the grid data structure.</span>
+<span class="n">G</span> <span class="p">=</span> <span class="n">processGRDECL</span><span class="p">(</span><span class="n">grdecl</span><span class="p">);</span>
+
+<span class="c">% Plot the resulting geometry.</span>
+<span class="nb">figure</span><span class="p">,</span> <span class="n">hg1</span> <span class="p">=</span> <span class="n">plotGrid</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s">&#39;FaceAlpha&#39;</span><span class="p">,</span> <span class="mf">0.625</span><span class="p">);</span>
+<span class="nb">view</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="nb">grid</span> <span class="n">on</span><span class="p">,</span> <span class="nb">axis</span> <span class="n">tight</span>
+
+<span class="c">% 2) Create the same 20-by-20-by-5 faulted grid, but now with a</span>
+<span class="c">%    variable fault drop implemented as a function handle.</span>
+<span class="n">grdecl</span> <span class="p">=</span> <span class="n">simpleGrdecl</span><span class="p">([</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">@(</span><span class="n">x</span><span class="p">)</span> <span class="mf">0.05</span> <span class="o">*</span> <span class="p">(</span><span class="nb">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="nb">pi</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span> <span class="p">);</span>
+
+<span class="c">% Create the grid data structure.</span>
+<span class="n">G</span> <span class="p">=</span> <span class="n">processGRDECL</span><span class="p">(</span><span class="n">grdecl</span><span class="p">);</span>
+
+<span class="c">% Plot the resulting geometry.</span>
+<span class="nb">figure</span><span class="p">,</span> <span class="n">hg2</span> <span class="p">=</span> <span class="n">plotGrid</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s">&#39;FaceAlpha&#39;</span><span class="p">,</span> <span class="mf">0.625</span><span class="p">);</span>
+<span class="nb">view</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="nb">grid</span> <span class="n">on</span><span class="p">,</span> <span class="nb">axis</span> <span class="n">tight</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="core.html#core.gridprocessing.processGRDECL" title="core.gridprocessing.processGRDECL"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">processGRDECL</span></code></a>, <a class="reference internal" href="core.html#core.utils.inout.writeGRDECL" title="core.utils.inout.writeGRDECL"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">writeGRDECL</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="spe10.make_spe10_data">
+<span class="sig-name descname"><span class="pre">make_spe10_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#spe10.make_spe10_data" title="Permalink to this definition"></a></dt>
+<dd><p>Create on-disk (MAT file) representation of SPE 10 ‘rock’ data.</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">ok</span> <span class="p">=</span> <span class="n">make_spe10_data</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>None.</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>ok</strong> – Status flag indicating successful creation of on-disk ‘rock’ data.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The on-disk representation is a ‘rock’ structure stored in the file
+‘spe10_rock.mat’ in the directory identified by</p>
+<blockquote>
+<div><p>getDatasetPath(‘spe10’)</p>
+</div></blockquote>
+<p>The permeability data is stored in SI units (metres squared).</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="core.html#core.utils.dataset_manager.getDatasetPath" title="core.utils.dataset_manager.getDatasetPath"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">getDatasetPath</span></code></a>, <a class="reference internal" href="#spe10.getSPE10rock" title="spe10.getSPE10rock"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">getSPE10rock</span></code></a>, <code class="xref mat mat-func docutils literal notranslate"><span class="pre">makeSPE10DataAvailable</span></code>.</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="spe10.setupSPE10_AD">
+<span class="sig-name descname"><span class="pre">setupSPE10_AD</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#spe10.setupSPE10_AD" title="Permalink to this definition"></a></dt>
+<dd><p>Undocumented Utility Function</p>
+</dd></dl>
+
+<span class="target" id="module-spe10.base_case"></span><dl class="mat script">
+<dt class="sig sig-object mat" id="spe10.base_case.Contents">
+<span class="sig-name descname"><span class="pre">Contents</span></span><a class="headerlink" href="#spe10.base_case.Contents" title="Permalink to this definition"></a></dt>
+<dd><p>Files
+prodCurves     - Calculate derived production data for wells.
+simulate_spe10 - Simulate the SPE10 base case
+spe10          - Define a model structure that represents a subset of the SPE10 base case.</p>
+</dd></dl>
+
+<dl class="mat script">
+<dt class="sig sig-object mat" id="spe10.base_case.simulate_spe10">
+<span class="sig-name descname"><span class="pre">simulate_spe10</span></span><a class="headerlink" href="#spe10.base_case.simulate_spe10" title="Permalink to this definition"></a></dt>
+<dd><p>Simulate the SPE10 base case
+The simulation uses a mimetic pressure solver and an implicit transport
+solver.</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="spe10.base_case.prodCurves">
+<span class="sig-name descname"><span class="pre">prodCurves</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">w</span></em>, <em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">fluid</span></em><span class="sig-paren">)</span><a class="headerlink" href="#spe10.base_case.prodCurves" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate derived production data for wells.</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">tot</span><span class="p">,</span> <span class="n">opr</span><span class="p">,</span> <span class="n">wpr</span><span class="p">,</span> <span class="n">wc</span><span class="p">]</span> <span class="p">=</span> <span class="n">prodCurves</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">fluid</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>W</strong> – Well data structure as defined by function addWell.</p></li>
+<li><p><strong>state</strong> – Solution state object as defined by functions ‘initResSol’,
+‘initWellSol’ and, possibly, flow and/or transport solvers.</p></li>
+<li><p><strong>fluid</strong> – Fluid data structure.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>tot</strong> – Total well production.  One value for each individual well.</p></li>
+<li><p><strong>opr</strong> – Oil (liquid) production rate.  One value for each individual well.</p></li>
+<li><p><strong>wpr</strong> – Water production rate.  One value for each individual well.</p></li>
+<li><p><strong>wc</strong> – Water cut.  One value for each individual well.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>LIMITATION:</dt><dd><p>This function assumes that the solution state object represents
+incompressible two-phase flow.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="spe10.base_case.spe10">
+<span class="sig-name descname"><span class="pre">spe10</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">domain</span></em><span class="sig-paren">)</span><a class="headerlink" href="#spe10.base_case.spe10" title="Permalink to this definition"></a></dt>
+<dd><p>Define a model structure that represents a subset of the SPE10 base case.</p>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="solvent.html" class="btn btn-neutral float-left" title="solvent: Solvent solvers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="steady-state.html" class="btn btn-neutral float-right" title="steady-state Steady-state upscaling of functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019, SINTEF Digital.
+      <span class="lastupdated">Last updated on Sep 23, 2021.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

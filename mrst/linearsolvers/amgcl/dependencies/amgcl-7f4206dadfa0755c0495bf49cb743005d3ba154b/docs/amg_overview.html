@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Algebraic Multigrid &mdash; The Matlab Reservoir Simulation Toolbox 2019b documentation</title>
+      <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../../../" id="documentation_options" src="../../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../../_static/jquery.js"></script>
+        <script src="../../../../../../_static/underscore.js"></script>
+        <script src="../../../../../../_static/doctools.js"></script>
+    <script src="../../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../../../index.html" class="icon icon-home"> The Matlab Reservoir Simulation Toolbox
+            <img src="../../../../../../_static/mrstlogo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                2019b
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../core.html">Core functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../ad-core.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-core</span></code>: Automatic Differentiation Core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../ad-props.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-props</span></code>: PVT, fluid models and other properties for the AD-solvers</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../../index.html">The Matlab Reservoir Simulation Toolbox</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Algebraic Multigrid</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../../../_sources/mrst/linearsolvers/amgcl/dependencies/amgcl-7f4206dadfa0755c0495bf49cb743005d3ba154b/docs/amg_overview.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="algebraic-multigrid">
+<h1>Algebraic Multigrid<a class="headerlink" href="#algebraic-multigrid" title="Permalink to this headline"></a></h1>
+<p>Here we outline the basic principles behind the Algebraic Multigrid (AMG)
+method <a class="reference internal" href="bibliography.html#brmh85" id="id1"><span>[BrMH85]</span></a>, <a class="reference internal" href="bibliography.html#stue99" id="id2"><span>[Stue99]</span></a>.  Consider a system of linear algebraic equations
+in the form</p>
+<div class="math">
+<p><img src="../../../../../../_images/math/e802474ddd900f5ca597458e2784cf2969e6f720.png" alt="Au = f"/></p>
+</div><p>where <img class="math" src="../../../../../../_images/math/211284f68205c3e66773eaf026f32a0acdd3dfb3.png" alt="A"/> is an <img class="math" src="../../../../../../_images/math/a093134f3fa86b4bc38a1634715b6a50c537ad3a.png" alt="n \times n"/> matrix. Multigrid methods are based on
+the recursive use of two-grid scheme, which combines</p>
+<ul class="simple">
+<li><p><em>Relaxation</em>, or <em>smoothing iteration</em>: a simple iterative method such as
+Jacobi or Gauss-Seidel; and</p></li>
+<li><p><em>Coarse grid correction</em>: solving residual equation on a coarser grid.
+Transfer between grids is described with <em>transfer operators</em> <img class="math" src="../../../../../../_images/math/c2aa3dff9bffb099e9dff196fd36aed56ec16baf.png" alt="P"/>
+(<em>prolongation</em> or <em>interpolation</em>) and <img class="math" src="../../../../../../_images/math/1ebe654cc7b8f2a0d8100aa5825cf2b9021adbbc.png" alt="R"/> (<em>restriction</em>).</p></li>
+</ul>
+<p>A setup phase of a generic algebraic multigrid (AMG) algorithm may be described
+as follows:</p>
+<ul class="simple">
+<li><p>Start with a system matrix <img class="math" src="../../../../../../_images/math/4619bbf481de34ca7828de1e2a2abf8dae9acaf6.png" alt="A_1 = A"/>.</p></li>
+<li><dl class="simple">
+<dt>While the matrix <img class="math" src="../../../../../../_images/math/9fe7be66fa87979c381922da1ca5909e8dd502ab.png" alt="A_i"/> is too big to be solved directly:</dt><dd><ol class="arabic simple">
+<li><p>Introduce prolongation operator <img class="math" src="../../../../../../_images/math/061c88bd514fa14b9e2881f2b52fd2184635f893.png" alt="P_i"/>, and restriction operator
+<img class="math" src="../../../../../../_images/math/8d47777d070e3b1ae6a9ea0d4918309bc8c942fe.png" alt="R_i"/>.</p></li>
+<li><p>Construct coarse system using Galerkin operator:
+<img class="math" src="../../../../../../_images/math/be83365be424f498b8c7475a3bcc436dd4da0481.png" alt="A_{i+1} = R_i A_i P_i"/>.</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><p>Construct a direct solver for the coarsest system <img class="math" src="../../../../../../_images/math/16b16800ce2b66b5960d46163b9be1345fcb0004.png" alt="A_L"/>.</p></li>
+</ul>
+<p>Note that in order to construct the next level in the AMG hierarchy, we only
+need to define transfer operators <img class="math" src="../../../../../../_images/math/c2aa3dff9bffb099e9dff196fd36aed56ec16baf.png" alt="P"/> and <img class="math" src="../../../../../../_images/math/1ebe654cc7b8f2a0d8100aa5825cf2b9021adbbc.png" alt="R"/>. Also, the
+restriction operator is often chosen to be a transpose of the prolongation
+operator: <img class="math" src="../../../../../../_images/math/862757c7367f3d0febd84c6f0e438fe0f9f56809.png" alt="R=P^T"/>.</p>
+<p>Having constructed the AMG hierarchy, we can use it to solve the system as
+follows:</p>
+<ul class="simple">
+<li><p>Start at the finest level with initial approximation <img class="math" src="../../../../../../_images/math/872cd1c03981a35ad115cd0e141fb25c80c162da.png" alt="u_1 = u^0"/>.</p></li>
+<li><dl class="simple">
+<dt>Iterate until convergence (<em>V-cycle</em>):</dt><dd><ul>
+<li><dl class="simple">
+<dt>At each level of the grid hiearchy, finest-to-coarsest:</dt><dd><ol class="arabic simple">
+<li><p>Apply a couple of smoothing iterations (<em>pre-relaxation</em>) to the
+current solution <img class="math" src="../../../../../../_images/math/7923aa41237b5cf6e126c8fb83cd28acb0d4d681.png" alt="u_i = S_i(A_i, f_i, u_i)"/>.</p></li>
+<li><p>Find residual <img class="math" src="../../../../../../_images/math/08f5dc80c697ed1074dd53054ba6fe4799638b18.png" alt="e_i = f_i - A_i u_i"/> and restrict it to the
+RHS on the coarser level: <img class="math" src="../../../../../../_images/math/fde6650b47f3b9e9c86d98b3b1a36d1a7d7200e3.png" alt="f_{i+1} = R_i e_i"/>.</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><p>Solve the corasest system directly: <img class="math" src="../../../../../../_images/math/9553d21dd73be7bd6614aa749d9be56ccf639807.png" alt="u_L = A_L^{-1} f_L"/>.</p></li>
+<li><dl class="simple">
+<dt>At each level of the grid hiearchy, coarsest-to-finest:</dt><dd><ol class="arabic simple">
+<li><p>Update the current solution with the interpolated solution from the
+coarser level: <img class="math" src="../../../../../../_images/math/69b23aef6bdef44b96529d5cd7f4960b518a1ea5.png" alt="u_i = u_i + P_i u_{i+1}"/>.</p></li>
+<li><p>Apply a couple of smoothing iterations (<em>post-relaxation</em>) to the
+updated solution: <img class="math" src="../../../../../../_images/math/7923aa41237b5cf6e126c8fb83cd28acb0d4d681.png" alt="u_i = S_i(A_i, f_i, u_i)"/>.</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>More often AMG is not used standalone, but as a preconditioner with an
+iterative Krylov subspace method. In this case single V-cycle is used as a
+preconditioning step.</p>
+<p>So, in order to fully define an AMG method, we need to choose transfer
+operators <img class="math" src="../../../../../../_images/math/c2aa3dff9bffb099e9dff196fd36aed56ec16baf.png" alt="P"/> and <img class="math" src="../../../../../../_images/math/1ebe654cc7b8f2a0d8100aa5825cf2b9021adbbc.png" alt="R"/>, and smoother <img class="math" src="../../../../../../_images/math/b988975be41fd13b4d091c10202ba19374643586.png" alt="S"/>.</p>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019, SINTEF Digital.
+      <span class="lastupdated">Last updated on Sep 23, 2021.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

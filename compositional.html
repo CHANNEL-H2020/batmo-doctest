@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>compositional: Equation-of-state compositional solvers &mdash; The Matlab Reservoir Simulation Toolbox 2019b documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="co2lab: Numerical CO2 laboratory" href="co2lab.html" />
+    <link rel="prev" title="coarsegrid: Generation of coarse grids" href="coarsegrid.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> The Matlab Reservoir Simulation Toolbox
+            <img src="_static/mrstlogo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                2019b
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="core.html">Core functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-core.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-core</span></code>: Automatic Differentiation Core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-props.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-props</span></code>: PVT, fluid models and other properties for the AD-solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-blackoil.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-blackoil</span></code>: Black-oil solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-eor.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-eor</span></code>: Enhanced oil recovery solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-mechanics.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-mechanics</span></code>: Coupled flow and mechanics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adjoint.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">adjoint</span></code>: Two-phase, incompressible adjoint solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agglom.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">agglom</span></code>: Flow and property-based coarse-grid generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="blackoil-sequential.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">blackoil-sequential</span></code>: Sequential implicit black-oil solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">book</span></code>: Book examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coarsegrid.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">coarsegrid</span></code>: Generation of coarse grids</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">compositional</span></code>: Equation-of-state compositional solvers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#models">Models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-compositional.models">Base classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-compositional.models.natvars">Different formulations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pvt-models">PVT models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-compositional.models.eos">Equations of state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-compositional.fluids">Fluid models</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="co2lab.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">co2lab</span></code>: Numerical CO<sub>2</sub> laboratory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deckformat.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">deckformat</span></code>: Reading and conversion of input decks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dfm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dfm</span></code>: Discrete fracture matrix implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dg.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dg</span></code>: Discontinous Galerkin discretizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="diagnostics.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">diagnostics</span></code>: Flow diagnostics functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dual_porosity.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dual-porosity</span></code>: Dual porosity/permeability model for fractures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fvbiot.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">fvbiot</span></code>: Consistent finite-volume discretizations for poroelasticity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geochemistry.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">geochemistry</span></code>: Surface geochemistry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heterogeneity.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">heterogeneity</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="hfm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">hfm</span></code>: Hierarchical and embedded fractures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="incomp.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">incomp</span></code>: Solvers for incompressible flow and transport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgeometry.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">libgeometry</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linearsolvers.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">linearsolvers</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab_bgl.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">matlab_bgl</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mimetic.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mimetic</span></code>: Mimetic solvers for pressure problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpfa.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mpfa</span></code>: Multi-point flux approximation solvers for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mrst_api.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mrst_api</span></code>: API for writing C/C++ for MRST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mrst-gui.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mrst-gui</span></code>: Graphical user-interfaces for MRST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msfvm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msfvm</span></code>: Multiscale Finite-Volume method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msmfem.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msmfem</span></code>: Multiscale Mixed Finite-Element method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msrsb.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msrsb</span></code>: Multiscale Restriction-Smoothed Basis method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nwm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">nwm</span></code>: Near Wellbore Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opm_gridprocessing.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">opm_gridprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimization.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">optimization</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="re-mpfa.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">re-mpfa</span></code>: Richards’ equation with multi-point flux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvent.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">solvent</span></code>: Solvent solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spe10.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">spe10</span></code>: Access to the SPE10 benchmark case</a></li>
+<li class="toctree-l1"><a class="reference internal" href="steady-state.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">steady-state</span></code> Steady-state upscaling of functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="streamlines.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">streamlines</span></code>: Compute streamlines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triangle.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">triangle</span></code>: Triangular grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upscaling.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">upscaling</span></code>: Upscaling of reservoir problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vem.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">vem</span></code>: Virtual element method on general grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vemmech.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">vemmech</span></code>: Mechanics for general grids using the virtual element method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wellpaths.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">wellpaths</span></code>: Generation of wells using general curves</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">The Matlab Reservoir Simulation Toolbox</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><code class="xref mat mat-func docutils literal notranslate"><span class="pre">compositional</span></code>: Equation-of-state compositional solvers</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/compositional.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="compositional-equation-of-state-compositional-solvers">
+<h1><code class="xref mat mat-func docutils literal notranslate"><span class="pre">compositional</span></code>: Equation-of-state compositional solvers<a class="headerlink" href="#compositional-equation-of-state-compositional-solvers" title="Permalink to this headline"></a></h1>
+<p>#.. include:: mrst/compositional/README.txt</p>
+<div class="section" id="models">
+<h2>Models<a class="headerlink" href="#models" title="Permalink to this headline"></a></h2>
+<div class="section" id="module-compositional.models">
+<span id="base-classes"></span><h3>Base classes<a class="headerlink" href="#module-compositional.models" title="Permalink to this headline"></a></h3>
+<dl class="mat script">
+<dt class="sig sig-object mat" id="compositional.models.Contents">
+<span class="sig-name descname"><span class="pre">Contents</span></span><a class="headerlink" href="#compositional.models.Contents" title="Permalink to this definition"></a></dt>
+<dd><p>MODELS</p>
+<dl class="simple">
+<dt>Files</dt><dd><p>GenericNaturalVariablesModel   -
+GenericOverallCompositionModel -
+ThreePhaseCompositionalModel   - Base class for compositional models</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat class">
+<dt class="sig sig-object mat" id="compositional.models.ThreePhaseCompositionalModel">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">ThreePhaseCompositionalModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">rock</span></em>, <em class="sig-param"><span class="pre">fluid</span></em>, <em class="sig-param"><span class="pre">compFluid</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.models.ThreePhaseCompositionalModel" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="ad-core.html#ad_core.models.ReservoirModel" title="ad_core.models.ReservoirModel"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ReservoirModel</span></code></a></p>
+<p>Base class for compositional models</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="p">=</span> <span class="n">ThreePhaseCompositionalModel</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">rock</span><span class="p">,</span> <span class="n">fluid</span><span class="p">,</span> <span class="n">compFluid</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>This is the base class for several compositional models in MRST. It
+contains common functionality and is not intended for direct use.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>G</strong> – Grid structure</p></li>
+<li><p><strong>rock</strong> – Rock structure for the reservoir</p></li>
+<li><p><strong>fluid</strong> – The flow fluid, containing relative permeabilities,
+surface densities and flow properties for the
+aqueous/water phase (if present)</p></li>
+<li><p><strong>compFluid</strong> – CompositionalMixture instance describing the species
+present.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>model</strong> – Initialized class instance</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref mat mat-func docutils literal notranslate"><span class="pre">NaturalVariablesCompositionalModel</span></code>, <code class="xref mat mat-func docutils literal notranslate"><span class="pre">OverallCompositionCompositionalModel</span></code></p>
+</div>
+<dl class="mat method">
+<dt class="sig sig-object mat" id="compositional.models.ThreePhaseCompositionalModel.computeFlash">
+<span class="sig-name descname"><span class="pre">computeFlash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">dt</span></em>, <em class="sig-param"><span class="pre">iteration</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.models.ThreePhaseCompositionalModel.computeFlash" title="Permalink to this definition"></a></dt>
+<dd><p>Flash a state with the model’s EOS.</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="compositional.models.ThreePhaseCompositionalModel.getScalingFactorsCPR">
+<span class="sig-name descname"><span class="pre">getScalingFactorsCPR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">problem</span></em>, <em class="sig-param"><span class="pre">names</span></em>, <em class="sig-param"><span class="pre">solver</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.models.ThreePhaseCompositionalModel.getScalingFactorsCPR" title="Permalink to this definition"></a></dt>
+<dd><p>#ok
+Get scaling factors for CPR reduction in <code class="xref mat mat-func docutils literal notranslate"><span class="pre">CPRSolverAD</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> – Class instance</p></li>
+<li><p><strong>problem</strong> – <code class="xref mat mat-func docutils literal notranslate"><span class="pre">LinearizedProblemAD</span></code> which is intended for CPR
+preconditioning.</p></li>
+<li><p><strong>names</strong> – The names of the equations for which the factors are
+to be obtained.</p></li>
+<li><p><strong>solver</strong> – The <code class="xref mat mat-func docutils literal notranslate"><span class="pre">LinearSolverAD</span></code> class requesting the scaling
+factors.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>scaling</strong> – Cell array with either a scalar scaling factor for
+each equation, or a vectogetComponentScalingr of equal length to that
+equation.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>SEE ALSO</dt><dd><p><code class="xref mat mat-func docutils literal notranslate"><span class="pre">CPRSolverAD</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="compositional.models.ThreePhaseCompositionalModel.setMinimumTwoPhaseSaturations">
+<span class="sig-name descname"><span class="pre">setMinimumTwoPhaseSaturations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">s_rem</span></em>, <em class="sig-param"><span class="pre">sL</span></em>, <em class="sig-param"><span class="pre">sV</span></em>, <em class="sig-param"><span class="pre">pureLiquid</span></em>, <em class="sig-param"><span class="pre">pureVapor</span></em>, <em class="sig-param"><span class="pre">twoPhase</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.models.ThreePhaseCompositionalModel.setMinimumTwoPhaseSaturations" title="Permalink to this definition"></a></dt>
+<dd><p>Set a minumum phase saturation value for the EOS-governed
+phases. This may be required for numerical stability, as the
+component-in-phase conservation equations degenerate when the
+saturations are zero. The minimum value is taken from the
+configured value i nthe EOS.</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="compositional.models.ThreePhaseCompositionalModel.storeDensities">
+<span class="sig-name descname"><span class="pre">storeDensities</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">rhoW</span></em>, <em class="sig-param"><span class="pre">rhoO</span></em>, <em class="sig-param"><span class="pre">rhoG</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.models.ThreePhaseCompositionalModel.storeDensities" title="Permalink to this definition"></a></dt>
+<dd><p>Densities</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="compositional.models.ThreePhaseCompositionalModel.EOSModel">
+<span class="sig-name descname"><span class="pre">EOSModel</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#compositional.models.ThreePhaseCompositionalModel.EOSModel" title="Permalink to this definition"></a></dt>
+<dd><p>EquationOfState model used for PVT and phase behavior</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="compositional.models.ThreePhaseCompositionalModel.EOSNonLinearSolver">
+<span class="sig-name descname"><span class="pre">EOSNonLinearSolver</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#compositional.models.ThreePhaseCompositionalModel.EOSNonLinearSolver" title="Permalink to this definition"></a></dt>
+<dd><p>NonLinearSolver used to solve EOS problems that appear</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="compositional.models.ThreePhaseCompositionalModel.dzMaxAbs">
+<span class="sig-name descname"><span class="pre">dzMaxAbs</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#compositional.models.ThreePhaseCompositionalModel.dzMaxAbs" title="Permalink to this definition"></a></dt>
+<dd><p>Maximum allowable change in any mole fraction</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="compositional.models.ThreePhaseCompositionalModel.fugacityTolerance">
+<span class="sig-name descname"><span class="pre">fugacityTolerance</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#compositional.models.ThreePhaseCompositionalModel.fugacityTolerance" title="Permalink to this definition"></a></dt>
+<dd><p>Tolerance for fugacity equality (in units 1/barsa)</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="compositional.models.ThreePhaseCompositionalModel.incTolComposition">
+<span class="sig-name descname"><span class="pre">incTolComposition</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#compositional.models.ThreePhaseCompositionalModel.incTolComposition" title="Permalink to this definition"></a></dt>
+<dd><p>Increment tolerance for composition</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="compositional.models.ThreePhaseCompositionalModel.incTolPressure">
+<span class="sig-name descname"><span class="pre">incTolPressure</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#compositional.models.ThreePhaseCompositionalModel.incTolPressure" title="Permalink to this definition"></a></dt>
+<dd><p>Relative increment tolerance for pressure</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="compositional.models.ThreePhaseCompositionalModel.useIncTolComposition">
+<span class="sig-name descname"><span class="pre">useIncTolComposition</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#compositional.models.ThreePhaseCompositionalModel.useIncTolComposition" title="Permalink to this definition"></a></dt>
+<dd><p>If true, use increment tolerance for composition. Otherwise, use mass-balance.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-compositional.models.natvars">
+<span id="different-formulations"></span><h3>Different formulations<a class="headerlink" href="#module-compositional.models.natvars" title="Permalink to this headline"></a></h3>
+<dl class="mat script">
+<dt class="sig sig-object mat" id="compositional.models.natvars.Contents">
+<span class="sig-name descname"><span class="pre">Contents</span></span><a class="headerlink" href="#compositional.models.natvars.Contents" title="Permalink to this definition"></a></dt>
+<dd><p>NATVARS</p>
+<dl class="simple">
+<dt>Files</dt><dd><p>equationsNaturalVariables          - Equations for natural variables formulation
+NaturalVariablesCompositionalModel - Natural variables model for compositional problems
+ReducedLinearizedSystem            - Linearized system which performs a Schur complement before solving</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat class">
+<dt class="sig sig-object mat" id="compositional.models.natvars.NaturalVariablesCompositionalModel">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">NaturalVariablesCompositionalModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">rock</span></em>, <em class="sig-param"><span class="pre">fluid</span></em>, <em class="sig-param"><span class="pre">mixture</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.models.natvars.NaturalVariablesCompositionalModel" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#compositional.models.ThreePhaseCompositionalModel" title="compositional.models.ThreePhaseCompositionalModel"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ThreePhaseCompositionalModel</span></code></a></p>
+<p>Natural variables model for compositional problems</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="p">=</span> <span class="n">NaturalVariablesCompositionalModel</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">rock</span><span class="p">,</span> <span class="n">fluid</span><span class="p">,</span> <span class="n">compFluid</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>The natural variables model relies on separate primary variables
+for saturations in the multiphase region. This makes it possible to
+perform certain heuristics to ensure convergence (e.g. saturation
+chopping) since there is a weaker correspondence between
+saturations and the compositions. However, this formulation
+traverses the phase boundary as a number of discrete steps and can
+take more nonlinear iterations for some problems.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>G</strong> – Grid structure</p></li>
+<li><p><strong>rock</strong> – Rock structure for the reservoir</p></li>
+<li><p><strong>fluid</strong> – The flow fluid, containing relative permeabilities,
+surface densities and flow properties for the
+aqueous/water phase (if present)</p></li>
+<li><p><strong>mixture</strong> – CompositionalMixture instance describing the species
+present.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>model</strong> – Initialized class instance</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ThreePhaseCompositionalModel</span></code>, <code class="xref mat mat-func docutils literal notranslate"><span class="pre">OverallCompositionCompositionalModel</span></code></p>
+</div>
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="compositional.models.natvars.NaturalVariablesCompositionalModel.allowLargeSaturations">
+<span class="sig-name descname"><span class="pre">allowLargeSaturations</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'false'</span></em><a class="headerlink" href="#compositional.models.natvars.NaturalVariablesCompositionalModel.allowLargeSaturations" title="Permalink to this definition"></a></dt>
+<dd><p>Allow sum of saturations larger than unity (experimental option)</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="compositional.models.natvars.NaturalVariablesCompositionalModel.checkStableTransition">
+<span class="sig-name descname"><span class="pre">checkStableTransition</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'false'</span></em><a class="headerlink" href="#compositional.models.natvars.NaturalVariablesCompositionalModel.checkStableTransition" title="Permalink to this definition"></a></dt>
+<dd><p>Do not transition to single-phase if stable</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="compositional.models.natvars.NaturalVariablesCompositionalModel.flashFromSinglePhase">
+<span class="sig-name descname"><span class="pre">flashFromSinglePhase</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'false'</span></em><a class="headerlink" href="#compositional.models.natvars.NaturalVariablesCompositionalModel.flashFromSinglePhase" title="Permalink to this definition"></a></dt>
+<dd><p>Perform flash for cells existing single-phase</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="compositional.models.natvars.NaturalVariablesCompositionalModel.maxPhaseChangesNonLinear">
+<span class="sig-name descname"><span class="pre">maxPhaseChangesNonLinear</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'inf'</span></em><a class="headerlink" href="#compositional.models.natvars.NaturalVariablesCompositionalModel.maxPhaseChangesNonLinear" title="Permalink to this definition"></a></dt>
+<dd><p>Maximum number of phase transitions for a given cell, during a nonlinear step (experimental option)</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="compositional.models.natvars.NaturalVariablesCompositionalModel.reduceLinearSystem">
+<span class="sig-name descname"><span class="pre">reduceLinearSystem</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'true'</span></em><a class="headerlink" href="#compositional.models.natvars.NaturalVariablesCompositionalModel.reduceLinearSystem" title="Permalink to this definition"></a></dt>
+<dd><p>Return ReducedLinearizedSystem instead of LinearizedSystemAD</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="compositional.models.natvars.NaturalVariablesCompositionalModel.saturationEpsilon">
+<span class="sig-name descname"><span class="pre">saturationEpsilon</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'1e-6'</span></em><a class="headerlink" href="#compositional.models.natvars.NaturalVariablesCompositionalModel.saturationEpsilon" title="Permalink to this definition"></a></dt>
+<dd><p>Epsilon for saturation during phase change</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="mat class">
+<dt class="sig sig-object mat" id="compositional.models.natvars.ReducedLinearizedSystem">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">ReducedLinearizedSystem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.models.natvars.ReducedLinearizedSystem" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="ad-core.html#ad_core.solvers.LinearizedProblem" title="ad_core.solvers.LinearizedProblem"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">LinearizedProblem</span></code></a></p>
+<p>Linearized system which performs a Schur complement before solving
+the linear system</p>
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="compositional.models.natvars.ReducedLinearizedSystem.B">
+<span class="sig-name descname"><span class="pre">B</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#compositional.models.natvars.ReducedLinearizedSystem.B" title="Permalink to this definition"></a></dt>
+<dd><p>Kept upper block</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="compositional.models.natvars.ReducedLinearizedSystem.C">
+<span class="sig-name descname"><span class="pre">C</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#compositional.models.natvars.ReducedLinearizedSystem.C" title="Permalink to this definition"></a></dt>
+<dd><p>Eliminated upper block</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="compositional.models.natvars.ReducedLinearizedSystem.D">
+<span class="sig-name descname"><span class="pre">D</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#compositional.models.natvars.ReducedLinearizedSystem.D" title="Permalink to this definition"></a></dt>
+<dd><p>First lower block</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="compositional.models.natvars.ReducedLinearizedSystem.E">
+<span class="sig-name descname"><span class="pre">E</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#compositional.models.natvars.ReducedLinearizedSystem.E" title="Permalink to this definition"></a></dt>
+<dd><p>Second lower block</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="compositional.models.natvars.ReducedLinearizedSystem.E_L">
+<span class="sig-name descname"><span class="pre">E_L</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#compositional.models.natvars.ReducedLinearizedSystem.E_L" title="Permalink to this definition"></a></dt>
+<dd><p>Lower part of LU-factorized E-matrix</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="compositional.models.natvars.ReducedLinearizedSystem.E_U">
+<span class="sig-name descname"><span class="pre">E_U</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#compositional.models.natvars.ReducedLinearizedSystem.E_U" title="Permalink to this definition"></a></dt>
+<dd><p>Upper part of LU-factorized E-matrix</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="compositional.models.natvars.ReducedLinearizedSystem.f">
+<span class="sig-name descname"><span class="pre">f</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#compositional.models.natvars.ReducedLinearizedSystem.f" title="Permalink to this definition"></a></dt>
+<dd><p>First part of right-hand-side</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="compositional.models.natvars.ReducedLinearizedSystem.h">
+<span class="sig-name descname"><span class="pre">h</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#compositional.models.natvars.ReducedLinearizedSystem.h" title="Permalink to this definition"></a></dt>
+<dd><p>Last part of right-hand-side</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="compositional.models.natvars.ReducedLinearizedSystem.keepNum">
+<span class="sig-name descname"><span class="pre">keepNum</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#compositional.models.natvars.ReducedLinearizedSystem.keepNum" title="Permalink to this definition"></a></dt>
+<dd><p>Number of equations to keep after elimination</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="compositional.models.natvars.ReducedLinearizedSystem.reorder">
+<span class="sig-name descname"><span class="pre">reorder</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#compositional.models.natvars.ReducedLinearizedSystem.reorder" title="Permalink to this definition"></a></dt>
+<dd><p>Reordering indices for the variables before elimination</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="compositional.models.natvars.equationsNaturalVariables">
+<span class="sig-name descname"><span class="pre">equationsNaturalVariables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">state0</span></em>, <em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">dt</span></em>, <em class="sig-param"><span class="pre">drivingForces</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.models.natvars.equationsNaturalVariables" title="Permalink to this definition"></a></dt>
+<dd><p>Equations for natural variables formulation</p>
+</dd></dl>
+
+<span class="target" id="module-compositional.models.overall"></span><dl class="mat script">
+<dt class="sig sig-object mat" id="compositional.models.overall.Contents">
+<span class="sig-name descname"><span class="pre">Contents</span></span><a class="headerlink" href="#compositional.models.overall.Contents" title="Permalink to this definition"></a></dt>
+<dd><p>OVERALL</p>
+<dl class="simple">
+<dt>Files</dt><dd><p>OverallCompositionCompositionalModel - Overall composition model for compositional problems</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat class">
+<dt class="sig sig-object mat" id="compositional.models.overall.OverallCompositionCompositionalModel">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">OverallCompositionCompositionalModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.models.overall.OverallCompositionCompositionalModel" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#compositional.models.ThreePhaseCompositionalModel" title="compositional.models.ThreePhaseCompositionalModel"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ThreePhaseCompositionalModel</span></code></a></p>
+<p>Overall composition model for compositional problems</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="p">=</span> <span class="n">OverallCompositionCompositionalModel</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">rock</span><span class="p">,</span> <span class="n">fluid</span><span class="p">,</span> <span class="n">compFluid</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>The overall composition model relies on primary variables
+pressure and overall compositions for all components. As a
+consequence, the the phase behavior and mixing is offloaded to the
+equation of state directly. A requirement for this model is that
+the equation of state is fullfilled at each Newton iteration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>G</strong> – Grid structure</p></li>
+<li><p><strong>rock</strong> – Rock structure for the reservoir</p></li>
+<li><p><strong>fluid</strong> – The flow fluid, containing relative permeabilities,
+surface densities and flow properties for the
+aqueous/water phase (if present)</p></li>
+<li><p><strong>compFluid</strong> – CompositionalMixture instance describing the species
+present.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>model</strong> – Initialized class instance</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ThreePhaseCompositionalModel</span></code>, <code class="xref mat mat-func docutils literal notranslate"><span class="pre">NaturalVariablesCompositionalModel</span></code></p>
+</div>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="pvt-models">
+<h2>PVT models<a class="headerlink" href="#pvt-models" title="Permalink to this headline"></a></h2>
+<div class="section" id="module-compositional.models.eos">
+<span id="equations-of-state"></span><h3>Equations of state<a class="headerlink" href="#module-compositional.models.eos" title="Permalink to this headline"></a></h3>
+<dl class="mat script">
+<dt class="sig sig-object mat" id="compositional.models.eos.Contents">
+<span class="sig-name descname"><span class="pre">Contents</span></span><a class="headerlink" href="#compositional.models.eos.Contents" title="Permalink to this definition"></a></dt>
+<dd><p>EOS</p>
+<dl class="simple">
+<dt>Files</dt><dd><p>EquationOfStateModel     - Equation of state model. Implements generalized two-parameter cubic
+EquilibriumConstantModel - Equilibrium constant EOS model for problems where functions of the</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat class">
+<dt class="sig sig-object mat" id="compositional.models.eos.EquationOfStateModel">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">EquationOfStateModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">fluid</span></em>, <em class="sig-param"><span class="pre">eosname</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.models.eos.EquationOfStateModel" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="ad-core.html#ad_core.models.PhysicalModel" title="ad_core.models.PhysicalModel"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">PhysicalModel</span></code></a></p>
+<p>Equation of state model. Implements generalized two-parameter cubic
+equation of state with Newton and successive substitution solvers, as
+well as standard functions for computing density and viscosity.</p>
+<dl class="mat method">
+<dt class="sig sig-object mat" id="compositional.models.eos.EquationOfStateModel.computeFugacity">
+<span class="sig-name descname"><span class="pre">computeFugacity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">p</span></em>, <em class="sig-param"><span class="pre">x</span></em>, <em class="sig-param"><span class="pre">Z</span></em>, <em class="sig-param"><span class="pre">A</span></em>, <em class="sig-param"><span class="pre">B</span></em>, <em class="sig-param"><span class="pre">Si</span></em>, <em class="sig-param"><span class="pre">Bi</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.models.eos.EquationOfStateModel.computeFugacity" title="Permalink to this definition"></a></dt>
+<dd><p>Compute fugacity based on EOS coefficients</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="compositional.models.eos.EquationOfStateModel.computeLiquidZ">
+<span class="sig-name descname"><span class="pre">computeLiquidZ</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">A</span></em>, <em class="sig-param"><span class="pre">B</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.models.eos.EquationOfStateModel.computeLiquidZ" title="Permalink to this definition"></a></dt>
+<dd><p>Pick smallest Z factors for liquid phase (least energy)</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="compositional.models.eos.EquationOfStateModel.computeVaporZ">
+<span class="sig-name descname"><span class="pre">computeVaporZ</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">A</span></em>, <em class="sig-param"><span class="pre">B</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.models.eos.EquationOfStateModel.computeVaporZ" title="Permalink to this definition"></a></dt>
+<dd><p>Pick largest Z factors for vapor phase (most energy)</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="compositional.models.eos.EquationOfStateModel.getMassFraction">
+<span class="sig-name descname"><span class="pre">getMassFraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">molfraction</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.models.eos.EquationOfStateModel.getMassFraction" title="Permalink to this definition"></a></dt>
+<dd><p>Convert molar fraction to mass fraction</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="compositional.models.eos.EquationOfStateModel.getMixtureFugacityCoefficients">
+<span class="sig-name descname"><span class="pre">getMixtureFugacityCoefficients</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">P</span></em>, <em class="sig-param"><span class="pre">T</span></em>, <em class="sig-param"><span class="pre">x</span></em>, <em class="sig-param"><span class="pre">y</span></em>, <em class="sig-param"><span class="pre">acf</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.models.eos.EquationOfStateModel.getMixtureFugacityCoefficients" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate intermediate values for fugacity computation</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="compositional.models.eos.EquationOfStateModel.getMoleFraction">
+<span class="sig-name descname"><span class="pre">getMoleFraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">massfraction</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.models.eos.EquationOfStateModel.getMoleFraction" title="Permalink to this definition"></a></dt>
+<dd><p>Convert mass fraction to molar fraction</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="compositional.models.eos.EquationOfStateModel.getPhaseFractionAsADI">
+<span class="sig-name descname"><span class="pre">getPhaseFractionAsADI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">p</span></em>, <em class="sig-param"><span class="pre">T</span></em>, <em class="sig-param"><span class="pre">z</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.models.eos.EquationOfStateModel.getPhaseFractionAsADI" title="Permalink to this definition"></a></dt>
+<dd><p>Compute derivatives for values obtained by solving the
+equilibrium equations (molar fractions in each phase, liquid
+mole fraction).</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="compositional.models.eos.EquationOfStateModel.setZDerivatives">
+<span class="sig-name descname"><span class="pre">setZDerivatives</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">Z</span></em>, <em class="sig-param"><span class="pre">A</span></em>, <em class="sig-param"><span class="pre">B</span></em>, <em class="sig-param"><span class="pre">cellJacMap</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.models.eos.EquationOfStateModel.setZDerivatives" title="Permalink to this definition"></a></dt>
+<dd><p>Z comes from the solution of a cubic equation of state, so
+the derivatives are not automatically computed. By
+differentiating the cubic EOS manually and solving for dZ/du
+where u is some primary variable, we can still obtain
+derivatives without making any assumptions other than the EOS
+being a cubic polynomial</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="compositional.models.eos.EquationOfStateModel.singlePhaseLabel">
+<span class="sig-name descname"><span class="pre">singlePhaseLabel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">eos</span></em>, <em class="sig-param"><span class="pre">p</span></em>, <em class="sig-param"><span class="pre">T</span></em>, <em class="sig-param"><span class="pre">z</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.models.eos.EquationOfStateModel.singlePhaseLabel" title="Permalink to this definition"></a></dt>
+<dd><p>Li’s method for phase labeling</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="compositional.models.eos.EquationOfStateModel.solveCubicEOS">
+<span class="sig-name descname"><span class="pre">solveCubicEOS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">A</span></em>, <em class="sig-param"><span class="pre">B</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.models.eos.EquationOfStateModel.solveCubicEOS" title="Permalink to this definition"></a></dt>
+<dd><p>Peng Robinson equation of state in form used by Coats</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="compositional.models.eos.EquationOfStateModel.stepFunction">
+<span class="sig-name descname"><span class="pre">stepFunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">state0</span></em>, <em class="sig-param"><span class="pre">dt</span></em>, <em class="sig-param"><span class="pre">drivingForces</span></em>, <em class="sig-param"><span class="pre">linsolve</span></em>, <em class="sig-param"><span class="pre">nonlinsolve</span></em>, <em class="sig-param"><span class="pre">iteration</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.models.eos.EquationOfStateModel.stepFunction" title="Permalink to this definition"></a></dt>
+<dd><p>#ok
+Compute a single step of the solution process for a given
+equation of state (thermodynamic flash calculation);</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="compositional.models.eos.EquationOfStateModel.substitutionCompositionUpdate">
+<span class="sig-name descname"><span class="pre">substitutionCompositionUpdate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">P</span></em>, <em class="sig-param"><span class="pre">T</span></em>, <em class="sig-param"><span class="pre">z</span></em>, <em class="sig-param"><span class="pre">K</span></em>, <em class="sig-param"><span class="pre">L</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.models.eos.EquationOfStateModel.substitutionCompositionUpdate" title="Permalink to this definition"></a></dt>
+<dd><p>Determine overall liquid fraction</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="compositional.models.eos.EquationOfStateModel.CompositionalMixture">
+<span class="sig-name descname"><span class="pre">CompositionalMixture</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#compositional.models.eos.EquationOfStateModel.CompositionalMixture" title="Permalink to this definition"></a></dt>
+<dd><p>CompositionalMixture</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="compositional.models.eos.EquationOfStateModel.PropertyModel">
+<span class="sig-name descname"><span class="pre">PropertyModel</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#compositional.models.eos.EquationOfStateModel.PropertyModel" title="Permalink to this definition"></a></dt>
+<dd><p>Model to be used for property evaluations</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="compositional.models.eos.EquationOfStateModel.method">
+<span class="sig-name descname"><span class="pre">method</span></span><em class="property"> <span class="pre">=</span> <span class="pre">&quot;'ssi'&quot;</span></em><a class="headerlink" href="#compositional.models.eos.EquationOfStateModel.method" title="Permalink to this definition"></a></dt>
+<dd><p>Type of method</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="compositional.models.eos.EquationOfStateModel.minimumComposition">
+<span class="sig-name descname"><span class="pre">minimumComposition</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'1e-8'</span></em><a class="headerlink" href="#compositional.models.eos.EquationOfStateModel.minimumComposition" title="Permalink to this definition"></a></dt>
+<dd><p>Minimum composition value (for numerical stability)</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="compositional.models.eos.EquationOfStateModel.minimumSaturation">
+<span class="sig-name descname"><span class="pre">minimumSaturation</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'1e-8'</span></em><a class="headerlink" href="#compositional.models.eos.EquationOfStateModel.minimumSaturation" title="Permalink to this definition"></a></dt>
+<dd><p>Minimum total EOS phase saturation</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="compositional.models.eos.EquationOfStateModel.omegaA">
+<span class="sig-name descname"><span class="pre">omegaA</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#compositional.models.eos.EquationOfStateModel.omegaA" title="Permalink to this definition"></a></dt>
+<dd><p>Parameter for EOS</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="compositional.models.eos.EquationOfStateModel.omegaB">
+<span class="sig-name descname"><span class="pre">omegaB</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#compositional.models.eos.EquationOfStateModel.omegaB" title="Permalink to this definition"></a></dt>
+<dd><p>Parameter for EOS</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="compositional.models.eos.EquationOfStateModel.selectGibbsMinimum">
+<span class="sig-name descname"><span class="pre">selectGibbsMinimum</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'true'</span></em><a class="headerlink" href="#compositional.models.eos.EquationOfStateModel.selectGibbsMinimum" title="Permalink to this definition"></a></dt>
+<dd><p>Use minimum Gibbs energy to select Z</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="mat class">
+<dt class="sig sig-object mat" id="compositional.models.eos.EquilibriumConstantModel">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">EquilibriumConstantModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">fluid</span></em>, <em class="sig-param"><span class="pre">k_values</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.models.eos.EquilibriumConstantModel" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#compositional.models.eos.EquationOfStateModel" title="compositional.models.eos.EquationOfStateModel"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">EquationOfStateModel</span></code></a></p>
+<p>Equilibrium constant EOS model for problems where functions of the
+type K(p, T, z) is sufficient to describe the phase behavior</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-compositional.fluids">
+<span id="fluid-models"></span><h3>Fluid models<a class="headerlink" href="#module-compositional.fluids" title="Permalink to this headline"></a></h3>
+<dl class="mat script">
+<dt class="sig sig-object mat" id="compositional.fluids.Contents">
+<span class="sig-name descname"><span class="pre">Contents</span></span><a class="headerlink" href="#compositional.fluids.Contents" title="Permalink to this definition"></a></dt>
+<dd><p>FLUIDS</p>
+<dl class="simple">
+<dt>Files</dt><dd><p>BlackOilPropertyModel       - Black-oil property model for compositional models
+CompositionalMixture          -
+CompositionalPropertyModel  - Property model for compositional models
+CoolPropsCompositionalMixture - Create MRST compositional fluid by using the open CoolProp library
+getBenchmarkMixture   - Grab bag of different fluids for use in examples etc
+PropertyModel               - Base class for properties in the compositional module
+TableCompositionalMixture     - Create MRST compositional from stored tables (taken from CoolProp)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat class">
+<dt class="sig sig-object mat" id="compositional.fluids.BlackOilPropertyModel">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">BlackOilPropertyModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">rho</span></em>, <em class="sig-param"><span class="pre">mu</span></em>, <em class="sig-param"><span class="pre">satfn</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.fluids.BlackOilPropertyModel" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#compositional.fluids.PropertyModel" title="compositional.fluids.PropertyModel"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">PropertyModel</span></code></a></p>
+<p>Black-oil property model for compositional models</p>
+</dd></dl>
+
+<dl class="mat class">
+<dt class="sig sig-object mat" id="compositional.fluids.CompositionalPropertyModel">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">CompositionalPropertyModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.fluids.CompositionalPropertyModel" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#compositional.fluids.PropertyModel" title="compositional.fluids.PropertyModel"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">PropertyModel</span></code></a></p>
+<p>Property model for compositional models</p>
+<dl class="mat method">
+<dt class="sig sig-object mat" id="compositional.fluids.CompositionalPropertyModel.computeDensity">
+<span class="sig-name descname"><span class="pre">computeDensity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">EOS</span></em>, <em class="sig-param"><span class="pre">p</span></em>, <em class="sig-param"><span class="pre">x</span></em>, <em class="sig-param"><span class="pre">Z</span></em>, <em class="sig-param"><span class="pre">T</span></em>, <em class="sig-param"><span class="pre">isLiquid</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.fluids.CompositionalPropertyModel.computeDensity" title="Permalink to this definition"></a></dt>
+<dd><p>Predict mass density from EOS Z-factor</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="compositional.fluids.CompositionalPropertyModel.computeMolarDensity">
+<span class="sig-name descname"><span class="pre">computeMolarDensity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">EOS</span></em>, <em class="sig-param"><span class="pre">p</span></em>, <em class="sig-param"><span class="pre">x</span></em>, <em class="sig-param"><span class="pre">Z</span></em>, <em class="sig-param"><span class="pre">T</span></em>, <em class="sig-param"><span class="pre">isLiquid</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.fluids.CompositionalPropertyModel.computeMolarDensity" title="Permalink to this definition"></a></dt>
+<dd><p>Predict molar density from EOS Z-factor</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="compositional.fluids.CompositionalPropertyModel.computePseudoCriticalPhaseProperties">
+<span class="sig-name descname"><span class="pre">computePseudoCriticalPhaseProperties</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">x</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.fluids.CompositionalPropertyModel.computePseudoCriticalPhaseProperties" title="Permalink to this definition"></a></dt>
+<dd><p>Molar fraction weighted aggregated properties to get
+pseudocritical properties of mixture.</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="compositional.fluids.CompositionalPropertyModel.computeViscosity">
+<span class="sig-name descname"><span class="pre">computeViscosity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">eos</span></em>, <em class="sig-param"><span class="pre">P</span></em>, <em class="sig-param"><span class="pre">x</span></em>, <em class="sig-param"><span class="pre">Z</span></em>, <em class="sig-param"><span class="pre">T</span></em>, <em class="sig-param"><span class="pre">isLiquid</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.fluids.CompositionalPropertyModel.computeViscosity" title="Permalink to this definition"></a></dt>
+<dd><p>Compute viscosity using the Lohrenz, Bray and Clark
+correlation for hydrocarbon mixtures (LBC viscosity)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="mat class">
+<dt class="sig sig-object mat" id="compositional.fluids.CoolPropsCompositionalMixture">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">CoolPropsCompositionalMixture</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">names</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.fluids.CoolPropsCompositionalMixture" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref mat mat-class docutils literal notranslate"><span class="pre">CompositionalMixture</span></code></p>
+<p>Create MRST compositional fluid by using the open CoolProp library
+(can be downloaded from <a class="reference external" href="http://www.coolprop.org/">http://www.coolprop.org/</a>)</p>
+<dl class="mat method">
+<dt class="sig sig-object mat" id="compositional.fluids.CoolPropsCompositionalMixture.CoolPropsCompositionalMixture">
+<span class="sig-name descname"><span class="pre">CoolPropsCompositionalMixture</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">names</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.fluids.CoolPropsCompositionalMixture.CoolPropsCompositionalMixture" title="Permalink to this definition"></a></dt>
+<dd><p>Create fluid from names</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="p">=</span> <span class="n">TableCompositionalMixture</span><span class="p">({</span><span class="s">&#39;Methane&#39;</span><span class="p">,</span> <span class="s">&#39;n-Decane&#39;</span><span class="p">});</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>names</strong> – Cell array of valid names. See <code class="xref mat mat-func docutils literal notranslate"><span class="pre">getFluidList</span></code> for
+valid names.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>fluid</strong> – Initialized fluid.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="mat class">
+<dt class="sig sig-object mat" id="compositional.fluids.PropertyModel">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">PropertyModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">f</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.fluids.PropertyModel" title="Permalink to this definition"></a></dt>
+<dd><p>Base class for properties in the compositional module</p>
+</dd></dl>
+
+<dl class="mat class">
+<dt class="sig sig-object mat" id="compositional.fluids.TableCompositionalMixture">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">TableCompositionalMixture</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">names</span></em>, <em class="sig-param"><span class="pre">outnames</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.fluids.TableCompositionalMixture" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref mat mat-class docutils literal notranslate"><span class="pre">CompositionalMixture</span></code></p>
+<p>Create MRST compositional mixture from stored tables (taken from CoolProp)</p>
+<dl class="mat method">
+<dt class="sig sig-object mat" id="compositional.fluids.TableCompositionalMixture.TableCompositionalMixture">
+<span class="sig-name descname"><span class="pre">TableCompositionalMixture</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">names</span></em>, <em class="sig-param"><span class="pre">outnames</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.fluids.TableCompositionalMixture.TableCompositionalMixture" title="Permalink to this definition"></a></dt>
+<dd><p>Create fluid from names</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="p">=</span> <span class="n">TableCompositionalMixture</span><span class="p">({</span><span class="s">&#39;Methane&#39;</span><span class="p">,</span> <span class="s">&#39;n-Decane&#39;</span><span class="p">});</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>names</strong> – Cell array of valid names. See <code class="xref mat mat-func docutils literal notranslate"><span class="pre">getFluidList</span></code> for
+valid names.</p></li>
+<li><p><strong>outnames</strong> – The names the components will have in output
+(optional).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>mix</strong> – Initialized compositional mixture.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="compositional.fluids.getBenchmarkMixture">
+<span class="sig-name descname"><span class="pre">getBenchmarkMixture</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">name</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.fluids.getBenchmarkMixture" title="Permalink to this definition"></a></dt>
+<dd><p>Grab bag of different fluids for use in examples etc</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="compositional.fluids.getCompositionalFluidCase">
+<span class="sig-name descname"><span class="pre">getCompositionalFluidCase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">name</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.fluids.getCompositionalFluidCase" title="Permalink to this definition"></a></dt>
+<dd><p>Grab bag of different fluids for use in examples etc</p>
+</dd></dl>
+
+<span class="target" id="module-compositional.fluids.blackoil"></span><dl class="mat script">
+<dt class="sig sig-object mat" id="compositional.fluids.blackoil.Contents">
+<span class="sig-name descname"><span class="pre">Contents</span></span><a class="headerlink" href="#compositional.fluids.blackoil.Contents" title="Permalink to this definition"></a></dt>
+<dd><p>BLACKOIL</p>
+<dl class="simple">
+<dt>Files</dt><dd><p>blackOilToMassFraction                   - Evaluate properties
+convertBlackOilModelToCompositionalModel - Convert blackoil model to compositional-like model
+convertBlackOilStateToCompositional      - Convert BO state to compositional-like state
+convertRSRVtoKValue                      - Convert RS/RV b lackoil to K-value. Experimental!</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="compositional.fluids.blackoil.blackOilToMassFraction">
+<span class="sig-name descname"><span class="pre">blackOilToMassFraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">p</span></em>, <em class="sig-param"><span class="pre">sO</span></em>, <em class="sig-param"><span class="pre">sG</span></em>, <em class="sig-param"><span class="pre">rs</span></em>, <em class="sig-param"><span class="pre">rv</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.fluids.blackoil.blackOilToMassFraction" title="Permalink to this definition"></a></dt>
+<dd><p>Evaluate properties</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="compositional.fluids.blackoil.convertBlackOilModelToCompositionalModel">
+<span class="sig-name descname"><span class="pre">convertBlackOilModelToCompositionalModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">bomodel</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.fluids.blackoil.convertBlackOilModelToCompositionalModel" title="Permalink to this definition"></a></dt>
+<dd><p>Convert blackoil model to compositional-like model</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="compositional.fluids.blackoil.convertBlackOilStateToCompositional">
+<span class="sig-name descname"><span class="pre">convertBlackOilStateToCompositional</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">bomodel</span></em>, <em class="sig-param"><span class="pre">state</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.fluids.blackoil.convertBlackOilStateToCompositional" title="Permalink to this definition"></a></dt>
+<dd><p>Convert BO state to compositional-like state</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="compositional.fluids.blackoil.convertRSRVtoKValue">
+<span class="sig-name descname"><span class="pre">convertRSRVtoKValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#compositional.fluids.blackoil.convertRSRVtoKValue" title="Permalink to this definition"></a></dt>
+<dd><p>Convert RS/RV b lackoil to K-value. Experimental!</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Does not yet support RV.</p>
+</div>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="coarsegrid.html" class="btn btn-neutral float-left" title="coarsegrid: Generation of coarse grids" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="co2lab.html" class="btn btn-neutral float-right" title="co2lab: Numerical CO2 laboratory" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019, SINTEF Digital.
+      <span class="lastupdated">Last updated on Sep 23, 2021.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

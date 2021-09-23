@@ -1,0 +1,13 @@
+`upscaling`: Upscaling of reservoir problems
+*******************************************
+.. include:: mrst/upscaling/README
+
+.. automodule:: upscaling
+	:members:
+
+.. automodule:: upscaling.input
+	:members:
+
+Examples
+===============================
+.. include:: examples/examples_upscaling.txt

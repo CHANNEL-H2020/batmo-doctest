@@ -1,0 +1,70 @@
+Welcome to the MRST quick documentation!
+============================================================
+
+.. toctree::
+   :maxdepth: 3
+
+   core
+   ad-core
+   ad-props
+   ad-blackoil
+   ad-eor
+   ad-mechanics
+   adjoint 
+   agglom   
+   blackoil-sequential
+   book   
+   coarsegrid   
+   compositional
+   co2lab  
+   deckformat   
+   dfm   
+   dg    
+   diagnostics
+   dual_porosity
+   fvbiot 
+   geochemistry
+   geothermal 
+   heterogeneity   
+   hfm
+   incomp
+   libgeometry      
+   linearsolvers   
+   matlab_bgl
+   mimetic
+   mpfa   
+   mrst_api   
+   mrst-gui   
+   msfvm
+   msmfem
+   msrsb
+   nwm   
+   opm_gridprocessing
+   optimization
+   re-mpfa   
+   solvent   
+   spe10   
+   steady-state  
+   streamlines
+   triangle  
+   upscaling
+   vag   
+   vem
+   vemmech
+   wellpaths
+   doc_templates
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

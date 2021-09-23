@@ -1,0 +1,22 @@
+`dual-porosity`: Dual porosity/permeability model for fractures
+*******************************************
+.. include:: mrst/dual_porosity/README.txt
+
+.. automodule:: dual_porosity
+	:members:
+
+.. automodule:: dual_porosity.ad_models
+	:members:
+
+.. automodule:: dual_porosity.ad_models.equations
+	:members:
+
+.. automodule:: dual_porosity.transfer_models
+	:members:
+
+.. automodule:: dual_porosity.transfer_models.shape_factor_models
+	:members:
+
+Examples
+===============================
+.. include:: examples/examples_dual_porosity.txt

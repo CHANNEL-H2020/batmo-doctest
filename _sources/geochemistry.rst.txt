@@ -1,0 +1,10 @@
+`geochemistry`: Surface geochemistry
+*******************************************
+.. include:: mrst/geochemistry/README.md
+
+.. automodule:: geochemistry.utils
+	:members:
+
+Examples
+===============================
+.. include:: examples/examples_geochemistry.txt

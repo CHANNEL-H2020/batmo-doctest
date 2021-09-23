@@ -1,0 +1,13 @@
+`vem`: Virtual element method on general grids
+*******************************************
+.. include:: mrst/vem/README
+
+.. automodule:: vem.utils
+	:members:
+
+.. automodule:: vem
+	:members:
+
+Examples
+===============================
+.. include:: examples/examples_vem.txt

@@ -1,0 +1,22 @@
+`solvent`: Solvent solvers
+*******************************************
+
+.. include:: mrst/solvent/README.txt
+Models
+===============================
+
+Base classes
+-------------------------------
+.. automodule:: solvent.models
+	:members:
+	:show-inheritance:
+
+
+Utilities
+===============================
+.. automodule:: solvent.utils
+	:members:
+
+Examples
+===============================
+.. include:: examples/examples_solvent.txt

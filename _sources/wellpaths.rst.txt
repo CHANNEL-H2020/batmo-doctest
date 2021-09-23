@@ -1,0 +1,10 @@
+`wellpaths`: Generation of wells using general curves
+*******************************************
+.. include:: mrst/wellpaths/README
+
+.. automodule:: wellpaths.utils
+	:members:
+
+Examples
+===============================
+.. include:: examples/examples_wellpaths.txt

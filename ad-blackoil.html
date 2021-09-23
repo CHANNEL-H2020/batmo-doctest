@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ad-blackoil: Black-oil solvers &mdash; The Matlab Reservoir Simulation Toolbox 2019b documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ad-eor: Enhanced oil recovery solvers" href="ad-eor.html" />
+    <link rel="prev" title="ad-props: PVT, fluid models and other properties for the AD-solvers" href="ad-props.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> The Matlab Reservoir Simulation Toolbox
+            <img src="_static/mrstlogo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                2019b
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="core.html">Core functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-core.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-core</span></code>: Automatic Differentiation Core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-props.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-props</span></code>: PVT, fluid models and other properties for the AD-solvers</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-blackoil</span></code>: Black-oil solvers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#models">Models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-ad_blackoil.models">Base classes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-ad_blackoil.utils">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ad-eor.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-eor</span></code>: Enhanced oil recovery solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-mechanics.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-mechanics</span></code>: Coupled flow and mechanics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adjoint.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">adjoint</span></code>: Two-phase, incompressible adjoint solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agglom.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">agglom</span></code>: Flow and property-based coarse-grid generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="blackoil-sequential.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">blackoil-sequential</span></code>: Sequential implicit black-oil solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">book</span></code>: Book examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coarsegrid.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">coarsegrid</span></code>: Generation of coarse grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compositional.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">compositional</span></code>: Equation-of-state compositional solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="co2lab.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">co2lab</span></code>: Numerical CO<sub>2</sub> laboratory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deckformat.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">deckformat</span></code>: Reading and conversion of input decks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dfm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dfm</span></code>: Discrete fracture matrix implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dg.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dg</span></code>: Discontinous Galerkin discretizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="diagnostics.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">diagnostics</span></code>: Flow diagnostics functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dual_porosity.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dual-porosity</span></code>: Dual porosity/permeability model for fractures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fvbiot.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">fvbiot</span></code>: Consistent finite-volume discretizations for poroelasticity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geochemistry.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">geochemistry</span></code>: Surface geochemistry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heterogeneity.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">heterogeneity</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="hfm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">hfm</span></code>: Hierarchical and embedded fractures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="incomp.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">incomp</span></code>: Solvers for incompressible flow and transport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgeometry.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">libgeometry</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linearsolvers.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">linearsolvers</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab_bgl.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">matlab_bgl</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mimetic.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mimetic</span></code>: Mimetic solvers for pressure problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpfa.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mpfa</span></code>: Multi-point flux approximation solvers for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mrst_api.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mrst_api</span></code>: API for writing C/C++ for MRST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mrst-gui.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mrst-gui</span></code>: Graphical user-interfaces for MRST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msfvm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msfvm</span></code>: Multiscale Finite-Volume method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msmfem.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msmfem</span></code>: Multiscale Mixed Finite-Element method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msrsb.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msrsb</span></code>: Multiscale Restriction-Smoothed Basis method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nwm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">nwm</span></code>: Near Wellbore Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opm_gridprocessing.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">opm_gridprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimization.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">optimization</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="re-mpfa.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">re-mpfa</span></code>: Richards’ equation with multi-point flux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvent.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">solvent</span></code>: Solvent solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spe10.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">spe10</span></code>: Access to the SPE10 benchmark case</a></li>
+<li class="toctree-l1"><a class="reference internal" href="steady-state.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">steady-state</span></code> Steady-state upscaling of functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="streamlines.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">streamlines</span></code>: Compute streamlines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triangle.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">triangle</span></code>: Triangular grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upscaling.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">upscaling</span></code>: Upscaling of reservoir problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vem.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">vem</span></code>: Virtual element method on general grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vemmech.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">vemmech</span></code>: Mechanics for general grids using the virtual element method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wellpaths.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">wellpaths</span></code>: Generation of wells using general curves</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">The Matlab Reservoir Simulation Toolbox</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-blackoil</span></code>: Black-oil solvers</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/ad-blackoil.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="ad-blackoil-black-oil-solvers">
+<h1><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-blackoil</span></code>: Black-oil solvers<a class="headerlink" href="#ad-blackoil-black-oil-solvers" title="Permalink to this headline"></a></h1>
+<p>Models and examples that extend the MRST AD-OO framework found in the ad-core module to black-oil problems. More specifically, the module adds additional models that implement the black-oil equations for multiphase, miscible, compressible flow. Included in the module are also a wide variety of examples validating the solvers against a commercial simulator on standard test cases.</p>
+<p>The module includes single-phase, two-phase and three-phase solvers. The three-phase solvers has optional support for problems where gas can dissolve into oil (Rs) and/or oil can vaporize into the gas phase (Rv). The solvers support source terms, boundary conditions and complex wells with changing controls, production limits and multiple segments. Standard benchmark cases (SPE1, SPE9) are included together with comparison results from a commercial simulator.</p>
+<div class="section" id="models">
+<h2>Models<a class="headerlink" href="#models" title="Permalink to this headline"></a></h2>
+<div class="section" id="module-ad_blackoil.models">
+<span id="base-classes"></span><h3>Base classes<a class="headerlink" href="#module-ad_blackoil.models" title="Permalink to this headline"></a></h3>
+<dl class="mat script">
+<dt class="sig sig-object mat" id="ad_blackoil.models.Contents">
+<span class="sig-name descname"><span class="pre">Contents</span></span><a class="headerlink" href="#ad_blackoil.models.Contents" title="Permalink to this definition"></a></dt>
+<dd><p>MODELS</p>
+<p>Files</p>
+</dd></dl>
+
+<dl class="mat class">
+<dt class="sig sig-object mat" id="ad_blackoil.models.ThreePhaseBlackOilModel">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">ThreePhaseBlackOilModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">rock</span></em>, <em class="sig-param"><span class="pre">fluid</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ad_blackoil.models.ThreePhaseBlackOilModel" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="ad-core.html#ad_core.models.ReservoirModel" title="ad_core.models.ReservoirModel"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ReservoirModel</span></code></a></p>
+<p>Three phase with optional dissolved gas and vaporized oil</p>
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ad_blackoil.models.ThreePhaseBlackOilModel.getPrimaryVariables">
+<span class="sig-name descname"><span class="pre">getPrimaryVariables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">state</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ad_blackoil.models.ThreePhaseBlackOilModel.getPrimaryVariables" title="Permalink to this definition"></a></dt>
+<dd><p>Get primary variables from state, before a possible
+initialization as AD.</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ad_blackoil.models.ThreePhaseBlackOilModel.getScalingFactorsCPR">
+<span class="sig-name descname"><span class="pre">getScalingFactorsCPR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">problem</span></em>, <em class="sig-param"><span class="pre">names</span></em>, <em class="sig-param"><span class="pre">type</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ad_blackoil.models.ThreePhaseBlackOilModel.getScalingFactorsCPR" title="Permalink to this definition"></a></dt>
+<dd><p>Get approximate, impes-like pressure scaling factors</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ad_blackoil.models.ThreePhaseBlackOilModel.validateState">
+<span class="sig-name descname"><span class="pre">validateState</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">state</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ad_blackoil.models.ThreePhaseBlackOilModel.validateState" title="Permalink to this definition"></a></dt>
+<dd><p>Check parent class</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ad_blackoil.models.ThreePhaseBlackOilModel.disgas">
+<span class="sig-name descname"><span class="pre">disgas</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#ad_blackoil.models.ThreePhaseBlackOilModel.disgas" title="Permalink to this definition"></a></dt>
+<dd><p>Flag deciding if oil can be vaporized into the gas phase</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ad_blackoil.models.ThreePhaseBlackOilModel.drsMaxRel">
+<span class="sig-name descname"><span class="pre">drsMaxRel</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#ad_blackoil.models.ThreePhaseBlackOilModel.drsMaxRel" title="Permalink to this definition"></a></dt>
+<dd><p>Maximum absolute Rs/Rv increment</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="ad_blackoil.models.ThreePhaseBlackOilModel.vapoil">
+<span class="sig-name descname"><span class="pre">vapoil</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#ad_blackoil.models.ThreePhaseBlackOilModel.vapoil" title="Permalink to this definition"></a></dt>
+<dd><p>Maximum relative Rs/Rv increment</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="mat class">
+<dt class="sig sig-object mat" id="ad_blackoil.models.TwoPhaseOilWaterModel">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">TwoPhaseOilWaterModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">rock</span></em>, <em class="sig-param"><span class="pre">fluid</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ad_blackoil.models.TwoPhaseOilWaterModel" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ad_blackoil.models.ThreePhaseBlackOilModel" title="ad_blackoil.models.ThreePhaseBlackOilModel"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ThreePhaseBlackOilModel</span></code></a></p>
+<p>Two phase oil/water system without dissolution</p>
+</dd></dl>
+
+<dl class="mat class">
+<dt class="sig sig-object mat" id="ad_blackoil.models.WaterModel">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">WaterModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">rock</span></em>, <em class="sig-param"><span class="pre">fluid</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ad_blackoil.models.WaterModel" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="ad-core.html#ad_core.models.ReservoirModel" title="ad_core.models.ReservoirModel"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ReservoirModel</span></code></a></p>
+<p>Single phase water model.</p>
+</dd></dl>
+
+<dl class="mat class">
+<dt class="sig sig-object mat" id="ad_blackoil.models.WaterThermalModel">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">WaterThermalModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">rock</span></em>, <em class="sig-param"><span class="pre">fluid</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ad_blackoil.models.WaterThermalModel" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ad_blackoil.models.WaterModel" title="ad_blackoil.models.WaterModel"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">WaterModel</span></code></a></p>
+<p>Single phase water model with thermal effects. Should be considered
+experimental and intentionally undocumented, as this feature is
+subject to change in the future.</p>
+<dl class="mat method">
+<dt class="sig sig-object mat" id="ad_blackoil.models.WaterThermalModel.insertWellEquations">
+<span class="sig-name descname"><span class="pre">insertWellEquations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">eqs</span></em>, <em class="sig-param"><span class="pre">names</span></em>, <em class="sig-param"><span class="pre">types</span></em>, <em class="sig-param"><span class="pre">wellSol0</span></em>, <em class="sig-param"><span class="pre">wellSol</span></em>, <em class="sig-param"><span class="pre">wellVars</span></em>, <em class="sig-param"><span class="pre">wellMap</span></em>, <em class="sig-param"><span class="pre">p</span></em>, <em class="sig-param"><span class="pre">mob</span></em>, <em class="sig-param"><span class="pre">rho</span></em>, <em class="sig-param"><span class="pre">hW</span></em>, <em class="sig-param"><span class="pre">components</span></em>, <em class="sig-param"><span class="pre">dt</span></em>, <em class="sig-param"><span class="pre">opt</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ad_blackoil.models.WaterThermalModel.insertWellEquations" title="Permalink to this definition"></a></dt>
+<dd><p>Utility function for setting up the well equations and adding
+source terms for black-oil like models. Note that this currently
+assumes that the first nPh equations are the conservation
+equations, according to the canonical MRST W-O-G ordering,</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-ad_blackoil.utils">
+<span id="utilities"></span><h2>Utilities<a class="headerlink" href="#module-ad_blackoil.utils" title="Permalink to this headline"></a></h2>
+<dl class="mat script">
+<dt class="sig sig-object mat" id="ad_blackoil.utils.Contents">
+<span class="sig-name descname"><span class="pre">Contents</span></span><a class="headerlink" href="#ad_blackoil.utils.Contents" title="Permalink to this definition"></a></dt>
+<dd><p>UTILS</p>
+<dl class="simple">
+<dt>Files</dt><dd><p>calculateHydrocarbonsFromStatusBO - Compute solution variables for the gas/oil/rs/rv-variable in black-oil
+computeFlashBlackOil              - Compute flash for a black-oil model with disgas/vapoil
+computeInitAquifer                - Undocumented Utility Function
+equationsBlackOil                 - Generate linearized problem for the black-oil equations
+equationsOilWater                 - Generate linearized problem for the two-phase oil-water model
+equationsWater                    - Generate linearized problem for the single-phase water model
+equationsWaterThermal             - Get linearized problem for single phase water system with black oil-style
+getbG_BO                          - Utility function for evaluating the reciprocal gas formation volume
+getbO_BO                          - Utility function for evaluating the reciprocal oil formation volume
+getCapillaryPressureBO            - Compute oil-water and oil-gas capillary pressures
+getCellStatusVO                   - Get status flags for each cell in a black-oil model
+getDeckEGG                        - Get the parsed deck for the EGG model
+getFluxAndPropsGas_BO             - Get flux and properties for the gas phase for a black-oil problem
+getFluxAndPropsOil_BO             - Get flux and properties for the oil phase for a black-oil problem
+getFluxAndPropsWater_BO           - Get flux and properties for the water phase for a black-oil problem
+getPolymerShearMultiplier         - Compute the flux multiplier due to polymer shear thinning/thickening
+getWellPolymer                    - Undocumented Utility Function
+updateStateBlackOilGeneric        - Generic update function for blackoil-like models</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="ad_blackoil.utils.calculateHydrocarbonsFromStatusBO">
+<span class="sig-name descname"><span class="pre">calculateHydrocarbonsFromStatusBO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">fluid</span></em>, <em class="sig-param"><span class="pre">status</span></em>, <em class="sig-param"><span class="pre">sO</span></em>, <em class="sig-param"><span class="pre">x</span></em>, <em class="sig-param"><span class="pre">rs</span></em>, <em class="sig-param"><span class="pre">rv</span></em>, <em class="sig-param"><span class="pre">pressure</span></em>, <em class="sig-param"><span class="pre">disgas</span></em>, <em class="sig-param"><span class="pre">vapoil</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ad_blackoil.utils.calculateHydrocarbonsFromStatusBO" title="Permalink to this definition"></a></dt>
+<dd><p>Compute solution variables for the gas/oil/rs/rv-variable in black-oil</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">sG</span><span class="p">,</span> <span class="n">rs</span><span class="p">,</span> <span class="n">rv</span><span class="p">,</span> <span class="n">rsSat</span><span class="p">,</span> <span class="n">rvSat</span><span class="p">]</span> <span class="p">=</span> <span class="p">...</span>
+</pre></div>
+</div>
+<p>calculateHydrocarbonsFromStatusBO(model, status, sO, x, rs, rv, pressure)</p>
+<p class="rubric">Description:</p>
+<p>The ThreePhaseBlackOil model has a single unknown that represents
+either gas, oil, oil in gas (rs) and gas in oil (rv) on a cell-by-cell
+basis. The purpose of this function is to easily compute the different
+quantities from the “x”-variable and other properties, with correct
+derivatives if any of them are AD-variables.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> – ThreePhaseBlackOilModel-derived class. Determines if
+vapoil/disgas is being used and contains the fluid model.</p></li>
+<li><p><strong>status</strong> – Status flag as defined by “getCellStatusVO”</p></li>
+<li><p><strong>sO</strong> – The tentative oil saturation.</p></li>
+<li><p><strong>x</strong> – Variable that is to be decomposed into sG, sO, rs, rv, …</p></li>
+<li><p><strong>rs</strong> – Dissolved gas, vaporized oil</p></li>
+<li><p><strong>rv</strong> – Dissolved gas, vaporized oil</p></li>
+<li><p><strong>pressure</strong> – Reservoir oil pressure</p></li>
+<li><p><strong>disgas</strong> – true if dissolved gas should be taken into account</p></li>
+<li><p><strong>vapoil</strong> – true if vaporized oil should be taken into account</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><p><strong>‘field’</strong></p>
+</dd>
+</dl>
+<p>RETURNS:</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>equationsBlackOil, getCellStatusVO</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="ad_blackoil.utils.computeFlashBlackOil">
+<span class="sig-name descname"><span class="pre">computeFlashBlackOil</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">state0</span></em>, <em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">status</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ad_blackoil.utils.computeFlashBlackOil" title="Permalink to this definition"></a></dt>
+<dd><p>Compute flash for a black-oil model with disgas/vapoil</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="p">=</span> <span class="n">computeFlashBlackOil</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">state0</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">status</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>Compute flash to ensure that dissolved properties are within physically
+reasonable values, and simultanously avoid that properties go far
+beyond the saturated zone when they were initially unsaturated and vice
+versa.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> – State where saturations, rs, rv have been updated due to a
+Newton-step.</p></li>
+<li><p><strong>state0</strong> – State from before the linearized update.</p></li>
+<li><p><strong>model</strong> – The ThreePhaseBlackOil derived model used to compute the
+update.</p></li>
+<li><p><strong>status</strong> – Status flags from getCellStatusVO, applied to state0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>state</strong> – Updated state where saturations and values are chopped near
+phase transitions.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Be mindful of the definition of state0. It is not necessarily the
+state at the previous timestep, but rather the state at the previous
+nonlinear iteration!</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="ad_blackoil.utils.computeInitAquifer">
+<span class="sig-name descname"><span class="pre">computeInitAquifer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">initState</span></em>, <em class="sig-param"><span class="pre">initaqvolumes</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ad_blackoil.utils.computeInitAquifer" title="Permalink to this definition"></a></dt>
+<dd><p>Undocumented Utility Function</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="ad_blackoil.utils.equationsBlackOil">
+<span class="sig-name descname"><span class="pre">equationsBlackOil</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">state0</span></em>, <em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">dt</span></em>, <em class="sig-param"><span class="pre">drivingForces</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ad_blackoil.utils.equationsBlackOil" title="Permalink to this definition"></a></dt>
+<dd><p>Generate linearized problem for the black-oil equations</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">problem</span><span class="p">,</span> <span class="n">state</span><span class="p">]</span> <span class="p">=</span> <span class="n">equationsBlackOil</span><span class="p">(</span><span class="n">state0</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">drivingForces</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>This is the core function of the black-oil solver. This function
+assembles the residual equations for the conservation of water, oil and
+gas, as well as required well equations. By default, Jacobians are also
+provided by the use of automatic differentiation.</p>
+<p>Oil can be vaporized into the gas phase if the model has the vapoil
+property enabled. Analogously, if the disgas property is enabled, gas
+is allowed to dissolve into the oil phase. Note that the fluid
+functions change depending on vapoil/disgas being active and may have
+to be updated when the property is changed in order to run a successful
+simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state0</strong> – Reservoir state at the previous timestep. Assumed to have
+physically reasonable values.</p></li>
+<li><p><strong>state</strong> – State at the current nonlinear iteration. The values do not
+need to be physically reasonable.</p></li>
+<li><p><strong>model</strong> – ThreePhaseBlackOilModel-derived class. Typically,
+equationsBlackOil will be called from the class
+getEquations member function.</p></li>
+<li><p><strong>dt</strong> – Scalar timestep in seconds.</p></li>
+<li><p><strong>drivingForces</strong> – Struct with fields:
+* W for wells. Can be empty for no wells.
+* bc for boundary conditions. Can be empty for no bc.
+* src for source terms. Can be empty for no sources.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>‘Verbose’</strong> – Extra output if requested.</p></li>
+<li><p><strong>‘reverseMode’</strong> – Boolean indicating if we are in reverse mode, i.e.
+solving the adjoint equations. Defaults to false.</p></li>
+<li><p><strong>‘resOnly’</strong> – Only assemble residual equations, do not assemble the
+Jacobians. Can save some assembly time if only the
+values are required.</p></li>
+<li><p><strong>‘iterations’</strong> – Nonlinear iteration number. Special logic happens in the
+wells if it is the first iteration.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>problem</strong> – LinearizedProblemAD class instance, containing the water, oil
+and gas conservation equations, as well as well equations
+specified by the FacilityModel class.</p></li>
+<li><p><strong>state</strong> – Updated state. Primarily returned to handle changing well
+controls from the well model.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>equationsOilWater, ThreePhaseBlackOilModel</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="ad_blackoil.utils.equationsOilWater">
+<span class="sig-name descname"><span class="pre">equationsOilWater</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">state0</span></em>, <em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">dt</span></em>, <em class="sig-param"><span class="pre">drivingForces</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ad_blackoil.utils.equationsOilWater" title="Permalink to this definition"></a></dt>
+<dd><p>Generate linearized problem for the two-phase oil-water model</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">problem</span><span class="p">,</span> <span class="n">state</span><span class="p">]</span> <span class="p">=</span> <span class="n">equationsOilWater</span><span class="p">(</span><span class="n">state0</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">drivingForces</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>This is the core function of the two-phase oil-water solver. This
+function assembles the residual equations for the conservation of water
+and oil as well as required well equations. By default, Jacobians are
+also provided by the use of automatic differentiation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state0</strong> – Reservoir state at the previous timestep. Assumed to have
+physically reasonable values.</p></li>
+<li><p><strong>state</strong> – State at the current nonlinear iteration. The values do not
+need to be physically reasonable.</p></li>
+<li><p><strong>model</strong> – TwoPhaseOilWaterModel-derived class. Typically,
+equationsOilWater will be called from the class
+getEquations member function.</p></li>
+<li><p><strong>dt</strong> – Scalar timestep in seconds.</p></li>
+<li><p><strong>drivingForces</strong> – Struct with fields:
+* W for wells. Can be empty for no wells.
+* bc for boundary conditions. Can be empty for no bc.
+* src for source terms. Can be empty for no sources.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>‘Verbose’</strong> – Extra output if requested.</p></li>
+<li><p><strong>‘reverseMode’</strong> – Boolean indicating if we are in reverse mode, i.e.
+solving the adjoint equations. Defaults to false.</p></li>
+<li><p><strong>‘resOnly’</strong> – Only assemble residual equations, do not assemble the
+Jacobians. Can save some assembly time if only the
+values are required.</p></li>
+<li><p><strong>‘iterations’</strong> – Nonlinear iteration number. Special logic happens in the
+wells if it is the first iteration.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>problem</strong> – LinearizedProblemAD class instance, containing the water
+and oil conservation equations, as well as well equations
+specified by the WellModel class.</p></li>
+<li><p><strong>state</strong> – Updated state. Primarily returned to handle changing well
+controls from the well model.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>equationsBlackOil, TwoPhaseOilWaterModel</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="ad_blackoil.utils.equationsWater">
+<span class="sig-name descname"><span class="pre">equationsWater</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">state0</span></em>, <em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">dt</span></em>, <em class="sig-param"><span class="pre">drivingForces</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ad_blackoil.utils.equationsWater" title="Permalink to this definition"></a></dt>
+<dd><p>Generate linearized problem for the single-phase water model</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">problem</span><span class="p">,</span> <span class="n">state</span><span class="p">]</span> <span class="p">=</span> <span class="n">equationsWater</span><span class="p">(</span><span class="n">state0</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">drivingForces</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>This is the core function of the single-phase water solver with
+black-oil style properties. This function assembles the residual
+equations for the conservation of water and oil as well as required
+well equations. By default, Jacobians are also provided by the use of
+automatic differentiation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state0</strong> – Reservoir state at the previous timestep. Assumed to have
+physically reasonable values.</p></li>
+<li><p><strong>state</strong> – State at the current nonlinear iteration. The values do not
+need to be physically reasonable.</p></li>
+<li><p><strong>model</strong> – WaterModel-derived class. Typically,
+equationsWater will be called from the class
+getEquations member function.</p></li>
+<li><p><strong>dt</strong> – Scalar timestep in seconds.</p></li>
+<li><p><strong>drivingForces</strong> – Struct with fields:
+* W for wells. Can be empty for no wells.
+* bc for boundary conditions. Can be empty for no bc.
+* src for source terms. Can be empty for no sources.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>‘Verbose’</strong> – Extra output if requested.</p></li>
+<li><p><strong>‘reverseMode’</strong> – Boolean indicating if we are in reverse mode, i.e.
+solving the adjoint equations. Defaults to false.</p></li>
+<li><p><strong>‘resOnly’</strong> – Only assemble residual equations, do not assemble the
+Jacobians. Can save some assembly time if only the
+values are required.</p></li>
+<li><p><strong>‘iterations’</strong> – Nonlinear iteration number. Special logic happens in the
+wells if it is the first iteration.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>problem</strong> – LinearizedProblemAD class instance, containing the equation
+for the water pressure, as well as well equations specified
+by the WellModel class.</p></li>
+<li><p><strong>state</strong> – Updated state. Primarily returned to handle changing well
+controls from the well model.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>equationsBlackOil, ThreePhaseBlackOilModel</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="ad_blackoil.utils.equationsWaterThermal">
+<span class="sig-name descname"><span class="pre">equationsWaterThermal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">state0</span></em>, <em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">dt</span></em>, <em class="sig-param"><span class="pre">drivingForces</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ad_blackoil.utils.equationsWaterThermal" title="Permalink to this definition"></a></dt>
+<dd><p>Get linearized problem for single phase water system with black oil-style
+properties</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="ad_blackoil.utils.getCapillaryPressureBO">
+<span class="sig-name descname"><span class="pre">getCapillaryPressureBO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">fluid</span></em>, <em class="sig-param"><span class="pre">sW</span></em>, <em class="sig-param"><span class="pre">sG</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ad_blackoil.utils.getCapillaryPressureBO" title="Permalink to this definition"></a></dt>
+<dd><p>Compute oil-water and oil-gas capillary pressures</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">pcOW</span><span class="p">,</span> <span class="n">pcOG</span><span class="p">]</span> <span class="p">=</span> <span class="n">getCapillaryPressureBO</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">sW</span><span class="p">,</span> <span class="n">sG</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>Compute the capillary pressures relative to the oil pressure</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fluid</strong> – AD fluid model, from for example initDeckADIFluid or
+initSimpleADIFluid.</p></li>
+<li><p><strong>sW</strong> – Water saturation. Used to evaluate the water-oil capillary
+pressure.</p></li>
+<li><p><strong>sG</strong> – Gas saturation. Used to evaluate the oil-gas capillary
+pressure.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>pcOW</strong> – Pressure difference between the oil and water pressures. The
+water phase pressure can be computed as
+pW = pO - pcOW;</p></li>
+<li><p><strong>pcOG</strong> – Pressure difference between the oil and gas pressures. The
+water phase pressure can be computed as
+pG = pO + pcOG;</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Mind the different sign for the computation of the phase pressures
+above!</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="ad_blackoil.utils.getCellStatusVO">
+<span class="sig-name descname"><span class="pre">getCellStatusVO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">sO</span></em>, <em class="sig-param"><span class="pre">sW</span></em>, <em class="sig-param"><span class="pre">sG</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ad_blackoil.utils.getCellStatusVO" title="Permalink to this definition"></a></dt>
+<dd><p>Get status flags for each cell in a black-oil model</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">st</span> <span class="p">=</span> <span class="n">getCellStatusVO</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">sO</span><span class="p">,</span> <span class="n">sW</span><span class="p">,</span> <span class="n">sG</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>Get the status flags for the number of phases present.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sO</strong> – Oil saturation. One value per cell in the simulation grid.</p></li>
+<li><p><strong>sW</strong> – Water saturation. One value per cell in the simulation grid.</p></li>
+<li><p><strong>sG</strong> – Gas saturation. One value per cell in the simulation grid.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>status</strong> – status that can be provided fom the state for which the status
+flags are to be computed.</p></li>
+<li><p><strong>vapoil</strong> – true if there can be vaporized oil</p></li>
+<li><p><strong>disgas</strong> – true if there can be dissolved gas</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>st</strong> –</p>
+<dl class="simple">
+<dt>Cell array with three columns with one entry per cell. The</dt><dd><p>interpretation of each flag:</p>
+</dd>
+</dl>
+<p>Col 1: A cell is flagged as true if oil is present, but gas
+is not present.
+Col 2: A cell is flagged as true if gas is present, but oil
+is not present.
+Col 3: A cell is flagged as true if both gas and oil are present and
+true three-phase flow is occuring.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>ThreePhaseBlackOilModel</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="ad_blackoil.utils.getFluxAndPropsGas_BO">
+<span class="sig-name descname"><span class="pre">getFluxAndPropsGas_BO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">pO</span></em>, <em class="sig-param"><span class="pre">sG</span></em>, <em class="sig-param"><span class="pre">krG</span></em>, <em class="sig-param"><span class="pre">T</span></em>, <em class="sig-param"><span class="pre">gdz</span></em>, <em class="sig-param"><span class="pre">rv</span></em>, <em class="sig-param"><span class="pre">isSat</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ad_blackoil.utils.getFluxAndPropsGas_BO" title="Permalink to this definition"></a></dt>
+<dd><p>Get flux and properties for the gas phase for a black-oil problem</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">vG</span><span class="p">,</span> <span class="n">bG</span><span class="p">,</span> <span class="n">mobG</span><span class="p">,</span> <span class="n">rhoG</span><span class="p">,</span> <span class="n">pG</span><span class="p">,</span> <span class="n">upcg</span><span class="p">,</span> <span class="n">dpG</span><span class="p">]</span> <span class="p">=</span> <span class="p">...</span>
+   <span class="n">getFluxAndPropsOil_BO</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">pO</span><span class="p">,</span> <span class="n">sG</span><span class="p">,</span> <span class="n">krG</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">gdz</span><span class="p">,</span> <span class="n">rv</span><span class="p">,</span> <span class="n">isSat</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>Utility function for evaluating mobilities, densities and fluxes for
+the gas phase in the black-oil (BO)-model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> – ThreePhaseBlackOil or derived subclass instance</p></li>
+<li><p><strong>p</strong> – Oil phase pressure. One value per cell in simulation grid.</p></li>
+<li><p><strong>sG</strong> – Gas phase saturation. One value per cell in simulation grid.</p></li>
+<li><p><strong>krG</strong> – Gas phase relative permeability, possibly evaluated some
+three-phase relperm function. One value per cell in simulation
+grid.</p></li>
+<li><p><strong>T</strong> – Transmissibility for the internal interfaces.</p></li>
+<li><p><strong>gdz</strong> – Let dz be the gradient of the cell depths, on each interface.</p></li>
+<li><p><strong>the</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">Then</span> <span class="pre">gdz</span> <span class="pre">is</span> <span class="pre">the</span> <span class="pre">dot</span> <span class="pre">product</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">dz</span> <span class="pre">with</span> <span class="pre">the</span> <span class="pre">gravity</span> <span class="pre">vector</span> <span class="pre">of</span></code></span>) – </p></li>
+<li><p><strong>information.</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">model.</span> <span class="pre">See</span> <span class="pre">getGravityGradient</span> <span class="pre">for</span> <span class="pre">more</span></code></span>) – </p></li>
+<li><p><strong>rv</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">when</span> <span class="pre">evaluating</span></code></span>) – Amount of oil vaporized into the gas phase. Use to evaluate the
+viscosity and density. One value per cell in simulation grid.</p></li>
+<li><p><strong>isSat</strong> – Boolean indicator if the gas in the cell is saturated with oil.</p></li>
+<li><p><strong>gas</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">True</span> <span class="pre">indicates</span> <span class="pre">that</span> <span class="pre">the</span> <span class="pre">maximum</span> <span class="pre">vaporized</span> <span class="pre">gas</span> <span class="pre">is</span> <span class="pre">present</span> <span class="pre">inside</span> <span class="pre">the</span></code></span>) – </p></li>
+<li><p><strong>cell</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">phase</span> <span class="pre">in</span> <span class="pre">the</span></code></span>) – </p></li>
+<li><p><strong>tables</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">and</span> <span class="pre">that</span> <span class="pre">we</span> <span class="pre">need</span> <span class="pre">to</span> <span class="pre">look</span> <span class="pre">at</span> <span class="pre">the</span> <span class="pre">saturated</span></code></span>) – </p></li>
+<li><p><strong>rv</strong> – dependent properties. One value per cell in</p></li>
+<li><p><strong>grid.</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">simulation</span></code></span>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>vG</strong> – Gas flux, at reservoir conditions, at each interface.</p></li>
+<li><p><strong>bG</strong> – Gas reciprocal formation volume factors. One value per cell in
+simulation grid.</p></li>
+<li><p><strong>rhoG</strong> – Gas density in each cell.</p></li>
+<li><p><strong>pG</strong> – Gas phase pressure. One value per cell in simulation grid.
+Pressure will be different from the oil pressure if capillary
+pressure is present in the model.</p></li>
+<li><p><strong>upcg</strong> – Upwind indicators for the gas phase. One value per interface.</p></li>
+<li><p><strong>dpG</strong> – Phase pressure differential for each interface. Was used to
+evaluate the phase flux.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>getFluxAndPropsOil_BO, getFluxAndPropsWater_BO</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="ad_blackoil.utils.getFluxAndPropsOil_BO">
+<span class="sig-name descname"><span class="pre">getFluxAndPropsOil_BO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">p</span></em>, <em class="sig-param"><span class="pre">sO</span></em>, <em class="sig-param"><span class="pre">krO</span></em>, <em class="sig-param"><span class="pre">T</span></em>, <em class="sig-param"><span class="pre">gdz</span></em>, <em class="sig-param"><span class="pre">rs</span></em>, <em class="sig-param"><span class="pre">isSat</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ad_blackoil.utils.getFluxAndPropsOil_BO" title="Permalink to this definition"></a></dt>
+<dd><p>Get flux and properties for the oil phase for a black-oil problem</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">vO</span><span class="p">,</span> <span class="n">bO</span><span class="p">,</span> <span class="n">mobO</span><span class="p">,</span> <span class="n">rhoO</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">upco</span><span class="p">,</span> <span class="n">dpO</span><span class="p">]</span> <span class="p">=</span> <span class="p">...</span>
+   <span class="n">getFluxAndPropsOil_BO</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">sO</span><span class="p">,</span> <span class="n">krO</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">gdz</span><span class="p">,</span> <span class="n">rs</span><span class="p">,</span> <span class="n">isSat</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>Utility function for evaluating mobilities, densities and fluxes for
+the oil phase in the black-oil (BO)-model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> – ThreePhaseBlackOil or derived subclass instance</p></li>
+<li><p><strong>p</strong> – Oil phase pressure. One value per cell in simulation grid.</p></li>
+<li><p><strong>sO</strong> – Oil phase saturation. One value per cell in simulation grid.</p></li>
+<li><p><strong>krO</strong> – Oil phase relative permeability, possibly evaluated some
+three-phase relperm function. One value per cell in simulation
+grid.</p></li>
+<li><p><strong>T</strong> – Transmissibility for the internal interfaces.</p></li>
+<li><p><strong>gdz</strong> – Let dz be the gradient of the cell depths, on each interface.</p></li>
+<li><p><strong>the</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">Then</span> <span class="pre">gdz</span> <span class="pre">is</span> <span class="pre">the</span> <span class="pre">dot</span> <span class="pre">product</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">dz</span> <span class="pre">with</span> <span class="pre">the</span> <span class="pre">gravity</span> <span class="pre">vector</span> <span class="pre">of</span></code></span>) – </p></li>
+<li><p><strong>information.</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">model.</span> <span class="pre">See</span> <span class="pre">getGravityGradient</span> <span class="pre">for</span> <span class="pre">more</span></code></span>) – </p></li>
+<li><p><strong>rs</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">look</span> <span class="pre">at</span> <span class="pre">the</span> <span class="pre">saturated</span> <span class="pre">tables</span> <span class="pre">when</span> <span class="pre">evaluating</span></code></span>) – Amount of gas dissolved into the oil phase. Use to evaluate the
+viscosity and density. One value per cell in simulation grid.</p></li>
+<li><p><strong>isSat</strong> – Boolean indicator if the oil in the cell is saturated with gas.</p></li>
+<li><p><strong>cell</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">True</span> <span class="pre">indicates</span> <span class="pre">that</span> <span class="pre">there</span> <span class="pre">is</span> <span class="pre">free</span> <span class="pre">gas</span> <span class="pre">in</span> <span class="pre">the</span></code></span>) – </p></li>
+<li><p><strong>to</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">and</span> <span class="pre">that</span> <span class="pre">we</span> <span class="pre">need</span></code></span>) – </p></li>
+<li><p><strong>rs</strong> – dependent properties.</p></li>
+<li><p><strong>grid.</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">One</span> <span class="pre">value</span> <span class="pre">per</span> <span class="pre">cell</span> <span class="pre">in</span> <span class="pre">simulation</span></code></span>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>vO</strong> – Oil flux, at reservoir conditions, at each interface.</p></li>
+<li><p><strong>bO</strong> – Oil reciprocal formation volume factors. One value per cell in
+simulation grid.</p></li>
+<li><p><strong>rhoO</strong> – Oil density in each cell.</p></li>
+<li><p><strong>p</strong> – Oil phase pressure. One value per cell in simulation grid.
+Should be unmodified. Included simply to have parity with
+analogous gas and water functions.</p></li>
+<li><p><strong>upco</strong> – Upwind indicators for the oil phase. One value per interface.</p></li>
+<li><p><strong>dpO</strong> – Phase pressure differential for each interface. Was used to
+evaluate the phase flux.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>getFluxAndPropsGas_BO, getFluxAndPropsWater_BO</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="ad_blackoil.utils.getFluxAndPropsWater_BO">
+<span class="sig-name descname"><span class="pre">getFluxAndPropsWater_BO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">pO</span></em>, <em class="sig-param"><span class="pre">sW</span></em>, <em class="sig-param"><span class="pre">krW</span></em>, <em class="sig-param"><span class="pre">T</span></em>, <em class="sig-param"><span class="pre">gdz</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ad_blackoil.utils.getFluxAndPropsWater_BO" title="Permalink to this definition"></a></dt>
+<dd><p>Get flux and properties for the water phase for a black-oil problem</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">vW</span><span class="p">,</span> <span class="n">bW</span><span class="p">,</span> <span class="n">mobW</span><span class="p">,</span> <span class="n">rhoW</span><span class="p">,</span> <span class="n">pW</span><span class="p">,</span> <span class="n">upcw</span><span class="p">,</span> <span class="n">dpW</span><span class="p">]</span> <span class="p">=</span> <span class="p">...</span>
+   <span class="n">getFluxAndPropsWater_BO</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">pO</span><span class="p">,</span> <span class="n">sW</span><span class="p">,</span> <span class="n">krW</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">gdz</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>Utility function for evaluating mobilities, densities and fluxes for
+the water phase in the black-oil (BO)-model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> – ThreePhaseBlackOil or derived subclass instance</p></li>
+<li><p><strong>pO</strong> – Oil phase pressure. One value per cell in simulation grid.</p></li>
+<li><p><strong>sW</strong> – Water phase saturation. One value per cell in simulation grid.</p></li>
+<li><p><strong>krW</strong> – Water phase relative permeability, possibly evaluated some
+three-phase relperm function. One value per cell in simulation
+grid.</p></li>
+<li><p><strong>T</strong> – Transmissibility for the internal interfaces.</p></li>
+<li><p><strong>gdz</strong> – Let dz be the gradient of the cell depths, on each interface.</p></li>
+<li><p><strong>the</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">Then</span> <span class="pre">gdz</span> <span class="pre">is</span> <span class="pre">the</span> <span class="pre">dot</span> <span class="pre">product</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">dz</span> <span class="pre">with</span> <span class="pre">the</span> <span class="pre">gravity</span> <span class="pre">vector</span> <span class="pre">of</span></code></span>) – </p></li>
+<li><p><strong>information.</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">model.</span> <span class="pre">See</span> <span class="pre">getGravityGradient</span> <span class="pre">for</span> <span class="pre">more</span></code></span>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>vW</strong> – Water flux, at reservoir conditions, at each interface.</p></li>
+<li><p><strong>bW</strong> – Water reciprocal formation volume factors. One value per cell in
+simulation grid.</p></li>
+<li><p><strong>rhoW</strong> – Water density in each cell.</p></li>
+<li><p><strong>pW</strong> – Water phase pressure. One value per cell in simulation grid.
+Pressure will be different from the oil pressure if capillary
+pressure is present in the model.</p></li>
+<li><p><strong>upcw</strong> – Upwind indicators for the water phase. One value per interface.</p></li>
+<li><p><strong>dpW</strong> – Phase pressure differential for each interface. Was used to
+evaluate the phase flux.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>getFluxAndPropsGas_BO, getFluxAndPropsOil_BO</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="ad_blackoil.utils.getPolymerShearMultiplier">
+<span class="sig-name descname"><span class="pre">getPolymerShearMultiplier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">VW0</span></em>, <em class="sig-param"><span class="pre">muWmult</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ad_blackoil.utils.getPolymerShearMultiplier" title="Permalink to this definition"></a></dt>
+<dd><p>Compute the flux multiplier due to polymer shear thinning/thickening</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">mult</span>           <span class="p">=</span> <span class="n">getPolymerShearMultiplier</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">VW0</span><span class="p">,</span> <span class="n">muWmult</span><span class="p">)</span>
+<span class="p">[</span><span class="n">mult</span><span class="p">,</span><span class="n">VW</span><span class="p">]</span>      <span class="p">=</span> <span class="n">getPolymerShearMultiplier</span><span class="p">(...)</span>
+<span class="p">[</span><span class="n">mult</span><span class="p">,</span><span class="n">VW</span><span class="p">,</span><span class="n">iter</span><span class="p">]</span> <span class="p">=</span> <span class="n">getPolymerShearMultiplier</span><span class="p">(...)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>The viscoisty of a polymer solution may be changed by the shear rate,
+which is related to the flow velocity. This function returns a flux
+multiplier mult, such that</p>
+<blockquote>
+<div><p>vWsh = vW.*mult,   and,   vPsh = vP.*mult,</p>
+</div></blockquote>
+<p>where vWsh and vPsh are the shear modified fluxes for pure water and
+water with polymer, respectively.</p>
+<dl class="simple">
+<dt>The input water face velocity is computed as</dt><dd><p>VW = vW/(poro*area)</p>
+</dd>
+</dl>
+<p>where poro is the average porosity between neighboring cells, and area
+is the face area.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> – Model structure</p></li>
+<li><p><strong>VW0</strong> – Water velocity on faces without shear thinning</p></li>
+<li><p><strong>muWmult</strong> – Viscosity multiplier on faces</p></li>
+<li><p><strong>iter</strong> – Number of non-linear iterations</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>mult</strong> – Flux multiplier (reciprocal of the viscosity multiplier)</p></li>
+<li><p><strong>VW</strong> – Water velocity as solution of nonlinear shear equation</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="ad_blackoil.utils.getWellPolymer">
+<span class="sig-name descname"><span class="pre">getWellPolymer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">W</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ad_blackoil.utils.getWellPolymer" title="Permalink to this definition"></a></dt>
+<dd><p>Undocumented Utility Function</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="ad_blackoil.utils.getbG_BO">
+<span class="sig-name descname"><span class="pre">getbG_BO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">p</span></em>, <em class="sig-param"><span class="pre">rv</span></em>, <em class="sig-param"><span class="pre">isLiquid</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ad_blackoil.utils.getbG_BO" title="Permalink to this definition"></a></dt>
+<dd><p>Utility function for evaluating the reciprocal gas formation volume
+factor function.</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="ad_blackoil.utils.getbO_BO">
+<span class="sig-name descname"><span class="pre">getbO_BO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">p</span></em>, <em class="sig-param"><span class="pre">rs</span></em>, <em class="sig-param"><span class="pre">isSaturated</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ad_blackoil.utils.getbO_BO" title="Permalink to this definition"></a></dt>
+<dd><p>Utility function for evaluating the reciprocal oil formation volume
+factor function.</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="ad_blackoil.utils.updateStateBlackOilGeneric">
+<span class="sig-name descname"><span class="pre">updateStateBlackOilGeneric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">problem</span></em>, <em class="sig-param"><span class="pre">dx</span></em>, <em class="sig-param"><span class="pre">drivingForces</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ad_blackoil.utils.updateStateBlackOilGeneric" title="Permalink to this definition"></a></dt>
+<dd><p>Generic update function for blackoil-like models</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="p">=</span> <span class="n">updateStateBlackOilGeneric</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">problem</span><span class="p">,</span> <span class="n">dx</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>This is a relatively generic update function that can dynamically work
+out where increments should go based on the model implementation. It
+can be used for simple models or used as inspiration for more exotic
+models.</p>
+<p>Presently handles either 2/3-phase with disgas/vapoil or n-phase
+without dissolution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> – PhysicalModel subclass.</p></li>
+<li><p><strong>state</strong> – State which is to be updated.</p></li>
+<li><p><strong>problem</strong> – Linearized problem from which increments were obtained</p></li>
+<li><p><strong>dx</strong> – Increments created by solving the linearized problem.</p></li>
+<li><p><strong>drivingForces</strong> – Wells etc.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>state</strong> – Updated state.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ad-props.html" class="btn btn-neutral float-left" title="ad-props: PVT, fluid models and other properties for the AD-solvers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ad-eor.html" class="btn btn-neutral float-right" title="ad-eor: Enhanced oil recovery solvers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019, SINTEF Digital.
+      <span class="lastupdated">Last updated on Sep 23, 2021.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

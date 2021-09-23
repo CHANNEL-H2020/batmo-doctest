@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>vem: Virtual element method on general grids &mdash; The Matlab Reservoir Simulation Toolbox 2019b documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="vemmech: Mechanics for general grids using the virtual element method" href="vemmech.html" />
+    <link rel="prev" title="upscaling: Upscaling of reservoir problems" href="upscaling.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> The Matlab Reservoir Simulation Toolbox
+            <img src="_static/mrstlogo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                2019b
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="core.html">Core functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-core.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-core</span></code>: Automatic Differentiation Core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-props.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-props</span></code>: PVT, fluid models and other properties for the AD-solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-blackoil.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-blackoil</span></code>: Black-oil solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-eor.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-eor</span></code>: Enhanced oil recovery solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-mechanics.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-mechanics</span></code>: Coupled flow and mechanics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adjoint.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">adjoint</span></code>: Two-phase, incompressible adjoint solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agglom.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">agglom</span></code>: Flow and property-based coarse-grid generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="blackoil-sequential.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">blackoil-sequential</span></code>: Sequential implicit black-oil solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">book</span></code>: Book examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coarsegrid.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">coarsegrid</span></code>: Generation of coarse grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compositional.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">compositional</span></code>: Equation-of-state compositional solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="co2lab.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">co2lab</span></code>: Numerical CO<sub>2</sub> laboratory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deckformat.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">deckformat</span></code>: Reading and conversion of input decks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dfm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dfm</span></code>: Discrete fracture matrix implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dg.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dg</span></code>: Discontinous Galerkin discretizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="diagnostics.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">diagnostics</span></code>: Flow diagnostics functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dual_porosity.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dual-porosity</span></code>: Dual porosity/permeability model for fractures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fvbiot.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">fvbiot</span></code>: Consistent finite-volume discretizations for poroelasticity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geochemistry.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">geochemistry</span></code>: Surface geochemistry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heterogeneity.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">heterogeneity</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="hfm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">hfm</span></code>: Hierarchical and embedded fractures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="incomp.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">incomp</span></code>: Solvers for incompressible flow and transport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgeometry.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">libgeometry</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linearsolvers.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">linearsolvers</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab_bgl.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">matlab_bgl</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mimetic.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mimetic</span></code>: Mimetic solvers for pressure problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpfa.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mpfa</span></code>: Multi-point flux approximation solvers for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mrst_api.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mrst_api</span></code>: API for writing C/C++ for MRST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mrst-gui.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mrst-gui</span></code>: Graphical user-interfaces for MRST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msfvm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msfvm</span></code>: Multiscale Finite-Volume method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msmfem.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msmfem</span></code>: Multiscale Mixed Finite-Element method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msrsb.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msrsb</span></code>: Multiscale Restriction-Smoothed Basis method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nwm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">nwm</span></code>: Near Wellbore Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opm_gridprocessing.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">opm_gridprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimization.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">optimization</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="re-mpfa.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">re-mpfa</span></code>: Richards’ equation with multi-point flux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvent.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">solvent</span></code>: Solvent solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spe10.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">spe10</span></code>: Access to the SPE10 benchmark case</a></li>
+<li class="toctree-l1"><a class="reference internal" href="steady-state.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">steady-state</span></code> Steady-state upscaling of functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="streamlines.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">streamlines</span></code>: Compute streamlines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triangle.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">triangle</span></code>: Triangular grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upscaling.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">upscaling</span></code>: Upscaling of reservoir problems</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">vem</span></code>: Virtual element method on general grids</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="vemmech.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">vemmech</span></code>: Mechanics for general grids using the virtual element method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wellpaths.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">wellpaths</span></code>: Generation of wells using general curves</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">The Matlab Reservoir Simulation Toolbox</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><code class="xref mat mat-func docutils literal notranslate"><span class="pre">vem</span></code>: Virtual element method on general grids</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/vem.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="vem-virtual-element-method-on-general-grids">
+<h1><code class="xref mat mat-func docutils literal notranslate"><span class="pre">vem</span></code>: Virtual element method on general grids<a class="headerlink" href="#vem-virtual-element-method-on-general-grids" title="Permalink to this headline"></a></h1>
+<span class="target" id="module-vem.utils"></span><dl class="mat script">
+<dt class="sig sig-object mat" id="vem.utils.Contents">
+<span class="sig-name descname"><span class="pre">Contents</span></span><a class="headerlink" href="#vem.utils.Contents" title="Permalink to this definition"></a></dt>
+<dd><p>UTILS</p>
+<dl class="simple">
+<dt>Files</dt><dd><p>addBCVEM            - Add boundary condition to (new or existing) BC using function handels,
+computeVEMGeometry  - Computes VEM geometry of MRST grid G.
+conserveFlux        - Postprocess nonconservative flux field.
+polyDim             - Computes the dimension of the space of polynomials of degree k or less in
+polygonInt          - Integrates the function f over each cell in cells of grid G, using a
+polygonInt3D        - Integrates the function f over each face in faces of 3D grid G, using a
+polyhedronInt       - Integrates the function f over each cell in cells of grid G, using a
+squeezeBlockDiag    - Squeezes a block diagonal matrix in which each block has the same number
+tetrahedronQuadRule - Returns quadrature rule for the reference terahedron with vertices V.
+triangleQuadRule    - Returns quadrature rule for the reference triangle with vertices (0,0),</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="vem.utils.addBCVEM">
+<span class="sig-name descname"><span class="pre">addBCVEM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">bc</span></em>, <em class="sig-param"><span class="pre">f</span></em>, <em class="sig-param"><span class="pre">t</span></em>, <em class="sig-param"><span class="pre">g</span></em><span class="sig-paren">)</span><a class="headerlink" href="#vem.utils.addBCVEM" title="Permalink to this definition"></a></dt>
+<dd><p>Add boundary condition to (new or existing) BC using function handels,
+to be used in patch-testing and convergence tests in incompVEM.</p>
+<blockquote>
+<div><p>Syntax is similar to that of addBC, but with a function handle in stead
+of scalar value for each boundary. Each call to addBCVEM adds a set of
+faces with a given type and function handle bc.</p>
+<dl>
+<dt>SYNOPSIS:</dt><dd><p>bc = addBC(bc, faces, type, function)</p>
+</dd>
+<dt>PARAMETERS:</dt><dd><dl>
+<dt>bc       - Boundary condition structure from a prior call to ‘addBCVEM’</dt><dd><p>which will be updated on output or an empty array (bc==[])
+in which case a new boundary condition structure is created.</p>
+</dd>
+<dt>faces    - Global faces in external model for which this boundary</dt><dd><p>condition should be applied.</p>
+</dd>
+<dt>type     - Type of boundary condition. Supported values are ‘pressure’</dt><dd><p>and ‘flux’, or cell array of such strings.</p>
+</dd>
+<dt>function - Boundary condition function. Interpreted as a pressure p</dt><dd><p>(in units of ‘Pa’) when type==’pressure’ and as a
+-K nabla p cdot n when type==’flux’. One scalar value for
+each face in ‘faces’.</p>
+<p>Note: type==’flux’ is only supported in 2D, and the function
+is interpreted as K nabla p cdot n.</p>
+</dd>
+</dl>
+</dd>
+<dt>SEE ALSO:</dt><dd><p>addBC</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="vem.utils.computeVEMGeometry">
+<span class="sig-name descname"><span class="pre">computeVEMGeometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">G</span></em><span class="sig-paren">)</span><a class="headerlink" href="#vem.utils.computeVEMGeometry" title="Permalink to this definition"></a></dt>
+<dd><p>Computes VEM geometry of MRST grid G.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>SYNOPSIS:</dt><dd><p>G = computeVEMGeometry(G)</p>
+</dd>
+<dt>DESCRIPTION:</dt><dd><p>Computes geometry using MRST functions G = computeGeometry(G) and G
+= mrstGridWithFullMappings(G), and computes edge data and cell
+diameters. Edge data is organized in the same way as face data in
+2D.</p>
+</dd>
+<dt>REQUIRED PARAMETERS:</dt><dd><p>G   - MRST grid.</p>
+</dd>
+<dt>RETURNS:</dt><dd><p>G   - Grid with computed VEM geometry.</p>
+</dd>
+</dl>
+</div></blockquote>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>computeVirtualIP, incompVEM.</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="vem.utils.conserveFlux">
+<span class="sig-name descname"><span class="pre">conserveFlux</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">rock</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#vem.utils.conserveFlux" title="Permalink to this definition"></a></dt>
+<dd><p>Postprocess nonconservative flux field.</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">state</span><span class="p">,</span> <span class="n">r</span><span class="p">]</span> <span class="p">=</span> <span class="n">conserveFlux</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">rock</span><span class="p">)</span>
+<span class="p">[</span><span class="n">state</span><span class="p">,</span> <span class="n">r</span><span class="p">]</span> <span class="p">=</span> <span class="n">conserveFlux</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">rock</span><span class="p">,</span> <span class="s">&#39;pn1&#39;</span><span class="p">,</span> <span class="n">vn1</span><span class="p">,</span> <span class="p">...)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>Postprocesses nonconsrevative flux field using a TPFA-like scheme.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> – Reservoir and well solution structure, result from
+a previous call to f.ex. function ‘incompVEM’ and, possibly, a
+transport solver such as function ‘explicitTransport’.</p></li>
+<li><p><strong>G</strong> – Grid structure as described by grid_structure.</p></li>
+<li><p><strong>rock</strong> – Rock data structure with valid field ‘perm’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul>
+<li><p><strong>bc</strong> – Boundary condition structure as defined by function ‘addBC’.
+This structure accounts for all external boundary conditions
+to the reservoir flow.  May be empty (i.e., bc = []) which is
+interpreted as all external no-flow (homogeneous Neumann)
+conditions.</p></li>
+<li><p><strong>src</strong> – Explicit source contributions as defined by function
+‘addSource’.  May be empty (i.e., src = []) which is
+interpreted as a reservoir model without explicit sources.</p></li>
+<li><p><strong>faceWeights</strong> – The choice of face weights for the L2 norm. String.
+Default vale = ‘permWeighted’.
+Supported value are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>permWeighted : Each face is weighted by the inverse of
+the sum of the inverses of the permeability in its
+neighbor cells.</p></li>
+<li><dl class="simple">
+<dt>tpf<span class="classifier">Face weights equals the TPFA</span></dt><dd><p>tranmissibilities.</p>
+</dd>
+</dl>
+</li>
+<li><p>ones         : All face weights equals one.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>tol</strong> – Tolerance for the residuals
+r_i = int Omega_i q dx - int_Omega_i v cdot n ds,
+If the function fails to construc a flux field with residuals
+norm(r)/norm(rhs) &lt; tol, a warning is displayed. Scalar.
+Default value = 1e-14.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> – Update reservoir solution structure with locally conservative
+fluxes.</p></li>
+<li><p><strong>r</strong> – Residuals.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>incompVEM.</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="vem.utils.polyDim">
+<span class="sig-name descname"><span class="pre">polyDim</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">k</span></em>, <em class="sig-param"><span class="pre">dim</span></em><span class="sig-paren">)</span><a class="headerlink" href="#vem.utils.polyDim" title="Permalink to this definition"></a></dt>
+<dd><p>Computes the dimension of the space of polynomials of degree k or less in
+R^dim.</p>
+<blockquote>
+<div><dl>
+<dt>SYNOPSIS:</dt><dd><p>polyDim(k, dim)</p>
+</dd>
+<dt>REQUIRED PARAMETERS:</dt><dd><p>k   - Polynomial order.</p>
+<p>dim - Dimension of domain on which the polynomails are defined.</p>
+</dd>
+<dt>RETURNS:</dt><dd><p>nk  - dimension of polynomial function space.</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="vem.utils.polygonInt">
+<span class="sig-name descname"><span class="pre">polygonInt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">cells</span></em>, <em class="sig-param"><span class="pre">f</span></em>, <em class="sig-param"><span class="pre">k</span></em><span class="sig-paren">)</span><a class="headerlink" href="#vem.utils.polygonInt" title="Permalink to this definition"></a></dt>
+<dd><p>Integrates the function f over each cell in cells of grid G, using a
+quadrature rule of precision k.</p>
+<blockquote>
+<div><dl>
+<dt>SYNOPSIS:</dt><dd><p>I = polygonInt(G, cells, f, k)</p>
+</dd>
+<dt>DESCRIPTION:</dt><dd><dl class="simple">
+<dt>Approximates the integrals</dt><dd><p>int_K f dx</p>
+</dd>
+</dl>
+<p>over specified cells K of G of using a quadrature rule of
+precission k. Each cell is trangulated, and a map F from reference
+triangle with vertices (0,0), (1,0) and (0,1) is constructed. Using
+that</p>
+<blockquote>
+<div><p>int_K f dx = <a href="#id1"><span class="problematic" id="id2">|\det(F)|</span></a>int_T f(F(y)) dy,</p>
+</div></blockquote>
+<p>the integral can be approximated by the quadrature rule.</p>
+</dd>
+<dt>REQUIRED PARAMETERS:</dt><dd><p>G       - MRST grid.
+cells   - Cells over which to integrate f.
+f       - Integrand.
+k       - Precission of quadrature rule.</p>
+</dd>
+<dt>RETURNS:</dt><dd><p>I       - Approximated solution to the integral.</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="vem.utils.polygonInt3D">
+<span class="sig-name descname"><span class="pre">polygonInt3D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">faces</span></em>, <em class="sig-param"><span class="pre">f</span></em>, <em class="sig-param"><span class="pre">k</span></em><span class="sig-paren">)</span><a class="headerlink" href="#vem.utils.polygonInt3D" title="Permalink to this definition"></a></dt>
+<dd><p>Integrates the function f over each face in faces of 3D grid G, using a
+quadrature rule of precision k.</p>
+<blockquote>
+<div><dl>
+<dt>SYNOPSIS:</dt><dd><p>I = polygonInt(G, faces, f, k)</p>
+</dd>
+<dt>DESCRIPTION:</dt><dd><p>Approximates the integrals</p>
+<blockquote>
+<div><p>int_F f dx</p>
+</div></blockquote>
+<p>over specified faces F of G of using a quadrature rule of
+precission k. Each face is mapped from 3D to 2D,  triangluated, and
+a map F from reference tringle Tr with vertices (0,0), (1,0) and
+(0,1) is constructed. Using that</p>
+<blockquote>
+<div><p>int_T f dx = <a href="#id3"><span class="problematic" id="id4">|\det(Fr)|</span></a>int_Tr f(Fr(y)) dy,</p>
+</div></blockquote>
+<p>the integral can be approximated by the quadrature rule.</p>
+</dd>
+<dt>REQUIRED PARAMETERS:</dt><dd><p>G       - 3D MRST grid.
+faces   - faces over which to integrate f.
+k       - Precision of quadrature rule.</p>
+</dd>
+<dt>RETURNS:</dt><dd><p>I       - Approximated solution to the integral.</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="vem.utils.polyhedronInt">
+<span class="sig-name descname"><span class="pre">polyhedronInt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">cells</span></em>, <em class="sig-param"><span class="pre">f</span></em>, <em class="sig-param"><span class="pre">k</span></em><span class="sig-paren">)</span><a class="headerlink" href="#vem.utils.polyhedronInt" title="Permalink to this definition"></a></dt>
+<dd><p>Integrates the function f over each cell in cells of grid G, using a
+quadrature rule of precision k.</p>
+<blockquote>
+<div><dl>
+<dt>SYNOPSIS:</dt><dd><p>I = polygonInt(G, cells, f, k)</p>
+</dd>
+<dt>DESCRIPTION:</dt><dd><p>Approximates the integrals</p>
+<blockquote>
+<div><p>int_K f dx</p>
+</div></blockquote>
+<p>over specified cells K of G of using a quadrature rule of
+precission k. Each cell divided into terahedra, and a map F from
+reference tetrahedron Tr with vertices V constructed. Using that</p>
+<blockquote>
+<div><p>int_T f dx = <a href="#id5"><span class="problematic" id="id6">|\det(F)|</span></a>int_Tr f(F(y)) dy,</p>
+</div></blockquote>
+<p>the integral can be approximated by the quadrature rule.</p>
+</dd>
+<dt>REQUIRED PARAMETERS:</dt><dd><p>G       - MRST grid.
+cells   - Cells over which to integrate f.
+k       - Precission of quadrature rule.</p>
+</dd>
+<dt>RETURNS:</dt><dd><p>I       - Approximated solution to the integral.</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="vem.utils.squeezeBlockDiag">
+<span class="sig-name descname"><span class="pre">squeezeBlockDiag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">A</span></em>, <em class="sig-param"><span class="pre">n</span></em>, <em class="sig-param"><span class="pre">r</span></em>, <em class="sig-param"><span class="pre">c</span></em><span class="sig-paren">)</span><a class="headerlink" href="#vem.utils.squeezeBlockDiag" title="Permalink to this definition"></a></dt>
+<dd><p>Squeezes a block diagonal matrix in which each block has the same number
+of columns OR the same numer of rows.</p>
+<blockquote>
+<div><p>The result is a ‘column’ or ‘row’ matrix:</p>
+<p>[A     ]             [A]         [A     ]
+[   B  ] -{column}-&gt; [B]   and   [   B  ] -{row}-&gt; [A  B  C]
+[     C]             [C]         [     C]</p>
+<dl>
+<dt>SYNOPSIS:</dt><dd><p>A = squeezeBlockDiag(A, n, r, c)</p>
+</dd>
+<dt>REQUIRED PARAMETERS:</dt><dd><dl class="simple">
+<dt>A - Block diagonal matrix in which each block has the same number</dt><dd><p>of columns OR the same numer of rows.</p>
+</dd>
+</dl>
+<p>n - Number of matrix blocks.</p>
+<p>r - Number of rows in resulting matrix.</p>
+<p>c - Number of columns in resulting matrix.</p>
+</dd>
+<dt>RETURNS:</dt><dd><p>A - Squeezed matrix.</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="vem.utils.tetrahedronQuadRule">
+<span class="sig-name descname"><span class="pre">tetrahedronQuadRule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">k</span></em><span class="sig-paren">)</span><a class="headerlink" href="#vem.utils.tetrahedronQuadRule" title="Permalink to this definition"></a></dt>
+<dd><p>Returns quadrature rule for the reference terahedron with vertices V.</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Xq</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">vol</span><span class="p">]</span> <span class="p">=</span> <span class="n">polyhedronQuadRule</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>Returns quadrature rule of precission k, as described in [1]. Usage
+of the rule is as follows:</p>
+<blockquote>
+<div><p>int_T f dx = volsum_{i = 1}^n w_i*f(Xq_i),</p>
+</div></blockquote>
+<p>where T is the reference terahedron with vertices V, f is the
+funtion to be integrated, vol is the area of T, and w_i and Xq_i is
+the ith wheight and quadrature point, respectively.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>k</strong> – Quadrature rule precision. supported values precisions
+are 2,3 and 7.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>Xq</strong> – nq x 3 matrix of quadrature points.</p></li>
+<li><p><strong>w</strong> – nq x 1 vector of quadrature wheights.</p></li>
+<li><p><strong>V</strong> – 4 x 3 matrix of reference tirangle vertices.</p></li>
+<li><p><strong>vol</strong> – Area of reference triangel.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="simple">
+<dt>[1]     - <a class="reference external" href="http://people.sc.fsu.edu/~jburkardt/m_src/">http://people.sc.fsu.edu/~jburkardt/m_src/</a>…</dt><dd><p>tetrahedron_arbq_rule/tetrahedron_arbq_rule.html</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="vem.utils.triangleQuadRule">
+<span class="sig-name descname"><span class="pre">triangleQuadRule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">k</span></em><span class="sig-paren">)</span><a class="headerlink" href="#vem.utils.triangleQuadRule" title="Permalink to this definition"></a></dt>
+<dd><p>Returns quadrature rule for the reference triangle with vertices (0,0),
+(1,0) and (0,1).</p>
+<blockquote>
+<div><dl>
+<dt>SYNOPSIS:</dt><dd><p>[Xq, w, V, vol] = triangleQuadRule(k)</p>
+</dd>
+<dt>DESCRIPTION:</dt><dd><p>Returns quadrature rule of precission k. k = 1 returns the
+centroid rule, while k &gt;= 2 returns rules named STRANG k, as
+defined in [1]. Usage of the rule is as follows:</p>
+<blockquote>
+<div><p>int_T f dx = volsum_{i = 1}^n w_i*f(Xq_i),</p>
+</div></blockquote>
+<p>where T is the reference triangle with vertices (0,0), (1,0) and
+(0,1), f is the funtion to be integrated, vol is the area of T, and
+w_i and Xq_i is the ith wheight and quadrature point, respectively.</p>
+</dd>
+<dt>REQUIRED PARAMETERS:</dt><dd><dl class="simple">
+<dt>k       - Quadrature rule precision. supported values precisions</dt><dd><p>are 1,2,3 and 7.</p>
+</dd>
+</dl>
+</dd>
+<dt>RETURNS:</dt><dd><p>Xq      - nq x 2 matrix of quadrature points.
+w       - nq x 1 vector of quadrature wheights.
+V       -  3 x 2 matrix of reference tirangle vertices.
+vol     - Area of reference triangel.</p>
+</dd>
+<dt>REFERENCES:</dt><dd><dl class="simple">
+<dt>[1]     - <a class="reference external" href="http://people.sc.fsu.edu/~jburkardt/datasets/">http://people.sc.fsu.edu/~jburkardt/datasets/</a>…</dt><dd><p>quadrature_rules_tri/quadrature_rules_tri.html</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<span class="target" id="module-vem"></span><dl class="mat script">
+<dt class="sig sig-object mat" id="vem.Contents">
+<span class="sig-name descname"><span class="pre">Contents</span></span><a class="headerlink" href="#vem.Contents" title="Permalink to this definition"></a></dt>
+<dd><p>MRST-VEM</p>
+<dl class="simple">
+<dt>Files</dt><dd><p>computeVirtualIP - Compute local inner products for the frist- or second order virtual
+incompVEM        - Solve incompressible flow problem (fluxes/pressures) using a first- or</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="vem.computeVirtualIP">
+<span class="sig-name descname"><span class="pre">computeVirtualIP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">rock</span></em>, <em class="sig-param"><span class="pre">k</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#vem.computeVirtualIP" title="Permalink to this definition"></a></dt>
+<dd><p>Compute local inner products for the frist- or second order virtual
+element method (VEM).</p>
+<blockquote>
+<div><dl>
+<dt>SYNOPSIS:</dt><dd><p>S = computeVirtualIP(G, rock, k)
+S = computeVirtualIP(G, rock, k, pn1, ‘vn1’, …)</p>
+</dd>
+<dt>REQUIRED PARAMETERS:</dt><dd><p>G    - Grid structure as described by grid_structure.</p>
+<dl>
+<dt>rock - Rock data structure with valid field ‘perm’.  The</dt><dd><p>permeability is assumed to be in measured in units of
+metres squared (m^2).  Use function ‘darcy’ to convert from
+(milli)darcies to m^2, e.g.,</p>
+<p>perm = convertFrom(perm, milli*darcy)</p>
+<p>if the permeability is provided in units of millidarcies.</p>
+<p>The field rock.perm may have ONE column for a scalar
+permeability in each cell, TWO/THREE columns for a diagonal
+permeability in each cell (in 2/3 D) and THREE/SIX columns
+for a symmetric full tensor permeability.  In the latter
+case, each cell gets the permeability tensor</p>
+<dl class="simple">
+<dt>K_i = [ k1  k2 ]      in two space dimensions</dt><dd><p>[ k2  k3 ]</p>
+</dd>
+<dt>K_i = [ k1  k2  k3 ]  in three space dimensions</dt><dd><p>[ k2  k4  k5 ]
+[ k3  k5  k6 ]</p>
+</dd>
+</dl>
+</dd>
+<dt>k    - Method order. A k-th order method vil recover k-th order</dt><dd><p>pressure fields exactly. Supported values are 1 and 2.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>OPTIONAL PARAMETERS:</p>
+<blockquote>
+<div><blockquote>
+<div><dl>
+<dt>innerProduct - The choice of stability term in the inner</dt><dd><p>product. String. Default value = ‘ip_simple’.
+Supported values are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>‘ip_simple’<span class="classifier">‘Standard’ VEM stability term equal</span></dt><dd><p>to trace(K)h^(dim-2) I.</p>
+</dd>
+</dl>
+</li>
+<li><p>‘ip_qfamily’ : Parametric family of inner products.</p></li>
+<li><dl class="simple">
+<dt>‘ip_fem’<span class="classifier">Inner product resembling the finite</span></dt><dd><p>element mehtod on regular Cartesian
+grids.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>‘ip_fd’<span class="classifier">Inner product resembling a</span></dt><dd><p>combination of two finite difference
+stencils, one using the regular
+Cartesian coordinate axes (Fc), and
+one using the cell diagonals (Fd) as
+axes on regular Cartesian grids.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</div></blockquote>
+<dl>
+<dt>sigma          - Extra parameters to inner product</dt><dd><p>ip_qfamily. Must be either a single scalar value, or
+nker values per cell, where nker is the dim of the
+nullspace of the projeciton operator Pi^nabla.</p>
+</dd>
+<dt>w              - Extra parameter to the inner product ip_fd,</dt><dd><p>corresponding to the weighting of the two FD stencils,
+wFc + (1-w)Fd. Positive scalar vale.</p>
+</dd>
+<dt>invertBlocks   - Method by which to invert a sequence of</dt><dd><p>small matrices that arise in the
+discretisation. String.
+Supported values are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>MATLAB<span class="classifier">Use the MATLAB function mldivide</span></dt><dd><p>(backslash) (the default).</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>MEX<span class="classifier">Use two C-accelerated MEX functions to</span></dt><dd><p>extract and invert, respectively, the
+blocks along the diagonal of a sparse
+matrix.  This method is often faster by a
+significant margin, but relies on being
+able to build the required MEX functions.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>trans          - Fluxes can alternatively be reconstructed from the</dt><dd><p>VEM pressure field using the TPFA or MPFA scheme.
+String. Supported values are ‘mpfa’ and ‘tpfa’.</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="simple">
+<dt>RETURNS:</dt><dd><dl class="simple">
+<dt>S - Pressure linear system structure having the following fields:</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>A<span class="classifier">Block diagonal matrix with the local inner products</span></dt><dd><p>on the diagonal.</p>
+</dd>
+</dl>
+</li>
+<li><p>order   : Order k of the VEM method.</p></li>
+<li><p>ip      : Inner product name.</p></li>
+<li><dl class="simple">
+<dt>PiNstar<span class="classifier">Block diagonal matrix with the Projection operators</span></dt><dd><p>Pi^nabla in the monomial basis for each cell.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>PiNFstar: Block diagonal matrix with the Projection operators</dt><dd><p>Pi^nabla in the monomial basis for each face of
+each cell. Empty if G.griddim = 2.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>faceCoords: Local 2D coordinate systems for each face if</dt><dd><p>G.griddim = 3.</p>
+</dd>
+</dl>
+</li>
+<li><p>dofVec  : Map from local to global degrees of freedom.</p></li>
+<li><dl class="simple">
+<dt>T, transType: If MPFA or TPFA scheme is to be used for flux</dt><dd><p>reconstructiom, T and transType are the corresponding
+transmissibilites and type.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt>SEE ALSO:</dt><dd><p>incompVEM, darcy, permTensor.</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="vem.incompVEM">
+<span class="sig-name descname"><span class="pre">incompVEM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">S</span></em>, <em class="sig-param"><span class="pre">fluid</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#vem.incompVEM" title="Permalink to this definition"></a></dt>
+<dd><p>Solve incompressible flow problem (fluxes/pressures) using a first- or
+second-order virtual element method.</p>
+<blockquote>
+<div><dl>
+<dt>SYNOPSIS:</dt><dd><p>state = incompVEM(state, G, S, fluid)
+state = incompVEM(state, G, S, fluid, ‘pn1’, pv1, …)</p>
+</dd>
+<dt>DESCRIPTION:</dt><dd><p>This function assembles and solves a set of linear equations defining
+the pressure at the nodes (first order), faces, edges and cells (second
+order) for the reservoir simulation problem defined by Darcy’s law,
+sources and boundary conditions. The fluxes are reconstructed from the
+pressure solution.</p>
+</dd>
+<dt>REQUIRED PARAMETERS:</dt><dd><dl class="simple">
+<dt>state  - Reservoir and well solution structure either properly</dt><dd><p>initialized from function ‘initState’, or as the results from
+a previous call to function ‘incompVEM’ and, possibly, a
+transport solver such as function ‘explicitTransport’.</p>
+</dd>
+<dt>G, S   - Grid and (VEM) linear system data structures as defined by</dt><dd><p>function ‘computeVirtualIP’.</p>
+</dd>
+</dl>
+<p>fluid  - Fluid data structure as described by ‘fluid_structure’.</p>
+</dd>
+<dt>OPTIONAL PARAMETERS:</dt><dd><dl>
+<dt>bc     - Boundary condition structure as defined by function ‘addBC’.</dt><dd><p>This structure accounts for all external boundary conditions
+to the reservoir flow.  May be empty (i.e., bc = []) which is
+interpreted as all external no-flow (homogeneous Neumann)
+conditions. Can also be a strucutre defined by the function
+‘addBCVEM’, wich allows for function handle boundary
+conditions for easy patch testing.</p>
+</dd>
+<dt>src    - Explicit source contributions as defined by function</dt><dd><p>‘addSource’.  May be empty (i.e., src = []) which is
+interpreted as a reservoir model without explicit sources.</p>
+</dd>
+<dt>facePressure -</dt><dd><p>Whether or not to calculate face pressures if a first-order
+method is used. Defalut value: facePressure = FALSE.</p>
+</dd>
+<dt>cellPressure -</dt><dd><p>Whether or not to calculate cell pressures if a first-order
+method is used. Defalut value: cellPressure = FALSE.</p>
+</dd>
+<dt>LinSolve -</dt><dd><p>Handle to linear system solver software to which the fully
+assembled system of linear equations will be passed.  Assumed
+to support the syntax</p>
+<blockquote>
+<div><p>x = LinSolve(A, b)</p>
+</div></blockquote>
+<p>in order to solve a system Ax=b of linear equations.
+Default value: LinSolve = &#64;mldivide (backslash).</p>
+</dd>
+<dt>MatrixOutput -</dt><dd><p>Whether or not to return the final system matrix ‘A’ to the
+caller of function ‘incompVEM’.
+Logical.  Default value: MatrixOutput = FALSE.</p>
+</dd>
+</dl>
+</dd>
+<dt>RETURNS:</dt><dd><dl class="simple">
+<dt>state - Update reservoir solution structure with new values for the</dt><dd><dl class="simple">
+<dt>fields:</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>nodePressure – Pressure values for all nodes in the</dt><dd><p>discretized resrvoir model, ‘G’.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>edgePressure – If G.griddim = 3 and method order = 2,</dt><dd><p>pressure values for all edges in the
+discretized resrvoir model, ‘G’.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>facePressure – If method order = 2 or facePressure =</dt><dd><p>true, pressure values for all faces in the
+discretized resrvoir model, ‘G’.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>pressure     – If method order = 2 or cellPressure =</dt><dd><p>true, Pressure values for all cells in the
+discretised reservoir model, ‘G’.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>flux         – If calculateFlux = true, fluxes across</dt><dd><p>global interfaces corresponding to the
+rows of ‘G.faces.neighbors’.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>A            – System matrix.  Only returned if</dt><dd><p>specifically requested by setting option
+‘MatrixOutput’.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+<dt>SEE ALSO:</dt><dd><p>computeVirtualIP, addBC, addBCVEM addSource, initSimpleFluid initState.</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="upscaling.html" class="btn btn-neutral float-left" title="upscaling: Upscaling of reservoir problems" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="vemmech.html" class="btn btn-neutral float-right" title="vemmech: Mechanics for general grids using the virtual element method" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019, SINTEF Digital.
+      <span class="lastupdated">Last updated on Sep 23, 2021.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

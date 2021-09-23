@@ -1,0 +1,16 @@
+`msmfem`: Multiscale Mixed Finite-Element method for pressure
+*******************************************
+.. include:: mrst/msfem/README
+
+
+Utilities
+===============================
+.. automodule:: msmfem
+	:members:
+
+.. automodule:: msmfem.utils
+	:members:
+
+Examples
+===============================
+.. include:: examples/examples_msmfem.txt

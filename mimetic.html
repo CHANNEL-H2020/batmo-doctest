@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mimetic: Mimetic solvers for pressure problems &mdash; The Matlab Reservoir Simulation Toolbox 2019b documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="mpfa: Multi-point flux approximation solvers for pressure" href="mpfa.html" />
+    <link rel="prev" title="matlab_bgl:" href="matlab_bgl.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> The Matlab Reservoir Simulation Toolbox
+            <img src="_static/mrstlogo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                2019b
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="core.html">Core functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-core.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-core</span></code>: Automatic Differentiation Core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-props.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-props</span></code>: PVT, fluid models and other properties for the AD-solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-blackoil.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-blackoil</span></code>: Black-oil solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-eor.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-eor</span></code>: Enhanced oil recovery solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-mechanics.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-mechanics</span></code>: Coupled flow and mechanics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adjoint.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">adjoint</span></code>: Two-phase, incompressible adjoint solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agglom.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">agglom</span></code>: Flow and property-based coarse-grid generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="blackoil-sequential.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">blackoil-sequential</span></code>: Sequential implicit black-oil solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">book</span></code>: Book examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coarsegrid.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">coarsegrid</span></code>: Generation of coarse grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compositional.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">compositional</span></code>: Equation-of-state compositional solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="co2lab.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">co2lab</span></code>: Numerical CO<sub>2</sub> laboratory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deckformat.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">deckformat</span></code>: Reading and conversion of input decks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dfm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dfm</span></code>: Discrete fracture matrix implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dg.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dg</span></code>: Discontinous Galerkin discretizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="diagnostics.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">diagnostics</span></code>: Flow diagnostics functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dual_porosity.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dual-porosity</span></code>: Dual porosity/permeability model for fractures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fvbiot.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">fvbiot</span></code>: Consistent finite-volume discretizations for poroelasticity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geochemistry.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">geochemistry</span></code>: Surface geochemistry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heterogeneity.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">heterogeneity</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="hfm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">hfm</span></code>: Hierarchical and embedded fractures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="incomp.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">incomp</span></code>: Solvers for incompressible flow and transport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgeometry.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">libgeometry</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linearsolvers.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">linearsolvers</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab_bgl.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">matlab_bgl</span></code>:</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mimetic</span></code>: Mimetic solvers for pressure problems</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mpfa.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mpfa</span></code>: Multi-point flux approximation solvers for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mrst_api.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mrst_api</span></code>: API for writing C/C++ for MRST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mrst-gui.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mrst-gui</span></code>: Graphical user-interfaces for MRST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msfvm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msfvm</span></code>: Multiscale Finite-Volume method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msmfem.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msmfem</span></code>: Multiscale Mixed Finite-Element method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msrsb.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msrsb</span></code>: Multiscale Restriction-Smoothed Basis method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nwm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">nwm</span></code>: Near Wellbore Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opm_gridprocessing.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">opm_gridprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimization.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">optimization</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="re-mpfa.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">re-mpfa</span></code>: Richards’ equation with multi-point flux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvent.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">solvent</span></code>: Solvent solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spe10.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">spe10</span></code>: Access to the SPE10 benchmark case</a></li>
+<li class="toctree-l1"><a class="reference internal" href="steady-state.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">steady-state</span></code> Steady-state upscaling of functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="streamlines.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">streamlines</span></code>: Compute streamlines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triangle.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">triangle</span></code>: Triangular grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upscaling.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">upscaling</span></code>: Upscaling of reservoir problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vem.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">vem</span></code>: Virtual element method on general grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vemmech.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">vemmech</span></code>: Mechanics for general grids using the virtual element method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wellpaths.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">wellpaths</span></code>: Generation of wells using general curves</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">The Matlab Reservoir Simulation Toolbox</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mimetic</span></code>: Mimetic solvers for pressure problems</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/mimetic.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="mimetic-mimetic-solvers-for-pressure-problems">
+<h1><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mimetic</span></code>: Mimetic solvers for pressure problems<a class="headerlink" href="#mimetic-mimetic-solvers-for-pressure-problems" title="Permalink to this headline"></a></h1>
+<p>Implementation of mimetic finite volume methods for incompressible (Poisson-type) pressure equations. Mimetic finite differences is a class of consistent discretizations that produce cellwise conservative velocity fields. These solvers support the same types of boundary conditions and wells as the incomp module does and can easily be used with the transport solvers contained therein (implicitTransport, explicitTransport).</p>
+<span class="target" id="module-mimetic"></span><dl class="mat script">
+<dt class="sig sig-object mat" id="mimetic.Contents">
+<span class="sig-name descname"><span class="pre">Contents</span></span><a class="headerlink" href="#mimetic.Contents" title="Permalink to this definition"></a></dt>
+<dd><p>Routines supporting the mimetic method for the pressure equation.</p>
+<dl class="simple">
+<dt>Files</dt><dd><p>computeMimeticIP - Compute mimetic inner product matrices.
+incompMimetic    - Solve incompressible flow problem (fluxes/pressures).
+solveIncompFlow  - Solve incompressible flow problem (fluxes/pressures). [DEPRECATED]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mimetic.computeMimeticIP">
+<span class="sig-name descname"><span class="pre">computeMimeticIP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">rock</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mimetic.computeMimeticIP" title="Permalink to this definition"></a></dt>
+<dd><p>Compute mimetic inner product matrices.</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">S</span> <span class="p">=</span> <span class="n">computeMimeticIP</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">rock</span><span class="p">)</span>
+<span class="n">S</span> <span class="p">=</span> <span class="n">computeMimeticIP</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">rock</span><span class="p">,</span> <span class="s">&#39;pn&#39;</span><span class="p">,</span> <span class="n">pv</span><span class="p">,</span> <span class="p">...)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>G</strong> – Grid structure as described by grid_structure.</p></li>
+<li><p><strong>rock</strong> – <p>Rock data structure with valid field ‘perm’.  The
+permeability is assumed to be in measured in units of
+metres squared (m^2).  Use function ‘darcy’ to convert from
+(milli)darcies to m^2, e.g.,</p>
+<blockquote>
+<div><p>perm = convertFrom(perm, milli*darcy)</p>
+</div></blockquote>
+<p>if the permeability is provided in units of millidarcies.</p>
+<p>The field rock.perm may have ONE column for a scalar
+permeability in each cell, TWO/THREE columns for a diagonal
+permeability in each cell (in 2/3 D) and THREE/SIX columns
+for a symmetric full tensor permeability.  In the latter
+case, each cell gets the permeability tensor</p>
+<blockquote>
+<div><dl class="simple">
+<dt>K_i = [ k1  k2 ]      in two space dimensions</dt><dd><p>[ k2  k3 ]</p>
+</dd>
+<dt>K_i = [ k1  k2  k3 ]  in three space dimensions</dt><dd><p>[ k2  k4  k5 ]
+[ k3  k5  k6 ]</p>
+</dd>
+</dl>
+</div></blockquote>
+</p></li>
+<li><p><strong>'pn'/pv</strong> – <p>List of ‘key’/value pairs defining optional parameters.  The
+supported options are:</p>
+<blockquote>
+<div><ul>
+<li><dl class="simple">
+<dt>Type – The kind of system to assemble.  The choice made</dt><dd><p>for this option influences which pressure solvers
+can be employed later.
+String.  Default value = ‘hybrid’.</p>
+</dd>
+<dt>Supported values are:</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>’hybrid’<span class="classifier">Hybrid system with inverse of B</span></dt><dd><p>(for Schur complement reduction)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>’mixed’<span class="classifier">Hybrid system with B</span></dt><dd><p>(for reduction to mixed form)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>’tpfa’<span class="classifier">Hybrid system with B</span></dt><dd><p>(for reduction to tpfa form)</p>
+</dd>
+</dl>
+</li>
+<li><p>’comp_hybrid’ : Both ‘hybrid’ and ‘mixed’</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>InnerProduct – The inner product with which to define</dt><dd><p>the mass matrix.
+String.  Default value = ‘ip_simple’.</p>
+</dd>
+<dt>Supported values are:</dt><dd><ul class="simple">
+<li><p>’ip_simple’   : inner product having the 2*tr(K)-term.</p></li>
+<li><dl class="simple">
+<dt>’ip_tpf’<span class="classifier">inner product giving method equivalent</span></dt><dd><p>to two-point flux approximation (TPFA).</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>’ip_quasitpf’<span class="classifier">inner product ‘’close to’’ TPFA</span></dt><dd><dl class="simple">
+<dt>(equivalent for Cartesian grids with</dt><dd><p>diagonal permeability tensor).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>’ip_rt’<span class="classifier">Raviart-Thomas for Cartesian grids,</span></dt><dd><p>else not valid.</p>
+</dd>
+</dl>
+</li>
+<li><p>’ip_quasirt’  :</p></li>
+<li><p>’ip_qfamily’ :parametric family of inner products.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>QParam  – Extra parameter to inner product family</dt><dd><p>qfamily.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Verbose – Whether or not to emit progress reports during</dt><dd><p>the assembly process.
+Logical.  Default value is dependent upon
+global MRST setting ‘mrstVerbose’.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>facetrans  If facetrans is specified, the innerproduct is</dt><dd><p>modified to account for a face
+transmissibilities specified as</p>
+<blockquote>
+<div><p>[faces, face_transmissibilities]</p>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>S</strong> – Pressure linear system structure having the following fields:
+- BI / B : inverse of B / B in hybrid/mixed system
+- type   : system type (hybrid or mixed)
+- ip     : inner product name</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#mimetic.solveIncompFlow" title="mimetic.solveIncompFlow"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">solveIncompFlow</span></code></a>, <a class="reference internal" href="core.html#core.utils.units.darcy" title="core.utils.units.darcy"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">darcy</span></code></a>, <a class="reference internal" href="core.html#core.params.rock.permTensor" title="core.params.rock.permTensor"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">permTensor</span></code></a>, <a class="reference internal" href="core.html#core.utils.mrstVerbose" title="core.utils.mrstVerbose"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mrstVerbose</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mimetic.incompMimetic">
+<span class="sig-name descname"><span class="pre">incompMimetic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">g</span></em>, <em class="sig-param"><span class="pre">s</span></em>, <em class="sig-param"><span class="pre">fluid</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mimetic.incompMimetic" title="Permalink to this definition"></a></dt>
+<dd><p>Solve incompressible flow problem (fluxes/pressures).</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="p">=</span> <span class="n">incompMimetic</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">fluid</span><span class="p">)</span>
+<span class="n">state</span> <span class="p">=</span> <span class="n">incompMimetic</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">fluid</span><span class="p">,</span> <span class="s">&#39;pn1&#39;</span><span class="p">,</span> <span class="n">pv1</span><span class="p">,</span> <span class="p">...)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>This function assembles and solves a (block) system of linear equations
+defining interface fluxes and cell and interface pressures at the next
+time step in a sequential splitting scheme for the reservoir simulation
+problem defined by Darcy’s law and a given set of external influences
+(wells, sources, and boundary conditions).</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> – Reservoir and well solution structure either properly
+initialized from function ‘initState’, or the results from a
+previous call to function ‘incompMimetic’ and, possibly, a
+transport solver such as function ‘explicitTransport’.</p></li>
+<li><p><strong>G</strong> – Grid and (mimetic) linear system data structures as defined by
+function ‘computeMimeticIP’.</p></li>
+<li><p><strong>S</strong> – Grid and (mimetic) linear system data structures as defined by
+function ‘computeMimeticIP’.</p></li>
+<li><p><strong>fluid</strong> – Fluid data structure as described by ‘fluid_structure’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul>
+<li><p><strong>W</strong> – Well structure as defined by function ‘addWell’.  May be empty
+(i.e., W = []) which is interpreted as a model without any
+wells.</p></li>
+<li><p><strong>bc</strong> – Boundary condition structure as defined by function ‘addBC’.
+This structure accounts for all external boundary conditions
+to the reservoir flow.  May be empty (i.e., bc = []) which is
+interpreted as all external no-flow (homogeneous Neumann)
+conditions.</p></li>
+<li><p><strong>src</strong> – Explicit source contributions as defined by function
+‘addSource’.  May be empty (i.e., src = []) which is
+interpreted as a reservoir model without explicit sources.</p></li>
+<li><p><strong>rhs</strong> – Supply system right-hand side ‘b’ directly.  Overrides
+internally constructed system right-hand side.  Must be a
+three-element cell array, the elements of which are correctly
+sized for the block system component to be replaced.</p>
+<p>NOTE: This is a special purpose option for use by code which
+needs to modify the system of linear equations directly, e.g.,
+the ‘adjoint’ code.</p>
+</li>
+<li><p><strong>Solver</strong> – Which solver mode function ‘incompMimetic’ should employ in
+assembling and solving the block system of linear equations.
+String.  Default value: Solver = ‘hybrid’.</p>
+<dl>
+<dt>Supported values are:</dt><dd><ul>
+<li><dl>
+<dt>‘hybrid’ –</dt><dd><p>Assemble and solve hybrid system for interface
+pressures.  System is eventually solved by Schur
+complement reduction and back substitution.</p>
+<p>The system ‘S’ must in this case be assembled by
+passing option pair (‘Type’,’hybrid’) or option pair
+(‘Type’,’comp_hybrid’) to function ‘computeMimeticIP’.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>‘mixed’ –</dt><dd><p>Assemble and solve a hybrid system for interface
+pressures, cell pressures and interface fluxes. System
+is eventually reduced to a mixed system as per function
+‘mixedSymm’.</p>
+<p>The system ‘S’ must in this case be assembled by
+passing option pair (‘Type’,’mixed’) or option pair
+(‘Type’,’comp_hybrid’) to function ‘computeMimeticIP’.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>‘tpfa’ –</dt><dd><p>Assemble and solve a cell-centred system for cell
+pressures.  Interface fluxes recovered through back
+substitution.</p>
+<p>The system ‘S’ must in this case be assembled by
+passing option pair (‘Type’,’mixed’) or option pair
+(‘Type’,’comp_hybrid’) to function ‘computeMimeticIP’.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><strong>LinSolve</strong> – Handle to linear system solver software to which the fully
+assembled system of linear equations will be passed.  Assumed
+to support the syntax</p>
+<blockquote>
+<div><p>x = LinSolve(A, b)</p>
+</div></blockquote>
+<p>in order to solve a system Ax=b of linear equations.
+Default value: LinSolve = &#64;mldivide (backslash).</p>
+</li>
+<li><p><strong>MatrixOutput</strong> – Whether or not to return the final system matrix ‘A’ to the
+caller of function ‘incompMimetic’.
+Logical.  Default value: MatrixOutput = FALSE.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>state</strong> – Update reservoir and well solution structure with new values
+for the fields:</p>
+<blockquote>
+<div><ul>
+<li><dl class="simple">
+<dt>pressure – Pressure values for all cells in the</dt><dd><p>discretised reservoir model, ‘G’.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>facePressure –</dt><dd><p>Pressure values for all interfaces in the
+discretised reservoir model, ‘G’.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>flux     – Flux across global interfaces corresponding to</dt><dd><p>the rows of ‘G.faces.neighbors’.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>A        – System matrix.  Only returned if specifically</dt><dd><p>requested by setting option ‘MatrixOutput’.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>wellSol  – Well solution structure array, one element for</dt><dd><p>each well in the model, with new values for
+the fields:</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>flux     – Perforation fluxes through all</dt><dd><p>perforations for corresponding
+well.  The fluxes are
+interpreted as injection
+fluxes, meaning positive
+values correspond to injection
+into reservoir while negative
+values mean
+production/extraction out of
+reservoir.</p>
+</dd>
+</dl>
+</li>
+<li><p>pressure – Well bottom-hole pressure.</p></li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If there are no external influences, i.e., if all of the structures
+‘W’, ‘bc’, and ‘src’ are empty and there are no effects of gravity, and
+no system right hand side has been supplied externally, then the input
+state is returned unchanged and a warning is printed in the command
+window.  This warning is printed with message ID</p>
+<blockquote>
+<div><p>‘incompMimetic:DrivingForce:Missing’</p>
+</div></blockquote>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#mimetic.computeMimeticIP" title="mimetic.computeMimeticIP"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">computeMimeticIP</span></code></a>, <a class="reference internal" href="core.html#core.params.wells_and_bc.addBC" title="core.params.wells_and_bc.addBC"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">addBC</span></code></a>, <a class="reference internal" href="core.html#core.params.wells_and_bc.addSource" title="core.params.wells_and_bc.addSource"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">addSource</span></code></a>, <a class="reference internal" href="core.html#core.params.wells_and_bc.addWell" title="core.params.wells_and_bc.addWell"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">addWell</span></code></a>, <a class="reference internal" href="incomp.html#incomp.fluid.incompressible.initSimpleFluid" title="incomp.fluid.incompressible.initSimpleFluid"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">initSimpleFluid</span></code></a>
+<a class="reference internal" href="core.html#core.solvers.initState" title="core.solvers.initState"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">initState</span></code></a>, <code class="xref mat mat-func docutils literal notranslate"><span class="pre">solveIncompFlowMS</span></code>.</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mimetic.solveIncompFlow">
+<span class="sig-name descname"><span class="pre">solveIncompFlow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mimetic.solveIncompFlow" title="Permalink to this definition"></a></dt>
+<dd><p>Solve incompressible flow problem (fluxes/pressures). [DEPRECATED]</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="p">=</span> <span class="n">solveIncompFlow</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">fluid</span><span class="p">)</span>
+<span class="n">state</span> <span class="p">=</span> <span class="n">solveIncompFlow</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">fluid</span><span class="p">,</span> <span class="s">&#39;pn1&#39;</span><span class="p">,</span> <span class="n">pv1</span><span class="p">,</span> <span class="p">...)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>This function assembles and solves a (block) system of linear equations
+defining interface fluxes and cell and interface pressures at the next
+time step in a sequential splitting scheme for the reservoir simulation
+problem defined by Darcy’s law and a given set of external influences
+(wells, sources, and boundary conditions).</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> – Reservoir and well solution structure either properly
+initialized from function ‘initState’, or the results from a
+previous call to function ‘solveIncompFlow’ and, possibly, a
+transport solver such as function ‘explicitTransport’.</p></li>
+<li><p><strong>G</strong> – Grid and (mimetic) linear system data structures as defined by
+function ‘computeMimeticIP’.</p></li>
+<li><p><strong>S</strong> – Grid and (mimetic) linear system data structures as defined by
+function ‘computeMimeticIP’.</p></li>
+<li><p><strong>fluid</strong> – Fluid data structure as described by ‘fluid_structure’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul>
+<li><p><strong>wells</strong> – Well structure as defined by function ‘addWell’.  May be empty
+(i.e., W = []) which is interpreted as a model without any
+wells.</p></li>
+<li><p><strong>bc</strong> – Boundary condition structure as defined by function ‘addBC’.
+This structure accounts for all external boundary conditions
+to the reservoir flow.  May be empty (i.e., bc = []) which is
+interpreted as all external no-flow (homogeneous Neumann)
+conditions.</p></li>
+<li><p><strong>src</strong> – Explicit source contributions as defined by function
+‘addSource’.  May be empty (i.e., src = []) which is
+interpreted as a reservoir model without explicit sources.</p></li>
+<li><p><strong>rhs</strong> – Supply system right-hand side ‘b’ directly.  Overrides
+internally constructed system right-hand side.  Must be a
+three-element cell array, the elements of which are correctly
+sized for the block system component to be replaced.</p>
+<p>NOTE: This is a special purpose option for use by code which
+needs to modify the system of linear equations directly, e.g.,
+the ‘adjoint’ code.</p>
+</li>
+<li><p><strong>Solver</strong> – Which solver mode function ‘solveIncompFlow’ should employ in
+assembling and solving the block system of linear equations.
+String.  Default value: Solver = ‘hybrid’.</p>
+<dl>
+<dt>Supported values are:</dt><dd><ul>
+<li><dl>
+<dt>‘hybrid’ –</dt><dd><p>Assemble and solve hybrid system for interface
+pressures.  System is eventually solved by Schur
+complement reduction and back substitution.</p>
+<p>The system ‘S’ must in this case be assembled by
+passing option pair (‘Type’,’hybrid’) or option pair
+(‘Type’,’comp_hybrid’) to function ‘computeMimeticIP’.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>‘mixed’ –</dt><dd><p>Assemble and solve a hybrid system for interface
+pressures, cell pressures and interface fluxes. System
+is eventually reduced to a mixed system as per function
+‘mixedSymm’.</p>
+<p>The system ‘S’ must in this case be assembled by
+passing option pair (‘Type’,’mixed’) or option pair
+(‘Type’,’comp_hybrid’) to function ‘computeMimeticIP’.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>‘tpfa’ –</dt><dd><p>Assemble and solve a cell-centred system for cell
+pressures.  Interface fluxes recovered through back
+substitution.</p>
+<p>The system ‘S’ must in this case be assembled by
+passing option pair (‘Type’,’mixed’) or option pair
+(‘Type’,’comp_hybrid’) to function ‘computeMimeticIP’.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><strong>LinSolve</strong> – Handle to linear system solver software to which the fully
+assembled system of linear equations will be passed.  Assumed
+to support the syntax</p>
+<blockquote>
+<div><p>x = LinSolve(A, b)</p>
+</div></blockquote>
+<p>in order to solve a system Ax=b of linear equations.
+Default value: LinSolve = &#64;mldivide (backslash).</p>
+</li>
+<li><p><strong>MatrixOutput</strong> – Whether or not to return the final system matrix ‘A’ to the
+caller of function ‘solveIncompFlow’.
+Logical.  Default value: MatrixOutput = FALSE.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>state</strong> – Update reservoir and well solution structure with new values
+for the fields:</p>
+<blockquote>
+<div><ul>
+<li><dl class="simple">
+<dt>pressure – Pressure values for all cells in the</dt><dd><p>discretised reservoir model, ‘G’.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>facePressure –</dt><dd><p>Pressure values for all interfaces in the
+discretised reservoir model, ‘G’.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>flux     – Flux across global interfaces corresponding to</dt><dd><p>the rows of ‘G.faces.neighbors’.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>A        – System matrix.  Only returned if specifically</dt><dd><p>requested by setting option ‘MatrixOutput’.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>wellSol  – Well solution structure array, one element for</dt><dd><p>each well in the model, with new values for
+the fields:</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>flux     – Perforation fluxes through all</dt><dd><p>perforations for corresponding
+well.  The fluxes are
+interpreted as injection
+fluxes, meaning positive
+values correspond to injection
+into reservoir while negative
+values mean
+production/extraction out of
+reservoir.</p>
+</dd>
+</dl>
+</li>
+<li><p>pressure – Well bottom-hole pressure.</p></li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function is deprecated and will be removed in a future release of MRST
+Please switch to replacement function ‘incompMimetic’.</p>
+<p>If there are no external influences, i.e., if all of the structures
+‘W’, ‘bc’, and ‘src’ are empty and there are no effects of gravity, and
+no system right hand side has been supplied externally, then the input
+state is returned unchanged and a warning is printed in the command
+window.  This warning is printed with message ID</p>
+<blockquote>
+<div><p>‘incompMimetic:DrivingForce:Missing’</p>
+</div></blockquote>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#mimetic.computeMimeticIP" title="mimetic.computeMimeticIP"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">computeMimeticIP</span></code></a>, <a class="reference internal" href="core.html#core.params.wells_and_bc.addBC" title="core.params.wells_and_bc.addBC"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">addBC</span></code></a>, <a class="reference internal" href="core.html#core.params.wells_and_bc.addSource" title="core.params.wells_and_bc.addSource"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">addSource</span></code></a>, <a class="reference internal" href="core.html#core.params.wells_and_bc.addWell" title="core.params.wells_and_bc.addWell"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">addWell</span></code></a>, <a class="reference internal" href="incomp.html#incomp.fluid.incompressible.initSimpleFluid" title="incomp.fluid.incompressible.initSimpleFluid"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">initSimpleFluid</span></code></a>
+<a class="reference internal" href="core.html#core.solvers.initState" title="core.solvers.initState"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">initState</span></code></a>, <code class="xref mat mat-func docutils literal notranslate"><span class="pre">solveIncompFlowMS</span></code>, <a class="reference internal" href="#mimetic.incompMimetic" title="mimetic.incompMimetic"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">incompMimetic</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<span class="target" id="module-mimetic.utils"></span><dl class="mat script">
+<dt class="sig sig-object mat" id="mimetic.utils.Contents">
+<span class="sig-name descname"><span class="pre">Contents</span></span><a class="headerlink" href="#mimetic.utils.Contents" title="Permalink to this definition"></a></dt>
+<dd><p>Files
+mixedSymm                - Solve symmetric system of linear eqns using reduction to a mixed system.
+schurComplementSymm      - Solve symmetric system of linear eqns using Schur Complement analysis.
+schurComplementSymmFault - Solve symmetric system of linear eqns using Schur Complement analysis.
+tpfSymm                  - Solve symmetric system of linear eqns using reduction to two-point system.</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mimetic.utils.mixedSymm">
+<span class="sig-name descname"><span class="pre">mixedSymm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">B</span></em>, <em class="sig-param"><span class="pre">C</span></em>, <em class="sig-param"><span class="pre">D</span></em>, <em class="sig-param"><span class="pre">f</span></em>, <em class="sig-param"><span class="pre">g</span></em>, <em class="sig-param"><span class="pre">h</span></em>, <em class="sig-param"><span class="pre">Do</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mimetic.utils.mixedSymm" title="Permalink to this definition"></a></dt>
+<dd><p>Solve symmetric system of linear eqns using reduction to a mixed system.</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">faceFlux</span><span class="p">,</span> <span class="n">press</span><span class="p">,</span> <span class="n">lam_n</span><span class="p">]</span>    <span class="p">=</span> <span class="n">mixedSymm</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">Do</span><span class="p">)</span>
+<span class="p">[</span><span class="n">faceFlux</span><span class="p">,</span> <span class="n">press</span><span class="p">,</span> <span class="n">lam_n</span><span class="p">]</span>    <span class="p">=</span> <span class="n">mixedSymm</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">Do</span><span class="p">,</span> <span class="p">...</span>
+                                        <span class="s">&#39;pn&#39;</span><span class="p">,</span> <span class="n">pv</span><span class="p">,</span> <span class="p">...)</span>
+<span class="p">[</span><span class="n">faceFlux</span><span class="p">,</span> <span class="n">press</span><span class="p">,</span> <span class="n">lam_n</span><span class="p">,</span> <span class="n">A</span><span class="p">]</span> <span class="p">=</span> <span class="n">mixedSymm</span><span class="p">(...)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>Solves the symmetric, hybrid (block) system of linear equations</p>
+<blockquote>
+<div><p>[  B   C   D  ] [  v ]     [ f ]
+[  C’  0   0  ] [ -p ]  =  [ g ]
+[  D’  0   0  ] [ cp ]     [ h ]</p>
+</div></blockquote>
+<p>with respect to the face flux ‘vf’, the cell pressure ‘p’, and the face
+(contact) pressure ‘cp’ for Neumann boundary.  The system is solved
+using a reduction to a symmetric mixed system of linear equations</p>
+<blockquote>
+<div><p>[  Bm   Cm   Dm ] [ vf   ]     [  fm ]
+[  Cm’  0    0  ] [ -p   ]  =  [  g  ]
+[  Dm’  0    0  ] [ cp_n ]     [ h_n ]</p>
+</div></blockquote>
+<p>where Bm, Cm are ‘the’ mixed block matrices, and Dm enforces Neumann
+BCs (size(Dm) = m x mb, where n is the number of faces and mb is the
+number of boundary faces).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>B</strong> – Matrix B  in the block system.  Assumed SPD.</p></li>
+<li><p><strong>C</strong> – Block ‘C’ of the block system.</p></li>
+<li><p><strong>D</strong> – Block ‘D’ of the block system, reduced so as to only apply to
+the Neumann faces (i.e., external faces for which the
+pressure is not prescribed).</p></li>
+<li><p><strong>f</strong> – Block ‘f’ of the block system right hand side.</p></li>
+<li><p><strong>g</strong> – Block ‘g’ of the block system right hand side.</p></li>
+<li><p><strong>h</strong> – Block ‘h’ of the block system right hand side, reduced so as
+to apply only to Neumann faces.</p></li>
+<li><p><strong>Do</strong> – Matrix mapping face-fluxes to half-face-fluxes.</p></li>
+<li><p><strong>'pn'/pv</strong> – <p>List of name/value pairs describing options to solver.
+The following options are supported:</p>
+<blockquote>
+<div><ul>
+<li><dl class="simple">
+<dt>’Regularize’ – TRUE/FALSE, whether or not to enforce</dt><dd><p>p(1)==0 (i.e., set pressure zero level).
+This option may be useful when solving
+pure Neumann problems.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>’MixedB’     – TRUE/FALSE (Default FALSE). Must be set</dt><dd><p>to TRUE if input ‘B’ is actually the
+mixed dicsretization matrix Bm (and not
+the hybrid). Useful for multiscale when
+Bm is formed directly.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>’LinSolve’   – Function handle to a solver for the</dt><dd><p>system above.  Assumed to support the
+syntax</p>
+<blockquote>
+<div><p>x = LinSolve(A, b)</p>
+</div></blockquote>
+<p>to solve a system Ax=b of linear
+equations.
+Default value: LinSolve = &#64;mldivide
+(backslash).</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>faceFlux</strong> – The face fluxes ‘vf’.</p></li>
+<li><p><strong>press</strong> – The cell pressure ‘p’.</p></li>
+<li><p><strong>lam_n</strong> – The contact pressure ‘cp’ on Neumann faces.</p></li>
+<li><p><strong>A</strong> – Mixed system matrix.
+OPTIONAL.  Only returned if specifically requested.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#mimetic.utils.tpfSymm" title="mimetic.utils.tpfSymm"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">tpfSymm</span></code></a>, <a class="reference internal" href="#mimetic.utils.schurComplementSymm" title="mimetic.utils.schurComplementSymm"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">schurComplementSymm</span></code></a>, <a class="reference internal" href="#mimetic.solveIncompFlow" title="mimetic.solveIncompFlow"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">solveIncompFlow</span></code></a>, <code class="xref mat mat-func docutils literal notranslate"><span class="pre">solveIncompFlowMS</span></code>.</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mimetic.utils.schurComplementSymm">
+<span class="sig-name descname"><span class="pre">schurComplementSymm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">BI</span></em>, <em class="sig-param"><span class="pre">C</span></em>, <em class="sig-param"><span class="pre">D</span></em>, <em class="sig-param"><span class="pre">f</span></em>, <em class="sig-param"><span class="pre">g</span></em>, <em class="sig-param"><span class="pre">h</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mimetic.utils.schurComplementSymm" title="Permalink to this definition"></a></dt>
+<dd><p>Solve symmetric system of linear eqns using Schur Complement analysis.</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">flux</span><span class="p">,</span> <span class="n">press</span><span class="p">,</span> <span class="n">lam</span><span class="p">]</span>    <span class="p">=</span> <span class="n">schurComplementSymm</span><span class="p">(</span><span class="n">BI</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+<span class="p">[</span><span class="n">flux</span><span class="p">,</span> <span class="n">press</span><span class="p">,</span> <span class="n">lam</span><span class="p">]</span>    <span class="p">=</span> <span class="n">schurComplementSymm</span><span class="p">(</span><span class="n">BI</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="p">...</span>
+                                            <span class="s">&#39;pn&#39;</span><span class="p">,</span> <span class="n">pv</span><span class="p">,</span> <span class="p">...)</span>
+<span class="p">[</span><span class="n">flux</span><span class="p">,</span> <span class="n">press</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">S</span><span class="p">]</span> <span class="p">=</span> <span class="n">schurComplementSymm</span><span class="p">(...)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>Solves the symmetric, hybrid (block) system of linear equations</p>
+<blockquote>
+<div><p>[  B   C   D  ] [  v ]     [ f ]
+[  C’  0   0  ] [ -p ]  =  [ g ]
+[  D’  0   0  ] [ cp ]     [ h ]</p>
+</div></blockquote>
+<p>with respect to the half-face (half-contact) flux ‘v’, the cell
+pressure ‘p’, and the face (contact) pressure ‘cp’.  The system is
+solved using a Schur complement reduction to a symmetric system of
+linear equations</p>
+<blockquote>
+<div><p>S cp = R          (*)</p>
+</div></blockquote>
+<p>from which the contact pressure ‘cp’ is recovered.  Then, using back
+substitution, the cell pressure and half-contact fluxes are
+recovered.</p>
+<p>Note, however, that the function assumes that any faces having
+prescribed pressure values (such as Dirichlet boundary condtions or
+wells constrained by BHP targets) have already been eliminated from
+the blocks ‘D’ and ‘h’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>BI</strong> – Inverse of the matrix B in the block system.  Assumed SPD.</p></li>
+<li><p><strong>C</strong> – Block ‘C’ of the block system.</p></li>
+<li><p><strong>D</strong> – Block ‘D’ of the block system.</p></li>
+<li><p><strong>f</strong> – Block ‘f’ of the block system right hand side.</p></li>
+<li><p><strong>g</strong> – Block ‘g’ of the block system right hand side.</p></li>
+<li><p><strong>h</strong> – Block ‘h’ of the block system right hand side.</p></li>
+<li><p><strong>'pn'/pv</strong> – <p>List of ‘key’/value pairs defining optional parameters.  The
+supported options are:</p>
+<blockquote>
+<div><dl>
+<dt>Regularize – Whether or not to enforce p(1)==0 (i.e., set</dt><dd><p>pressure zero level) which may be useful when
+solving pure Neumann problems.
+Logicial.  Default value = FALSE.</p>
+</dd>
+<dt>LinSolve   – Function handle to a solver for the system</dt><dd><p>(*) above.  Assumed to support the syntax</p>
+<blockquote>
+<div><p>x = LinSolve(A, b)</p>
+</div></blockquote>
+<p>to solve a system Ax=b of linear equations.
+Default value: LinSolve = &#64;mldivide
+(backslash).</p>
+</dd>
+</dl>
+</div></blockquote>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>flux</strong> – The half-contact fluxes ‘v’.</p></li>
+<li><p><strong>press</strong> – The cell pressure ‘p’.</p></li>
+<li><p><strong>lam</strong> – The contact pressure ‘cp’.</p></li>
+<li><p><strong>S</strong> – Schur complement reduced system matrix used in recovering
+contact pressures.
+OPTIONAL.  Only returned if specifically requested.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#mimetic.utils.tpfSymm" title="mimetic.utils.tpfSymm"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">tpfSymm</span></code></a>, <a class="reference internal" href="#mimetic.utils.mixedSymm" title="mimetic.utils.mixedSymm"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mixedSymm</span></code></a>, <a class="reference internal" href="#mimetic.solveIncompFlow" title="mimetic.solveIncompFlow"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">solveIncompFlow</span></code></a>, <code class="xref mat mat-func docutils literal notranslate"><span class="pre">solveIncompFlowMS</span></code>.</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mimetic.utils.schurComplementSymmFault">
+<span class="sig-name descname"><span class="pre">schurComplementSymmFault</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">BI</span></em>, <em class="sig-param"><span class="pre">C</span></em>, <em class="sig-param"><span class="pre">D</span></em>, <em class="sig-param"><span class="pre">E</span></em>, <em class="sig-param"><span class="pre">f</span></em>, <em class="sig-param"><span class="pre">g</span></em>, <em class="sig-param"><span class="pre">h</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mimetic.utils.schurComplementSymmFault" title="Permalink to this definition"></a></dt>
+<dd><p>Solve symmetric system of linear eqns using Schur Complement analysis.</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">flux</span><span class="p">,</span> <span class="n">press</span><span class="p">,</span> <span class="n">lam</span><span class="p">]</span>    <span class="p">=</span> <span class="n">schurComplementSymm</span><span class="p">(</span><span class="n">BI</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+<span class="p">[</span><span class="n">flux</span><span class="p">,</span> <span class="n">press</span><span class="p">,</span> <span class="n">lam</span><span class="p">]</span>    <span class="p">=</span> <span class="n">schurComplementSymm</span><span class="p">(</span><span class="n">BI</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="p">...</span>
+                                            <span class="s">&#39;pn&#39;</span><span class="p">,</span> <span class="n">pv</span><span class="p">,</span> <span class="p">...)</span>
+<span class="p">[</span><span class="n">flux</span><span class="p">,</span> <span class="n">press</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">S</span><span class="p">]</span> <span class="p">=</span> <span class="n">schurComplementSymm</span><span class="p">(...)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>Solves the symmetric, hybrid (block) system of linear equations</p>
+<blockquote>
+<div><p>[  B   C   D  ] [  v ]     [ f ]
+[  C’  0   0  ] [ -p ]  =  [ g ]
+[  D’  0   E  ] [ cp ]     [ h ]</p>
+</div></blockquote>
+<p>with respect to the half-face (half-contact) flux ‘v’, the cell
+pressure ‘p’, and the face (contact) pressure ‘cp’.  The system is
+solved using a Schur complement reduction to a symmetric system of
+linear equations</p>
+<blockquote>
+<div><p>S cp = R          (*)</p>
+</div></blockquote>
+<p>from which the contact pressure ‘cp’ is recovered.  Then, using back
+substitution, the cell pressure and half-contact fluxes are
+recovered.</p>
+<p>Note, however, that the function assumes that any faces having
+prescribed pressure values (such as Dirichlet boundary condtions or
+wells constrained by BHP targets) have already been eliminated from
+the blocks ‘D’ and ‘h’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>BI</strong> – Inverse of the matrix B in the block system.  Assumed SPD.</p></li>
+<li><p><strong>C</strong> – Block ‘C’ of the block system.</p></li>
+<li><p><strong>D</strong> – Block ‘D’ of the block system.</p></li>
+<li><p><strong>f</strong> – Block ‘f’ of the block system right hand side.</p></li>
+<li><p><strong>g</strong> – Block ‘g’ of the block system right hand side.</p></li>
+<li><p><strong>h</strong> – Block ‘h’ of the block system right hand side.</p></li>
+<li><p><strong>'pn'/pv</strong> – <p>List of ‘key’/value pairs defining optional parameters.  The
+supported options are:</p>
+<blockquote>
+<div><dl>
+<dt>Regularize – Whether or not to enforce p(1)==0 (i.e., set</dt><dd><p>pressure zero level) which may be useful when
+solving pure Neumann problems.
+Logicial.  Default value = FALSE.</p>
+</dd>
+<dt>LinSolve   – Function handle to a solver for the system</dt><dd><p>(*) above.  Assumed to support the syntax</p>
+<blockquote>
+<div><p>x = LinSolve(A, b)</p>
+</div></blockquote>
+<p>to solve a system Ax=b of linear equations.
+Default value: LinSolve = &#64;mldivide
+(backslash).</p>
+</dd>
+</dl>
+</div></blockquote>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>flux</strong> – The half-contact fluxes ‘v’.</p></li>
+<li><p><strong>press</strong> – The cell pressure ‘p’.</p></li>
+<li><p><strong>lam</strong> – The contact pressure ‘cp’.</p></li>
+<li><p><strong>S</strong> – Schur complement reduced system matrix used in recovering
+contact pressures.
+OPTIONAL.  Only returned if specifically requested.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#mimetic.utils.tpfSymm" title="mimetic.utils.tpfSymm"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">tpfSymm</span></code></a>, <a class="reference internal" href="#mimetic.utils.mixedSymm" title="mimetic.utils.mixedSymm"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mixedSymm</span></code></a>, <a class="reference internal" href="#mimetic.solveIncompFlow" title="mimetic.solveIncompFlow"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">solveIncompFlow</span></code></a>, <code class="xref mat mat-func docutils literal notranslate"><span class="pre">solveIncompFlowMS</span></code>.</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mimetic.utils.tpfSymm">
+<span class="sig-name descname"><span class="pre">tpfSymm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">B</span></em>, <em class="sig-param"><span class="pre">C</span></em>, <em class="sig-param"><span class="pre">D</span></em>, <em class="sig-param"><span class="pre">f</span></em>, <em class="sig-param"><span class="pre">g</span></em>, <em class="sig-param"><span class="pre">h</span></em>, <em class="sig-param"><span class="pre">Do</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mimetic.utils.tpfSymm" title="Permalink to this definition"></a></dt>
+<dd><p>Solve symmetric system of linear eqns using reduction to two-point system.</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">faceFlux</span><span class="p">,</span> <span class="n">press</span><span class="p">,</span> <span class="n">lam_n</span><span class="p">]</span>    <span class="p">=</span> <span class="n">tpfSymm</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">Do</span><span class="p">)</span>
+<span class="p">[</span><span class="n">faceFlux</span><span class="p">,</span> <span class="n">press</span><span class="p">,</span> <span class="n">lam_n</span><span class="p">]</span>    <span class="p">=</span> <span class="n">tpfSymm</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">Do</span><span class="p">,</span> <span class="p">...</span>
+                                      <span class="s">&#39;pn&#39;</span><span class="p">,</span> <span class="n">pv</span><span class="p">,</span> <span class="p">...)</span>
+<span class="p">[</span><span class="n">faceFlux</span><span class="p">,</span> <span class="n">press</span><span class="p">,</span> <span class="n">lam_n</span><span class="p">,</span> <span class="n">A</span><span class="p">]</span> <span class="p">=</span> <span class="n">tpfSymm</span><span class="p">(...)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>Solves the symmetric, hybrid (block) system of linear equations</p>
+<blockquote>
+<div><p>[  B   C   D  ] [  v ]     [ f ]
+[  C’  0   0  ] [ -p ]  =  [ g ]
+[  D’  0   0  ] [ cp ]     [ h ]</p>
+</div></blockquote>
+<p>with respect to the face flux ‘vf’, the cell pressure ‘p’, and the face
+(contact) pressure ‘cp’ for neumann boundary.  The system is solved
+using a reduction to two-point flux system of linear equations</p>
+<blockquote>
+<div><p>A [p cp_n] = rhs</p>
+</div></blockquote>
+<p>where A is size m-by-m, m = number of cells + number of Neumann faces.
+If B is not diagonal, off-diagonal terms are ignored.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>B</strong> – Matrix B  in the block system.  Assumed SPD.</p></li>
+<li><p><strong>C</strong> – Block ‘C’ of the block system.</p></li>
+<li><p><strong>D</strong> – Block ‘D’ of the block system, reduced so as to only apply to
+the Neumann faces (i.e., external faces for which the
+pressure is not prescribed).</p></li>
+<li><p><strong>f</strong> – Block ‘f’ of the block system right hand side.</p></li>
+<li><p><strong>g</strong> – Block ‘g’ of the block system right hand side.</p></li>
+<li><p><strong>h</strong> – Block ‘h’ of the block system right hand side, reduced so as
+to apply only to Neumann faces.</p></li>
+<li><p><strong>Do</strong> – Matrix mapping face-fluxes to half-face-fluxes.</p></li>
+<li><p><strong>'pn'/pv</strong> – <p>List of name/value pairs describing options to solver.
+The following options are supported:</p>
+<blockquote>
+<div><ul>
+<li><dl class="simple">
+<dt>’Regularize’ – TRUE/FALSE, whether or not to enforce</dt><dd><p>p(1)==0 (i.e., set pressure zero level).
+This option may be useful when solving
+pure Neumann problems.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>’MixedB’     – TRUE/FALSE (Default FALSE). Must be set</dt><dd><p>to TRUE if input ‘B’ is actually the
+mixed dicsretization matrix Bm (and not
+the hybrid). Useful for multiscale when
+Bm is formed directly.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>’LinSolve’   – Function handle to a solver for the</dt><dd><p>system above.  Assumed to support the
+syntax</p>
+<blockquote>
+<div><p>x = LinSolve(A, b)</p>
+</div></blockquote>
+<p>to solve a system Ax=b of linear
+equations.
+Default value: LinSolve = &#64;mldivide
+(backslash).</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>faceFlux</strong> – The face fluxes ‘vf’.</p></li>
+<li><p><strong>press</strong> – The cell pressure ‘p’.</p></li>
+<li><p><strong>lam_n</strong> – The contact pressure ‘cp’ on Neumann faces.</p></li>
+<li><p><strong>A</strong> – TPF system matrix.  OPTIONAL.  Only returned if specifically
+requested.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#mimetic.utils.mixedSymm" title="mimetic.utils.mixedSymm"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mixedSymm</span></code></a>, <a class="reference internal" href="#mimetic.utils.schurComplementSymm" title="mimetic.utils.schurComplementSymm"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">schurComplementSymm</span></code></a>, <a class="reference internal" href="#mimetic.solveIncompFlow" title="mimetic.solveIncompFlow"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">solveIncompFlow</span></code></a>, <code class="xref mat mat-func docutils literal notranslate"><span class="pre">solveIncompFlowMS</span></code>.</p>
+</div>
+</dd></dl>
+
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="matlab_bgl.html" class="btn btn-neutral float-left" title="matlab_bgl:" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mpfa.html" class="btn btn-neutral float-right" title="mpfa: Multi-point flux approximation solvers for pressure" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019, SINTEF Digital.
+      <span class="lastupdated">Last updated on Sep 23, 2021.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

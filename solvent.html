@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>solvent: Solvent solvers &mdash; The Matlab Reservoir Simulation Toolbox 2019b documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="spe10: Access to the SPE10 benchmark case" href="spe10.html" />
+    <link rel="prev" title="re-mpfa: Richards’ equation with multi-point flux" href="re-mpfa.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> The Matlab Reservoir Simulation Toolbox
+            <img src="_static/mrstlogo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                2019b
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="core.html">Core functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-core.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-core</span></code>: Automatic Differentiation Core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-props.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-props</span></code>: PVT, fluid models and other properties for the AD-solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-blackoil.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-blackoil</span></code>: Black-oil solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-eor.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-eor</span></code>: Enhanced oil recovery solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-mechanics.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-mechanics</span></code>: Coupled flow and mechanics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adjoint.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">adjoint</span></code>: Two-phase, incompressible adjoint solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agglom.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">agglom</span></code>: Flow and property-based coarse-grid generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="blackoil-sequential.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">blackoil-sequential</span></code>: Sequential implicit black-oil solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">book</span></code>: Book examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coarsegrid.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">coarsegrid</span></code>: Generation of coarse grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compositional.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">compositional</span></code>: Equation-of-state compositional solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="co2lab.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">co2lab</span></code>: Numerical CO<sub>2</sub> laboratory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deckformat.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">deckformat</span></code>: Reading and conversion of input decks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dfm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dfm</span></code>: Discrete fracture matrix implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dg.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dg</span></code>: Discontinous Galerkin discretizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="diagnostics.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">diagnostics</span></code>: Flow diagnostics functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dual_porosity.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dual-porosity</span></code>: Dual porosity/permeability model for fractures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fvbiot.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">fvbiot</span></code>: Consistent finite-volume discretizations for poroelasticity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geochemistry.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">geochemistry</span></code>: Surface geochemistry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heterogeneity.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">heterogeneity</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="hfm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">hfm</span></code>: Hierarchical and embedded fractures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="incomp.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">incomp</span></code>: Solvers for incompressible flow and transport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgeometry.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">libgeometry</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linearsolvers.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">linearsolvers</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab_bgl.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">matlab_bgl</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mimetic.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mimetic</span></code>: Mimetic solvers for pressure problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpfa.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mpfa</span></code>: Multi-point flux approximation solvers for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mrst_api.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mrst_api</span></code>: API for writing C/C++ for MRST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mrst-gui.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mrst-gui</span></code>: Graphical user-interfaces for MRST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msfvm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msfvm</span></code>: Multiscale Finite-Volume method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msmfem.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msmfem</span></code>: Multiscale Mixed Finite-Element method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msrsb.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msrsb</span></code>: Multiscale Restriction-Smoothed Basis method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nwm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">nwm</span></code>: Near Wellbore Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opm_gridprocessing.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">opm_gridprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimization.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">optimization</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="re-mpfa.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">re-mpfa</span></code>: Richards’ equation with multi-point flux</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">solvent</span></code>: Solvent solvers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#models">Models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-solvent.models">Base classes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-solvent.utils">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="spe10.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">spe10</span></code>: Access to the SPE10 benchmark case</a></li>
+<li class="toctree-l1"><a class="reference internal" href="steady-state.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">steady-state</span></code> Steady-state upscaling of functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="streamlines.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">streamlines</span></code>: Compute streamlines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triangle.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">triangle</span></code>: Triangular grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upscaling.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">upscaling</span></code>: Upscaling of reservoir problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vem.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">vem</span></code>: Virtual element method on general grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vemmech.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">vemmech</span></code>: Mechanics for general grids using the virtual element method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wellpaths.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">wellpaths</span></code>: Generation of wells using general curves</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">The Matlab Reservoir Simulation Toolbox</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><code class="xref mat mat-func docutils literal notranslate"><span class="pre">solvent</span></code>: Solvent solvers</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/solvent.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="solvent-solvent-solvers">
+<h1><code class="xref mat mat-func docutils literal notranslate"><span class="pre">solvent</span></code>: Solvent solvers<a class="headerlink" href="#solvent-solvent-solvers" title="Permalink to this headline"></a></h1>
+<div class="section" id="models">
+<h2>Models<a class="headerlink" href="#models" title="Permalink to this headline"></a></h2>
+<div class="section" id="module-solvent.models">
+<span id="base-classes"></span><h3>Base classes<a class="headerlink" href="#module-solvent.models" title="Permalink to this headline"></a></h3>
+<dl class="mat script">
+<dt class="sig sig-object mat" id="solvent.models.Contents">
+<span class="sig-name descname"><span class="pre">Contents</span></span><a class="headerlink" href="#solvent.models.Contents" title="Permalink to this definition"></a></dt>
+<dd><p>MODELS</p>
+<dl class="simple">
+<dt>Files</dt><dd><p>BlackOilSolventModel     - Black-oil solvent model.
+equationsBlackOilSolvent - Generate linearized problem for the black-oil solvent model equations</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat class">
+<dt class="sig sig-object mat" id="solvent.models.BlackOilSolventModel">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">BlackOilSolventModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">rock</span></em>, <em class="sig-param"><span class="pre">fluid</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solvent.models.BlackOilSolventModel" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="ad-blackoil.html#ad_blackoil.models.ThreePhaseBlackOilModel" title="ad_blackoil.models.ThreePhaseBlackOilModel"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ThreePhaseBlackOilModel</span></code></a></p>
+<p>Black-oil solvent model.</p>
+<dl class="mat method">
+<dt class="sig sig-object mat" id="solvent.models.BlackOilSolventModel.getActivePhases">
+<span class="sig-name descname"><span class="pre">getActivePhases</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solvent.models.BlackOilSolventModel.getActivePhases" title="Permalink to this definition"></a></dt>
+<dd><p>Get active flag for the canonical phase ordering (water, oil
+gas as on/off flags).</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="solvent.models.BlackOilSolventModel.getPhaseIndices">
+<span class="sig-name descname"><span class="pre">getPhaseIndices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solvent.models.BlackOilSolventModel.getPhaseIndices" title="Permalink to this definition"></a></dt>
+<dd><p>Get the active phases in canonical ordering</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="solvent.models.BlackOilSolventModel.getPhaseNames">
+<span class="sig-name descname"><span class="pre">getPhaseNames</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solvent.models.BlackOilSolventModel.getPhaseNames" title="Permalink to this definition"></a></dt>
+<dd><p>Get the active phases in canonical ordering</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="solvent.models.BlackOilSolventModel.storeDensity">
+<span class="sig-name descname"><span class="pre">storeDensity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">rhoW</span></em>, <em class="sig-param"><span class="pre">rhoO</span></em>, <em class="sig-param"><span class="pre">rhoG</span></em>, <em class="sig-param"><span class="pre">rhoS</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solvent.models.BlackOilSolventModel.storeDensity" title="Permalink to this definition"></a></dt>
+<dd><p>Store compressibility / surface factors for plotting and
+output.</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="solvent.models.BlackOilSolventModel.storeFluxes">
+<span class="sig-name descname"><span class="pre">storeFluxes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">vW</span></em>, <em class="sig-param"><span class="pre">vO</span></em>, <em class="sig-param"><span class="pre">vG</span></em>, <em class="sig-param"><span class="pre">vS</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solvent.models.BlackOilSolventModel.storeFluxes" title="Permalink to this definition"></a></dt>
+<dd><p>Utility function for storing the interface fluxes in the state</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="solvent.models.BlackOilSolventModel.storeMobilities">
+<span class="sig-name descname"><span class="pre">storeMobilities</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">mobW</span></em>, <em class="sig-param"><span class="pre">mobO</span></em>, <em class="sig-param"><span class="pre">mobG</span></em>, <em class="sig-param"><span class="pre">mobS</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solvent.models.BlackOilSolventModel.storeMobilities" title="Permalink to this definition"></a></dt>
+<dd><p>Utility function for storing the mobilities in the state</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="solvent.models.BlackOilSolventModel.storeUpstreamIndices">
+<span class="sig-name descname"><span class="pre">storeUpstreamIndices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">upcw</span></em>, <em class="sig-param"><span class="pre">upco</span></em>, <em class="sig-param"><span class="pre">upcg</span></em>, <em class="sig-param"><span class="pre">upcs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solvent.models.BlackOilSolventModel.storeUpstreamIndices" title="Permalink to this definition"></a></dt>
+<dd><p>Store upstream indices, so that they can be reused for other
+purposes.</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="solvent.models.BlackOilSolventModel.storebfactors">
+<span class="sig-name descname"><span class="pre">storebfactors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">bW</span></em>, <em class="sig-param"><span class="pre">bO</span></em>, <em class="sig-param"><span class="pre">bG</span></em>, <em class="sig-param"><span class="pre">bS</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solvent.models.BlackOilSolventModel.storebfactors" title="Permalink to this definition"></a></dt>
+<dd><p>Store compressibility / surface factors for plotting and
+output.</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="solvent.models.BlackOilSolventModel.hystereticResSat">
+<span class="sig-name descname"><span class="pre">hystereticResSat</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#solvent.models.BlackOilSolventModel.hystereticResSat" title="Permalink to this definition"></a></dt>
+<dd><p>Dynamic end-point scaling should be used in a proper solvent model,</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="solvent.models.BlackOilSolventModel.solvent">
+<span class="sig-name descname"><span class="pre">solvent</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#solvent.models.BlackOilSolventModel.solvent" title="Permalink to this definition"></a></dt>
+<dd><p>HC residual saturations can be set to the smallest observed over the entire</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="solvent.models.equationsBlackOilSolvent">
+<span class="sig-name descname"><span class="pre">equationsBlackOilSolvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">state0</span></em>, <em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">dt</span></em>, <em class="sig-param"><span class="pre">drivingForces</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solvent.models.equationsBlackOilSolvent" title="Permalink to this definition"></a></dt>
+<dd><p>Generate linearized problem for the black-oil solvent model equations</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">problem</span><span class="p">,</span> <span class="n">state</span><span class="p">]</span> <span class="p">=</span> <span class="n">equationsBlackOilSolvent</span><span class="p">(</span><span class="n">state0</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">drivingForces</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>This is the core function of the black-oil solvent model. This function
+assembles the residual equations for the conservation of water, oil and
+gas, as well as required well equations. By default, Jacobians are also
+provided by the use of automatic differentiation.</p>
+<p>The model assumes two extrema: In cases with only oil, reservoir gas
+and water, we have traditional black-oil behavior. In cases with oil,
+solvent gas and water, the oil mixes with the solvent gas according to
+the Todd-Longstaff model. In intermediate regions, we interpolate
+between the two extrema based on the solvet to total gas saturation
+fraction, and the pressure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state0</strong> – Reservoir state at the previous timestep. Assumed to have
+physically reasonable values.</p></li>
+<li><p><strong>state</strong> – State at the current nonlinear iteration. The values do not
+need to be physically reasonable.</p></li>
+<li><p><strong>model</strong> – BlackOilSolventModel-derived class. Typically,
+equationsBlackOil will be called from the class
+getEquations member function.</p></li>
+<li><p><strong>dt</strong> – Scalar timestep in seconds.</p></li>
+<li><p><strong>drivingForces</strong> – Struct with fields:
+* W for wells. Can be empty for no wells.
+* NOTE: The current implementation does not support
+BC’s and sources.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>‘Verbose’</strong> – Extra output if requested.</p></li>
+<li><p><strong>‘reverseMode’</strong> – Boolean indicating if we are in reverse mode, i.e.
+solving the adjoint equations. Defaults to false.</p></li>
+<li><p><strong>‘resOnly’</strong> – Only assemble residual equations, do not assemble the
+Jacobians. Can save some assembly time if only the
+values are required.</p></li>
+<li><p><strong>‘iterations’</strong> – Nonlinear iteration number. Special logic happens in the
+wells if it is the first iteration.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>problem</strong> – LinearizedProblemAD class instance, containing the water, oil
+and gas conservation equations, as well as well equations
+specified by the FacilityModel class.</p></li>
+<li><p><strong>state</strong> – Updated state. Primarily returned to handle changing well
+controls from the well model.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>BlackOilSolventModel,  ThreePhaseBlackOilModel</p>
+</div>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-solvent.utils">
+<span id="utilities"></span><h2>Utilities<a class="headerlink" href="#module-solvent.utils" title="Permalink to this headline"></a></h2>
+<dl class="mat script">
+<dt class="sig sig-object mat" id="solvent.utils.Contents">
+<span class="sig-name descname"><span class="pre">Contents</span></span><a class="headerlink" href="#solvent.utils.Contents" title="Permalink to this definition"></a></dt>
+<dd><p>UTILS</p>
+<dl class="simple">
+<dt>Files</dt><dd><p>addSolventProperties           - Add solvent pseudo-component and properties to fluid.
+computeFlashBlackOilSolvent    - Compute flash for a black-oil solvent model with disgas/vapoil
+computeRelPermSolvent          - Calulates effective relative permeabilities.
+computeResidualSaturations     - Calculate effective residual saturations
+computeViscositiesAndDensities - Calculates effective viscosities and densities using Todd-Longstaff
+getFluxAndPropsSolvent         - Flux and other properties for the black-oil solvent model equations.
+getPlotAfterStepSolvent        - Get a function that allows for dynamic plotting in <a class="reference internal" href="ad-core.html#ad_core.simulators.simulateScheduleAD" title="ad_core.simulators.simulateScheduleAD"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">simulateScheduleAD</span></code></a>
+makeWAGschedule                - Make schedule for water-alternating gas (WAG) injection.
+plotSolventFluidProps          - Terneary plots of HC components in black-oil solvent model.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="solvent.utils.addSolventProperties">
+<span class="sig-name descname"><span class="pre">addSolventProperties</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">fluid</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solvent.utils.addSolventProperties" title="Permalink to this definition"></a></dt>
+<dd><p>Add solvent pseudo-component and properties to fluid.</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="solvent.utils.computeFlashBlackOilSolvent">
+<span class="sig-name descname"><span class="pre">computeFlashBlackOilSolvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">state0</span></em>, <em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">status</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solvent.utils.computeFlashBlackOilSolvent" title="Permalink to this definition"></a></dt>
+<dd><p>Compute flash for a black-oil solvent model with disgas/vapoil</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="p">=</span> <span class="n">computeFlashBlackOil</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">state0</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">status</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>Compute flash to ensure that dissolved properties are within physically
+reasonable values, and simultanously avoid that properties go far
+beyond the saturated zone when they were initially unsaturated and vice
+versa.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> – State where saturations, rs, rv have been updated due to a
+Newton-step.</p></li>
+<li><p><strong>state0</strong> – State from before the linearized update.</p></li>
+<li><p><strong>model</strong> – The ThreePhaseBlackOil derived model used to compute the
+update.</p></li>
+<li><p><strong>status</strong> – Status flags from getCellStatusVO, applied to state0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>state</strong> – Updated state where saturations and values are chopped near
+phase transitions.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Be mindful of the definition of state0. It is not necessarily the
+state at the previous timestep, but rather the state at the previous
+nonlinear iteration!</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="solvent.utils.computeRelPermSolvent">
+<span class="sig-name descname"><span class="pre">computeRelPermSolvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">p</span></em>, <em class="sig-param"><span class="pre">sW</span></em>, <em class="sig-param"><span class="pre">sO</span></em>, <em class="sig-param"><span class="pre">sG</span></em>, <em class="sig-param"><span class="pre">sS</span></em>, <em class="sig-param"><span class="pre">sWcon</span></em>, <em class="sig-param"><span class="pre">sOr</span></em>, <em class="sig-param"><span class="pre">sGc</span></em>, <em class="sig-param"><span class="pre">mobMult</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solvent.utils.computeRelPermSolvent" title="Permalink to this definition"></a></dt>
+<dd><p>Calulates effective relative permeabilities.</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="solvent.utils.computeResidualSaturations">
+<span class="sig-name descname"><span class="pre">computeResidualSaturations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">p</span></em>, <em class="sig-param"><span class="pre">sW</span></em>, <em class="sig-param"><span class="pre">sG</span></em>, <em class="sig-param"><span class="pre">sS</span></em>, <em class="sig-param"><span class="pre">state0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solvent.utils.computeResidualSaturations" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate effective residual saturations</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="solvent.utils.computeViscositiesAndDensities">
+<span class="sig-name descname"><span class="pre">computeViscositiesAndDensities</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">p</span></em>, <em class="sig-param"><span class="pre">sW</span></em>, <em class="sig-param"><span class="pre">sO</span></em>, <em class="sig-param"><span class="pre">sG</span></em>, <em class="sig-param"><span class="pre">sS</span></em>, <em class="sig-param"><span class="pre">sOr</span></em>, <em class="sig-param"><span class="pre">sGc</span></em>, <em class="sig-param"><span class="pre">rs</span></em>, <em class="sig-param"><span class="pre">rv</span></em>, <em class="sig-param"><span class="pre">isSatO</span></em>, <em class="sig-param"><span class="pre">isSatG</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solvent.utils.computeViscositiesAndDensities" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates effective viscosities and densities using Todd-Longstaff
+model + 1/4th-power mixing rule</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="solvent.utils.getFluxAndPropsSolvent">
+<span class="sig-name descname"><span class="pre">getFluxAndPropsSolvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">fluid</span></em>, <em class="sig-param"><span class="pre">pO</span></em>, <em class="sig-param"><span class="pre">krW</span></em>, <em class="sig-param"><span class="pre">krO</span></em>, <em class="sig-param"><span class="pre">krG</span></em>, <em class="sig-param"><span class="pre">krS</span></em>, <em class="sig-param"><span class="pre">muW</span></em>, <em class="sig-param"><span class="pre">muO</span></em>, <em class="sig-param"><span class="pre">muG</span></em>, <em class="sig-param"><span class="pre">muS</span></em>, <em class="sig-param"><span class="pre">rhoW</span></em>, <em class="sig-param"><span class="pre">rhoO</span></em>, <em class="sig-param"><span class="pre">rhoG</span></em>, <em class="sig-param"><span class="pre">rhoS</span></em>, <em class="sig-param"><span class="pre">sW</span></em>, <em class="sig-param"><span class="pre">sG</span></em>, <em class="sig-param"><span class="pre">sS</span></em>, <em class="sig-param"><span class="pre">T</span></em>, <em class="sig-param"><span class="pre">gdz</span></em>, <em class="sig-param"><span class="pre">op</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solvent.utils.getFluxAndPropsSolvent" title="Permalink to this definition"></a></dt>
+<dd><p>Flux and other properties for the black-oil solvent model equations.</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="solvent.utils.getPlotAfterStepSolvent">
+<span class="sig-name descname"><span class="pre">getPlotAfterStepSolvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">state0</span></em>, <em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solvent.utils.getPlotAfterStepSolvent" title="Permalink to this definition"></a></dt>
+<dd><p>Get a function that allows for dynamic plotting in <a class="reference internal" href="ad-core.html#ad_core.simulators.simulateScheduleAD" title="ad_core.simulators.simulateScheduleAD"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">simulateScheduleAD</span></code></a>
+for the black-oil solvent model.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="ad-core.html#ad_core.plotting.getPlotAfterStep" title="ad_core.plotting.getPlotAfterStep"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">getPlotAfterStep</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="solvent.utils.makeWAGschedule">
+<span class="sig-name descname"><span class="pre">makeWAGschedule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">W</span></em>, <em class="sig-param"><span class="pre">nCycles</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solvent.utils.makeWAGschedule" title="Permalink to this definition"></a></dt>
+<dd><p>Make schedule for water-alternating gas (WAG) injection.</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">schedule</span> <span class="p">=</span> <span class="n">makeWAGschedule</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">nCycles</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>This function makes a WAG schedule based on a well structure, to be
+used with the BlackOilSolventModel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>W</strong> – Well structure, properly initialized with e.g. addWell().
+The function assumes this is initialized with desired
+rates/bhp.</p></li>
+<li><p><strong>nCycles</strong> – Number of cycles.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>‘time’</strong> – Total duration of the WAG injection period. Defaults to 1
+year.</p></li>
+<li><p><strong>‘dt’          Target time step size. Defaluts to 30 days.</strong></p></li>
+<li><p><strong>‘gas_end’</strong> – Duration of gas injection, 0 &lt; gas_end &lt; 1. The gas
+injection period of each cycle will last for
+time/ncycle*gas_end. Defaults to 0.5.</p></li>
+<li><p><strong>‘useRampUp’</strong> – Use rampup each time the well control changes to ease the
+nonlinear solution process. Defaults to false.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>schedule</strong> – WAG injection schedule.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>simpleSchedule, BlackOilSolventModel</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="solvent.utils.plotSolventFluidProps">
+<span class="sig-name descname"><span class="pre">plotSolventFluidProps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">propNames</span></em>, <em class="sig-param"><span class="pre">phases</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#solvent.utils.plotSolventFluidProps" title="Permalink to this definition"></a></dt>
+<dd><p>Terneary plots of HC components in black-oil solvent model.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="re-mpfa.html" class="btn btn-neutral float-left" title="re-mpfa: Richards’ equation with multi-point flux" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="spe10.html" class="btn btn-neutral float-right" title="spe10: Access to the SPE10 benchmark case" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019, SINTEF Digital.
+      <span class="lastupdated">Last updated on Sep 23, 2021.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

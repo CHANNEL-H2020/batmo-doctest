@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Examples &mdash; The Matlab Reservoir Simulation Toolbox 2019b documentation</title>
+      <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../../../" id="documentation_options" src="../../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../../_static/jquery.js"></script>
+        <script src="../../../../../../_static/underscore.js"></script>
+        <script src="../../../../../../_static/doctools.js"></script>
+    <script src="../../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../../../index.html" class="icon icon-home"> The Matlab Reservoir Simulation Toolbox
+            <img src="../../../../../../_static/mrstlogo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                2019b
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../core.html">Core functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../ad-core.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-core</span></code>: Automatic Differentiation Core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../ad-props.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-props</span></code>: PVT, fluid models and other properties for the AD-solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../ad-blackoil.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-blackoil</span></code>: Black-oil solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../ad-eor.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-eor</span></code>: Enhanced oil recovery solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../ad-mechanics.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-mechanics</span></code>: Coupled flow and mechanics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../adjoint.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">adjoint</span></code>: Two-phase, incompressible adjoint solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../agglom.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">agglom</span></code>: Flow and property-based coarse-grid generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../blackoil-sequential.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">blackoil-sequential</span></code>: Sequential implicit black-oil solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../book.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">book</span></code>: Book examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../coarsegrid.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">coarsegrid</span></code>: Generation of coarse grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../compositional.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">compositional</span></code>: Equation-of-state compositional solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../co2lab.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">co2lab</span></code>: Numerical CO<sub>2</sub> laboratory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../deckformat.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">deckformat</span></code>: Reading and conversion of input decks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../dfm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dfm</span></code>: Discrete fracture matrix implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../dg.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dg</span></code>: Discontinous Galerkin discretizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../diagnostics.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">diagnostics</span></code>: Flow diagnostics functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../dual_porosity.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dual-porosity</span></code>: Dual porosity/permeability model for fractures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../fvbiot.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">fvbiot</span></code>: Consistent finite-volume discretizations for poroelasticity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../geochemistry.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">geochemistry</span></code>: Surface geochemistry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../heterogeneity.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">heterogeneity</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../hfm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">hfm</span></code>: Hierarchical and embedded fractures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../incomp.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">incomp</span></code>: Solvers for incompressible flow and transport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../libgeometry.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">libgeometry</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../linearsolvers.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">linearsolvers</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../matlab_bgl.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">matlab_bgl</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../mimetic.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mimetic</span></code>: Mimetic solvers for pressure problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../mpfa.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mpfa</span></code>: Multi-point flux approximation solvers for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../mrst_api.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mrst_api</span></code>: API for writing C/C++ for MRST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../mrst-gui.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mrst-gui</span></code>: Graphical user-interfaces for MRST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../msfvm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msfvm</span></code>: Multiscale Finite-Volume method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../msmfem.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msmfem</span></code>: Multiscale Mixed Finite-Element method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../msrsb.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msrsb</span></code>: Multiscale Restriction-Smoothed Basis method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../nwm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">nwm</span></code>: Near Wellbore Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../opm_gridprocessing.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">opm_gridprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../optimization.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">optimization</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../re-mpfa.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">re-mpfa</span></code>: Richards’ equation with multi-point flux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../solvent.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">solvent</span></code>: Solvent solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../spe10.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">spe10</span></code>: Access to the SPE10 benchmark case</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../steady-state.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">steady-state</span></code> Steady-state upscaling of functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../streamlines.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">streamlines</span></code>: Compute streamlines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../triangle.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">triangle</span></code>: Triangular grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../upscaling.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">upscaling</span></code>: Upscaling of reservoir problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../vem.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">vem</span></code>: Virtual element method on general grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../vemmech.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">vemmech</span></code>: Mechanics for general grids using the virtual element method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../wellpaths.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">wellpaths</span></code>: Generation of wells using general curves</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../../index.html">The Matlab Reservoir Simulation Toolbox</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Examples</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../../../_sources/mrst/linearsolvers/amgcl/dependencies/amgcl-7f4206dadfa0755c0495bf49cb743005d3ba154b/docs/examples.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="examples">
+<h1>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="solving-poisson-s-equation">
+<h2>Solving Poisson’s equation<a class="headerlink" href="#solving-poisson-s-equation" title="Permalink to this headline"></a></h2>
+<p>The easiest way to solve a problem with AMGCL is to use the
+<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">amgcl::make_solver</span></code> class. It has two
+template parameters: the first one specifies a <span class="xref std std-doc">preconditioner</span> to use, and the second chooses an <span class="xref std std-doc">iterative solver</span>. The class constructor takes the system matrix in one of supported
+<span class="xref std std-doc">formats</span> and parameters for the chosen algorithms and for the
+<span class="xref std std-doc">backend</span>.</p>
+<p>Let us consider a simple example of <a class="reference external" href="https://en.wikipedia.org/wiki/Poisson%27s_equation">Poisson’s equation</a> in a unit square.
+Here is how the problem may be solved with AMGCL. We will use BiCGStab solver
+preconditioned with smoothed aggregation multigrid with SPAI(0) for relaxation
+(smoothing). First, we include the necessary headers. Each of those brings in
+the corresponding component of the method:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;amgcl/make_solver.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;amgcl/solver/bicgstab.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;amgcl/amg.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;amgcl/coarsening/smoothed_aggregation.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;amgcl/relaxation/spai0.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;amgcl/adapter/crs_tuple.hpp&gt;</span><span class="cp"></span>
+</pre></div>
+</div>
+<p>Next, we assemble sparse matrix for the Poisson’s equation on a uniform
+1000x1000 grid. See below for the definition of the <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">poisson</span></code>
+function:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span>    <span class="n">ptr</span><span class="p">,</span> <span class="n">col</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">val</span><span class="p">,</span> <span class="n">rhs</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">poisson</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">ptr</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">rhs</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>For this example, we select the <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">builtin</span></code>
+backend with double precision numbers as value type:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span> <span class="n">amgcl</span><span class="o">::</span><span class="n">backend</span><span class="o">::</span><span class="n">builtin</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">Backend</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Now we can construct the solver for our system matrix. We use the convenient
+adapter for <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">std::tuple</span></code> here and just tie together the matrix size
+and its CRS components:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span> <span class="n">amgcl</span><span class="o">::</span><span class="n">make_solver</span><span class="o">&lt;</span>
+    <span class="c1">// Use AMG as preconditioner:</span>
+    <span class="n">amgcl</span><span class="o">::</span><span class="n">amg</span><span class="o">&lt;</span>
+        <span class="n">Backend</span><span class="p">,</span>
+        <span class="n">amgcl</span><span class="o">::</span><span class="n">coarsening</span><span class="o">::</span><span class="n">smoothed_aggregation</span><span class="p">,</span>
+        <span class="n">amgcl</span><span class="o">::</span><span class="n">relaxation</span><span class="o">::</span><span class="n">spai0</span>
+        <span class="o">&gt;</span><span class="p">,</span>
+    <span class="c1">// And BiCGStab as iterative solver:</span>
+    <span class="n">amgcl</span><span class="o">::</span><span class="n">solver</span><span class="o">::</span><span class="n">bicgstab</span><span class="o">&lt;</span><span class="n">Backend</span><span class="o">&gt;</span>
+    <span class="o">&gt;</span> <span class="n">Solver</span><span class="p">;</span>
+
+<span class="n">Solver</span> <span class="nf">solve</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">ptr</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="p">);</span>
+</pre></div>
+</div>
+<p>Once the solver is constructed, we can apply it to the right-hand side to
+obtain the solution. This may be repeated multiple times for different
+right-hand sides. Here we start with a zero initial approximation. The solver
+returns a boost tuple with number of iterations and norm of the achieved
+residual:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">x</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">);</span>
+<span class="kt">int</span>    <span class="n">iters</span><span class="p">;</span>
+<span class="kt">double</span> <span class="n">error</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">iters</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">rhs</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>That’s it! Vector <code class="docutils literal notranslate"><span class="pre">x</span></code> contains the solution of our problem now.</p>
+</div>
+<div class="section" id="input-formats">
+<h2>Input formats<a class="headerlink" href="#input-formats" title="Permalink to this headline"></a></h2>
+<p>We used STL vectors to store the matrix components in the above axample. This
+may seem too restrictive if you want to use AMGCL with your own types.  But the
+<code class="xref mat mat-func docutils literal notranslate"><span class="pre">crs_tuple</span></code> adapter will take anything that the <a class="reference external" href="http://www.boost.org/doc/libs/release/libs/range/">Boost.Range</a> library recognizes
+as a random access range. For example, you can wrap raw pointers to your data
+into a <a class="reference external" href="http://www.boost.org/doc/libs/release/libs/range/doc/html/range/reference/utilities/iterator_range.html">boost::iterator_range</a>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Solver</span> <span class="nf">solve</span><span class="p">(</span> <span class="n">boost</span><span class="o">::</span><span class="n">make_tuple</span><span class="p">(</span>
+    <span class="n">n</span><span class="p">,</span>
+    <span class="n">boost</span><span class="o">::</span><span class="n">make_iterator_range</span><span class="p">(</span><span class="n">ptr</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span> <span class="n">ptr</span><span class="p">.</span><span class="n">data</span><span class="p">()</span> <span class="o">+</span> <span class="n">ptr</span><span class="p">.</span><span class="n">size</span><span class="p">()),</span>
+    <span class="n">boost</span><span class="o">::</span><span class="n">make_iterator_range</span><span class="p">(</span><span class="n">col</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span> <span class="n">col</span><span class="p">.</span><span class="n">data</span><span class="p">()</span> <span class="o">+</span> <span class="n">col</span><span class="p">.</span><span class="n">size</span><span class="p">()),</span>
+    <span class="n">boost</span><span class="o">::</span><span class="n">make_iterator_range</span><span class="p">(</span><span class="n">val</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span> <span class="n">val</span><span class="p">.</span><span class="n">data</span><span class="p">()</span> <span class="o">+</span> <span class="n">val</span><span class="p">.</span><span class="n">size</span><span class="p">())</span>
+    <span class="p">)</span> <span class="p">);</span>
+</pre></div>
+</div>
+<p>Same applies to the right-hand side and the solution vectors. And if that is
+still not general enough, you can provide your own adapter for your matrix
+type. See <span class="xref std std-doc">adapters</span> for further information on this.</p>
+</div>
+<div class="section" id="setting-parameters">
+<h2>Setting parameters<a class="headerlink" href="#setting-parameters" title="Permalink to this headline"></a></h2>
+<p>Any component in AMGCL defines its own parameters by declaring a <code class="docutils literal notranslate"><span class="pre">param</span></code>
+subtype. When a class wraps several subclasses, it includes parameters of its
+children into its own <code class="docutils literal notranslate"><span class="pre">param</span></code>. For example, parameters for the
+<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">amgcl::make_solver&lt;Precond,</span> <span class="pre">Solver&gt;</span></code> are declared as</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">params</span> <span class="p">{</span>
+    <span class="k">typename</span> <span class="n">Precond</span><span class="o">::</span><span class="n">params</span> <span class="n">precond</span><span class="p">;</span>
+    <span class="k">typename</span> <span class="n">Solver</span><span class="o">::</span><span class="n">params</span> <span class="n">solver</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Knowing that, we can easily set the parameters for individual components. For
+example, we can set the desired tolerance for the iterative solver in the above
+example like this:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Solver</span><span class="o">::</span><span class="n">params</span> <span class="n">prm</span><span class="p">;</span>
+<span class="n">prm</span><span class="p">.</span><span class="n">solver</span><span class="p">.</span><span class="n">tol</span> <span class="o">=</span> <span class="mf">1e-3</span><span class="p">;</span>
+<span class="n">Solver</span> <span class="nf">solve</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">ptr</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">val</span><span class="p">),</span> <span class="n">prm</span> <span class="p">);</span>
+</pre></div>
+</div>
+<p>Parameters may also be initialized with a <a class="reference external" href="http://www.boost.org/doc/libs/release/doc/html/property_tree.html">boost::property_tree::ptree</a>. This
+is especially convenient when <span class="xref std std-doc">runtime</span> is used, and the exact structure
+of the parameters is not known at compile time:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">boost</span><span class="o">::</span><span class="n">property_tree</span><span class="o">::</span><span class="n">ptree</span> <span class="n">prm</span><span class="p">;</span>
+<span class="n">prm</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="s">&quot;solver.tol&quot;</span><span class="p">,</span> <span class="mf">1e-3</span><span class="p">);</span>
+<span class="n">Solver</span> <span class="nf">solve</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">ptr</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">val</span><span class="p">),</span> <span class="n">prm</span> <span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="assembling-matrix-for-poisson-s-equation">
+<h2>Assembling matrix for Poisson’s equation<a class="headerlink" href="#assembling-matrix-for-poisson-s-equation" title="Permalink to this headline"></a></h2>
+<p>The section provides an example of assembling the system matrix and the
+right-hand side for a Poisson’s equation in a unit square
+<img class="math" src="../../../../../../_images/math/702b41c5b392f72455910bf446116e9fbae99da5.png" alt="\Omega=[0,1]\times[0,1]"/>:</p>
+<div class="math">
+<p><img src="../../../../../../_images/math/f8e161c6fc9e1ecdcbacfa1c6cffd13876ed0a19.png" alt="-\Delta u = 1, \; u \in \Omega \quad u = 0, \; u \in \partial \Omega"/></p>
+</div><p>The solution to the problem looks like this:</p>
+<p>Here is how the problem may be discretized on a uniform <img class="math" src="../../../../../../_images/math/a093134f3fa86b4bc38a1634715b6a50c537ad3a.png" alt="n \times n"/>
+grid:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+
+<span class="c1">// Assembles matrix for Poisson&#39;s equation with homogeneous</span>
+<span class="c1">// boundary conditions on a n x n grid.</span>
+<span class="c1">// Returns number of rows in the assembled matrix.</span>
+<span class="c1">// The matrix is returned in the CRS components ptr, col, and val.</span>
+<span class="c1">// The right-hand side is returned in rhs.</span>
+<span class="kt">int</span> <span class="nf">poisson</span><span class="p">(</span>
+    <span class="kt">int</span> <span class="n">n</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span>    <span class="o">&amp;</span><span class="n">ptr</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span>    <span class="o">&amp;</span><span class="n">col</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">val</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">rhs</span>
+    <span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span>    <span class="n">n2</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">n</span><span class="p">;</span>        <span class="c1">// Number of points in the grid.</span>
+    <span class="kt">double</span> <span class="n">h</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span> <span class="c1">// Grid spacing.</span>
+
+    <span class="n">ptr</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span> <span class="n">ptr</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">n2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span> <span class="n">ptr</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="n">col</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span> <span class="n">col</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">n2</span> <span class="o">*</span> <span class="mi">5</span><span class="p">);</span> <span class="c1">// We use 5-point stencil, so the matrix</span>
+    <span class="n">val</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span> <span class="n">val</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">n2</span> <span class="o">*</span> <span class="mi">5</span><span class="p">);</span> <span class="c1">// will have at most n2 * 5 nonzero elements.</span>
+
+    <span class="n">rhs</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">n2</span><span class="p">);</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">,</span> <span class="o">++</span><span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">i</span> <span class="o">==</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">||</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">j</span> <span class="o">==</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// Boundary point. Use Dirichlet condition.</span>
+                <span class="n">col</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">k</span><span class="p">);</span>
+                <span class="n">val</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mf">1.0</span><span class="p">);</span>
+
+                <span class="n">rhs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="c1">// Interior point. Use 5-point finite difference stencil.</span>
+                <span class="n">col</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="n">n</span><span class="p">);</span>
+                <span class="n">val</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">h</span> <span class="o">*</span> <span class="n">h</span><span class="p">));</span>
+
+                <span class="n">col</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+                <span class="n">val</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">h</span> <span class="o">*</span> <span class="n">h</span><span class="p">));</span>
+
+                <span class="n">col</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">k</span><span class="p">);</span>
+                <span class="n">val</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mf">4.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">h</span> <span class="o">*</span> <span class="n">h</span><span class="p">));</span>
+
+                <span class="n">col</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+                <span class="n">val</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">h</span> <span class="o">*</span> <span class="n">h</span><span class="p">));</span>
+
+                <span class="n">col</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="n">n</span><span class="p">);</span>
+                <span class="n">val</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">h</span> <span class="o">*</span> <span class="n">h</span><span class="p">));</span>
+
+                <span class="n">rhs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="n">ptr</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">col</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">n2</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019, SINTEF Digital.
+      <span class="lastupdated">Last updated on Sep 23, 2021.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+`msfvm`: Multiscale Finite-Volume method for pressure
+*******************************************
+.. include:: mrst/msfvm/README
+
+Utilities
+===============================
+.. automodule:: msfvm
+	:members:
+
+Examples
+===============================
+.. include:: examples/examples_msfvm.txt

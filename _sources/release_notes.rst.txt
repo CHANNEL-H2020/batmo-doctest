@@ -1,0 +1,187 @@
+MRST Release notes
+*******************************************
+
+Release 2019b
+===============================
+
+Highlights
+-------------------------------
+The new release comes with a number of bug fixes, improvements and increased documentation coverage. We especially highlight:
+* Several new modules have been added, including support for discontinuous Galerkin (dG) methods, geothermal simulation capability, near-wellbore modelling, nonlinear finite-volume schemes (NTPFA/NMPFA) and a vertex-approximate gradient scheme. Many of these modules are either fully or in-part contributed by external authors.
+* Many new examples, some of which are early previews of content from the upcoming book on advanced modelling with MRST.
+* The AD simulators have many improved features, including generalized sequential models and better support for CPR variants.
+
+
+New modules and features
+-------------------------------
+
+
+Module `dg`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Implementation of Discontinuous Galerkin Methods (dG) for the transport subproblem in immiscible multiphase flow simulations
+* Implements several useful features for element-type discretizations
+
+	* DGDiscretization class: The core of the module, with implementation of inner products, logics for accessing degrees of freedom, etc.
+	* Cubature class: Multiple cubature rules for unstructured elements
+	* Polynomial class: Facilitates easy definition of polynomial basis functions, with operator implementation of tensor product, gradient, etc.
+	* SpatialVector class: Supports spatial AD vectors for computation of gradients in cells
+	
+* Higher order than dG(1) is currently only supported for Cartesian grids
+* The module is in an early development stage, and will be subject to potentially large changes in the near future
+
+
+Module `geothermal`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Module for geothermal simulations
+* Supports single-phase, single-component water and single-phase, two-component water/NaCl models
+* Implements the standard conservation equations for water and NaCl mass, in addition to an equation for conservation of energy
+* Includes pressure/temperature/NaCl-dependent equations of state for density and viscosity
+
+
+Module `nwm`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The nwm is a new module for the implementation and manipulation of near-wellbore modeling (NWM) methodology. The nwm provides several useful routines:
+* Local grid reconstructions in the near-wellbore region originally modeled by the Corner-point grid (CPG) or Cartesian grid. The layered unstructured (Voronoi or triangular) grid in the near-wellbore region, namely volume of interest (VOI), glues the CPG to the layered radial grid built along the well trajectory. The hybrid NWM grid is assembled by the three sub grids.
+* Mapping of the rock properties from original CPG to NWM grid.
+* Hybrid transmissibility calculations for different sub grids (support the radial transmissibility).
+* Generation of non-neighboring connections (NNC) to connect the sub grids.
+* Automatic conversion of data structures given in ECLIPSE deck file, conforming to the original CPG, to the standard mrst data structures for the NWM hybrid.
+* Support for multi-segment well (MSW) definition, and generation of node and segment information through grid-based methods.
+* Several useful gridding tools, such as constructions of 2D Cartesian-radial hybrid grids, Cartesian-Voronoi hybrid grids and inclined layered grids.
+
+
+Module `nfvm`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+This module, developed by Wenjuan Zhang and Mohammed Al Kobaisi from the department of petroleum engineering in Khalifa University of Science and Technology, adds experimental support for nonlinear finite volume discretizations. It follows the development of paper W. Zhang, M. Al Kobaisi, Cell-centered nonlinear finite volume methods with improved robustness, SPE Journal (in print), 2019. 
+
+
+Module `vag`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Implementation of a Vertex Approximate Gradient (VAG) scheme.
+
+
+Changes to MRST core
+-------------------------------
+* Several new datasets added from the Norwegian Petroleum Directorate
+* New function `mrstColorbar` that improves the existing `colorbarHist` function
+* New function `merge_options_relaxed` that trades the generality of `merge_options` for improved runtime performance.
+
+
+Changes to existing modules
+-------------------------------
+
+Module `ad-core`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* New example: differentRegionFunctionsExample demonstrates the use of the state function system to set different functions in different parts of the domain.
+* New example: linearSolverExample demonstrating different linear solvers and different linear systems they may be used for (CPR, AMG, preconditioners and smoothers for fully-implicit, pressure and transport systems).
+* simulatePackedProblem: Add support for specifying a restartStep, even when that time step is already simulated.
+* Improved support for adaptive implicit (AIM) and explicit solvers.
+* DiagonalAutoDiffBackend: Several performance improvements and bug fixes.
+* NonLinearSolver now has separate parameters for both relaxation increment and decrement.
+* getNonLinearSolver has been revised. The input options have changed somewhat.
+* StateFunctions: Several improvements to getStateFunctionGroupingDependencyGraph and plots of graphs.
+* New framework wells now has a rigorous implementation for cross-flow in both injectors and producers.
+* plotWellSols: Better saving of plotted figures.
+* CPRSolverAD: The relativeTolerance property now correctly applies to the subsolver. This fixes a discrepancy between the documentation and the implementation. The solver now uses the standard tolerance field to control the global solve. In addition, some logic has been added to ensure that the AMG solver improves the result at every iteration.
+* PackedProblemManager: A class for managing a number of packed simulation problems, including some preliminary functionality for running ensambles on available cores in background threads.
+* FacilityModel: Support for using no primary variables. Useful for strategies involving a mostly fixed well system.
+* Function numelData mirrors numelData for ResultHandler and makes it easier to write code which can use either a cell array or a ResultHandler instance.
+* selectLinearSolver now uses CPR by default (see linear solver release notes)
+* LinearSolverAD now supports the “id” parameter together with a custom “disp” listing which makes it easier to see what parameters are set up.
+* Linear solvers have generally been harmonized in what parameters are output in the report (to show convergence, iterations, etc)
+* getMultiDimInterpolator is more accurate when computing derivatives.
+* Fixed a bug in generic rel. perm. evaluator for non-three-phase models.
+* Fix a scaling bug in well equations convergence check for generic models. It was previously too strict in many cases (missing division by surface densities).
+
+
+Module `ad-props`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Capillary pressure function handles are no longer assigned if the table is entirely made up of zero entries.
+
+
+Module `ad-blackoil`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* New examples showing variable implicitness (immiscibleTimeIntegrationExample, blackoilTimeIntegrationExample)
+* Support for BC in generic solvers.
+* Threshold pressures has been rewritten to subtract the threshold pressure from the gradient, instead of acting as an on/off-switch entirely.
+* GenericBlackOilModel: Can now run with boundary conditions or source terms.
+* Aquifer model based on Fetkovich aquifer model now including Eclipse input. 
+
+Module `ad-eor`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Implementation of a blackoil model with surfactant and polymer.
+
+
+Module `blackoil-sequential`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Support for generic pressure and transport models by calling PressureModel(model) and TransportModel(model) for some generic model. This will automatically generate a sequential scheme for that specific model, provided that the pressure reduction factors are known.
+
+
+Module `compositional`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* standaloneFlash is less picky on dimensions for input arguments
+* Several speed improvements in generic class of solvers
+* Support for K-values with EOS for density predictions
+* Rachford Rice bisection should be more robust.
+* K-values are now initialized once, and stored per-cell. This means that the initial guess for flash is usually much better when transitioning from single-phase.
+* Compositional properties now have a parameter useCompactEvaluation which avoids evaluating e.g. vapor properties in regions where vapor is not present.
+ 
+Module `diagnostics`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Well pair region saturation values calculated in computeRTD.
+* Option to compute RTDs in reverse direction of flow field.
+* Explicit 1D saturation solver along reverse direction of backwards TOF. This provides improved flow diagnostics proxies when dealing with non-uniform initial reservoir saturations.
+
+
+Module `incomp`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Experimental support in the incompressible solvers for using AD fluids as inputs instead of the older implementation. The solvers will use the oil-water properties. Note that the fluids will still be treated as incompressible! The example “incompExampleWithADFluids” has been added.
+
+
+
+Module `linearsolvers`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* AMGCL solvers should be much easier to set up as many of the routines now document which options are available.
+* Support for reuse of AMGCL solvers, for example to solve multiple right-hand sides.
+* Add support to interface for block-CPR-solver added in AMGCL library.
+* Support for storing partial preconditioners for CPR between solves.
+* AMGCL required files (boost subset and specific commit from AMGCL repository) is now automatically fetched if not found. You will be prompted at first call to any AMGCL solver.
+* Default AMG options have been improved for porous media-typical parameter ranges. Aggregation-based solvers are especially improved.
+* Can now pass the number of threads as option.
+
+
+Module `mrst-gui`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* plotToolbar now has support for 1D grids.
+
+Module `msrsb`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* getMultiscaleBasis: Updates to naming convention. The msrsb basis functions are no longer called rsb in type optional argument. If your script specifies basis functions, this will have to be revised.
+* Many reworked examples
+* Release of multiscale solvers for AD-type solvers
+ 
+
+Module `upr`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Linearized computation of distance function in distmesh
+* New default method for tessellation of curves (e.g. fault lines or well lines in 2D)
+
+	* Direct segmentation of each line segment to ensure exact conformity with input
+	* Set keyword interpolWP = true (well lines) or interpolFL = true (fault lines) for previous behavior.
+	
+* Small adjustment of geometric tolerances, resulting in increased robustness
+
+	* Correct assignment of G.cells.tag and G.faces.tag also when distmesh removes duplicate points
+
+* Default PEBI gridding algorithm changed to clippedPebi2d in the functions pebiGrid and compositePebiGrid
+
+	* Set keyword useMrstPebi = true to use pebi.m from MRST-core
+	
+* Several new examples
+
+
+
+
+
+

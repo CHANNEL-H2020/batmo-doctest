@@ -1,0 +1,10 @@
+`mpfa`: Multi-point flux approximation solvers for pressure
+*******************************************
+.. include:: mrst/mpfa/README
+
+.. automodule:: mpfa
+	:members:
+
+Examples
+===============================
+.. include:: examples/examples_mpfa.txt

@@ -1,0 +1,1880 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>diagnostics: Flow diagnostics functionality &mdash; The Matlab Reservoir Simulation Toolbox 2019b documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="dual-porosity: Dual porosity/permeability model for fractures" href="dual_porosity.html" />
+    <link rel="prev" title="dg: Discontinous Galerkin discretizations" href="dg.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> The Matlab Reservoir Simulation Toolbox
+            <img src="_static/mrstlogo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                2019b
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="core.html">Core functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-core.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-core</span></code>: Automatic Differentiation Core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-props.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-props</span></code>: PVT, fluid models and other properties for the AD-solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-blackoil.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-blackoil</span></code>: Black-oil solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-eor.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-eor</span></code>: Enhanced oil recovery solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-mechanics.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-mechanics</span></code>: Coupled flow and mechanics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adjoint.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">adjoint</span></code>: Two-phase, incompressible adjoint solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agglom.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">agglom</span></code>: Flow and property-based coarse-grid generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="blackoil-sequential.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">blackoil-sequential</span></code>: Sequential implicit black-oil solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">book</span></code>: Book examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coarsegrid.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">coarsegrid</span></code>: Generation of coarse grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compositional.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">compositional</span></code>: Equation-of-state compositional solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="co2lab.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">co2lab</span></code>: Numerical CO<sub>2</sub> laboratory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deckformat.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">deckformat</span></code>: Reading and conversion of input decks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dfm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dfm</span></code>: Discrete fracture matrix implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dg.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dg</span></code>: Discontinous Galerkin discretizations</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">diagnostics</span></code>: Flow diagnostics functionality</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dual_porosity.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dual-porosity</span></code>: Dual porosity/permeability model for fractures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fvbiot.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">fvbiot</span></code>: Consistent finite-volume discretizations for poroelasticity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geochemistry.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">geochemistry</span></code>: Surface geochemistry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heterogeneity.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">heterogeneity</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="hfm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">hfm</span></code>: Hierarchical and embedded fractures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="incomp.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">incomp</span></code>: Solvers for incompressible flow and transport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgeometry.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">libgeometry</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linearsolvers.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">linearsolvers</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab_bgl.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">matlab_bgl</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mimetic.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mimetic</span></code>: Mimetic solvers for pressure problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpfa.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mpfa</span></code>: Multi-point flux approximation solvers for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mrst_api.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mrst_api</span></code>: API for writing C/C++ for MRST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mrst-gui.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mrst-gui</span></code>: Graphical user-interfaces for MRST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msfvm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msfvm</span></code>: Multiscale Finite-Volume method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msmfem.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msmfem</span></code>: Multiscale Mixed Finite-Element method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msrsb.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msrsb</span></code>: Multiscale Restriction-Smoothed Basis method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nwm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">nwm</span></code>: Near Wellbore Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opm_gridprocessing.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">opm_gridprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimization.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">optimization</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="re-mpfa.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">re-mpfa</span></code>: Richards’ equation with multi-point flux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvent.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">solvent</span></code>: Solvent solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spe10.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">spe10</span></code>: Access to the SPE10 benchmark case</a></li>
+<li class="toctree-l1"><a class="reference internal" href="steady-state.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">steady-state</span></code> Steady-state upscaling of functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="streamlines.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">streamlines</span></code>: Compute streamlines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triangle.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">triangle</span></code>: Triangular grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upscaling.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">upscaling</span></code>: Upscaling of reservoir problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vem.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">vem</span></code>: Virtual element method on general grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vemmech.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">vemmech</span></code>: Mechanics for general grids using the virtual element method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wellpaths.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">wellpaths</span></code>: Generation of wells using general curves</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">The Matlab Reservoir Simulation Toolbox</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><code class="xref mat mat-func docutils literal notranslate"><span class="pre">diagnostics</span></code>: Flow diagnostics functionality</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/diagnostics.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="diagnostics-flow-diagnostics-functionality">
+<h1><code class="xref mat mat-func docutils literal notranslate"><span class="pre">diagnostics</span></code>: Flow diagnostics functionality<a class="headerlink" href="#diagnostics-flow-diagnostics-functionality" title="Permalink to this headline"></a></h1>
+<p>Flow diagnostics refers to a set of simple and controlled numerical flow experiments that are run to probe a reservoir model, establish connections and basic volume estimates, compute dynamic heterogeneity measures, and and quickly provide a qualitative picture of the flow patterns in the reservoir. Flow diagnostics can also be used to compute simplified forecasts of fluid displacement and perform what-if and sensitivity analyzes in parameter regions surrounding preexisting simulations. The module offers a computationally inexpensive alternative to performing full-featured multiphase simulations to rank, compare, and validate reservoir models, upscaling procedures, and optimize production scenarios.</p>
+<span class="target" id="module-diagnostics.utils"></span><dl class="mat script">
+<dt class="sig sig-object mat" id="diagnostics.utils.Contents">
+<span class="sig-name descname"><span class="pre">Contents</span></span><a class="headerlink" href="#diagnostics.utils.Contents" title="Permalink to this definition"></a></dt>
+<dd><p>Files
+computeFandPhi                - Compute flow-capacity/storage-capacity diagram (F,Phi)
+computeFandPhiFromDist        - Undocumented Utility Function
+computeLorenz                 - Compute the Lorenz coefficient
+computeRTD                    - Compute residence time distributions based on computed tof-values
+computeSweep                  - Compute sweep efficiency versus dimensionless time (PVI)
+computeTOFandTracer           - Compute time-of-flight and tracer distribution using finite-volume scheme.
+computeTOFandTracerAverage    - Executes computeTOFandTracer for a series of states and averages
+computeTimeOfFlight           - Compute time of flight using finite-volume scheme.
+computeWellPairs              - Compute volumes and fluxes associated with each flux pair
+estimateRTD                   - Estimate residence time distributions based on computed tof-values
+expandCoarseWellCompletions   - Pseudo-wells for computing flow diagnostics in an upscaled model
+expandWellCompletions         - Pseudo-wells for computation of flow diagnostics for completions
+interactiveDiagnostics        - Launch an interactive diagnostics session
+plotTOFArrival                - Undocumented Utility Function
+plotTracerBlend               - Visualise tracer partitions: gray regions are affected by multiple tracers
+plotWellAllocationComparison  - Plot a panel comparing well-allocation from models with different resolution
+plotWellAllocationPanel       - Plot a panel comparing well-allocation from models with different resolution
+plotWellPairConnections       - Plot lines between wells to show relative flux allocation
+PostProcessDiagnostics        - PostProcessDiagnostics handle class
+PostProcessDiagnosticsECLIPSE - Launch flow diagnostics postprocessor GUI for ECLIPSE simulation output.
+PostProcessDiagnosticsMRST    - Launch flow diagnostics postprocessor GUI for MRST simulation output.
+selectTOFRegion               - Select a subset of cells based on TOF criteria
+validateStateForDiagnostics   - Validate and fix state for flow diagnostics</p>
+</dd></dl>
+
+<dl class="mat class">
+<dt class="sig sig-object mat" id="diagnostics.utils.PostProcessDiagnostics">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">PostProcessDiagnostics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">dinput</span></em>, <em class="sig-param"><span class="pre">precomp</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.PostProcessDiagnostics" title="Permalink to this definition"></a></dt>
+<dd><p>PostProcessDiagnostics handle class</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="p">=</span> <span class="n">PostProcessDiagnostics</span><span class="p">(</span><span class="n">dinput</span><span class="p">,</span> <span class="n">precomp</span><span class="p">,</span> <span class="n">varargin</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>Class definition for PostProcessDiagnostics GUI object. Takes a
+information from a previously run simulation and displays accompanying
+flow diagnostics and simulation results in an interactive GUI.
+If no precomputed diagnostics are passed in, diagnostics are calculated
+internally. Simulations should be processed first using either
+PostProcessDiagnosticsECLIPSE or PostProcessDiagnosticsMRST.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dinput</strong> – <p>Structure containing the following fields:</p>
+<ul>
+<li><p>maxTOF - Maximum TOF value.</p></li>
+<li><p>G      - MRST Grid structure with G.cells.PORV field</p></li>
+<li><p>Gs     - Simulation Grid (for MRST simulations Gs = G)</p></li>
+<li><p>Data   - Data structure containing static, dynamic and computed properties.</p></li>
+</ul>
+</p></li>
+<li><p><strong>precomp</strong> – Structure optionally containing array of precomputed
+diagnostics data for each timestep required.
+If empty, diagnostics will be calculated when the GUI is
+run.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><p><strong>style</strong> – Optional gui style. Only default has been implemented.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>d</strong> – Handle to PostProcessDiagnostics object.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#diagnostics.utils.PostProcessDiagnosticsMRST" title="diagnostics.utils.PostProcessDiagnosticsMRST"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">PostProcessDiagnosticsMRST</span></code></a>, <a class="reference internal" href="#diagnostics.utils.PostProcessDiagnosticsECLIPSE" title="diagnostics.utils.PostProcessDiagnosticsECLIPSE"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">PostProcessDiagnosticsECLIPSE</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.PostProcessDiagnosticsECLIPSE">
+<span class="sig-name descname"><span class="pre">PostProcessDiagnosticsECLIPSE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.PostProcessDiagnosticsECLIPSE" title="Permalink to this definition"></a></dt>
+<dd><p>Launch flow diagnostics postprocessor GUI for ECLIPSE simulation output.</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">d</span><span class="p">]</span> <span class="p">=</span> <span class="n">PostProcessDiagnosticsECLIPSE</span><span class="p">(</span><span class="n">varargin</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>Takes the output of an ECLIPSE simulation  and launches the flow
+diagnostics postprocessor GUI. Optionally the path to the .EGRID file
+can be passed as an input parameter. If no parameters are given a file
+dialogue box will be launched to select the .EGRID file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>steps</strong> – Array of timesteps to be displayed in the GUI.</p></li>
+<li><p><strong>maxTOF</strong> – Maximum TOF value. Default value is 500 years.</p></li>
+<li><p><strong>cleanup</strong> – true or false. Delete all existing flow diagnostics
+results from previous runs. Default is false.</p></li>
+<li><p><strong>precompute</strong> – true or false. Precompute flow diagnostics for all
+timesteps. Default is true.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>d</strong> – Handle to PostProcessDiagnostics object.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#diagnostics.utils.PostProcessDiagnosticsMRST" title="diagnostics.utils.PostProcessDiagnosticsMRST"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">PostProcessDiagnosticsMRST</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.PostProcessDiagnosticsMRST">
+<span class="sig-name descname"><span class="pre">PostProcessDiagnosticsMRST</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">problem</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.PostProcessDiagnosticsMRST" title="Permalink to this definition"></a></dt>
+<dd><p>Launch flow diagnostics postprocessor GUI for MRST simulation output.</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">d</span><span class="p">]</span> <span class="p">=</span> <span class="n">PostProcessDiagnosticsMRST</span><span class="p">(</span><span class="n">problem</span><span class="p">,</span><span class="n">varargin</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>Takes the output of an MRST simulation problem and launches the flow
+diagnostics postprocessor GUI. The simulation should already
+have been run as PostProcessDiagnosticsMRST.m will only look for
+exisiting output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>problem</strong> – An MRST simulation problem defined using
+packSimulationProblem.m.</p>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>steps</strong> – Array of timesteps to be displayed in the GUI.</p></li>
+<li><p><strong>maxTOF</strong> – Maximum TOF value. Default value is 500 years.</p></li>
+<li><p><strong>cleanup</strong> – true or false. Delete all existing flow diagnostics
+results from previous runs. Default is false.</p></li>
+<li><p><strong>precompute</strong> – true or false. Precompute flow diagnostics for all
+timesteps. Default is true.</p></li>
+<li><p><strong>startdate</strong> – optionally specify a start date of the format
+[day month year] e.g. [1 1 2000] for the 1st January
+2000.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>d</strong> – Handle to PostProcessDiagnostics object.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#diagnostics.utils.PostProcessDiagnosticsECLIPSE" title="diagnostics.utils.PostProcessDiagnosticsECLIPSE"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">PostProcessDiagnosticsECLIPSE</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.computeFandPhi">
+<span class="sig-name descname"><span class="pre">computeFandPhi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">arg1</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.computeFandPhi" title="Permalink to this definition"></a></dt>
+<dd><p>Compute flow-capacity/storage-capacity diagram (F,Phi)</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">F</span><span class="p">,</span><span class="n">Phi</span><span class="p">]</span> <span class="p">=</span> <span class="n">computeFandPhi</span><span class="p">(</span><span class="n">pv</span><span class="p">,</span> <span class="n">tof</span><span class="p">)</span>
+<span class="p">[</span><span class="n">F</span><span class="p">,</span><span class="n">Phi</span><span class="p">]</span> <span class="p">=</span> <span class="n">computeFandPhi</span><span class="p">(</span><span class="n">rtd</span><span class="p">)</span>
+<span class="p">[</span><span class="n">F</span><span class="p">,</span><span class="n">Phi</span><span class="p">]</span> <span class="p">=</span> <span class="n">computeFandPhi</span><span class="p">(</span><span class="n">rtd</span><span class="p">,</span> <span class="s">&#39;sum&#39;</span><span class="p">,</span> <span class="nb">true</span><span class="o">/</span><span class="nb">false</span><span class="p">);</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<dl class="simple">
+<dt>Compute the flow-capacity/storage-capacity based upon either:</dt><dd><ol class="arabic simple">
+<li><p>Pore volumes and time-of-flight values per cell. In this case,
+Phi is defined as the cumulative pore volume and F is the
+cumulative flux as function of residence time. Assuming
+incompressible flow, the instant flux is computed as the ratio of
+pore volume and the residence time.</p></li>
+<li><p>Residence-time distribution. In this case, F is the integral of the
+RTD values, whereas Phi is the first-order moment (i.e., the
+integral of the product of time and RTD values).</p></li>
+</ol>
+</dd>
+</dl>
+<p>Making an analogue to 1D displacement theory, the F-Phi curve is the
+equivalent to a plot of the fractional flow versus saturation.
+Technical description: see Section 13.2-13.3 in the MRST book, Shavali
+et al. (SPE 146446), and Shook and Mitchell (SPE 124625)</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vol</strong> – pore volume, one value per cell</p></li>
+<li><p><strong>tof</strong> – two-component vector with time-of-flight from injector and
+time-of-flight from producer, one value per cell</p></li>
+<li><p><strong>rtd</strong> – structure with residence-time distribution from computeRTD</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><ul>
+<li><p><strong>F</strong> – flow capacity = cumulative flux for increasing time-of-flight
+values, where the flux per cell is defined from the relation</p>
+<blockquote>
+<div><p>volume = flux * total_travel_time</p>
+</div></blockquote>
+</li>
+<li><p><strong>Phi</strong> – storage capacity = cumulative pore volume for increasing
+time-of-flight values</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#diagnostics.utils.computeTOFandTracer" title="diagnostics.utils.computeTOFandTracer"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">computeTOFandTracer</span></code></a>, <a class="reference internal" href="#diagnostics.utils.computeLorenz" title="diagnostics.utils.computeLorenz"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">computeLorenz</span></code></a>, <a class="reference internal" href="#diagnostics.utils.computeSweep" title="diagnostics.utils.computeSweep"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">computeSweep</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.computeFandPhiFromDist">
+<span class="sig-name descname"><span class="pre">computeFandPhiFromDist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">RTD</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.computeFandPhiFromDist" title="Permalink to this definition"></a></dt>
+<dd><p>Undocumented Utility Function</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.computeLorenz">
+<span class="sig-name descname"><span class="pre">computeLorenz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">F</span></em>, <em class="sig-param"><span class="pre">Phi</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.computeLorenz" title="Permalink to this definition"></a></dt>
+<dd><p>Compute the Lorenz coefficient</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">Lc</span> <span class="p">=</span> <span class="n">computeLorenz</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">Phi</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>F</strong> – flow capacity</p></li>
+<li><p><strong>Phi</strong> – storage capacity</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>Lc</strong> – the Lorenz coefficient, a popular measure of heterogeneity. It is
+equal to twice the area under the curve and above the F=Phi line.
+It varies between 0 (homogeneous displacement) to 1 (infinitely
+heterogeneous displacement).</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#diagnostics.utils.computeFandPhi" title="diagnostics.utils.computeFandPhi"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">computeFandPhi</span></code></a>, <a class="reference internal" href="#diagnostics.utils.computeSweep" title="diagnostics.utils.computeSweep"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">computeSweep</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.computeRTD">
+<span class="sig-name descname"><span class="pre">computeRTD</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">pv</span></em>, <em class="sig-param"><span class="pre">D</span></em>, <em class="sig-param"><span class="pre">WP</span></em>, <em class="sig-param"><span class="pre">W</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.computeRTD" title="Permalink to this definition"></a></dt>
+<dd><p>Compute residence time distributions based on computed tof-values
+.. rubric:: Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">dist</span> <span class="p">=</span> <span class="n">computeRTD</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">pv</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">WP</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="s">&#39;pn1&#39;</span><span class="p">,</span> <span class="n">pv1</span><span class="p">,</span> <span class="p">...)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>This function computes well-pair RTDs by simulating an imaginary tracer
+which ditributes equally among all phases (follows the total flux-field),
+and follows the flux field given by state. A tracer pulse is injected at
+injector i at time zero and produced at producer p. The RTD is scaled
+such that</p>
+<blockquote>
+<div><p>RTD_{ip}(t) = (rate producer p / total tracer mass) * c_p(t),</p>
+</div></blockquote>
+<p>where c_p(t) is the tracer concentration in producer p.</p>
+<dl>
+<dt>With the above scaling the RTD has units [s]^-1</dt><dd><ul class="simple">
+<li><p>the integral of the RTD approximates fractional recovery</p></li>
+</ul>
+<blockquote>
+<div><p>(produced mass/injected mass)</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>the mean of the RTD time i-to-p allocation approximates the i-to-p
+allocation volume</p></li>
+</ul>
+</dd>
+</dl>
+<p>RETURNS:
+dist - structure with fields</p>
+<blockquote>
+<div><p>pairIx            nreg x 2 each row index to injector/producer
+t                 nbin x 1 discrete times
+values            nbin x 1 discrete RTD-values
+volumes           nreg x 1 interaction volume for each well pair
+allocations       nreg x 1 interaction allocation for each well pair
+injectorFlux      ninj injector total rates
+producerFlux      nprod producer total rates</p>
+</div></blockquote>
+<dl class="simple">
+<dt>SEE ALSO</dt><dd><p>estimateRTD</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.computeSweep">
+<span class="sig-name descname"><span class="pre">computeSweep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">F</span></em>, <em class="sig-param"><span class="pre">Phi</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.computeSweep" title="Permalink to this definition"></a></dt>
+<dd><p>Compute sweep efficiency versus dimensionless time (PVI)</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Ev</span><span class="p">,</span><span class="n">tD</span><span class="p">]</span> <span class="p">=</span> <span class="n">computeSweep</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">Phi</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>F</strong> – flow capacity</p></li>
+<li><p><strong>Phi</strong> – storage capacity</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>tD</strong> – dimensionless time (PVI)</p></li>
+<li><p><strong>Ev</strong> – sweep efficiency. Analogue: 1D displacement using the F-Phi curve
+as flux funcion</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#diagnostics.utils.computeFandPhi" title="diagnostics.utils.computeFandPhi"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">computeFandPhi</span></code></a>, <a class="reference internal" href="#diagnostics.utils.computeLorenz" title="diagnostics.utils.computeLorenz"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">computeLorenz</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.computeTOFandTracer">
+<span class="sig-name descname"><span class="pre">computeTOFandTracer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">rock</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.computeTOFandTracer" title="Permalink to this definition"></a></dt>
+<dd><p>Compute time-of-flight and tracer distribution using finite-volume scheme.</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">D</span>  <span class="p">=</span> <span class="n">computeTOFandTracer</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">rock</span><span class="p">)</span>
+<span class="n">D</span>  <span class="p">=</span> <span class="n">computeTOFandTracer</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">rock</span><span class="p">,</span> <span class="s">&#39;pn1&#39;</span><span class="p">,</span> <span class="n">pv1</span><span class="p">,</span> <span class="p">...)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<dl class="simple">
+<dt>Construct the basis for flow diagnostic by computing</dt><dd><ol class="arabic simple">
+<li><p>time-of-flight        :   nabla�(v T) = phi,</p></li>
+<li><p>reverse time-of-flight:  -nabla�(v T) = phi,</p></li>
+<li><p>stationary tracer     :  �nabla�(v C) = 0</p></li>
+</ol>
+</dd>
+</dl>
+<p>using a first-order finite-volume method with upwind flux. A majority
+vote is also used to partition the volume and assign each cell to a
+unique tracer. Optionally, the routine can also compute time-of-flight
+values for each influence region by solving localized time-of-flight
+equations</p>
+<blockquote>
+<div><p>nabla�(v C_i T) = phi C_i,</p>
+</div></blockquote>
+<p>where C_i is the tracer concentration of each influence region.</p>
+<p>Optionally, first arrival time is computed by a graph algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>G</strong> – Grid structure.</p></li>
+<li><p><strong>rock</strong> – Rock data structure.
+Must contain a valid porosity field, ‘rock.poro’.</p></li>
+<li><p><strong>state</strong> – Reservoir and well solution structure either properly
+initialized from functions ‘initResSol’ and ‘initWellSol’
+respectively, or the results from a call to function
+‘solveIncompFlow’.  Must contain valid cell interface fluxes,
+‘state.flux’.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>OPTIONAL PARAMETERS (supplied in ‘key’/value pairs):</dt><dd><dl class="simple">
+<dt>wells - Well structure as defined by function ‘addWell’.  May be empty</dt><dd><p>(i.e., wells = []) which is interpreted as a model without any
+wells.</p>
+</dd>
+<dt>src   - Explicit source contributions as defined by function</dt><dd><p>‘addSource’.  May be empty (i.e., src = []) which is
+interpreted as a reservoir model without explicit sources.</p>
+</dd>
+<dt>bc    - Boundary condition structure as defined by function ‘addBC’.</dt><dd><p>This structure accounts for all external boundary conditions
+to the reservoir flow.  May be empty (i.e., bc = []) which is
+interpreted as all external no-flow (homogeneous Neumann)
+conditions.</p>
+</dd>
+<dt>tracerWells - Logical index vector indicating subset of wells for which</dt><dd><p>tracer-fields will be computed. Empty matrix (default) is
+interpeted as all true, i.e., compute tracer fields for all
+wells.</p>
+</dd>
+<dt>computeWellTOFs - Boolean variable. If true, time-of-flight values are</dt><dd><p>computed individually for each influence region by solving
+localized time-of-flight equations.</p>
+</dd>
+<dt>firstArrival - Boolean variable. If true, compute first-arrival time by</dt><dd><p>a graph algorithm.</p>
+</dd>
+<dt>solver - Function handle to solver for use in TOF/tracer equations.</dt><dd><p>Default (empty) is matlab mldivide (i.e., )</p>
+</dd>
+<dt>maxTOF - Maximal TOF thresholding to avoid singular/ill-conditioned</dt><dd><p>systems. Default (empty) is 50*PVI (pore-volumes-injected).</p>
+</dd>
+<dt>processCycles - Extend TOF thresholding to strongly connected</dt><dd><p>components in flux graph by considering Dulmage-Mendelsohn
+decomposition (dmperm). Recommended for highly cyclic flux
+fields. Only takes effect if ‘allowInf’ is set to false.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="field-list">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>D</strong> – struct that contains the basis for computing flow diagnostics:
+‘inj’     - list of injection wells
+‘prod’    - list of production wells
+‘tof’     - time-of-flight and reverse time-of-flight returned</p>
+<blockquote>
+<div><p>as an array where the first (G.cells.num x 2) elements
+contain forward/backward TOF for the whole field, and
+any other columns optinally contain TOF values for
+individual influence regions</p>
+</div></blockquote>
+<p>‘itracer’ - steady-state tracer distribution for injectors
+‘ipart’   - tracer partition for injectors
+‘ifa’     - first-arrival time injectors
+‘ptracer’ - steady-state tracer distribution for producers
+‘ppart’   - tracer partition for producers
+‘pfa’     - first-arrival time for producers</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.computeTOFandTracerAverage">
+<span class="sig-name descname"><span class="pre">computeTOFandTracerAverage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">rock</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.computeTOFandTracerAverage" title="Permalink to this definition"></a></dt>
+<dd><p>Executes computeTOFandTracer for a series of states and averages</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">D</span>  <span class="p">=</span> <span class="n">computeTOFandTracerAverage</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">rock</span><span class="p">,</span> <span class="s">&#39;pn1&#39;</span><span class="p">,</span> <span class="n">pv1</span><span class="p">,</span> <span class="p">...)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>Computes time of flight for a series of time steps and avarages.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>G</strong> – Grid structure.</p></li>
+<li><p><strong>rock</strong> – Rock data structure.
+Must contain a valid porosity field, ‘rock.poro’.</p></li>
+<li><p><strong>state</strong> – Reservoir and well solution structure either properly
+initialized from functions ‘initResSol’ and ‘initWellSol’
+respectively, or the results from a call to function
+‘solveIncompFlow’.  Must contain valid cell interface fluxes,
+‘state.flux’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>wells</strong> – Well structure as defined by function ‘addWell’.  May be empty
+(i.e., wells = []) which is interpreted as a model without any
+wells.</p></li>
+<li><p><strong>dt</strong> – List of timesteps to use in averaging</p></li>
+<li><p><strong>max_tof</strong> – Threshold</p></li>
+<li><p><strong>min_tof</strong> – Threshold</p></li>
+<li><p><strong>Additional parameters will be passed on to ‘computeTOFandTracer’, which</strong></p></li>
+<li><p><strong>computes the flow diagnostics. See this function for further documentation.</strong></p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>D</strong> – struct that contains the basis for computing flow diagnostics:
+‘inj’     - list of injection wells
+‘prod’    - list of production wells
+‘tof’     - time-of-flight and reverse time-of-flight returned</p>
+<blockquote>
+<div><p>as an (G.cells.num x 2) vector</p>
+</div></blockquote>
+<p>‘itracer’ - steady-state tracer distribution for injectors
+‘ipart’   - tracer partition for injectors
+‘ptracer’ - steady-state tracer distribution for producers
+‘ppart’   - tracer partition for producers
+‘isubset’ - flooding volumes which satisfy the min/max tof</p>
+<blockquote>
+<div><p>thresholds (if set). Represents a kind of frequency.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>‘psubset’ - drainage volumes which satisfy the min/max tof</dt><dd><p>thresholds (if set). Represents a kind of frequency.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>EXAMPLE:</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#diagnostics.utils.computeTOFandTracer" title="diagnostics.utils.computeTOFandTracer"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">computeTOFandTracer</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.computeTimeOfFlight">
+<span class="sig-name descname"><span class="pre">computeTimeOfFlight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">rock</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.computeTimeOfFlight" title="Permalink to this definition"></a></dt>
+<dd><p>Compute time of flight using finite-volume scheme.</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span> <span class="n">T</span>        <span class="p">=</span> <span class="n">computeTimeOfFlight</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">rock</span><span class="p">)</span>
+ <span class="n">T</span>        <span class="p">=</span> <span class="n">computeTimeOfFlight</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">rock</span><span class="p">,</span> <span class="s">&#39;pn1&#39;</span><span class="p">,</span> <span class="n">pv1</span><span class="p">,</span> <span class="p">...)</span>
+
+<span class="p">[</span><span class="n">T</span><span class="p">,</span> <span class="n">A</span><span class="p">]</span>    <span class="p">=</span> <span class="n">computeTimeOfFlight</span><span class="p">(...)</span>
+<span class="p">[</span><span class="n">T</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">q</span><span class="p">]</span> <span class="p">=</span> <span class="n">computeTimeOfFlight</span><span class="p">(...)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>Compute time-of-flight by solving</p>
+<blockquote>
+<div><p>v·nabla T = phi</p>
+</div></blockquote>
+<p>using a first-order finite-volume method with upwind flux. Here, ‘v’ is
+the Darcy velocity, ‘phi’ is the porosity, and T is time-of-flight.
+The time-of-flight T(x) is the time it takes an inert particles that is
+passively advected with the fluid to travel from the nearest inflow
+point to the point ‘x’ inside the reservoir. For the computation to
+make sense, inflow points must be specified in terms of inflow
+boundaries, source terms, wells, or combinations of these.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>G</strong> – Grid structure.</p></li>
+<li><p><strong>rock</strong> – Rock data structure.
+Must contain a valid porosity field, ‘rock.poro’.</p></li>
+<li><p><strong>state</strong> – Reservoir state structure, must contain valid cell interface
+fluxes, ‘state.flux’. Typically, ‘state’ will contain the
+solution produced by a flow solver like ‘incompTPFA’.</p></li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>OPTIONAL PARAMETERS (supplied in ‘key’/value pairs):</dt><dd><dl>
+<dt>wells - Well structure as defined by function ‘addWell’.  May be empty</dt><dd><p>(i.e., wells = []) which is interpreted as a model without any
+wells.</p>
+</dd>
+<dt>src   - Explicit source contributions as defined by function</dt><dd><p>‘addSource’.  May be empty (i.e., src = []) which is
+interpreted as a reservoir model without explicit sources.</p>
+</dd>
+<dt>bc    - Boundary condition structure as defined by function ‘addBC’.</dt><dd><p>This structure accounts for all external boundary conditions
+to the reservoir flow.  May be empty (i.e., bc = []) which is
+interpreted as all external no-flow (homogeneous Neumann)
+conditions.</p>
+</dd>
+<dt>reverse - Boolean variable. If true, the reverse time-of-flight will be</dt><dd><p>computed, i.e., the travel time from a cell inside the
+reservoir to the nearest outflow point (well, source, or
+outflow boundary). Default: FALSE, i.e, compute forward tof.</p>
+</dd>
+<dt>tracer - Cell-array of cell-index vectors for which to solve a</dt><dd><p>stationary tracer equation:</p>
+<blockquote>
+<div><p>nabla·(v C) = 0,      C(inflow,t)=1</p>
+</div></blockquote>
+<p>One equation is solved for each vector with tracer injected in
+the cells with the given indices. Each vector adds one
+additional right-hand side to the original tof-system. Output
+given as additional columns in T.</p>
+</dd>
+<dt>computeWellTOFs - Boolean variable. If true, time-of-flight values are</dt><dd><p>computed individually for each influence region by solving
+equations of the form:</p>
+<blockquote>
+<div><p>nabla·(v C_i T) = phi C_i,    T(inflow)=0</p>
+</div></blockquote>
+<p>where C_i denotes the tracer concentration associated with each
+individual influence region</p>
+</dd>
+<dt>firstArrival - Boolean variable. If true, also compute the first-arrival</dt><dd><p>time by a graph algorithm (requires MATLAB R2015b or newer)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.computeWellPairs">
+<span class="sig-name descname"><span class="pre">computeWellPairs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">rock</span></em>, <em class="sig-param"><span class="pre">W</span></em>, <em class="sig-param"><span class="pre">D</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.computeWellPairs" title="Permalink to this definition"></a></dt>
+<dd><p>Compute volumes and fluxes associated with each flux pair</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">WP</span> <span class="p">=</span> <span class="n">computeWellPairs</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">rock</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> – Reservoir state</p></li>
+<li><p><strong>G</strong> – Grid structure.</p></li>
+<li><p><strong>rock</strong> – Rock data structure.
+Must contain a valid porosity field, ‘rock.poro’.</p></li>
+<li><p><strong>state</strong> – Reservoir and well solution structure either properly
+initialized from functions ‘initResSol’ and ‘initWellSol’
+respectively, or the results from a call to function
+‘solveIncompFlow’.  Must contain valid cell interface fluxes,
+‘state.flux’.</p></li>
+<li><p><strong>W</strong> – Well structure</p></li>
+<li><p><strong>D</strong> – Struct containing TOF and tracer
+See documentation of computeTOFandTracer</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><ul>
+<li><p><strong>WP</strong> – struct containing well-pair diagnostics
+‘pairs’   - list of well pairs (as text strings using well names)
+‘pairsIx’ - list of well pairs (indices in a N_pair x 2 list. Pair</p>
+<blockquote>
+<div><p>number i has injector pairsIx(i, 1) and producer
+pairsIx(i, 2)</p>
+</div></blockquote>
+<p>‘vols’    - pore volumes associated with each pair
+‘inj’     - list of structs containing allocation factors for the</p>
+<blockquote>
+<div><p>injectors</p>
+</div></blockquote>
+<dl class="simple">
+<dt>‘prod’    - list of structs containing allocation factors for the</dt><dd><p>producers</p>
+</dd>
+</dl>
+</li>
+<li><p><strong>The structs that contain flux allocation information consist of the</strong></p></li>
+<li><p><strong>following data objects</strong> –</p>
+<dl class="simple">
+<dt>‘alloc’   - nxm array, where n is the number of perforations in</dt><dd><p>this well and m is the number of wells or segments from
+the flow diagnostics computation that may potentially
+contribute to the flux allocation</p>
+</dd>
+<dt>‘ralloc’  - nx1 array containing the well flux that cannot be</dt><dd><p>attributed to one of the wells/segments accounted for
+in the flow diagnostics computatation</p>
+</dd>
+</dl>
+<p>‘z’       - nx1 array giving the depth of the completions
+‘name’    - string with the name of the well or segment</p>
+</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.estimateRTD">
+<span class="sig-name descname"><span class="pre">estimateRTD</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">pv</span></em>, <em class="sig-param"><span class="pre">D</span></em>, <em class="sig-param"><span class="pre">WP</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.estimateRTD" title="Permalink to this definition"></a></dt>
+<dd><p>Estimate residence time distributions based on computed tof-values</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">dist</span> <span class="p">=</span> <span class="n">estimateRTD</span><span class="p">(</span><span class="n">pv</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">WP</span><span class="p">,</span> <span class="s">&#39;pn1&#39;</span><span class="p">,</span> <span class="n">pv1</span><span class="p">,</span> <span class="p">...)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>This function estmates well-pair RTDs based on computed TOFs and tracer
+fields. The RDT approximates an imaginary tracer which ditributes equally
+among all phases (follows the total flux-field). A tracer pulse is
+injected at injector i at time zero and produced at producer p. The RTD
+is scaled such that</p>
+<blockquote>
+<div><p>RTD_{ip}(t) ~= (rate producer p / total tracer mass) * c_p(t),</p>
+</div></blockquote>
+<p>where c_p(t) is the tracer concentration in producer p.</p>
+<dl>
+<dt>With the above scaling the RTD has units [s]^-1</dt><dd><ul class="simple">
+<li><p>the integral of the RTD approximates fractional recovery</p></li>
+</ul>
+<blockquote>
+<div><p>(produced mass/injected mass)</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>the mean of the RTD time i-to-p allocation approximates the i-to-p
+allocation volume</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>dist</strong> – structure with fields
+pairIx            nreg x 2 each row index to injector/producer
+t                 nbin x 1 discrete times
+values            nbin x 1 discrete RTD-values
+volumes           nreg x 1 interaction volume for each well pair
+allocations       nreg x 1 interaction allocation for each well pair
+injectorFlux      ninj injector total rates
+producerFlux      nprod producer total rates</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>SEE ALSO</dt><dd><p>computeRTD</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.expandCoarseWellCompletions">
+<span class="sig-name descname"><span class="pre">expandCoarseWellCompletions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">xc</span></em>, <em class="sig-param"><span class="pre">WC</span></em>, <em class="sig-param"><span class="pre">Wdf</span></em>, <em class="sig-param"><span class="pre">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.expandCoarseWellCompletions" title="Permalink to this definition"></a></dt>
+<dd><p>Pseudo-wells for computing flow diagnostics in an upscaled model</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">xn</span><span class="p">,</span> <span class="n">Wn</span><span class="p">]</span> <span class="p">=</span> <span class="n">expandCoarseWellCompletions</span><span class="p">(</span><span class="n">xc</span><span class="p">,</span> <span class="n">Wc</span><span class="p">,</span> <span class="n">Wdf</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xc</strong> – Reservoir and well solution structure either properly
+initialized from functions ‘initResSol’ and ‘initWellSol’,
+respectively, or the results from a call to function
+‘solveIncompFlow’.  Must contain valid cell interface fluxes,
+‘state.flux’.</p></li>
+<li><p><strong>Wc</strong> – Well structure as defined by function ‘addWell’.</p></li>
+<li><p><strong>Wdf</strong> – Expanded well structure used for flow diagnostics computation in
+the underlying fine-scale model, typically the result of a call
+to ‘expandWellCompletions’.</p></li>
+<li><p><strong>p</strong> – partition vector describing the coarse-scale partition (i.e., the
+mapping from the fine grid to the coarse grid)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>Wn</strong> – Well structure containing the pseudo wells</p></li>
+<li><p><strong>xn</strong> – Reservoir and solution structure corresponding</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#diagnostics.utils.expandWellCompletions" title="diagnostics.utils.expandWellCompletions"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">expandWellCompletions</span></code></a>, <a class="reference internal" href="#diagnostics.utils.computeTOFandTracer" title="diagnostics.utils.computeTOFandTracer"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">computeTOFandTracer</span></code></a>, <a class="reference internal" href="#diagnostics.utils.computeWellPairs" title="diagnostics.utils.computeWellPairs"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">computeWellPairs</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.expandWellCompletions">
+<span class="sig-name descname"><span class="pre">expandWellCompletions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">W</span></em>, <em class="sig-param"><span class="pre">expansion</span></em>, <em class="sig-param"><span class="pre">split</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.expandWellCompletions" title="Permalink to this definition"></a></dt>
+<dd><p>Pseudo-wells for computation of flow diagnostics for completions</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">xn</span><span class="p">,</span> <span class="n">Wn</span><span class="p">]</span> <span class="p">=</span> <span class="n">expandWellCompletions</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>The routines in the flow diagnostic module compute time-of-flight,
+tracer partition, and well-pair information associated with the whole
+completion set of each individual well. To compute flow diagnostics for
+subsets of the well completion, the corresponding well must be replaced
+by a set of pseudo wells, one for each desired completion interval.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> – Reservoir and well solution structure either properly
+initialized from functions ‘initResSol’ and ‘initWellSol’,
+respectively, or the results from a call to function
+‘solveIncompFlow’.  Must contain valid cell interface fluxes,
+‘state.flux’.</p></li>
+<li><p><strong>W</strong> – Well structure as defined by function ‘addWell’.</p></li>
+<li><p><strong>expansion</strong> – <p>Either of two alternatives:</p>
+<ol class="loweralpha simple">
+<li><p>nx2 vector that specifies how to expand individual wells into a
+set of pseudo wells. That is, the completions of well number
+c(i,1) are assigned to c(i,2) bins using a load-balanced
+linear distribution and then the well is replaced with c(i,2)
+pseudo wells, one for each bin of completions.</p></li>
+<li><p>Cell array of length n. Entry number i in this cell array should be
+the same length as W(i).cells and contain the bins that will be
+used to expand the well.</p></li>
+</ol>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>Wn</strong> – Well structure containing the pseudo wells</p></li>
+<li><p><strong>xn</strong> – Reservoir and solution structure corresponding</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#diagnostics.utils.computeTOFandTracer" title="diagnostics.utils.computeTOFandTracer"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">computeTOFandTracer</span></code></a>, <a class="reference internal" href="#diagnostics.utils.computeWellPairs" title="diagnostics.utils.computeWellPairs"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">computeWellPairs</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.interactiveDiagnostics">
+<span class="sig-name descname"><span class="pre">interactiveDiagnostics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">rock</span></em>, <em class="sig-param"><span class="pre">W</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.interactiveDiagnostics" title="Permalink to this definition"></a></dt>
+<dd><p>Launch an interactive diagnostics session</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">interactiveDiagnostics</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">rock</span><span class="p">,</span> <span class="n">W</span><span class="p">);</span>
+<span class="n">interactiveDiagnostics</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">rock</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="s">&#39;state&#39;</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+<span class="n">interactiveDiagnostics</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">rock</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="s">&#39;state&#39;</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>This function launches an interactive session for doing flow
+diagnostics. The functionality differs slightly based on the input
+arguments given:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>If a dataset is given, this set of cellwise data will be available
+for visualization.</p></li>
+<li><p>If a state is given, this state will allow for visualization of
+the component ratios inside a drainage volume. The flux from this
+state can also be used to calculate time of flight if “computeFlux”
+is disabled, for instance if the user has some external means of
+computing fluxes.</p></li>
+</ul>
+</div></blockquote>
+<dl>
+<dt>Once the initialization is complete, two windows will be produced:</dt><dd><ul>
+<li><p>A plotting window, showing the reservoir along with the wells and
+visualized quantities. In the plotting window, it is possible to
+click wells to get additional information, such as the allocation
+factors per perforation in the well, the phase distribution grouped
+by time of flight and the corresponding pore volumes swept/drained.</p></li>
+<li><p>A controller window which is used to alter the state of the
+plotting window:</p>
+<p>1) Wells can be selected for display (if a well is selected, the
+corresponding drainage (producer) or flooding (injector) volumes
+will be visualized. A simple playback function can be used to show
+propagation of time of flight. Different quantities can be
+visualized to get a better understanding of the system.</p>
+<p>2) A set of buttons provide (experimental) well editing, access to
+visualization of the well pair connections, Phi/F diagram with
+Lorenz’ coefficient etc.</p>
+<p>3) A player controller (experimental), if a time-series of wells
+(and states) are supplied.</p>
+</li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>G</strong> – Valid grid structure.</p></li>
+<li><p><strong>rock</strong> – Rock with valid permeability and porosity fields.</p></li>
+<li><p><strong>W</strong> – A set of wells which are compatible with the incompTPFA solver.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>‘state’</strong> – Reservoir state containing fluid saturations and optionally
+flux and pressure (if ‘computeFlux’ is false)</p></li>
+<li><p><strong>‘computeGrid’</strong> – Use G for plotting, but computeGrid for computing
+time-of-flight, tracer partitions, etc.</p></li>
+<li><p><strong>‘tracerfluid’</strong> – Fluid used for tracer computation. This defaults to a
+trivial single-phase fluid.</p></li>
+<li><p><strong>‘fluid’</strong> – Fluid used for mobility calculations if ‘useMobilityArrival’
+is enabled.</p></li>
+<li><p><strong>‘LinSolve’</strong> – Linear solver for pressure systems. Defaults: mldivide</p></li>
+<li><p><strong>‘computeFlux’</strong> – If set to false, fluxes are extracted from the provided
+state keyword argument. This requires a state to be provided and
+can be used if the fluxes are computed externally (for instance
+from a expensive full-physics simulation)</p></li>
+<li><p><strong>‘useMobilityArrival’</strong> – If the well plot showing nearby saturations
+should plot mobility instead of saturations. This may be
+interesting in some cases because the mobile fluids are more likely
+to be extracted. However, this plot is often dominated by very
+mobile gas regions.</p></li>
+<li><p><strong>‘daspect’</strong> – Data aspect ratio, in a format understood by daspect()</p></li>
+<li><p><strong>‘name’</strong> – Name to use for windows</p></li>
+<li><p><strong>‘leaveOpenOnClose’</strong> – Default false. Leaves all figures open when closing
+the controller.</p></li>
+<li><p><strong>‘fastRotate’</strong> – Enables fast rotate if true, disables if false. Default
+is enabled for models with &gt; 50000 cells, disabled otherwise.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>Nothing. Creates two figures.</strong></p>
+</dd>
+</dl>
+<p class="rubric">Example:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">G</span> <span class="p">=</span> <span class="n">computeGeometry</span><span class="p">(</span><span class="n">cartGrid</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">]));</span>
+<span class="n">rock</span> <span class="p">=</span> <span class="nb">struct</span><span class="p">(</span><span class="s">&#39;poro&#39;</span><span class="p">,</span> <span class="nb">ones</span><span class="p">(</span><span class="n">G</span><span class="p">.</span><span class="n">cells</span><span class="p">.</span><span class="n">num</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s">&#39;perm&#39;</span><span class="p">,</span> <span class="nb">ones</span><span class="p">(</span><span class="n">G</span><span class="p">.</span><span class="n">cells</span><span class="p">.</span><span class="n">num</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">darcy</span><span class="p">)</span>
+
+<span class="n">W</span> <span class="p">=</span> <span class="n">verticalWell</span><span class="p">([],</span> <span class="n">G</span><span class="p">,</span> <span class="n">rock</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span> <span class="p">[],</span> <span class="s">&#39;Val&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">W</span> <span class="p">=</span> <span class="n">verticalWell</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">rock</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">10</span><span class="p">,</span> <span class="p">[],</span> <span class="s">&#39;Val&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">W</span> <span class="p">=</span> <span class="n">verticalWell</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">rock</span><span class="p">,</span>  <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[],</span> <span class="s">&#39;Val&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">W</span> <span class="p">=</span> <span class="n">verticalWell</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">rock</span><span class="p">,</span>  <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">[],</span> <span class="s">&#39;Val&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">W</span> <span class="p">=</span> <span class="n">verticalWell</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">rock</span><span class="p">,</span>  <span class="mi">5</span><span class="p">,</span>  <span class="mi">5</span><span class="p">,</span> <span class="p">[],</span> <span class="s">&#39;Val&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">interactiveDiagnostics</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">rock</span><span class="p">,</span> <span class="n">W</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref mat mat-func docutils literal notranslate"><span class="pre">Diagnostics</span></code> <code class="xref mat mat-func docutils literal notranslate"><span class="pre">examples</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.plotTOFArrival">
+<span class="sig-name descname"><span class="pre">plotTOFArrival</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">W</span></em>, <em class="sig-param"><span class="pre">pv</span></em>, <em class="sig-param"><span class="pre">fluid</span></em>, <em class="sig-param"><span class="pre">prod</span></em>, <em class="sig-param"><span class="pre">D</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.plotTOFArrival" title="Permalink to this definition"></a></dt>
+<dd><p>Undocumented Utility Function</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.plotTracerBlend">
+<span class="sig-name descname"><span class="pre">plotTracerBlend</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">partition</span></em>, <em class="sig-param"><span class="pre">maxconc</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.plotTracerBlend" title="Permalink to this definition"></a></dt>
+<dd><p>Visualise tracer partitions: gray regions are affected by multiple tracers</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span> <span class="n">plotTracerBlend</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">partition</span><span class="p">,</span> <span class="n">maxconc</span><span class="p">)</span>
+ <span class="n">plotTracerBlend</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">partition</span><span class="p">,</span> <span class="n">maxconc</span><span class="p">,</span> <span class="s">&#39;pn1&#39;</span><span class="p">,</span> <span class="n">pv1</span><span class="p">,</span> <span class="p">...)</span>
+
+<span class="n">h</span> <span class="p">=</span> <span class="n">plotTracerBlend</span><span class="p">(...)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>G</strong> – Grid structure partitioned by tracers.</p></li>
+<li><p><strong>partition</strong> – Tracer partition structure.  This is the field ‘.ppart’ (or
+‘.ipart’) of the diagnostics structure constructed by
+function ‘computeTOFandTracer’.  One non-negative
+(integral) value for each grid cell.</p></li>
+<li><p><strong>maxconc</strong> – Maximum tracer concentration.  One scalar value for each
+grid cell.  This value is typically MAX(D.ptracer, [], 2).</p></li>
+<li><p><strong>'pn'/pv</strong> – <p>List of ‘key’/value pairs defining optional parameters.
+The supported options are:</p>
+<blockquote>
+<div><ul>
+<li><p>p –
+Power by which to amplify smearing effects.  Note
+that the amplification power is applied to a
+decreasing function of concentration, so to highlight
+regions of smearing, small (but positive) powers
+should be used.  Using p = 0.2 works well in the case
+of secondary production on the Tarbert layers of
+SPE10.</p>
+<p>Default value: p = 1.  No special highlighting or
+amplification of smearing regions.</p>
+</li>
+<li><p>alpha –
+Alpha factor to modify colormap for tracer. The
+colormap is by default set to be from the colorcube
+function. By specifying a value 0&lt;alpha&lt;=1, you can
+blend these colors with white to brigthen the
+colormap.</p></li>
+<li><p>cells –
+List of cells as expected by plotCellData()</p></li>
+<li><p>cmap –
+Colormap. Defaults to colorcube</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>non</strong> (<span><code class="xref mat mat-obj docutils literal notranslate"><span class="pre">Any</span></code></span>) – matching parameter is passed through to plotCellData().</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>h</strong> – Patch handle as defined by function ‘plotCellData’.  Only returned
+if specifically requested.</p>
+</dd>
+</dl>
+<p class="rubric">Example:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">G</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">rock</span><span class="p">]</span> <span class="p">=</span> <span class="n">getSPE10setup</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">);</span>
+
+<span class="n">is_pos</span> <span class="p">=</span> <span class="n">rock</span><span class="p">.</span><span class="n">poro</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">rock</span><span class="p">.</span><span class="n">poro</span><span class="p">(</span><span class="o">~</span><span class="n">is_pos</span><span class="p">)</span> <span class="p">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">rock</span><span class="p">.</span><span class="n">poro</span><span class="p">(</span><span class="n">is_pos</span><span class="p">));</span>
+
+<span class="n">T</span> <span class="p">=</span> <span class="n">computeTrans</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">rock</span><span class="p">);</span>
+<span class="n">fluid</span> <span class="p">=</span> <span class="n">initSingleFluid</span><span class="p">(</span><span class="s">&#39;mu&#39;</span> <span class="p">,</span> <span class="mi">1</span><span class="o">*</span><span class="n">centi</span><span class="o">*</span><span class="n">poise</span><span class="p">,</span> <span class="p">...</span>
+                        <span class="s">&#39;rho&#39;</span><span class="p">,</span> <span class="mi">1000</span><span class="o">*</span><span class="n">kilogram</span><span class="o">/</span><span class="n">meter</span>^<span class="mi">3</span><span class="p">);</span>
+<span class="n">state</span> <span class="p">=</span> <span class="n">incompTPFA</span><span class="p">(</span><span class="n">initState</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">G</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">fluid</span><span class="p">,</span> <span class="s">&#39;wells&#39;</span><span class="p">,</span> <span class="n">W</span><span class="p">);</span>
+<span class="n">D</span> <span class="p">=</span> <span class="n">computeTOFandTracer</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">rock</span><span class="p">,</span> <span class="s">&#39;wells&#39;</span><span class="p">,</span> <span class="n">W</span><span class="p">);</span>
+
+<span class="n">plotTracerBlend</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">D</span><span class="p">.</span><span class="n">ppart</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">D</span><span class="p">.</span><span class="n">ptracer</span><span class="p">,</span> <span class="p">[],</span> <span class="mi">2</span><span class="p">))</span>
+
+<span class="nb">axis</span> <span class="n">equal</span> <span class="n">tight</span> <span class="n">off</span><span class="p">,</span> <span class="k">set</span><span class="p">(</span><span class="nb">gca</span><span class="p">,</span> <span class="s">&#39;DataAspectRatio&#39;</span><span class="p">,</span> <span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span> <span class="p">])</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#diagnostics.utils.computeTOFandTracer" title="diagnostics.utils.computeTOFandTracer"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">computeTOFandTracer</span></code></a>, <a class="reference internal" href="core.html#core.plotting.plotCellData" title="core.plotting.plotCellData"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">plotCellData</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.plotWellAllocationComparison">
+<span class="sig-name descname"><span class="pre">plotWellAllocationComparison</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">D1</span></em>, <em class="sig-param"><span class="pre">WP1</span></em>, <em class="sig-param"><span class="pre">D2</span></em>, <em class="sig-param"><span class="pre">WP2</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.plotWellAllocationComparison" title="Permalink to this definition"></a></dt>
+<dd><p>Plot a panel comparing well-allocation from models with different resolution</p>
+<dl class="simple">
+<dt>SYNOPSIS</dt><dd><p>plotWellAllocationComparision(D1, WP1, D2, WP2)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>D1</strong> – data structure with basic data for flow diagnostics computed
+by a call to ‘computeTOFandTracer’ for model 1 and model 2</p></li>
+<li><p><strong>D2</strong> – data structure with basic data for flow diagnostics computed
+by a call to ‘computeTOFandTracer’ for model 1 and model 2</p></li>
+<li><p><strong>WP1</strong> – data structure containing information about well pairs,
+computed by a call to ‘computeWellPairs’</p></li>
+<li><p><strong>WP2</strong> – data structure containing information about well pairs,
+computed by a call to ‘computeWellPairs’</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Description:</p>
+<p>The routine makes a bar plot for each well segment that is represented
+in the input data D/WP. (There is no check that the well segments in
+D1 and D2 are the same). For injection wells, the bars represent
+the cumulative outfluxes, from the bottom to the top of the segment,
+that have been attributed to the different producers. The bars are
+shown in color for model 1, with a unique color representing each of
+the segments of the producers,  and in solid black lines for model 2.
+For the production wells, the bars represent influxes that can be
+attributed to different injector segments. If the two models predict
+the same flux allocation, the color bars and the solid lines should be
+matching.</p>
+<p>If D2 and WP2 are empty, a graph is produced that shows the well
+allocation for the wells in WP1.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#diagnostics.utils.computeTOFandTracer" title="diagnostics.utils.computeTOFandTracer"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">computeTOFandTracer</span></code></a>, <code class="xref mat mat-func docutils literal notranslate"><span class="pre">computeWellParis</span></code>, <a class="reference internal" href="#diagnostics.utils.expandWellCompletions" title="diagnostics.utils.expandWellCompletions"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">expandWellCompletions</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.plotWellAllocationPanel">
+<span class="sig-name descname"><span class="pre">plotWellAllocationPanel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">D</span></em>, <em class="sig-param"><span class="pre">WP</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.plotWellAllocationPanel" title="Permalink to this definition"></a></dt>
+<dd><p>Plot a panel comparing well-allocation from models with different resolution</p>
+<dl class="simple">
+<dt>SYNOPSIS</dt><dd><p>plotWellAllocationPanel(D, WP)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>D</strong> – data structure with basic data for flow diagnostics computed
+by a call to ‘computeTOFandTracer’</p></li>
+<li><p><strong>WP</strong> – data structure containing information about well pairs,
+computed by a call to ‘computeWellPairs’</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Description:</p>
+<p>The routine makes a bar plot for each well segment that is represented
+in the input data D/WP.  For injection wells, the bars represent
+the cumulative outfluxes, from the bottom to the top of the segment,
+that have been attributed to the different producers. The bars are
+shown in color with a unique color representing each of
+the segments of the producers.
+For the production wells, the bars represent influxes that can be
+attributed to different injector segments.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#diagnostics.utils.computeTOFandTracer" title="diagnostics.utils.computeTOFandTracer"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">computeTOFandTracer</span></code></a>, <a class="reference internal" href="#diagnostics.utils.computeWellPairs" title="diagnostics.utils.computeWellPairs"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">computeWellPairs</span></code></a>, <a class="reference internal" href="#diagnostics.utils.expandWellCompletions" title="diagnostics.utils.expandWellCompletions"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">expandWellCompletions</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.plotWellPairConnections">
+<span class="sig-name descname"><span class="pre">plotWellPairConnections</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">WP</span></em>, <em class="sig-param"><span class="pre">D</span></em>, <em class="sig-param"><span class="pre">W</span></em>, <em class="sig-param"><span class="pre">pv</span></em>, <em class="sig-param"><span class="pre">minAlloc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.plotWellPairConnections" title="Permalink to this definition"></a></dt>
+<dd><p>Plot lines between wells to show relative flux allocation</p>
+<dl class="simple">
+<dt>SYNOPSIS</dt><dd><p>plotWellPairConnections(G, WP, D, W, pv)
+plotWellPairConnections(G, WP, D, W, pv, mA)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>G</strong> – Grid structure.</p></li>
+<li><p><strong>WP</strong> – data structure containing information about well pairs,
+computed by a call to ‘computeWellPairs’</p></li>
+<li><p><strong>D</strong> – data structure with basic data for flow diagnostics computed
+by a call to ‘computeTOFandTracer’</p></li>
+<li><p><strong>W</strong> – Well structure as defined by function ‘addWell’.</p></li>
+<li><p><strong>pv</strong> – vector with pore volume as computed by ‘poreVolume(G,rock)’</p></li>
+<li><p><strong>mA</strong> – disregard connections with relative allocation below mA</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Description:</p>
+<p>The routine makes a curved line between each well pair, where the
+thickness of the line is proportional to the relative flux allocation
+for this pair.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#diagnostics.utils.computeTOFandTracer" title="diagnostics.utils.computeTOFandTracer"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">computeTOFandTracer</span></code></a>, <a class="reference internal" href="#diagnostics.utils.computeWellPairs" title="diagnostics.utils.computeWellPairs"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">computeWellPairs</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.selectTOFRegion">
+<span class="sig-name descname"><span class="pre">selectTOFRegion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">D</span></em>, <em class="sig-param"><span class="pre">max_tof</span></em>, <em class="sig-param"><span class="pre">min_tof</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.selectTOFRegion" title="Permalink to this definition"></a></dt>
+<dd><p>Select a subset of cells based on TOF criteria</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">selectTOFRegion</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">max_tof</span><span class="p">,</span> <span class="n">min_tof</span><span class="p">,</span> <span class="p">...);</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>Selects a subset of a grid based on TOF information and selection
+criteria.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>D</strong> – Time of flight object computed by computeTOFandTracer.</p></li>
+<li><p><strong>max_tof</strong> – All TOF-regions higher than this will be discarded.</p></li>
+<li><p><strong>min_tof</strong> – All TOF-regions less than this will be discarded.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>‘drain_wells’</strong> – List of draining (production) wells to consider.
+Other wells will be ignored</p></li>
+<li><p><strong>‘flood_wells’</strong> – List of flooding (injecting) wells to consider.
+Other wells will be ignored</p></li>
+<li><p><strong>‘set_op’</strong> – Operation op to perform, so that the computed
+selection is op(flood, drain) where flood and drain
+are the flooding and drainage volumes,
+respectively.</p></li>
+<li><p><strong>‘near_well_max_tof’</strong> – Threshold for near well regions to include.
+Set to zero to disable including near-well
+regions.</p></li>
+<li><p><strong>‘psubset’</strong> – User specified draining / production region to
+consider. When this is enabled, max_tof and min_tof
+will not be used to find the selected drainage region.</p></li>
+<li><p><strong>‘isubset’</strong> – User specified flooding / injection region to consider.
+When this is enabled, max_tof and min_tof will not be
+used to find the selected flooding region.</p></li>
+<li><p><strong>‘tracer_threshold’</strong> – Tracer-value threshold for including in
+region. For ‘intersection’, threshold applies to product
+of inj/prod tracers. Default value: 0.05;</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>A list of cell indices</strong></p>
+</dd>
+</dl>
+<p>EXAMPLE:</p>
+<p>SEE ALSO:</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.validateStateForDiagnostics">
+<span class="sig-name descname"><span class="pre">validateStateForDiagnostics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">state</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.validateStateForDiagnostics" title="Permalink to this definition"></a></dt>
+<dd><p>Validate and fix state for flow diagnostics</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="p">=</span> <span class="n">validateStateForDiagnostics</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>Routine for ensuring that states are suitable for diagnostic routines.
+Not all solvers produce the “flux” fields directly, but may instead
+give component fluxes that must be combined to form the flux. This
+routine will, if possible, ensure that flux exists in the state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>state</strong> – State produced by one of MRST’s solvers.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>state</strong> – State with flux at wellSol and interfaces, if possible.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This routine will throw an error if there is insufficient data to
+produce the correct fields.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#diagnostics.utils.computeTOFandTracer" title="diagnostics.utils.computeTOFandTracer"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">computeTOFandTracer</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<span class="target" id="module-diagnostics.utils.optimization"></span><dl class="mat script">
+<dt class="sig sig-object mat" id="diagnostics.utils.optimization.Contents">
+<span class="sig-name descname"><span class="pre">Contents</span></span><a class="headerlink" href="#diagnostics.utils.optimization.Contents" title="Permalink to this definition"></a></dt>
+<dd><p>OPTIMIZATION</p>
+<dl class="simple">
+<dt>Files</dt><dd><p>argmaxCubic                      - find max of cubic polynom through p1, p2
+computeDefaultBasis              - Undocumented Utility Function
+control2well                     - Update val-fields of W from controls u
+evalObjectiveDiagnostics         - Undocumented Utility Function
+getObjectiveDiagnostics          - Get an objective function for the diagnostics optimization routines
+lineSearch                       - lineSearch – helper function which performs line search based on
+linsolveWithTimings              - Undocumented Utility Function
+optimizeDiagnosticsBFGS          - Optimize well rates/bhps to minimize/maximize objective
+optimizeTOF                      - Optimize well rates based on diagnostics-based objective function
+optimizeWellPlacementDiagnostics - Optimize the placement of wells using flow diagnostics
+plotWellRates                    - Simple utility for plotting well rates. Used by optimizeTOF.
+plotWellsPrint                   - Plots wells as simple colored circles. Helper for diagnostics examples.
+solveStationaryPressure          - Solve incompressible, stationary pressure without gravity with optional TOF output
+SolveTOFEqsADI                   - Solve the time of flight equations for solveStationaryPressure.
+tofRobustFix                     - Presently does nothing. Can be overriden if needed.
+unitBoxBFGS                      - Undocumented Utility Function
+well2control                     - Produce control vector u from target-wells</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.optimization.SolveTOFEqsADI">
+<span class="sig-name descname"><span class="pre">SolveTOFEqsADI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">eqs</span></em>, <em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">W</span></em>, <em class="sig-param"><span class="pre">computeTracer</span></em>, <em class="sig-param"><span class="pre">linsolve</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.optimization.SolveTOFEqsADI" title="Permalink to this definition"></a></dt>
+<dd><p>Solve the time of flight equations for solveStationaryPressure.</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="p">=</span> <span class="n">SolveTOFEqsADI</span><span class="p">(</span><span class="n">eqs</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="nb">true</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>Solves tof/tracer problems efficiently for solveStationaryPressure.
+This function is primarily meant to be called from other functions and
+the interface reflects this. For a more general time of flight solver,
+see computeTOFandTracer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>eqs</strong> – Residual equations for pressure, time of flight and tracer.</p></li>
+<li><p><strong>state</strong> – Reservoir state</p></li>
+<li><p><strong>W</strong> – The wells for which tracers are to be computed.</p></li>
+<li><p><strong>computeTracer</strong> – Boolean indicating if tracers are required.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>D</strong> – Time of flight / tracer structure.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.optimization.computeDefaultBasis">
+<span class="sig-name descname"><span class="pre">computeDefaultBasis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">basis</span></em>, <em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">system</span></em>, <em class="sig-param"><span class="pre">W</span></em>, <em class="sig-param"><span class="pre">fluid</span></em>, <em class="sig-param"><span class="pre">pv</span></em>, <em class="sig-param"><span class="pre">T</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.optimization.computeDefaultBasis" title="Permalink to this definition"></a></dt>
+<dd><p>Undocumented Utility Function</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.optimization.control2well">
+<span class="sig-name descname"><span class="pre">control2well</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">u</span></em>, <em class="sig-param"><span class="pre">W</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.optimization.control2well" title="Permalink to this definition"></a></dt>
+<dd><p>Update val-fields of W from controls u
+If scaling is supplied, u is assumed to be scaled control s.t. 0&lt;=u&lt;=1
+according to scaling.boxLims</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.optimization.evalObjectiveDiagnostics">
+<span class="sig-name descname"><span class="pre">evalObjectiveDiagnostics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">u</span></em>, <em class="sig-param"><span class="pre">obj</span></em>, <em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">system</span></em>, <em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">fluid</span></em>, <em class="sig-param"><span class="pre">pv</span></em>, <em class="sig-param"><span class="pre">T</span></em>, <em class="sig-param"><span class="pre">W</span></em>, <em class="sig-param"><span class="pre">scaling</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.optimization.evalObjectiveDiagnostics" title="Permalink to this definition"></a></dt>
+<dd><p>Undocumented Utility Function</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.optimization.getObjectiveDiagnostics">
+<span class="sig-name descname"><span class="pre">getObjectiveDiagnostics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">rock</span></em>, <em class="sig-param"><span class="pre">type</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.optimization.getObjectiveDiagnostics" title="Permalink to this definition"></a></dt>
+<dd><p>Get an objective function for the diagnostics optimization routines</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span> <span class="p">=</span> <span class="n">getObjectiveDiagnostics</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">rock</span><span class="p">,</span> <span class="s">&#39;minlorenz&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>DESCRIPTION:
+This function produces a function handle that is a realization of some
+objective function based on quantities used in flow diagnostics, that is:</p>
+<blockquote>
+<div><blockquote>
+<div><ul class="simple">
+<li><p>Pressure</p></li>
+<li><p>Reservoir fluxes</p></li>
+<li><p>Well fluxes and bottom hole pressure</p></li>
+<li><p>Forward / backward time of flight</p></li>
+<li><p>Well tracers (production / injection are treated seperately)</p></li>
+</ul>
+</div></blockquote>
+<p>The returned function handle will accept input in the form</p>
+<blockquote>
+<div><p>value = obj(state, D)</p>
+</div></blockquote>
+<p>where state is the reservoir state and D the flow diagnostics object
+containing time of flight and tracer values. The ‘D’ struct can be
+returned from solveStationaryPressure or computeTOFandTracer and the
+state may come from any pressure solver contained in MRST. Most of the
+optimization routines get both these quantities from
+solveStationaryPressure, which is the recommended way of evaluating the
+objective functions if gradients are required.</p>
+<p>The value return will be an instance of the ADI class and contains both
+the objective function value as well as gradients with respect to time
+of flight etc. The treatment is consistent with the ordering used in
+solveStationaryPressure.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>G</strong> – The grid which will be used to evaluate the objective function</p></li>
+<li><p><strong>rock</strong> – Rock with valid &lt;poro&gt; field containing the porosity. Several of
+the included objective functions use the pore volumes.</p></li>
+<li><p><strong>type</strong> – <p>Either:</p>
+<blockquote>
+<div><p>A string indicating the type of objective functions. Currently the
+available functions include,
+‘minlorenz’ - Minimize the Lorenz’ coefficient,</p>
+<p>or</p>
+<p>A function handle which accepts a single struct argument
+containing the fields</p>
+<blockquote>
+<div><p>’pressure’:    Reservoir pressure
+‘state’:       Full reservoir state
+‘pv’ :         Pore volume
+‘fluxes’:      Well fluxes
+‘bhp’:         Well bottom hole pressures
+‘forward_tof’: Time of flight originating from injectors
+‘backward_tof’:Time of flight originating from producers</p>
+</div></blockquote>
+</div></blockquote>
+<p>This option is primarily intended for rapid experimentation, i.e.
+allowing someone who knows what they are doing to define
+objective functions on the fly in the form</p>
+<p>tmp = &#64;(packed) sqrt(sum(packed.forward_tof.^2))</p>
+<p>obj = getObjectiveDiagnostics(G, rock, tmp)</p>
+<p>which would make obj an objective function that is now the norm
+of the forward time of flight, and can be used to optimize well
+rates and placement.</p>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>Any optional parameters are passed onto the objective function.</strong></p></li>
+<li><p><strong>Different objective functions handle different parameters.</strong></p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>obj</strong> – Function handle accepting state and D struct.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.optimization.linsolveWithTimings">
+<span class="sig-name descname"><span class="pre">linsolveWithTimings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">A</span></em>, <em class="sig-param"><span class="pre">x</span></em>, <em class="sig-param"><span class="pre">linsolve</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.optimization.linsolveWithTimings" title="Permalink to this definition"></a></dt>
+<dd><p>Undocumented Utility Function</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.optimization.optimizeDiagnosticsBFGS">
+<span class="sig-name descname"><span class="pre">optimizeDiagnosticsBFGS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">W</span></em>, <em class="sig-param"><span class="pre">fluid</span></em>, <em class="sig-param"><span class="pre">pv</span></em>, <em class="sig-param"><span class="pre">T</span></em>, <em class="sig-param"><span class="pre">s</span></em>, <em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">boxLims</span></em>, <em class="sig-param"><span class="pre">objective</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.optimization.optimizeDiagnosticsBFGS" title="Permalink to this definition"></a></dt>
+<dd><p>Optimize well rates/bhps to minimize/maximize objective</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">W_best</span><span class="p">,</span> <span class="n">D_init</span><span class="p">,</span> <span class="n">D_best</span><span class="p">]</span> <span class="p">=</span> <span class="n">optimizeDiagnosticsBFGS</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">fluid</span><span class="p">,</span> <span class="n">pv</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">minRate</span><span class="p">,</span> <span class="n">objective</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>Optimizes well rates/bhps as defined in W. The optimization process is based
+on BFGS where the search direction is projected onto the feasible domain
+as given by boxLims (upper/lower value for each control).</p>
+<ul class="simple">
+<li><p>boxLims must be supplied for all target wells.</p></li>
+</ul>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>G</strong> – Valid grid structure.</p></li>
+<li><p><strong>W</strong> – Well configuration suitable for AD-solvers.</p></li>
+<li><p><strong>fluid</strong> – AD-fluid, for instance defined by initSimpleADIFluid. This is
+used to evalute relperm / viscosity when calculating fluxes.</p></li>
+<li><p><strong>pv</strong> – Pore volume. Typicall output from poreVolume(G, rock).</p></li>
+<li><p><strong>s</strong> – AD system. See initADISystem.</p></li>
+<li><p><strong>state</strong> – Reservoir state as defined by initResSol.</p></li>
+<li><p><strong>boxLims</strong> – Lower and upper limit for each target well</p></li>
+<li><p><strong>objective</strong> – Objective function handle. Should have the interface
+&#64;(state, D) where D is a diagnostics object (see
+computeTOFandTracer for the expected fields) and return a
+single numerical value along with its Jacobian. See
+getObjectiveDiagnostics for examples.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul>
+<li><p><strong>maxiter</strong> – Maximum number of attempts to find an improvement. If maxiter
+successive evaluations fail to improve upon the last optimum,
+the function returns.</p></li>
+<li><p><strong>alpha</strong> – Adjustment for scaling the initial relaxation factor in the
+optimization algorithm. This can improve convergence if the
+problem if chosen wisely, but the default is fairly robust
+since it is based on the magnitude of the initial objective as
+well as the gradients of the well at i = 0.</p></li>
+<li><p><strong>targets</strong> – Index into W argument of wells that are to be optimized. They
+<em>must</em> all be initially the same type (i.e. producers /
+injectors) and they should be rate controlled. This defaults
+to all injectors with rate controls.</p></li>
+<li><p><strong>deltatol</strong> – Termination criterion. If the relative change between
+iterations falls below this number, the function returns. For
+instance, if deltatol is 0.05, if the relative change between
+evaluations is less than 5% in absolute value, the iteration
+completes.</p></li>
+<li><p><strong>plotProgress</strong> – Plots the well rates and function evaluations during the
+well optimization process.</p></li>
+<li><p><strong>verbose</strong> – Controls the amount of output produced by the routine.</p></li>
+<li><p><strong>linsolve</strong> – The linear solver used to solve the elliptic pressure
+systems during the optimization with a interface on the form
+&#64;(A, b) for the linear system Ax=b. Fast multigrid or
+multiscale methods will significantly improve upon the
+solution speed for larger problems.</p></li>
+<li><p><strong>alphamod</strong> – The modifier used to adjust alpha during the process. If a
+step is unsuccessful,</p>
+<blockquote>
+<div><p>alpha &lt;- alpha/alphamod</p>
+</div></blockquote>
+<p>and the step is retried. If a step is successful, the next
+initial alpha is set to</p>
+<blockquote>
+<div><p>alpha &lt;- alpha*alphamod.</p>
+</div></blockquote>
+</li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><ul>
+<li><p><strong>D_best</strong> – The flow diagnostics object corresponding to the best
+evaluated well configuration.</p></li>
+<li><p><strong>W_best</strong> – The best well configuration</p></li>
+<li><p><strong>history</strong> – A struct containing the optimization history in the fields:
+D - Diagnostic objects for all steps that reduced the
+objective function.</p>
+<dl class="simple">
+<dt>values - Values per target well. One row per element in</dt><dd><p>the D array.</p>
+</dd>
+<dt>gradient - One gradient per diagnostics object. The</dt><dd><p>objective function value for step i can be
+found at history.gradient(1).objective.val.</p>
+</dd>
+<dt>iterations - Iteration per step required to improve</dt><dd><p>upon the previous minimum.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.optimization.optimizeTOF">
+<span class="sig-name descname"><span class="pre">optimizeTOF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">W</span></em>, <em class="sig-param"><span class="pre">fluid</span></em>, <em class="sig-param"><span class="pre">pv</span></em>, <em class="sig-param"><span class="pre">T</span></em>, <em class="sig-param"><span class="pre">op</span></em>, <em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">minRates</span></em>, <em class="sig-param"><span class="pre">objective</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.optimization.optimizeTOF" title="Permalink to this definition"></a></dt>
+<dd><p>Optimize well rates based on diagnostics-based objective function</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">D_best</span><span class="p">,</span> <span class="n">W_best</span><span class="p">,</span> <span class="n">history</span><span class="p">]</span> <span class="p">=</span> <span class="n">optimizeTOF</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">fluid</span><span class="p">,</span> <span class="n">pv</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">minRate</span><span class="p">,</span> <span class="n">objective</span><span class="p">)</span>
+<span class="p">[</span><span class="n">D_best</span><span class="p">,</span> <span class="n">W_best</span><span class="p">,</span> <span class="n">history</span><span class="p">]</span> <span class="p">=</span> <span class="n">optimizeTOF</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">fluid</span><span class="p">,</span> <span class="n">pv</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">minRate</span><span class="p">,</span> <span class="n">objective</span><span class="p">,</span> <span class="s">&#39;targets&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>Optimizes well rates. The optimization process is based on steepest
+descent given a gradient, and uses the following constraints to perform
+the optimization:</p>
+<ul class="simple">
+<li><p>Sum of rates of the targets are constant, i.e. the total</p></li>
+</ul>
+<p>injected/produced volume of the targets remains constant throughout the
+optimization.</p>
+<ul class="simple">
+<li><p>All target wells must have a minimum rate which ensures that they do</p></li>
+</ul>
+<p>not change from injectors to producers during the optimization process.
+This can be specified for all wells simultanously, or well specific
+limits can be provided.</p>
+<p>The progress of the optimization can be visualized during the process
+(see optional parameters below)</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>G</strong> – Valid grid structure.</p></li>
+<li><p><strong>W</strong> – Well configuration suitable for AD-solvers.</p></li>
+<li><p><strong>fluid</strong> – AD-fluid, for instance defined by initSimpleADIFluid. This is
+used to evalute relperm / viscosity when calculating fluxes.</p></li>
+<li><p><strong>pv</strong> – Pore volume. Typicall output from poreVolume(G, rock).</p></li>
+<li><p><strong>op</strong> – Operators from setupOperatorsTPFA</p></li>
+<li><p><strong>state</strong> – Reservoir state as defined by initResSol.</p></li>
+<li><p><strong>minRates</strong> – Either a single value for the minimum well rate, or a value
+per target well (see ‘targets’ keyword)</p></li>
+<li><p><strong>objective</strong> – Objective function handle. Should have the interface
+&#64;(state, D) where D is a diagnostics object (see
+computeTOFandTracer for the expected fields) and return a
+single numerical value along with its Jacobian. See
+getObjectiveDiagnostics for examples.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul>
+<li><p><strong>maxiter</strong> – Maximum number of attempts to find an improvement. If maxiter
+successive evaluations fail to improve upon the last optimum,
+the function returns.</p></li>
+<li><p><strong>alpha</strong> – Adjustment for scaling the initial relaxation factor in the
+optimization algorithm. This can improve convergence if the
+problem if chosen wisely, but the default is fairly robust
+since it is based on the magnitude of the initial objective as
+well as the gradients of the well at i = 0.</p></li>
+<li><p><strong>targets</strong> – Index into W argument of wells that are to be optimized. They
+<em>must</em> all be initially the same type (i.e. producers /
+injectors) and they should be rate controlled. This defaults
+to all injectors with rate controls.</p></li>
+<li><p><strong>deltatol</strong> – Termination criterion. If the relative change between
+iterations falls below this number, the function returns. For
+instance, if deltatol is 0.05, if the relative change between
+evaluations is less than 5% in absolute value, the iteration
+completes.</p></li>
+<li><p><strong>plotProgress</strong> – Plots the well rates and function evaluations during the
+well optimization process.</p></li>
+<li><p><strong>verbose</strong> – Controls the amount of output produced by the routine.</p></li>
+<li><p><strong>linsolve</strong> – The linear solver used to solve the elliptic pressure
+systems during the optimization with a interface on the form
+&#64;(A, b) for the linear system Ax=b. Fast multigrid or
+multiscale methods will significantly improve upon the
+solution speed for larger problems.</p></li>
+<li><p><strong>alphamod</strong> – The modifier used to adjust alpha during the process. If a
+step is unsuccessful,</p>
+<blockquote>
+<div><p>alpha &lt;- alpha/alphamod</p>
+</div></blockquote>
+<p>and the step is retried. If a step is successful, the next
+initial alpha is set to</p>
+<blockquote>
+<div><p>alpha &lt;- alpha*alphamod.</p>
+</div></blockquote>
+</li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><ul>
+<li><p><strong>D_best</strong> – The flow diagnostics object corresponding to the best
+evaluated well configuration.</p></li>
+<li><p><strong>W_best</strong> – The best well configuration</p></li>
+<li><p><strong>history</strong> – A struct containing the optimization history in the fields:
+D - Diagnostic objects for all steps that reduced the
+objective function.</p>
+<dl class="simple">
+<dt>values - Values per target well. One row per element in</dt><dd><p>the D array.</p>
+</dd>
+<dt>gradient - One gradient per diagnostics object. The</dt><dd><p>objective function value for step i can be
+found at history.gradient(1).objective.val.</p>
+</dd>
+<dt>iterations - Iteration per step required to improve</dt><dd><p>upon the previous minimum.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.optimization.optimizeWellPlacementDiagnostics">
+<span class="sig-name descname"><span class="pre">optimizeWellPlacementDiagnostics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">W</span></em>, <em class="sig-param"><span class="pre">rock</span></em>, <em class="sig-param"><span class="pre">objective</span></em>, <em class="sig-param"><span class="pre">targetWells</span></em>, <em class="sig-param"><span class="pre">D</span></em>, <em class="sig-param"><span class="pre">wlimit</span></em>, <em class="sig-param"><span class="pre">state0</span></em>, <em class="sig-param"><span class="pre">fluid_ad</span></em>, <em class="sig-param"><span class="pre">pv</span></em>, <em class="sig-param"><span class="pre">T</span></em>, <em class="sig-param"><span class="pre">s</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.optimization.optimizeWellPlacementDiagnostics" title="Permalink to this definition"></a></dt>
+<dd><p>Optimize the placement of wells using flow diagnostics</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">W</span> <span class="p">=</span> <span class="n">optimizeWellPlacementDiagnostics</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">rock</span><span class="p">,</span> <span class="n">objective</span><span class="p">,</span> <span class="n">targetWells</span><span class="p">,...</span>
+                                       <span class="n">D</span><span class="p">,</span> <span class="n">wlimit</span><span class="p">,</span> <span class="n">state0</span><span class="p">,</span> <span class="n">fluid_ad</span><span class="p">,</span> <span class="n">pv</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>This function optimizes the controls of some set of wells using
+fast-to-evalute diagnostic proxy models.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>G</strong> – Grid structure.</p></li>
+<li><p><strong>W</strong> – Well structured as defined by addWell.</p></li>
+<li><p><strong>rock</strong> – Rock with valied perm field. Used to calculate well indices
+for new well positions.</p></li>
+<li><p><strong>objective</strong> – Objective function as defined by getObjectiveDiagnostics.</p></li>
+<li><p><strong>targetWells</strong> – Indices into W indicating which wells are to be optimized.
+If the rates <em>and</em> placement are to be optimized, all
+targets must be of the same kind (i.e. all injectors or
+producers) as the algorithm assumes that the total injected
+fluid is constant.</p></li>
+<li><p><strong>D</strong> – Struct of diagnostics quantities. Unused.</p></li>
+<li><p><strong>wlimit</strong> – Well limits.- Passed onto optimizeTOF if optimizeSubsteps
+is enabled.</p></li>
+<li><p><strong>state0</strong> – Initial state as defined by for example initResSol.</p></li>
+<li><p><strong>fluid_ad</strong> – Valid ad_fluid. See initSimpleADIFluid.</p></li>
+<li><p><strong>pv</strong> – Pore volume.</p></li>
+<li><p><strong>T</strong> – Half-transmissibilities as produced by computeTrans.</p></li>
+<li><p><strong>s</strong> – AD system. See initADISystem.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>maxIter</strong> – Maximum outer iterations. An outer iteration does a single
+pass over all wells, moving them until they improve the
+solution or they reach the wellSteps constraint.</p></li>
+<li><p><strong>optimizeSubsteps</strong> – Optimize the rates of the wells after each placement.
+This may increase the complexity <em>substatially</em>!</p></li>
+<li><p><strong>searchRadius</strong> – How large logical region should be used to evaluate
+candidate wells. The larger the region, the faster
+the convergence for simple cases, but at the same
+time the optimization assumptions may be less valid
+the further away from current wells a ghost well is
+moved. Should be carefully adjusted.</p></li>
+<li><p><strong>searchIncrement</strong> – How many ghost wells should be placed? As adding
+wells is a bit costly, this allows coarser grained
+ghost well placement inside the searchRadius. If the
+search radius is 10 in each ij-direction and
+searchIncrement is set to 5, 4*4 = 16 ghost wells
+will be equally spaced.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>W</strong> – Optimized wells.</p></li>
+<li><p><strong>wellHistory</strong> – numel(W) long array containing the visitation history of
+each well for plotting or debugging.</p></li>
+<li><p><strong>history</strong> – Optimization history (if optimizeSubsteps is active). One
+entry per optimization leading to improvement.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.optimization.plotWellRates">
+<span class="sig-name descname"><span class="pre">plotWellRates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">W</span></em>, <em class="sig-param"><span class="pre">data</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.optimization.plotWellRates" title="Permalink to this definition"></a></dt>
+<dd><p>Simple utility for plotting well rates. Used by optimizeTOF.</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.optimization.plotWellsPrint">
+<span class="sig-name descname"><span class="pre">plotWellsPrint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">W</span></em>, <em class="sig-param"><span class="pre">D</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.optimization.plotWellsPrint" title="Permalink to this definition"></a></dt>
+<dd><p>Plots wells as simple colored circles. Helper for diagnostics examples.</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.optimization.solveStationaryPressure">
+<span class="sig-name descname"><span class="pre">solveStationaryPressure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">operators</span></em>, <em class="sig-param"><span class="pre">W</span></em>, <em class="sig-param"><span class="pre">fluid</span></em>, <em class="sig-param"><span class="pre">pv</span></em>, <em class="sig-param"><span class="pre">T</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.optimization.solveStationaryPressure" title="Permalink to this definition"></a></dt>
+<dd><p>Solve incompressible, stationary pressure without gravity with optional TOF output</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="c">% Compute pressure</span>
+<span class="n">state</span> <span class="p">=</span> <span class="n">solveStationaryPressure</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">ops</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">pv</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+
+<span class="c">% Compute pressure and time of flight / well tracers</span>
+<span class="p">[</span><span class="n">state</span><span class="p">,</span> <span class="n">D</span><span class="p">]</span> <span class="p">=</span> <span class="n">solveStationaryPressure</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">ops</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">pv</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+
+<span class="c">% Compute pressure, tof/tracer and the well control gradients wrt some</span>
+<span class="n">objective</span> <span class="k">function</span>
+<span class="p">[</span><span class="n">state</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">grad</span><span class="p">]</span> <span class="p">=</span> <span class="n">solveStationaryPressure</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">ops</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">pv</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="s">&#39;objective&#39;</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>This function is the primary solver for several optimization routines in
+the diagnostics module. It serves as a convenient pressure solver, time
+of flight / tracer solver and gradient evaluator rolled up in one. The
+functionality provided and computational complexity depends on the
+output arguments.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>G</strong> – Grid structure.</p></li>
+<li><p><strong>state</strong> – Reservoir and well solution structure either properly
+initialized from functions ‘initResSol’ and ‘initWellSol’
+respectively, or the results from a previous call to function
+‘incompTPFA’ and, possibly, a transport solver such as
+function ‘implicitTransport’.</p></li>
+<li><p><strong>ops</strong> – Operators from e.g. setupOperatorsTPFA</p></li>
+<li><p><strong>W</strong> – The well configuration to be used. Unlike many of the other
+solvers in MRST, the wells are required and are the only way
+of driving flow in this solver. This is because
+solveStationaryPressure is designed to be used for well
+optimization. Although it is quite possible to use it as a
+standalone pressure solver for incompressible problems with
+wells, other choices are likely better and faster if no
+gradients or time of flight are required (see incompTPFA).</p></li>
+<li><p><strong>fluid</strong> – Valid AD fluid object. For simple instances, consider
+initSimpleADIFluid</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul>
+<li><p><strong>objective</strong> – Objective function handle as defined by
+getObjectiveDiagnostics. Should use the interface</p>
+<blockquote>
+<div><p>&#64;(state, D)</p>
+</div></blockquote>
+</li>
+<li><p><strong>maxiter</strong> – Maximum number of iterations. Currently not in use, but may
+become active in the event that this solver starts to
+support compressibility some time in the future.</p></li>
+<li><p><strong>linsolve</strong> –</p>
+<dl class="simple">
+<dt>Linear solver supporting the syntax x = linsolve(A,b).</dt><dd><p>Elliptic pressure problems that are fairly large may be
+efficiently solved with algebraic multigrid if a function
+is provided. This function provides SPD systems.</p>
+</dd>
+<dt>src       - Source terms. Array of G.cells.num x 1. This implementation</dt><dd><p>will likely change.</p>
+</dd>
+<dt>computeTracer - Defines if tracers are to be solved for wells, if</dt><dd><p>requested through variable output count. Default: TRUE.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl>
+<dt><strong>state</strong> – Update reservoir and well solution structure with new values</dt><dd><dl>
+<dt>for the fields:</dt><dd><ul>
+<li><dl class="simple">
+<dt>pressure – Pressure values for all cells in the</dt><dd><p>discretised reservoir model, ‘G’.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>flux     – Flux across global interfaces corresponding to</dt><dd><p>the rows of ‘G.faces.neighbors’.%</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>wellSol  – Well solution structure array, one element for</dt><dd><p>each well in the model, with new values for
+the fields:</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>flux     – Perforation fluxes through all</dt><dd><p>perforations for corresponding
+well.  The fluxes are
+interpreted as injection
+fluxes, meaning positive
+values correspond to injection
+into reservoir while negative
+values mean
+production/extraction out of
+reservoir.</p>
+</dd>
+</dl>
+</li>
+<li><p>pressure – Well bottom-hole pressure.</p></li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt>D (OPTIONAL) - Diagnostics struct. See computeTOFandTracer. Requesting</dt><dd><p>this output means additional non-trivial computations
+will be performed.</p>
+</dd>
+<dt>grad (OPTIONAL) - Gradient of the objective function with regards to the</dt><dd><p>different well controls. An objective function must
+obviously be provided for this to work.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.optimization.tofRobustFix">
+<span class="sig-name descname"><span class="pre">tofRobustFix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">A</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.optimization.tofRobustFix" title="Permalink to this definition"></a></dt>
+<dd><p>Presently does nothing. Can be overriden if needed.</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="diagnostics.utils.optimization.well2control">
+<span class="sig-name descname"><span class="pre">well2control</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">W</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#diagnostics.utils.optimization.well2control" title="Permalink to this definition"></a></dt>
+<dd><p>Produce control vector u from target-wells
+If scaling is supplied, u is scaled s.t. 0&lt;=u&lt;=1
+according to scaling.boxLims</p>
+</dd></dl>
+
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="dg.html" class="btn btn-neutral float-left" title="dg: Discontinous Galerkin discretizations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dual_porosity.html" class="btn btn-neutral float-right" title="dual-porosity: Dual porosity/permeability model for fractures" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019, SINTEF Digital.
+      <span class="lastupdated">Last updated on Sep 23, 2021.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

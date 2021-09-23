@@ -1,0 +1,10 @@
+`streamlines`: Compute streamlines
+*******************************************
+.. include:: mrst/streamlines//README
+
+.. automodule:: streamlines
+	:members:
+
+Examples
+===============================
+.. include:: examples/examples_streamlines.txt

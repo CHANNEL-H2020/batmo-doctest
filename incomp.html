@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>incomp: Solvers for incompressible flow and transport &mdash; The Matlab Reservoir Simulation Toolbox 2019b documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="libgeometry:" href="libgeometry.html" />
+    <link rel="prev" title="hfm: Hierarchical and embedded fractures" href="hfm.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> The Matlab Reservoir Simulation Toolbox
+            <img src="_static/mrstlogo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                2019b
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="core.html">Core functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-core.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-core</span></code>: Automatic Differentiation Core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-props.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-props</span></code>: PVT, fluid models and other properties for the AD-solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-blackoil.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-blackoil</span></code>: Black-oil solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-eor.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-eor</span></code>: Enhanced oil recovery solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-mechanics.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-mechanics</span></code>: Coupled flow and mechanics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adjoint.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">adjoint</span></code>: Two-phase, incompressible adjoint solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agglom.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">agglom</span></code>: Flow and property-based coarse-grid generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="blackoil-sequential.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">blackoil-sequential</span></code>: Sequential implicit black-oil solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">book</span></code>: Book examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coarsegrid.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">coarsegrid</span></code>: Generation of coarse grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compositional.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">compositional</span></code>: Equation-of-state compositional solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="co2lab.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">co2lab</span></code>: Numerical CO<sub>2</sub> laboratory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deckformat.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">deckformat</span></code>: Reading and conversion of input decks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dfm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dfm</span></code>: Discrete fracture matrix implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dg.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dg</span></code>: Discontinous Galerkin discretizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="diagnostics.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">diagnostics</span></code>: Flow diagnostics functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dual_porosity.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dual-porosity</span></code>: Dual porosity/permeability model for fractures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fvbiot.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">fvbiot</span></code>: Consistent finite-volume discretizations for poroelasticity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geochemistry.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">geochemistry</span></code>: Surface geochemistry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heterogeneity.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">heterogeneity</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="hfm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">hfm</span></code>: Hierarchical and embedded fractures</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">incomp</span></code>: Solvers for incompressible flow and transport</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="libgeometry.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">libgeometry</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linearsolvers.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">linearsolvers</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab_bgl.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">matlab_bgl</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mimetic.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mimetic</span></code>: Mimetic solvers for pressure problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpfa.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mpfa</span></code>: Multi-point flux approximation solvers for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mrst_api.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mrst_api</span></code>: API for writing C/C++ for MRST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mrst-gui.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mrst-gui</span></code>: Graphical user-interfaces for MRST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msfvm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msfvm</span></code>: Multiscale Finite-Volume method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msmfem.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msmfem</span></code>: Multiscale Mixed Finite-Element method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msrsb.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msrsb</span></code>: Multiscale Restriction-Smoothed Basis method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nwm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">nwm</span></code>: Near Wellbore Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opm_gridprocessing.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">opm_gridprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimization.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">optimization</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="re-mpfa.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">re-mpfa</span></code>: Richards’ equation with multi-point flux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvent.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">solvent</span></code>: Solvent solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spe10.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">spe10</span></code>: Access to the SPE10 benchmark case</a></li>
+<li class="toctree-l1"><a class="reference internal" href="steady-state.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">steady-state</span></code> Steady-state upscaling of functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="streamlines.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">streamlines</span></code>: Compute streamlines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triangle.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">triangle</span></code>: Triangular grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upscaling.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">upscaling</span></code>: Upscaling of reservoir problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vem.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">vem</span></code>: Virtual element method on general grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vemmech.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">vemmech</span></code>: Mechanics for general grids using the virtual element method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wellpaths.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">wellpaths</span></code>: Generation of wells using general curves</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">The Matlab Reservoir Simulation Toolbox</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><code class="xref mat mat-func docutils literal notranslate"><span class="pre">incomp</span></code>: Solvers for incompressible flow and transport</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/incomp.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="incomp-solvers-for-incompressible-flow-and-transport">
+<h1><code class="xref mat mat-func docutils literal notranslate"><span class="pre">incomp</span></code>: Solvers for incompressible flow and transport<a class="headerlink" href="#incomp-solvers-for-incompressible-flow-and-transport" title="Permalink to this headline"></a></h1>
+<span class="target" id="module-incomp"></span><dl class="mat script">
+<dt class="sig sig-object mat" id="incomp.Contents">
+<span class="sig-name descname"><span class="pre">Contents</span></span><a class="headerlink" href="#incomp.Contents" title="Permalink to this definition"></a></dt>
+<dd><p>Support for incompressible flow/transport problems</p>
+<dl class="simple">
+<dt>Files</dt><dd><p>capPressureRHS                - Compute capillary pressure contribution to system RHS
+checkDrivingForcesIncomp      - Check if a solution is necessary for incompressible solvers.
+computeFacePressure           - Compute face pressure using two-point flux approximation.
+computeIncompWellPressureDrop - Compute incompressible connection pressure drop for a single well
+computePressureRHS            - Compute right-hand side contributions to pressure linear system.
+incompTPFA                    - Solve incompressible flow problem (fluxes/pressures) using TPFA method.
+treatLegacyForceOptions       - Internal function for ensuring that both W and Wells are supported as</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="incomp.capPressureRHS">
+<span class="sig-name descname"><span class="pre">capPressureRHS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">g</span></em>, <em class="sig-param"><span class="pre">mob</span></em>, <em class="sig-param"><span class="pre">pc</span></em>, <em class="sig-param"><span class="pre">pc_form</span></em><span class="sig-paren">)</span><a class="headerlink" href="#incomp.capPressureRHS" title="Permalink to this definition"></a></dt>
+<dd><p>Compute capillary pressure contribution to system RHS</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">cc</span> <span class="p">=</span> <span class="n">capPressureRHS</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">mob</span><span class="p">,</span> <span class="n">pc</span><span class="p">,</span> <span class="n">pc_form</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>Calculate halfface contribution to rhs of darcy equation from the
+capillary pressure</p>
+<p>g       - Grid data structure.</p>
+<p>mob     - mobilities evaluated in all cells.</p>
+<p>pc      - capillary pressure evaluated in all cells, = fluid.pc(state)</p>
+<p>pc_form - capillary pressure formulation</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="incomp.checkDrivingForcesIncomp">
+<span class="sig-name descname"><span class="pre">checkDrivingForcesIncomp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">g</span></em>, <em class="sig-param"><span class="pre">opt</span></em><span class="sig-paren">)</span><a class="headerlink" href="#incomp.checkDrivingForcesIncomp" title="Permalink to this definition"></a></dt>
+<dd><p>Check if a solution is necessary for incompressible solvers.</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">W</span> <span class="p">=</span> <span class="n">addWell</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">rock</span><span class="p">,</span> <span class="n">cellInx</span><span class="p">)</span>
+<span class="n">W</span> <span class="p">=</span> <span class="n">addWell</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">rock</span><span class="p">,</span> <span class="n">cellInx</span><span class="p">,</span> <span class="s">&#39;pn&#39;</span><span class="p">,</span> <span class="n">pv</span><span class="p">,</span> <span class="p">...)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>g</strong> – Valid MRST grid intended for simulation.</p></li>
+<li><p><strong>opt</strong> – Merged options struct with standard incompressible options.
+Specifically, the forces supported by incompTPFA and
+incompMimetic should be included.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>do_solve</strong> – Logical indicating if forces are well specified and should
+be solved. This check verifies that the problem is
+meaningful for incompressible flow.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="mimetic.html#mimetic.incompMimetic" title="mimetic.incompMimetic"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">incompMimetic</span></code></a>, <a class="reference internal" href="#incomp.incompTPFA" title="incomp.incompTPFA"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">incompTPFA</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="incomp.computeFacePressure">
+<span class="sig-name descname"><span class="pre">computeFacePressure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">xr</span></em>, <em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">T</span></em>, <em class="sig-param"><span class="pre">fluid</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#incomp.computeFacePressure" title="Permalink to this definition"></a></dt>
+<dd><p>Compute face pressure using two-point flux approximation.</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">xr</span> <span class="p">=</span> <span class="n">computeFacePressure</span><span class="p">(</span><span class="n">xr</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">fluid</span><span class="p">)</span>
+<span class="n">xr</span> <span class="p">=</span> <span class="n">computeFacePressure</span><span class="p">(</span><span class="n">xr</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">fluid</span><span class="p">,</span> <span class="s">&#39;pn1&#39;</span><span class="p">,</span> <span class="n">pv1</span><span class="p">,</span> <span class="p">...)</span>
+</pre></div>
+</div>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xr</strong> – Reservoir solution structures either properly
+initialized from functions ‘initResSol’ and ‘initWellSol’
+respectively, or the results from a previous call to function
+‘incompTPFA’ and, possibly, a transport solver such as
+function ‘implicitTransport’.</p></li>
+<li><p><strong>G</strong> – Grid and half-transmissibilities as computed by the function
+‘computeTrans’.</p></li>
+<li><p><strong>T</strong> – Grid and half-transmissibilities as computed by the function
+‘computeTrans’.</p></li>
+<li><p><strong>fluid</strong> – Fluid object as defined by function ‘initSimpleFluid’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>bc</strong> – Boundary condition structure as defined by function ‘addBC’.
+This structure accounts for all external boundary conditions to
+the reservoir flow.  May be empty (i.e., bc = struct([])) which
+is interpreted as all external no-flow (homogeneous Neumann)
+conditions.</p></li>
+<li><p><strong>src</strong> – Explicit source contributions as defined by function
+‘addSource’.  May be empty (i.e., src = struct([])) which is
+interpreted as a reservoir model without explicit sources.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>xr</strong> – Reservoir solution structure with new values for the field:
+- facePressure – Pressure values for all interfaces in the</p>
+<blockquote>
+<div><p>discretised reservoir model, ‘G’.</p>
+</div></blockquote>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="core.html#core.solvers.computeTrans" title="core.solvers.computeTrans"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">computeTrans</span></code></a>, <a class="reference internal" href="core.html#core.params.wells_and_bc.addBC" title="core.params.wells_and_bc.addBC"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">addBC</span></code></a>, <a class="reference internal" href="core.html#core.params.wells_and_bc.addSource" title="core.params.wells_and_bc.addSource"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">addSource</span></code></a>, <a class="reference internal" href="#incomp.fluid.incompressible.initSingleFluid" title="incomp.fluid.incompressible.initSingleFluid"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">initSingleFluid</span></code></a>, <a class="reference internal" href="core.html#core.solvers.initResSol" title="core.solvers.initResSol"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">initResSol</span></code></a>,
+<a class="reference internal" href="#incomp.incompTPFA" title="incomp.incompTPFA"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">incompTPFA</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="incomp.computeIncompWellPressureDrop">
+<span class="sig-name descname"><span class="pre">computeIncompWellPressureDrop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">W</span></em>, <em class="sig-param"><span class="pre">mob</span></em>, <em class="sig-param"><span class="pre">rho</span></em>, <em class="sig-param"><span class="pre">g</span></em><span class="sig-paren">)</span><a class="headerlink" href="#incomp.computeIncompWellPressureDrop" title="Permalink to this definition"></a></dt>
+<dd><p>Compute incompressible connection pressure drop for a single well</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">dp</span> <span class="p">=</span> <span class="n">computeIncompWellPressureDrop</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">mob</span><span class="p">,</span> <span class="n">rho</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>W</strong> – Well structure as defined by function addWell.</p></li>
+<li><p><strong>mob</strong> – Phase mobilities for each cell in model.</p></li>
+<li><p><strong>rho</strong> – Fluid mass densities.  One scalar for each fluid phase.</p></li>
+<li><p><strong>g</strong> – Norm of gravity along z-axis</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>dp</strong> – Column vector of size numel(W.cells).  Contains each completion’s
+pressure drop along the well bore from the bottom hole pressure
+reference depth, under certain assumptions for the incompressible,
+linear pressure equation.</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>In order to avoid nonlinear behavior for wells, this function assumes
+that the well bore density is constant for all perforations and is
+equal to the injection composition if the well is an injector,
+either through positive rates or W.sign &gt; 0. If the well is a producer,
+the mixture is assumed to be taken from the perforated cells, with flux
+proportional to the well indices.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="core.html#core.params.wells_and_bc.addWell" title="core.params.wells_and_bc.addWell"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">addWell</span></code></a>, <a class="reference internal" href="#incomp.incompTPFA" title="incomp.incompTPFA"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">incompTPFA</span></code></a>, <a class="reference internal" href="mimetic.html#mimetic.incompMimetic" title="mimetic.incompMimetic"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">incompMimetic</span></code></a>, <a class="reference internal" href="mpfa.html#mpfa.incompMPFA" title="mpfa.incompMPFA"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">incompMPFA</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="incomp.computePressureRHS">
+<span class="sig-name descname"><span class="pre">computePressureRHS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">g</span></em>, <em class="sig-param"><span class="pre">omega</span></em>, <em class="sig-param"><span class="pre">bc</span></em>, <em class="sig-param"><span class="pre">src</span></em><span class="sig-paren">)</span><a class="headerlink" href="#incomp.computePressureRHS" title="Permalink to this definition"></a></dt>
+<dd><p>Compute right-hand side contributions to pressure linear system.</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">grav</span><span class="p">,</span> <span class="n">dF</span><span class="p">,</span> <span class="n">dC</span><span class="p">]</span> <span class="p">=</span> <span class="n">computePressureRHS</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">omega</span><span class="p">,</span> <span class="n">bc</span><span class="p">,</span> <span class="n">src</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>The contributions to the right-hand side for mimetic, two-point and
+multi-point discretisations of the equations for pressure and total
+velocity</p>
+<blockquote>
+<div><p>v + lam K·grad (p - g·z omega) = 0
+div v  = q</p>
+</div></blockquote>
+<dl>
+<dt>with</dt><dd><blockquote>
+<div><p>   kr_i/</p>
+</div></blockquote>
+<dl class="simple">
+<dt>lam   = /       / mu_i</dt><dd><p>– i
+__
+</p>
+</dd>
+<dt>omega = /    f_i·rho_i</dt><dd><p>– i</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>G</strong> – Grid data structure.</p></li>
+<li><p><strong>omega</strong> – Accumulated phase densities rho_i weighted by fractional flow
+functions f_i – i.e., omega = sum_i rho_i f_i.  One scalar
+value for each cell in the discretised reservoir model, G.</p></li>
+<li><p><strong>bc</strong> – Boundary condition structure as defined by function ‘addBC’.
+This structure accounts for all external boundary conditions to
+the reservoir flow.  May be empty (i.e., bc = struct([])) which
+is interpreted as all external no-flow (homogeneous Neumann)
+conditions.</p></li>
+<li><p><strong>src</strong> – Explicit source contributions as defined by function
+‘addSource’.  May be empty (i.e., src = struct([])) which is
+interpreted as a reservoir model without explicit sources.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><ul>
+<li><p><strong>f, g, h</strong> – Pressure (f), source/sink (g), and flux (h) external
+conditions.  In a problem without effects of gravity, these
+values may be passed directly on to linear system solvers
+such as ‘schurComplementSymm’.</p></li>
+<li><p><strong>grav</strong> –</p>
+<p>Pressure contributions from gravity,</p>
+<blockquote>
+<div><p>grav = omega·g·(x_face - x_cell)</p>
+</div></blockquote>
+<p>where</p>
+<blockquote>
+<div><p>omega = sum_i f_irho_i,</p>
+</div></blockquote>
+<p>thus grav is a vector with one scalar value for each
+half-face in the model (size(G.cells.faces,1)).</p>
+</li>
+<li><p><strong>dF, dC</strong> – Dirichlet/pressure condition structure.  Logical array ‘dF’
+is true for those faces that have prescribed pressures, while
+the corresponding prescribed pressure values are listed in
+‘dC’.  The number of elements in ‘dC’ is SUM(DOUBLE(dF)).</p>
+<p>This structure may be used to eliminate known face pressures
+from the linear system before calling a system solver (e.g.,
+‘schurComplementSymm’).</p>
+</li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="core.html#core.params.wells_and_bc.addBC" title="core.params.wells_and_bc.addBC"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">addBC</span></code></a>, <a class="reference internal" href="core.html#core.params.wells_and_bc.addSource" title="core.params.wells_and_bc.addSource"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">addSource</span></code></a>, <a class="reference internal" href="mimetic.html#mimetic.computeMimeticIP" title="mimetic.computeMimeticIP"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">computeMimeticIP</span></code></a>, <a class="reference internal" href="mimetic.html#mimetic.utils.schurComplementSymm" title="mimetic.utils.schurComplementSymm"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">schurComplementSymm</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="incomp.incompTPFA">
+<span class="sig-name descname"><span class="pre">incompTPFA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">T</span></em>, <em class="sig-param"><span class="pre">fluid</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#incomp.incompTPFA" title="Permalink to this definition"></a></dt>
+<dd><p>Solve incompressible flow problem (fluxes/pressures) using TPFA method.</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="p">=</span> <span class="n">incompTPFA</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">fluid</span><span class="p">)</span>
+<span class="n">state</span> <span class="p">=</span> <span class="n">incompTPFA</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">fluid</span><span class="p">,</span> <span class="s">&#39;pn1&#39;</span><span class="p">,</span> <span class="n">pv1</span><span class="p">,</span> <span class="p">...)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>This function assembles and solves a (block) system of linear equations
+defining interface fluxes and cell pressures at the next time step in a
+sequential splitting scheme for the reservoir simulation problem
+defined by Darcy’s law and a given set of external influences (wells,
+sources, and boundary conditions).</p>
+<p>This function uses a two-point flux approximation (TPFA) method with
+minimal memory consumption within the constraints of operating on a
+fully unstructured polyhedral grid structure.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> – Reservoir and well solution structure either properly
+initialized from functions ‘initResSol’ and ‘initWellSol’
+respectively, or the results from a previous call to function
+‘incompTPFA’ and, possibly, a transport solver such as
+function ‘implicitTransport’.</p></li>
+<li><p><strong>G</strong> – Grid and half-transmissibilities as computed by the function
+‘computeTrans’.</p></li>
+<li><p><strong>T</strong> – Grid and half-transmissibilities as computed by the function
+‘computeTrans’.</p></li>
+<li><p><strong>fluid</strong> – Fluid object as defined by function ‘initSimpleFluid’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul>
+<li><p><strong>W</strong> – Well structure as defined by function ‘addWell’.  May be empty
+(i.e., W = []) which is interpreted as a model without
+any wells.</p></li>
+<li><p><strong>bc</strong> – Boundary condition structure as defined by function ‘addBC’.
+This structure accounts for all external boundary conditions to
+the reservoir flow.  May be empty (i.e., bc = struct([])) which
+is interpreted as all external no-flow (homogeneous Neumann)
+conditions.</p></li>
+<li><p><strong>src</strong> – Explicit source contributions as defined by function
+‘addSource’.  May be empty (i.e., src = struct([])) which is
+interpreted as a reservoir model without explicit sources.</p></li>
+<li><p><strong>LinSolve</strong> – Handle to linear system solver software to which the
+fully assembled system of linear equations will be
+passed.  Assumed to support the syntax</p>
+<blockquote>
+<div><p>x = LinSolve(A, b)</p>
+</div></blockquote>
+<p>in order to solve a system Ax=b of linear equations.
+Default value: LinSolve = &#64;mldivide (backslash).</p>
+</li>
+<li><p><strong>MatrixOutput</strong> – Whether or not to return the final system matrix ‘A’ to
+the caller of function ‘incompTPFA’.
+Logical.  Default value: MatrixOutput = FALSE.</p></li>
+<li><p><strong>verbose</strong> – Enable output.  Default value dependent upon global verbose
+settings of function ‘mrstVerbose’.</p></li>
+<li><p><strong>condition_number</strong> – Display estimated condition number of linear system.</p></li>
+<li><p><strong>gravity</strong> – The current gravity in vector form. Defaults to gravity().</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>state</strong> – Update reservoir and well solution structure with new values
+for the fields:</p>
+<blockquote>
+<div><ul>
+<li><dl class="simple">
+<dt>pressure – Pressure values for all cells in the</dt><dd><p>discretised reservoir model, ‘G’.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>facePressure –</dt><dd><p>Pressure values for all interfaces in the
+discretised reservoir model, ‘G’.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>flux     – Flux across global interfaces corresponding to</dt><dd><p>the rows of ‘G.faces.neighbors’.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>A        – System matrix.  Only returned if specifically</dt><dd><p>requested by setting option ‘MatrixOutput’.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>wellSol  – Well solution structure array, one element for</dt><dd><p>each well in the model, with new values for
+the fields:</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>flux     – Perforation fluxes through all</dt><dd><p>perforations for corresponding
+well.  The fluxes are
+interpreted as injection
+fluxes, meaning positive
+values correspond to injection
+into reservoir while negative
+values mean
+production/extraction out of
+reservoir.</p>
+</dd>
+</dl>
+</li>
+<li><p>pressure – Well bottom-hole pressure.</p></li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If there are no external influences, i.e., if all of the structures
+‘W’, ‘bc’, and ‘src’ are empty and there are no effects of gravity,
+then the input values ‘xr’ and ‘xw’ are returned unchanged and a
+warning is printed in the command window. This warning is printed with
+message ID</p>
+<blockquote>
+<div><p>‘incompTPFA:DrivingForce:Missing’</p>
+</div></blockquote>
+</div>
+<p class="rubric">Example:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">G</span>   <span class="p">=</span> <span class="n">computeGeometry</span><span class="p">(</span><span class="n">cartGrid</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]));</span>
+
+<span class="n">f</span>   <span class="p">=</span> <span class="n">initSingleFluid</span><span class="p">(</span><span class="s">&#39;mu&#39;</span> <span class="p">,</span> <span class="mi">1</span><span class="o">*</span><span class="n">centi</span><span class="o">*</span><span class="n">poise</span><span class="p">,</span> <span class="p">...</span>
+                      <span class="s">&#39;rho&#39;</span><span class="p">,</span> <span class="mi">1000</span><span class="o">*</span><span class="n">kilogram</span><span class="o">/</span><span class="n">meter</span>^<span class="mi">3</span><span class="p">);</span>
+<span class="n">rock</span><span class="p">.</span><span class="n">perm</span> <span class="p">=</span> <span class="nb">rand</span><span class="p">(</span><span class="n">G</span><span class="p">.</span><span class="n">cells</span><span class="p">.</span><span class="n">num</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">darcy</span><span class="p">()</span><span class="o">/</span><span class="mi">100</span><span class="p">;</span>
+
+<span class="n">bc</span>  <span class="p">=</span> <span class="n">pside</span><span class="p">([],</span> <span class="n">G</span><span class="p">,</span> <span class="s">&#39;LEFT&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">barsa</span><span class="p">);</span>
+<span class="n">src</span> <span class="p">=</span> <span class="n">addSource</span><span class="p">([],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="n">W</span>   <span class="p">=</span> <span class="n">verticalWell</span><span class="p">([],</span> <span class="n">G</span><span class="p">,</span> <span class="n">rock</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">G</span><span class="p">.</span><span class="n">cartDims</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="p">[]</span>   <span class="p">,</span> <span class="p">...</span>
+                   <span class="s">&#39;Type&#39;</span><span class="p">,</span> <span class="s">&#39;rate&#39;</span><span class="p">,</span> <span class="s">&#39;Val&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="o">*</span><span class="n">meter</span>^<span class="mi">3</span><span class="o">/</span><span class="n">day</span><span class="p">,</span> <span class="p">...</span>
+                   <span class="s">&#39;InnerProduct&#39;</span><span class="p">,</span> <span class="s">&#39;ip_tpf&#39;</span><span class="p">);</span>
+<span class="n">W</span>   <span class="p">=</span> <span class="n">verticalWell</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">rock</span><span class="p">,</span> <span class="n">G</span><span class="p">.</span><span class="n">cartDims</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">G</span><span class="p">.</span><span class="n">cartDims</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="p">[],</span> <span class="p">...</span>
+                   <span class="s">&#39;Type&#39;</span><span class="p">,</span> <span class="s">&#39;bhp&#39;</span><span class="p">,</span> <span class="s">&#39;Val&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="o">*</span><span class="n">barsa</span><span class="p">,</span> <span class="p">...</span>
+                   <span class="s">&#39;InnerProduct&#39;</span><span class="p">,</span> <span class="s">&#39;ip_tpf&#39;</span><span class="p">);</span>
+
+<span class="n">T</span>   <span class="p">=</span> <span class="n">computeTrans</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">rock</span><span class="p">);</span>
+
+<span class="n">state</span>         <span class="p">=</span> <span class="n">initResSol</span> <span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+<span class="n">state</span><span class="p">.</span><span class="n">wellSol</span> <span class="p">=</span> <span class="n">initWellSol</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+
+<span class="n">state</span> <span class="p">=</span> <span class="n">incompTPFA</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="s">&#39;bc&#39;</span><span class="p">,</span> <span class="n">bc</span><span class="p">,</span> <span class="s">&#39;src&#39;</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="p">...</span>
+                   <span class="s">&#39;wells&#39;</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="s">&#39;MatrixOutput&#39;</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+
+<span class="n">plotCellData</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">state</span><span class="p">.</span><span class="n">pressure</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="core.html#core.solvers.computeTrans" title="core.solvers.computeTrans"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">computeTrans</span></code></a>, <a class="reference internal" href="core.html#core.params.wells_and_bc.addBC" title="core.params.wells_and_bc.addBC"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">addBC</span></code></a>, <a class="reference internal" href="core.html#core.params.wells_and_bc.addSource" title="core.params.wells_and_bc.addSource"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">addSource</span></code></a>, <a class="reference internal" href="core.html#core.params.wells_and_bc.addWell" title="core.params.wells_and_bc.addWell"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">addWell</span></code></a>, <a class="reference internal" href="#incomp.fluid.incompressible.initSingleFluid" title="incomp.fluid.incompressible.initSingleFluid"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">initSingleFluid</span></code></a>, <a class="reference internal" href="core.html#core.solvers.initResSol" title="core.solvers.initResSol"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">initResSol</span></code></a>,
+<a class="reference internal" href="core.html#core.solvers.initWellSol" title="core.solvers.initWellSol"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">initWellSol</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="incomp.treatLegacyForceOptions">
+<span class="sig-name descname"><span class="pre">treatLegacyForceOptions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">opt</span></em><span class="sig-paren">)</span><a class="headerlink" href="#incomp.treatLegacyForceOptions" title="Permalink to this definition"></a></dt>
+<dd><p>Internal function for ensuring that both W and Wells are supported as
+keyword arguments to incompressible solvers.</p>
+</dd></dl>
+
+<span class="target" id="module-incomp.fluid"></span><dl class="mat script">
+<dt class="sig sig-object mat" id="incomp.fluid.Contents">
+<span class="sig-name descname"><span class="pre">Contents</span></span><a class="headerlink" href="#incomp.fluid.Contents" title="Permalink to this definition"></a></dt>
+<dd><p>Routines for evaluating pressure and saturation dependent parameters.</p>
+<dl class="simple">
+<dt>Files</dt><dd><p>fluid_structure - Fluid structure used in MATLAB Reservoir Simulation Toolbox.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat script">
+<dt class="sig sig-object mat" id="incomp.fluid.fluid_structure">
+<span class="sig-name descname"><span class="pre">fluid_structure</span></span><a class="headerlink" href="#incomp.fluid.fluid_structure" title="Permalink to this definition"></a></dt>
+<dd><p>Fluid structure used in MATLAB Reservoir Simulation Toolbox.</p>
+<p>MRST’s fluid representation is a structure of function handles which
+compute fluid properties (e.g., density or viscosity), fluid phase
+saturations, and phase relative permeability curves.  This representation
+supports generic implementation of derived quantities such as mobilities
+or flux functions for a wide range of fluid models.</p>
+<p>Specifically, the ‘fluid’ structure contains the following fields:</p>
+<blockquote>
+<div><ul>
+<li><dl>
+<dt>properties – Function handle for evaluating fluid properties such</dt><dd><p>as density or viscosity.  Must support the syntaxen</p>
+<blockquote>
+<div><blockquote>
+<div><p>mu              = properties()</p>
+</div></blockquote>
+<p>[mu, rho]        = properties()
+[…]            = properties(state)
+[mu, rho, extra] = properties(state)</p>
+</div></blockquote>
+<p>The first call computes the phase viscosity, the
+second adds phase density, and the final computes
+additional parameters which may be needed in complex
+fluid models (e.g., Black Oil).</p>
+<p>If there are multiple PVT/property regions in the
+reservoir model–for instance defined by means of the
+ECLIPSE keyword ‘PVTNUM’–then ‘properties’ must be a
+cell array of function handles with one element for
+each property region.  In this case each of the
+functions in ‘properties’ must support a call syntax of
+the form</p>
+<blockquote>
+<div><p>[output] = properties(state, i)</p>
+</div></blockquote>
+<p>where [output] represents one of the three output forms
+specified above and ‘i’ is an indicator (a LOGICAL
+array).  The call ‘properties(state,i)’ must compute
+property values only for those elements where ‘i’ is
+TRUE.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>saturation – Function handle for evaluating fluid phase saturations.</dt><dd><p>Must support the syntaxen</p>
+<blockquote>
+<div><p>s = saturation(state)
+s = saturation(state, extra)</p>
+</div></blockquote>
+<p>The first call computes fluid phase saturations based
+only on the current reservoir (and well) state, while
+the second call may utilize additional parameters and
+properties–typically derived from the third syntax of
+function ‘properties’.</p>
+<p>If there are multiple PVT/property regions in the
+reservoir model–for instance defined by means of the
+ECLIPSE keyword ‘PVTNUM’–then ‘saturations’ must be a
+cell array of function handles with one element for
+each property region.  In this case each of the
+functions in ‘saturation’ must support a call syntax of
+the form</p>
+<blockquote>
+<div><p>s = saturation(state, i)
+s = saturation(state, i, extra)</p>
+</div></blockquote>
+<p>where ‘i’ is an indicator (a LOGICAL array).  The
+‘saturation’ function must compute values only for
+those elements where ‘i’ is TRUE.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>relperm    – Function handle, or a cell array of function handles</dt><dd><p>(one element for each relative permeability region,
+i.e., each saturation function region) for evaluating
+relative permeability curves for each fluid phase.
+Must support the syntaxen</p>
+<blockquote>
+<div><blockquote>
+<div><p>kr             = relperm(s, state)</p>
+</div></blockquote>
+<p>[kr, dkr]       = relperm(s, state)
+[kr, dkr, d2kr] = relperm(s, state) [optional]</p>
+</div></blockquote>
+<p>The first call computes the relative permeability
+curves at the current saturations, ‘s’.  The second
+call additionally computes the first partial
+derivatives of these curves with respect to each phase
+saturation.  Finally, the third syntax additionally
+computes second order derivatives.  This syntax is
+optional and only needed in a few specific instances
+(e.g., when using the second order adjoint method).</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>In case the description scrolled off screen too quickly, you may access
+the information at your own pace using the command</p>
+<blockquote>
+<div><p>more on, help fluid_structure, more off</p>
+</div></blockquote>
+</div>
+</dd></dl>
+
+<span class="target" id="module-incomp.fluid.utils"></span><dl class="mat script">
+<dt class="sig sig-object mat" id="incomp.fluid.utils.Contents">
+<span class="sig-name descname"><span class="pre">Contents</span></span><a class="headerlink" href="#incomp.fluid.utils.Contents" title="Permalink to this definition"></a></dt>
+<dd><p>Files
+constantProperties         - Construct fluid property evaluator from constant data
+getIncompCapillaryPressure - Undocumented Utility Function
+getIncompProps             - Undocumented Utility Function
+interpRelPermTable         - Fast linear interpolation of tabulated relperm function (and derivative)
+tabulatedSatFunc           - Construct rel-perm and capillary pressure evaluators from tabulated data</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="incomp.fluid.utils.constantProperties">
+<span class="sig-name descname"><span class="pre">constantProperties</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">mu</span></em>, <em class="sig-param"><span class="pre">rho</span></em><span class="sig-paren">)</span><a class="headerlink" href="#incomp.fluid.utils.constantProperties" title="Permalink to this definition"></a></dt>
+<dd><p>Construct fluid property evaluator from constant data</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="k">properties</span> <span class="p">=</span> <span class="n">constantProperties</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">rho</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mu</strong> – Phase viscosities in units of Pa*s.</p></li>
+<li><p><strong>rho</strong> – Phase densities in units of kilogram/meter^3.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>properties</strong> –</p>
+<blockquote>
+<div><p>Function handle that supports the following calling convention</p>
+<blockquote>
+<div><blockquote>
+<div><p>mu       = properties()</p>
+</div></blockquote>
+<p>[mu, rho] = properties()</p>
+</div></blockquote>
+</div></blockquote>
+<p>The return values are exactly the input parameters ‘mu’ and ‘rho’
+to function ‘constantProperties’, respectively.</p>
+<p>For compatiblity with the rest of MRST, the ‘properties’ function
+accepts any number of input arguments.  All arguments are ignored.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="incomp.fluid.utils.getIncompCapillaryPressure">
+<span class="sig-name descname"><span class="pre">getIncompCapillaryPressure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">fluid</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#incomp.fluid.utils.getIncompCapillaryPressure" title="Permalink to this definition"></a></dt>
+<dd><p>Undocumented Utility Function</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="incomp.fluid.utils.getIncompProps">
+<span class="sig-name descname"><span class="pre">getIncompProps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">fluid</span></em><span class="sig-paren">)</span><a class="headerlink" href="#incomp.fluid.utils.getIncompProps" title="Permalink to this definition"></a></dt>
+<dd><p>Undocumented Utility Function</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="incomp.fluid.utils.interpRelPermTable">
+<span class="sig-name descname"><span class="pre">interpRelPermTable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">s</span></em>, <em class="sig-param"><span class="pre">kr</span></em>, <em class="sig-param"><span class="pre">si</span></em><span class="sig-paren">)</span><a class="headerlink" href="#incomp.fluid.utils.interpRelPermTable" title="Permalink to this definition"></a></dt>
+<dd><p>Fast linear interpolation of tabulated relperm function (and derivative)</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span> <span class="n">kri</span>        <span class="p">=</span> <span class="n">interpRelPermTable</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">kr</span><span class="p">,</span> <span class="n">si</span><span class="p">)</span>
+
+<span class="p">[</span><span class="n">kri</span><span class="p">,</span> <span class="n">dkri</span><span class="p">]</span> <span class="p">=</span> <span class="n">interpRelPermTable</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">kr</span><span class="p">,</span> <span class="n">si</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> – Saturation nodes at which underlying function kr=kr(s) is
+sampled.  The node values must be monotonically increasing.</p></li>
+<li><p><strong>kr</strong> – Values of the underlying function kr=kr(s) at the nodes, s.
+Must be level or increasing.</p></li>
+<li><p><strong>si</strong> – Evaluation points (saturations) for new, interpolated, relperm
+function values and derivatives.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><ul>
+<li><p><strong>kri</strong> – Column vector of piecewise linearly interpolated values of the
+relperm function kr=kr(s) at the evaluation points ‘si’.</p></li>
+<li><p><strong>dkri</strong> – Column vector of piecewise constant derivative values of the
+function kr=kr(s) at the evaluation points ‘si’.
+OPTIONAL.  Only computed and returned if specifically requested.</p>
+<p>The derivative values are defined by the piecewise formulae</p>
+<blockquote>
+<div><blockquote>
+<div><blockquote>
+<div><p>‘  0 ,      0   &lt;= si &lt;  s( 1 ),  % if 0 &lt; s(1)</p>
+</div></blockquote>
+<dl class="simple">
+<dt>dkri = |  dm,   s( m ) &lt;= si &lt;  s(m+1),</dt><dd><p>`  0 ,   s(end) &lt;= si &lt;=    1  ,</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>where dm = (kr(m+1) - kr(m)) / (s(m+1) - s(m)).</p>
+<p>The caller needs to pay particular attention to the handling of
+sub-interval end points when computing derivatives, as the
+derivative is generally discontinuous.</p>
+</div></blockquote>
+</li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Function ‘interpRelPermTable’ is designed for efficient evaluation of
+tabulated relative permeability curves defined by SWOF, SGOF, SOF2 and
+related ECLIPSE keywords.</p>
+<p>Using this utility function as a general interpolator is not advised.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="core.html#core.utils.interpTable" title="core.utils.interpTable"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">interpTable</span></code></a>, <a class="reference internal" href="core.html#core.utils.dinterpTable" title="core.utils.dinterpTable"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dinterpTable</span></code></a>, <code class="xref mat mat-func docutils literal notranslate"><span class="pre">interp1q</span></code>, <a class="reference internal" href="core.html#core.utils.dinterpq1" title="core.utils.dinterpq1"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dinterpq1</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="incomp.fluid.utils.tabulatedSatFunc">
+<span class="sig-name descname"><span class="pre">tabulatedSatFunc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">T</span></em><span class="sig-paren">)</span><a class="headerlink" href="#incomp.fluid.utils.tabulatedSatFunc" title="Permalink to this definition"></a></dt>
+<dd><p>Construct rel-perm and capillary pressure evaluators from tabulated data</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">kr</span><span class="p">,</span> <span class="n">pc</span><span class="p">]</span> <span class="p">=</span> <span class="n">tabulatedSatFunc</span><span class="p">(</span><span class="nb">table</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>table</strong> – <p>Tabulated data for relative permeability and capillary pressure
+as a function of water saturation.  The table must be a three-
+or four-column array in which the first column is interpreted
+as water saturation, the second is water relative permeability
+and the third is relative permeability of oil.  The fourth
+column, if present, is interpreted as the oil-water capillary
+pressure function, P_oil-P_wat.</p>
+<p>The first column, saturation, must be monotonically increasing.
+The second column must be level or increasing, while the third
+column must be level or decreasing.  The fourth column, if
+present, must be level or decreasing.</p>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><ul>
+<li><p><strong>kr</strong> –</p>
+<p>Function handle that supports the following calling convention</p>
+<blockquote>
+<div><blockquote>
+<div><p>KR       = kr(s)</p>
+</div></blockquote>
+<p>[KR, dKR] = kr(s)</p>
+</div></blockquote>
+<p>in which the first syntax evaluates the relative permeability
+function, using linear interpolation, in ‘table’ at the saturation
+point ‘s’ and the second syntax additionally provides derivatives
+of the rel-perm function (piecewise constant interpolation).</p>
+<p>The return value ‘KR’ has one row (and two columns) for each <em>row</em>
+in the saturation ‘s’.  The return value ‘dKR’, if requested, has
+one row and four colums for each row in the saturation ‘s’.  The
+column values are the partial derivatives</p>
+<blockquote>
+<div><dl class="simple">
+<dt>[  d KR(:,1) / d s(:,1)  ,  …</dt><dd><p>d KR(:,2) / d s(:,1)  ,  …
+d KR(:,1) / d s(:,2)  ,  …
+d KR(:,2) / d s(:,2)  ]</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>respectively.  The diagonal of the Jacobian matrix at each
+saturation value may thus be extracted as ‘dKR(:, [1, 4])’.</p>
+<p>For compatiblity with the rest of MRST, the ‘kr’ function accepts
+any positive number of input arguments.  All arguments other than
+the first are ignored.</p>
+</li>
+<li><p><strong>pc</strong> –</p>
+<p>Function handle that supports the following calling convention</p>
+<blockquote>
+<div><blockquote>
+<div><p>PC       = pc(s)</p>
+</div></blockquote>
+<p>[PC, dPC] = pc(s)</p>
+</div></blockquote>
+<p>The return value ‘PC’ is the capillary pressure P_oil - P_wat
+evaluated at the saturation point ‘s’.  The second return value,
+if requested, is the derivative of capillary pressure with respect
+to s(:,1).</p>
+</li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The evaluators constructed by function ‘tabulatedSatFunc’ are
+explicitly two-phase only.  Specifically, the evaluators use only the
+first column of the input parameter ‘s’ and explicitly assume that the
+second column, if present, satisfies the saturation constraint</p>
+<blockquote>
+<div><p>s(:,2) = 1 - s(:,1)</p>
+</div></blockquote>
+</div>
+</dd></dl>
+
+<span class="target" id="module-incomp.fluid.incompressible"></span><dl class="mat script">
+<dt class="sig sig-object mat" id="incomp.fluid.incompressible.Contents">
+<span class="sig-name descname"><span class="pre">Contents</span></span><a class="headerlink" href="#incomp.fluid.incompressible.Contents" title="Permalink to this definition"></a></dt>
+<dd><p>Models for various simple, incompressible fluids.</p>
+<dl class="simple">
+<dt>Files</dt><dd><p>initCoreyFluid       - Initialize incompressible two-phase fluid model (res. sat., an. rel-perm).
+initSimpleFluid      - Initialize incompressible two-phase fluid model (analytic rel-perm).
+initSimpleFluidJfunc - Two-phase fluid model with Leverett J-function capillary pressure
+initSimpleFluidPc    - Initialize incompressible two-phase fluid model with capillary forces
+initSingleFluid      - Initialize incompressible single phase fluid model.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="incomp.fluid.incompressible.initCoreyFluid">
+<span class="sig-name descname"><span class="pre">initCoreyFluid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#incomp.fluid.incompressible.initCoreyFluid" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize incompressible two-phase fluid model (res. sat., an. rel-perm).</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">fluid</span> <span class="p">=</span> <span class="n">initCoreyFluid</span><span class="p">(</span><span class="s">&#39;pn1&#39;</span><span class="p">,</span> <span class="n">pv1</span><span class="p">,</span> <span class="p">...)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>'pn'/pv</strong> – <p>List of ‘key’/value pairs defining specific fluid
+characteristics.  The following parameters must be defined
+with one value for each of the two fluid phases:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>mu  – Phase viscosities in units of Pa*s.</p></li>
+<li><p>rho – Phase densities in units of kilogram/meter^3.</p></li>
+<li><p>n   – Phase relative permeability exponents.</p></li>
+<li><p>sr  – Residual phase saturation.</p></li>
+<li><p>kwm – Phase relative permeability at ‘sr’.</p></li>
+</ul>
+</div></blockquote>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>fluid</strong> – Fluid data structure as described in ‘fluid_structure’
+representing the current state of the fluids within the
+reservoir model.</p>
+</dd>
+</dl>
+<p class="rubric">Example:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">fluid</span> <span class="p">=</span> <span class="n">initCoreyFluid</span><span class="p">(</span><span class="s">&#39;mu&#39;</span> <span class="p">,</span> <span class="p">[</span>   <span class="mi">1</span><span class="p">,</span>  <span class="mi">10</span><span class="p">]</span><span class="o">*</span><span class="n">centi</span><span class="o">*</span><span class="n">poise</span>     <span class="p">,</span> <span class="p">...</span>
+                       <span class="s">&#39;rho&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1014</span><span class="p">,</span> <span class="mi">859</span><span class="p">]</span><span class="o">*</span><span class="n">kilogram</span><span class="o">/</span><span class="n">meter</span>^<span class="mi">3</span><span class="p">,</span> <span class="p">...</span>
+                       <span class="s">&#39;n&#39;</span>  <span class="p">,</span> <span class="p">[</span>   <span class="mi">2</span><span class="p">,</span>   <span class="mi">2</span><span class="p">]</span>                 <span class="p">,</span> <span class="p">...</span>
+                       <span class="s">&#39;sr&#39;</span> <span class="p">,</span> <span class="p">[</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]</span>                 <span class="p">,</span> <span class="p">...</span>
+                       <span class="s">&#39;kwm&#39;</span><span class="p">,</span> <span class="p">[</span>   <span class="mi">1</span><span class="p">,</span>   <span class="mi">1</span><span class="p">]);</span>
+
+<span class="n">s</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1001</span><span class="p">).</span><span class="o">&#39;</span><span class="p">;</span> <span class="n">kr</span> <span class="p">=</span> <span class="n">fluid</span><span class="p">.</span><span class="n">relperm</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">kr</span><span class="p">),</span> <span class="nb">legend</span><span class="p">(</span><span class="s">&#39;kr_1&#39;</span><span class="p">,</span> <span class="s">&#39;kr_2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref mat mat-func docutils literal notranslate"><span class="pre">fluid_structure</span></code>, <a class="reference internal" href="#incomp.fluid.incompressible.initSimpleFluid" title="incomp.fluid.incompressible.initSimpleFluid"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">initSimpleFluid</span></code></a>, <a class="reference internal" href="mimetic.html#mimetic.solveIncompFlow" title="mimetic.solveIncompFlow"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">solveIncompFlow</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="incomp.fluid.incompressible.initSimpleFluid">
+<span class="sig-name descname"><span class="pre">initSimpleFluid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#incomp.fluid.incompressible.initSimpleFluid" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize incompressible two-phase fluid model (analytic rel-perm).</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">fluid</span> <span class="p">=</span> <span class="n">initSimpleFluid</span><span class="p">(</span><span class="s">&#39;pn1&#39;</span><span class="p">,</span> <span class="n">pv1</span><span class="p">,</span> <span class="p">...)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>'pn'/pv</strong> – <p>List of ‘key’/value pairs defining specific fluid
+characteristics.  The following parameters can be defined
+with one value for each of the two fluid phases:</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>mu  – Phase viscosities in units of Pa*s. Defaults to 1</dt><dd><p>1*centi*poise for each phase.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>rho – Phase densities in units of kilogram/meter^3.</dt><dd><p>Defaults to 1.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>n   – Phase relative permeability exponents.</dt><dd><p>Defaults to 1.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>fluid</strong> – Incompressible fluid data structure that is also compatible
+with AD-based solvers.</p>
+</dd>
+</dl>
+<p class="rubric">Example:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">fluid</span> <span class="p">=</span> <span class="n">initSimpleFluid</span><span class="p">(</span><span class="s">&#39;mu&#39;</span> <span class="p">,</span> <span class="p">[</span>   <span class="mi">1</span><span class="p">,</span>  <span class="mi">10</span><span class="p">]</span><span class="o">*</span><span class="n">centi</span><span class="o">*</span><span class="n">poise</span>     <span class="p">,</span> <span class="p">...</span>
+                        <span class="s">&#39;rho&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1014</span><span class="p">,</span> <span class="mi">859</span><span class="p">]</span><span class="o">*</span><span class="n">kilogram</span><span class="o">/</span><span class="n">meter</span>^<span class="mi">3</span><span class="p">,</span> <span class="p">...</span>
+                        <span class="s">&#39;n&#39;</span>  <span class="p">,</span> <span class="p">[</span>   <span class="mi">2</span><span class="p">,</span>   <span class="mi">2</span><span class="p">]);</span>
+
+<span class="n">s</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1001</span><span class="p">).</span><span class="o">&#39;</span><span class="p">;</span> <span class="n">krW</span> <span class="p">=</span> <span class="n">fluid</span><span class="p">.</span><span class="n">krW</span><span class="p">(</span><span class="n">s</span><span class="p">);</span> <span class="n">krO</span> <span class="p">=</span> <span class="n">fluid</span><span class="p">.</span><span class="n">krO</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">s</span><span class="p">);</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="p">[</span><span class="n">krW</span><span class="p">,</span> <span class="n">krO</span><span class="p">]),</span> <span class="nb">legend</span><span class="p">(</span><span class="s">&#39;kr_1&#39;</span><span class="p">,</span> <span class="s">&#39;kr_2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#incomp.fluid.incompressible.initSingleFluid" title="incomp.fluid.incompressible.initSingleFluid"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">initSingleFluid</span></code></a>, <a class="reference internal" href="#incomp.fluid.incompressible.initSimpleFluidJfunc" title="incomp.fluid.incompressible.initSimpleFluidJfunc"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">initSimpleFluidJfunc</span></code></a>, <a class="reference internal" href="#incomp.incompTPFA" title="incomp.incompTPFA"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">incompTPFA</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="incomp.fluid.incompressible.initSimpleFluidJfunc">
+<span class="sig-name descname"><span class="pre">initSimpleFluidJfunc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#incomp.fluid.incompressible.initSimpleFluidJfunc" title="Permalink to this definition"></a></dt>
+<dd><p>Two-phase fluid model with Leverett J-function capillary pressure</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">fluid</span> <span class="p">=</span> <span class="n">initSimpleFluidJfunc</span><span class="p">(</span><span class="s">&#39;pn1&#39;</span><span class="p">,</span> <span class="n">pv1</span><span class="p">,</span> <span class="p">...)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>'pn'/pv</strong> – <p>List of ‘key’/value pairs defining specific fluid
+characteristics.  The following parameters must be defined
+with one value for each of the two fluid phases:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>mu    – Phase viscosities in units of Pa*s.</p></li>
+<li><p>rho   – Phase densities in units of kilogram/meter^3.</p></li>
+<li><p>n     – Phase relative permeability exponents.</p></li>
+<li><dl class="simple">
+<dt>rock  – Rock object containing fields ‘poro’ and ‘perm’,</dt><dd><p>which will be used to evaluate the Leverett
+J-function for capillary pressure</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>surf_tension – Surface tension used in the Leverett</dt><dd><p>J-function for capillary pressure</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>fluid</strong> – Incompressible fluid data structure that is also compatible
+with AD-based solvers.</p>
+</dd>
+</dl>
+<p class="rubric">Example:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">G</span> <span class="p">=</span> <span class="n">computeGeometry</span><span class="p">(</span><span class="n">cartGrid</span><span class="p">([</span><span class="mi">40</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">1</span><span class="p">]));</span>
+<span class="n">s</span> <span class="p">=</span> <span class="n">G</span><span class="p">.</span><span class="n">cells</span><span class="p">.</span><span class="n">centroids</span><span class="p">(:,</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">;</span>
+<span class="n">p</span> <span class="p">=</span> <span class="n">G</span><span class="p">.</span><span class="n">cells</span><span class="p">.</span><span class="n">centroids</span><span class="p">(:,</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.001</span><span class="p">;</span>
+
+<span class="n">rock</span> <span class="p">=</span> <span class="n">makeRock</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">p</span><span class="o">.^</span><span class="mi">3</span> <span class="o">.*</span> <span class="p">(</span><span class="mf">1e-5</span><span class="p">)</span>^<span class="mi">2</span> <span class="o">./</span> <span class="p">(</span><span class="mf">0.81</span> <span class="o">*</span> <span class="mi">72</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p</span><span class="p">)</span><span class="o">.^</span><span class="mi">2</span><span class="p">),</span> <span class="n">p</span><span class="p">);</span>
+
+<span class="n">fluid</span> <span class="p">=</span> <span class="n">initSimpleFluidJfunc</span><span class="p">(</span><span class="s">&#39;mu&#39;</span> <span class="p">,</span> <span class="p">[</span>   <span class="mi">1</span><span class="p">,</span>  <span class="mi">10</span><span class="p">]</span><span class="o">*</span><span class="n">centi</span><span class="o">*</span><span class="n">poise</span>     <span class="p">,</span> <span class="p">...</span>
+       <span class="s">&#39;rho&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1014</span><span class="p">,</span> <span class="mi">859</span><span class="p">]</span><span class="o">*</span><span class="n">kilogram</span><span class="o">/</span><span class="n">meter</span>^<span class="mi">3</span><span class="p">,</span> <span class="p">...</span>
+       <span class="s">&#39;n&#39;</span>  <span class="p">,</span> <span class="p">[</span>   <span class="mi">2</span><span class="p">,</span>   <span class="mi">2</span><span class="p">],</span> <span class="p">...</span>
+       <span class="s">&#39;surf_tension&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="o">*</span><span class="n">barsa</span> <span class="o">/</span> <span class="nb">sqrt</span><span class="p">(</span><span class="mf">0.1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">milli</span><span class="o">*</span><span class="n">darcy</span><span class="p">)),</span> <span class="p">...</span>
+       <span class="s">&#39;rock&#39;</span><span class="p">,</span> <span class="n">rock</span><span class="p">);</span>
+
+<span class="nb">plot</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">convertTo</span><span class="p">(</span><span class="n">fluid</span><span class="p">.</span><span class="n">pcOW</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">barsa</span><span class="p">),</span> <span class="s">&#39;o&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#incomp.fluid.incompressible.initSimpleFluid" title="incomp.fluid.incompressible.initSimpleFluid"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">initSimpleFluid</span></code></a>, <a class="reference internal" href="#incomp.fluid.incompressible.initSimpleFluidPc" title="incomp.fluid.incompressible.initSimpleFluidPc"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">initSimpleFluidPc</span></code></a>, <a class="reference internal" href="#incomp.incompTPFA" title="incomp.incompTPFA"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">incompTPFA</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="incomp.fluid.incompressible.initSimpleFluidPc">
+<span class="sig-name descname"><span class="pre">initSimpleFluidPc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#incomp.fluid.incompressible.initSimpleFluidPc" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize incompressible two-phase fluid model with capillary forces</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">fluid</span> <span class="p">=</span> <span class="n">initSimpleFluidPc</span><span class="p">(</span><span class="s">&#39;pn1&#39;</span><span class="p">,</span> <span class="n">pv1</span><span class="p">,</span> <span class="p">...)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>'pn'/pv</strong> – <p>List of ‘key’/value pairs defining specific fluid
+characteristics.  The following parameters must be defined
+with one value for each of the two fluid phases:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>mu  – Phase viscosities in units of Pa*s.</p></li>
+<li><p>rho – Phase densities in units of kilogram/meter^3.</p></li>
+<li><p>n   – Phase relative permeability exponents.</p></li>
+<li><dl class="simple">
+<dt>pc_scale – Constant multiplying the linear capillary</dt><dd><p>term, i.e., pc(S) = pc_scale*(1-S)</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>fluid</strong> – Incompressible fluid data structure that is also compatible
+with AD-based solvers.</p>
+</dd>
+</dl>
+<p class="rubric">Example:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">fluid</span> <span class="p">=</span> <span class="n">initSimpleFluidPc</span><span class="p">(</span><span class="s">&#39;mu&#39;</span> <span class="p">,</span> <span class="p">[</span>   <span class="mi">1</span><span class="p">,</span>  <span class="mi">10</span><span class="p">]</span><span class="o">*</span><span class="n">centi</span><span class="o">*</span><span class="n">poise</span>     <span class="p">,</span> <span class="p">...</span>
+                          <span class="s">&#39;rho&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1014</span><span class="p">,</span> <span class="mi">859</span><span class="p">]</span><span class="o">*</span><span class="n">kilogram</span><span class="o">/</span><span class="n">meter</span>^<span class="mi">3</span><span class="p">,</span> <span class="p">...</span>
+                          <span class="s">&#39;n&#39;</span>  <span class="p">,</span> <span class="p">[</span>   <span class="mi">2</span><span class="p">,</span>   <span class="mi">2</span><span class="p">],</span> <span class="p">...</span>
+                          <span class="s">&#39;pc_scale&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">barsa</span><span class="p">);</span>
+
+<span class="n">s</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">101</span><span class="p">).</span><span class="o">&#39;</span><span class="p">;</span> <span class="n">krW</span> <span class="p">=</span> <span class="n">fluid</span><span class="p">.</span><span class="n">krW</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>  <span class="n">krO</span> <span class="p">=</span> <span class="n">fluid</span><span class="p">.</span><span class="n">krO</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">s</span><span class="p">);</span>
+<span class="nb">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="nb">plot</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="p">[</span><span class="n">krW</span><span class="p">,</span> <span class="n">krO</span><span class="p">]),</span> <span class="nb">legend</span><span class="p">(</span><span class="s">&#39;kr_1(S)&#39;</span><span class="p">,</span> <span class="s">&#39;kr_2(S)&#39;</span><span class="p">)</span>
+<span class="n">pc</span> <span class="p">=</span> <span class="n">fluid</span><span class="p">.</span><span class="n">pcOW</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+<span class="nb">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="nb">plot</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">pc</span><span class="p">);</span> <span class="nb">legend</span><span class="p">(</span><span class="s">&#39;P_c(S)&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#incomp.fluid.incompressible.initSimpleFluid" title="incomp.fluid.incompressible.initSimpleFluid"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">initSimpleFluid</span></code></a>, <a class="reference internal" href="#incomp.incompTPFA" title="incomp.incompTPFA"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">incompTPFA</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="incomp.fluid.incompressible.initSingleFluid">
+<span class="sig-name descname"><span class="pre">initSingleFluid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#incomp.fluid.incompressible.initSingleFluid" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize incompressible single phase fluid model.</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">fluid</span> <span class="p">=</span> <span class="n">initSingleFluid</span><span class="p">(</span><span class="s">&#39;pn1&#39;</span><span class="p">,</span> <span class="n">pv1</span><span class="p">,</span> <span class="p">...)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>'pn'/pv</strong> – <p>List of ‘key’/value pairs defining specific fluid
+characteristics.  The following parameters must be defined:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>mu    – Fluid viscosity in units of Pa*s.</p></li>
+<li><p>rho   – Fluid density in units of kilogram/meter^3.</p></li>
+<li><p>pahse – Phase name.  Default value ‘W’.  Supported</p></li>
+</ul>
+<p>values are ‘W’, ‘O’, and ‘G’.</p>
+</div></blockquote>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>fluid</strong> – Incompressible fluid data structure that is also compatible
+with AD-based solvers.  Supports a single phase, identified by
+the ‘phase’ parameter, only.  Requests for properties of other
+phases return empty arrays/objects.</p>
+</dd>
+</dl>
+<p class="rubric">Example:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">fluid</span> <span class="p">=</span> <span class="n">initSingleFluid</span><span class="p">(</span><span class="s">&#39;mu&#39;</span> <span class="p">,</span>    <span class="mi">1</span><span class="o">*</span><span class="n">centi</span><span class="o">*</span><span class="n">poise</span>     <span class="p">,</span> <span class="p">...</span>
+                        <span class="s">&#39;rho&#39;</span><span class="p">,</span> <span class="mi">1014</span><span class="o">*</span><span class="n">kilogram</span><span class="o">/</span><span class="n">meter</span>^<span class="mi">3</span><span class="p">);</span>
+
+<span class="n">s</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1001</span><span class="p">).</span><span class="o">&#39;</span><span class="p">;</span> <span class="n">kr</span> <span class="p">=</span> <span class="n">fluid</span><span class="p">.</span><span class="n">krW</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">kr</span><span class="p">),</span> <span class="nb">legend</span><span class="p">(</span><span class="s">&#39;kr&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#incomp.fluid.incompressible.initSimpleFluid" title="incomp.fluid.incompressible.initSimpleFluid"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">initSimpleFluid</span></code></a>, <a class="reference internal" href="#incomp.incompTPFA" title="incomp.incompTPFA"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">incompTPFA</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<span class="target" id="module-incomp.transport"></span><dl class="mat script">
+<dt class="sig sig-object mat" id="incomp.transport.Contents">
+<span class="sig-name descname"><span class="pre">Contents</span></span><a class="headerlink" href="#incomp.transport.Contents" title="Permalink to this definition"></a></dt>
+<dd><p>Routines for solving transport/saturation equation.</p>
+<dl class="simple">
+<dt>Files</dt><dd><p>explicitTransport - Explicit single-point upstream mobility-weighted transport solver for two-phase flow.
+implicitTransport - Implicit single-point upstream mobility-weighted transport solver for two-phase flow.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="incomp.transport.explicitTransport">
+<span class="sig-name descname"><span class="pre">explicitTransport</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">tf</span></em>, <em class="sig-param"><span class="pre">rock</span></em>, <em class="sig-param"><span class="pre">fluid</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#incomp.transport.explicitTransport" title="Permalink to this definition"></a></dt>
+<dd><p>Explicit single-point upstream mobility-weighted transport solver for two-phase flow.</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="p">=</span> <span class="n">explicitTransport</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">tf</span><span class="p">,</span> <span class="n">rock</span><span class="p">,</span> <span class="n">fluid</span><span class="p">)</span>
+<span class="n">state</span> <span class="p">=</span> <span class="n">explicitTransport</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">tf</span><span class="p">,</span> <span class="n">rock</span><span class="p">,</span> <span class="n">fluid</span><span class="p">,</span> <span class="s">&#39;pn1&#39;</span><span class="p">,</span> <span class="n">pv1</span><span class="p">,</span> <span class="p">...)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>Implicit discretization of the transport equation</p>
+<blockquote>
+<div><p>s_t + div[f(s)(v + mo K((rho_w-rho_o)g + grad(P_c)))] = f(s)q</p>
+</div></blockquote>
+<p>where v is the sum of the phase Darcy fluxes, f is the fractional
+flow function,</p>
+<blockquote>
+<div><blockquote>
+<div><p>mw(s)</p>
+</div></blockquote>
+<dl class="simple">
+<dt>f(s) = ————-</dt><dd><p>mw(s) + mo(s)</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>mi = kr_i/mu_i is the phase mobility of phase i, mu_i and rho_i are the
+phase viscosity and density, respectively, g the (vector) acceleration
+of gravity, K the permeability, and P_c(s) the capillary pressure.  The
+source term f(s)q is a volumetric rate of water.</p>
+<p>We use a first-order upstream mobility-weighted discretization in space
+and a backward Euler discretization in time. The transport equation is
+solved on the time interval [0,tf] by calling twophaseJacobian to build
+a function computing the residual of the discrete system in addition to
+a function taking care of the update of the solution during the
+time loop.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> – Reservoir and well solution structure either properly
+initialized from function ‘initState’, or the results from a
+previous call to function ‘solveIncompFlow’ and, possibly, a
+transport solver such as function ‘explicitTransport’.</p></li>
+<li><p><strong>G</strong> – Grid data structure discretizing the reservoir model.</p></li>
+<li><p><strong>tf</strong> – End point of time integration interval (i.e., final time).
+Measured in units of seconds.</p></li>
+<li><p><strong>rock</strong> – Rock data structure.  Must contain the field ‘rock.poro’ and,
+in the presence of gravity or capillary forces, valid
+permeabilities measured in units of m^2 in field ‘rock.perm’.</p></li>
+<li><p><strong>fluid</strong> – Fluid data structure as defined in ‘fluid_structure’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>W</strong> – Well structure as defined by function ‘addWell’.  This
+structure accounts for all injection and production well
+contribution to the reservoir flow.
+Default value: W = [], meaning a model without any wells.</p></li>
+<li><p><strong>bc</strong> – Boundary condition structure as defined by function
+‘addBC’.  This structure accounts for all external boundary
+contributions to the reservoir flow.
+Default value: bc = [] meaning all external no-flow
+(homogeneous Neumann) conditions.</p></li>
+<li><p><strong>src</strong> – Explicit source contributions as defined by function
+‘addSource’. Default value: src = [] meaning no explicit
+sources exist in the model.</p></li>
+<li><p><strong>onlygrav</strong> – Ignore content of state.flux.         Default false.</p></li>
+<li><p><strong>computedt</strong> – Estimate time step.                   Default true.</p></li>
+<li><p><strong>max_dt</strong> – If ‘computedt’, limit time step.      Default inf.</p></li>
+<li><p><strong>dt_factor</strong> – Safety factor in time step estimate.  Default 0.5.</p></li>
+<li><p><strong>dt</strong> – Set time step manually.  Overrides all other options.</p></li>
+<li><p><strong>gravity</strong> – The current gravity in vector form. Defaults to gravity().</p></li>
+<li><p><strong>satwarn</strong> – Issue a warning if saturation is more than ‘satwarn’
+outside the default interval of [0,1].</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>state</strong> – Reservoir solution with updated saturation, state.s.</p>
+</dd>
+</dl>
+<p class="rubric">Example:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">See</span> <span class="n">simple2phWellExample</span><span class="p">.</span><span class="n">m</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref mat mat-func docutils literal notranslate"><span class="pre">twophaseJacobian</span></code>, <a class="reference internal" href="#incomp.transport.implicitTransport" title="incomp.transport.implicitTransport"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">implicitTransport</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="incomp.transport.implicitTransport">
+<span class="sig-name descname"><span class="pre">implicitTransport</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">tf</span></em>, <em class="sig-param"><span class="pre">rock</span></em>, <em class="sig-param"><span class="pre">fluid</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#incomp.transport.implicitTransport" title="Permalink to this definition"></a></dt>
+<dd><p>Implicit single-point upstream mobility-weighted transport solver for two-phase flow.</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="p">=</span> <span class="n">implicitTransport</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">tf</span><span class="p">,</span> <span class="n">rock</span><span class="p">,</span> <span class="n">fluid</span><span class="p">)</span>
+<span class="n">state</span> <span class="p">=</span> <span class="n">implicitTransport</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">tf</span><span class="p">,</span> <span class="n">rock</span><span class="p">,</span> <span class="n">fluid</span><span class="p">,</span> <span class="s">&#39;pn1&#39;</span><span class="p">,</span> <span class="n">pv1</span><span class="p">,</span> <span class="p">...)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>Implicit discretization of the transport equation</p>
+<blockquote>
+<div><p>s_t + div[f(s)(v + mo K((rho_w-rho_o)g + grad(P_c)))] = f(s)q</p>
+</div></blockquote>
+<p>where v is the sum of the phase Darcy fluxes, f is the fractional
+flow function,</p>
+<blockquote>
+<div><blockquote>
+<div><p>mw(s)</p>
+</div></blockquote>
+<dl class="simple">
+<dt>f(s) = ————-</dt><dd><p>mw(s) + mo(s)</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>mi = kr_i/mu_i is the phase mobility of phase i, mu_i and rho_i are the
+phase viscosity and density, respectively, g the (vector) acceleration
+of gravity, K the permeability, and P_c(s) the capillary pressure.  The
+source term f(s)q is a volumetric rate of water.</p>
+<p>We use a first-order upstream mobility-weighted discretization in space
+and a backward Euler discretization in time.  The transport equation is
+solved on the time interval [0,tf] by calling the private function
+‘twophaseJacobian’ to build functions computing the residual and the
+Jacobian matrix of the discrete system in addition to a function taking
+care of the update of the solution during a Newton-Raphson iteration.
+These functions are passed to the private function ‘newtonRaphson2ph’
+that implements a Newton-Raphson iteration with some logic to modify
+time step size in case of non-convergence.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> – Reservoir and well solution structure either properly
+initialized from function ‘initState’, or the results from a
+previous call to function ‘solveIncompFlow’ and, possibly, a
+transport solver such as function ‘implicitTransport’.</p></li>
+<li><p><strong>G</strong> – Grid data structure discretizing the reservoir model.</p></li>
+<li><p><strong>tf</strong> – End point of time integration interval (i.e., final time).
+Measured in units of seconds.</p></li>
+<li><p><strong>rock</strong> – Rock data structure.  Must contain the field ‘rock.poro’ and,
+in the presence of gravity or capillary forces, valid
+permeabilities measured in units of m^2 in field ‘rock.perm’.</p></li>
+<li><p><strong>fluid</strong> – Fluid data structure as described by ‘fluid_structure’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul>
+<li><p><strong>verbose</strong> – Whether or not time integration progress should be
+reported to the screen. Default value: verbose = mrstVerbose.</p></li>
+<li><p><strong>W</strong> – Well structure as defined by function ‘addWell’.  May be
+empty (i.e., W = []) which is interpreted as a model without
+any wells.</p></li>
+<li><p><strong>bc</strong> – Boundary condition structure as defined by function
+‘addBC’. This structure accounts for all external boundary
+contributions to the reservoir flow.
+Default value: bc = [] meaning all external no-flow
+(homogeneous Neumann) conditions.</p></li>
+<li><p><strong>src</strong> – Explicit source contributions as defined by function
+‘addSource’. Default value: src = [] meaning no explicit
+sources exist in the model.</p></li>
+<li><p><strong>Trans</strong> – two point flux transmissibilities. This will be used instead
+of rock. Useful for grids without proper geometry and
+or for getting consistency with pressure solver.</p></li>
+<li><p><strong>nltol</strong> – Absolute tolerance of iteration.  The numerical solution
+must satisfy the condition</p>
+<blockquote>
+<div><p>NORM(S-S0 + dt/porvol(out - in) - Q, INF) &lt;= nltol</p>
+</div></blockquote>
+<p>at all times in the interval [0,tf].
+Default value: nltol = 1.0e-6.</p>
+</li>
+<li><p><strong>lstrials</strong> – Maximum number of trials in line search method.  Each new
+trial corresponds to halving the step size along the
+search direction. Default value: lstrials = 20.</p></li>
+<li><p><strong>maxnewt</strong> – Maximum number of inner iterations in Newton-Raphson method.
+Default value: maxnewt = 25.</p></li>
+<li><p><strong>tsref</strong> – Maximum time step refinement power.  The minimum time step
+allowed is tf / 2^tsref.
+Default value: tsref = 12.</p></li>
+<li><p><strong>LinSolve</strong> – Handle to linear system solver software to which the fully
+assembled system of linear equations will be passed.
+Assumed to support the syntax</p>
+<blockquote>
+<div><p>x = LinSolve(A, b)</p>
+</div></blockquote>
+<p>in order to solve a system Ax=b of linear equations.
+Default value: LinSolve = &#64;mldivide (backslash).</p>
+</li>
+<li><p><strong>gravity</strong> – The current gravity in vector form. Defaults to gravity().</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>state</strong> – Updated reservoir/well solution object.
+New values for reservoir saturations, state.s.</p>
+</dd>
+</dl>
+<p class="rubric">Example:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">See</span> <span class="n">simple2phWellExample</span><span class="p">.</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#incomp.transport.explicitTransport" title="incomp.transport.explicitTransport"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">explicitTransport</span></code></a>, <code class="xref mat mat-func docutils literal notranslate"><span class="pre">private/twophaseJacobian</span></code>, <code class="xref mat mat-func docutils literal notranslate"><span class="pre">private/newtonRaphson2ph</span></code>.</p>
+</div>
+</dd></dl>
+
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="hfm.html" class="btn btn-neutral float-left" title="hfm: Hierarchical and embedded fractures" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="libgeometry.html" class="btn btn-neutral float-right" title="libgeometry:" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019, SINTEF Digital.
+      <span class="lastupdated">Last updated on Sep 23, 2021.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

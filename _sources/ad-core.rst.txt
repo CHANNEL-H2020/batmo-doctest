@@ -1,0 +1,79 @@
+`ad-core`: Automatic Differentiation Core
+*******************************************
+
+.. include:: mrst/ad_core/README.txt
+
+Overview of the solvers:
+
+.. figure:: relations.png
+   :scale: 50 %
+
+Models
+===============================
+
+Base classes
+-------------------------------
+.. automodule:: ad_core.models
+	:members:
+	:show-inheritance:
+
+Facility and wells
+-------------------------------
+.. automodule:: ad_core.models.facilities
+	:members:
+	:show-inheritance:
+
+.. automodule:: ad_core.models.facilities.vfp
+	:members:
+	:show-inheritance:
+
+Simulators
+===============================
+.. automodule:: ad_core.simulators
+	:members:
+
+Solvers
+===============================
+.. automodule:: ad_core.solvers
+	:members:
+
+Time-step selection
+===============================
+.. automodule:: ad_core.timesteps
+	:members:
+
+Model upscaling
+===============================
+.. automodule:: ad_core.upscale
+	:members:
+
+Plotting
+===============================
+.. automodule:: ad_core.plotting
+	:members:
+
+Automatic differentation backends
+=================================
+.. automodule:: ad_core.backends
+	:members:
+
+.. automodule:: ad_core.backends.diagonal
+	:members:
+
+.. automodule:: ad_core.backends.diagonal.operators
+	:members:
+
+.. automodule:: ad_core.backends.diagonal.utils
+	:members:
+
+.. automodule:: ad_core.backends.sparse
+	:members:
+Utilities
+===============================
+.. automodule:: ad_core.utils
+	:members:
+
+
+Examples
+===============================
+.. include:: examples/examples_ad_core.txt

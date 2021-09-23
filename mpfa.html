@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mpfa: Multi-point flux approximation solvers for pressure &mdash; The Matlab Reservoir Simulation Toolbox 2019b documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="mrst_api: API for writing C/C++ for MRST" href="mrst_api.html" />
+    <link rel="prev" title="mimetic: Mimetic solvers for pressure problems" href="mimetic.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> The Matlab Reservoir Simulation Toolbox
+            <img src="_static/mrstlogo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                2019b
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="core.html">Core functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-core.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-core</span></code>: Automatic Differentiation Core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-props.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-props</span></code>: PVT, fluid models and other properties for the AD-solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-blackoil.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-blackoil</span></code>: Black-oil solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-eor.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-eor</span></code>: Enhanced oil recovery solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-mechanics.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-mechanics</span></code>: Coupled flow and mechanics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adjoint.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">adjoint</span></code>: Two-phase, incompressible adjoint solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agglom.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">agglom</span></code>: Flow and property-based coarse-grid generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="blackoil-sequential.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">blackoil-sequential</span></code>: Sequential implicit black-oil solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">book</span></code>: Book examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coarsegrid.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">coarsegrid</span></code>: Generation of coarse grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compositional.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">compositional</span></code>: Equation-of-state compositional solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="co2lab.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">co2lab</span></code>: Numerical CO<sub>2</sub> laboratory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deckformat.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">deckformat</span></code>: Reading and conversion of input decks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dfm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dfm</span></code>: Discrete fracture matrix implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dg.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dg</span></code>: Discontinous Galerkin discretizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="diagnostics.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">diagnostics</span></code>: Flow diagnostics functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dual_porosity.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dual-porosity</span></code>: Dual porosity/permeability model for fractures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fvbiot.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">fvbiot</span></code>: Consistent finite-volume discretizations for poroelasticity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geochemistry.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">geochemistry</span></code>: Surface geochemistry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heterogeneity.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">heterogeneity</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="hfm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">hfm</span></code>: Hierarchical and embedded fractures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="incomp.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">incomp</span></code>: Solvers for incompressible flow and transport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgeometry.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">libgeometry</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linearsolvers.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">linearsolvers</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab_bgl.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">matlab_bgl</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mimetic.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mimetic</span></code>: Mimetic solvers for pressure problems</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mpfa</span></code>: Multi-point flux approximation solvers for pressure</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mrst_api.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mrst_api</span></code>: API for writing C/C++ for MRST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mrst-gui.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mrst-gui</span></code>: Graphical user-interfaces for MRST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msfvm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msfvm</span></code>: Multiscale Finite-Volume method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msmfem.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msmfem</span></code>: Multiscale Mixed Finite-Element method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msrsb.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msrsb</span></code>: Multiscale Restriction-Smoothed Basis method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nwm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">nwm</span></code>: Near Wellbore Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opm_gridprocessing.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">opm_gridprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimization.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">optimization</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="re-mpfa.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">re-mpfa</span></code>: Richards’ equation with multi-point flux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvent.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">solvent</span></code>: Solvent solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spe10.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">spe10</span></code>: Access to the SPE10 benchmark case</a></li>
+<li class="toctree-l1"><a class="reference internal" href="steady-state.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">steady-state</span></code> Steady-state upscaling of functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="streamlines.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">streamlines</span></code>: Compute streamlines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triangle.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">triangle</span></code>: Triangular grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upscaling.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">upscaling</span></code>: Upscaling of reservoir problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vem.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">vem</span></code>: Virtual element method on general grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vemmech.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">vemmech</span></code>: Mechanics for general grids using the virtual element method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wellpaths.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">wellpaths</span></code>: Generation of wells using general curves</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">The Matlab Reservoir Simulation Toolbox</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mpfa</span></code>: Multi-point flux approximation solvers for pressure</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/mpfa.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="mpfa-multi-point-flux-approximation-solvers-for-pressure">
+<h1><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mpfa</span></code>: Multi-point flux approximation solvers for pressure<a class="headerlink" href="#mpfa-multi-point-flux-approximation-solvers-for-pressure" title="Permalink to this headline"></a></h1>
+<p>Implementation of the multipoint flux-approximation (MPFA-O) method for incompressible (Poisson-type) pressure equations</p>
+<span class="target" id="module-mpfa"></span><dl class="mat script">
+<dt class="sig sig-object mat" id="mpfa.Contents">
+<span class="sig-name descname"><span class="pre">Contents</span></span><a class="headerlink" href="#mpfa.Contents" title="Permalink to this definition"></a></dt>
+<dd><p>Routines supporting the MPFA-O method for the pressure equation.</p>
+<dl class="simple">
+<dt>Files</dt><dd><p>computeMultiPointTrans - Compute multi-point transmissibilities.
+incompMPFA             - Solve incompressible flow problem (fluxes/pressures) using MPFA-O method.
+matrixBlocksFromSparse - Extract block-diagonal matrix elements from sparse matrix</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mpfa.computeMultiPointTrans">
+<span class="sig-name descname"><span class="pre">computeMultiPointTrans</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">rock</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mpfa.computeMultiPointTrans" title="Permalink to this definition"></a></dt>
+<dd><p>Compute multi-point transmissibilities for MPFA using local flux mimetic approach</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span>varargout<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">computeMultiPointTrans</span><span class="p">(</span>G, rock, varargin<span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>DESCRIPTION:</p>
+<p>We follow the local flux mimetic approach as described in this reference paper:</p>
+<blockquote>
+<div><p>title     = {Local flux mimetic finite difference methods},
+author    = {Lipnikov, Konstantin and Shashkov, Mikhail and Yotov, Ivan},
+journal   = {Numerische Mathematik},
+volume    = {112},
+number    = {1},
+pages     = {115–152},
+year      = {2009},
+publisher = {Springer}</p>
+</div></blockquote>
+<p>Two versions are available : ‘legacy’ (default) and ‘tensor Assembly’ (set key option <code class="xref mat mat-func docutils literal notranslate"><span class="pre">useTensorAssembly</span></code> to true).</p>
+<p>This legacy version is faster. It is limited to mesh where all the grid cells
+have corners that have the same number of faces as the spatial dimension (this
+is always the case in 2D but not in 3D). The tensor assembly version can
+handle the other cases but is slower (We plan to optimize this implementation
+in the future to run faster).</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>G</strong> – Grid data structure as described by grid_structure.</p></li>
+<li><p><strong>rock</strong> – <p>Rock data structure with valid field ‘perm’.  The
+permeability is assumed to be in measured in units of
+metres squared (m^2).  Use function ‘darcy’ to convert from
+(milli)darcies to m^2, e.g.,</p>
+<blockquote>
+<div><p>perm = convertFrom(perm, milli*darcy)</p>
+</div></blockquote>
+<p>if the permeability is provided in units of millidarcies.</p>
+<p>The field rock.perm may have ONE column for a scalar
+permeability in each cell, TWO/THREE columns for a diagonal
+permeability in each cell (in 2/3 D) and THREE/SIX columns
+for a symmetric full tensor permeability.  In the latter
+case, each cell gets the permeability tensor</p>
+<blockquote>
+<div><dl class="simple">
+<dt>K_i = [ k1  k2 ]      in two space dimensions</dt><dd><p>[ k2  k3 ]</p>
+</dd>
+<dt>K_i = [ k1  k2  k3 ]  in three space dimensions</dt><dd><p>[ k2  k4  k5 ]
+[ k3  k5  k6 ]</p>
+</dd>
+</dl>
+</div></blockquote>
+</p></li>
+<li><p><strong>varargin</strong> – see below</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul>
+<li><p><strong>verbose</strong> – Whether or not to emit informational messages throughout the
+computational process.  Default value depending on the
+settings of function ‘mrstVerbose’.</p></li>
+<li><p><strong>useTensorAssembly</strong> – If true, uses  tensor assembly</p></li>
+<li><p><strong>blocksize</strong> – If non-empty, divide the nodes in block with the given block size and proceed
+with assembly by iterating on the blocks.
+This is necessary in case of large models (get otherwise memory problems with MATLAB)</p>
+<p>Only used/available for tensor assembly version</p>
+</li>
+<li><p><strong>neumann</strong> – If true, set up the problem for Neumann boundary conditions (no flux).
+In this case, a lighter implementation is used.</p>
+<p>Only used/available for tensor assembly version</p>
+</li>
+<li><p><strong>facetrans</strong> – Accounts for face transmissibilities (see <code class="xref mat mat-func docutils literal notranslate"><span class="pre">computeMultiPointTransLegacy</span></code>)</p>
+<p>Only used/available for legacy version</p>
+</li>
+<li><p><strong>invertBlocks</strong> – Method by which to invert a sequence of small matrices that
+arise in the discretisation.  String.  Must be one of</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>MATLAB – Use an function implemented purely in MATLAB</dt><dd><p>(the default).</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>MEX    – Use two C-accelerated MEX functions to</dt><dd><p>extract and invert, respectively, the blocks
+along the diagonal of a sparse matrix.  This
+method is often faster by a significant
+margin, but relies on being able to build
+the required MEX functions.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>vargout</strong> – Two cases :</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>for legacy<span class="classifier">[T, T_noflow]  - half-transmissibilities for each local face of each grid cell</span></dt><dd><p>in the grid. The number of half-transmissibilities equal the
+number of rows in G.cells.faces. T_noflow gives the half-transmissibilities
+only for internal faces</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>for tensor assembly<span class="classifier">[mpfastruct] - Assembly structure as computed by</span></dt><dd><p>computeMultiPointTransTensorAssembly (contains transmissibilities and
+IndexArrays). If <code class="xref mat mat-func docutils literal notranslate"><span class="pre">neumann</span></code> is set to false, extra mappings are returned to
+handle the boundary.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<p>EXAMPLE:</p>
+<p>SEE ALSO:</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="mpfa.incompMPFA">
+<span class="sig-name descname"><span class="pre">incompMPFA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">mpfaT</span></em>, <em class="sig-param"><span class="pre">fluid</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mpfa.incompMPFA" title="Permalink to this definition"></a></dt>
+<dd><p>Solve incompressible problem with mpfa transmissibilities.</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span>state<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">incompMPFA</span><span class="p">(</span>state, G, mpfaT, fluid, varargin<span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>DESCRIPTION:</p>
+<p>Two versions available : ‘legacy’ (default) and ‘tensor Assembly’.</p>
+<p>The legacy version is faster. It is limited to a mesh with grid cells where
+corners have the same number of faces as the spatial dimension (this is always
+the case in 2D but not in 3D). The tensor assembly version
+(computeMultiPointTransTensorAssembly) can handle the other cases but is
+slower (the implementation will be optimized in the future to run faster).%</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> – <p>Reservoir and well solution structure either properly
+initialized from functions ‘initResSol’ and ‘initWellSol’
+respectively, or the results from a previous call to function
+‘incompMPFAlegacy’ and, possibly, a transport solver such as
+function ‘implicitTransport’.</p>
+<p>not used in <code class="xref mat mat-func docutils literal notranslate"><span class="pre">tensor</span> <span class="pre">Assembly</span></code> version</p>
+</p></li>
+<li><p><strong>G</strong> – Grid</p></li>
+<li><p><strong>mpfaT</strong> – transmissibilities (or assembly structure) as computed by computeMultiPointTrans</p></li>
+<li><p><strong>fluid</strong> – Fluid object as defined by function ‘initSimpleFluid’ (not used for tensor assembly).</p></li>
+<li><p><strong>varargin</strong> – see below</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul>
+<li><p><strong>wells</strong> – Well structure as defined by functions ‘addWell’ and
+‘assembleWellSystem’.  May be empty (i.e., W = struct([]))
+which is interpreted as a model without any wells.</p></li>
+<li><p><strong>bc</strong> – Boundary condition structure as defined by function ‘addBC’.
+This structure accounts for all external boundary conditions to
+the reservoir flow.  May be empty (i.e., bc = struct([])) which
+is interpreted as all external no-flow (homogeneous Neumann)
+conditions.</p></li>
+<li><p><strong>src</strong> – Explicit source contributions as defined by function
+‘addSource’.  May be empty (i.e., src = struct([])) which is
+interpreted as a reservoir model without explicit sources.</p>
+<p>(not supported yet in case of tensor assembly)</p>
+</li>
+<li><p><strong>LinSolve</strong> – Handle to linear system solver software to which the
+fully assembled system of linear equations will be
+passed.  Assumed to support the syntax</p>
+<blockquote>
+<div><p>x = LinSolve(A, b)</p>
+</div></blockquote>
+<p>in order to solve a system Ax=b of linear equations.
+Default value: LinSolve = &#64;mldivide (backslash).</p>
+</li>
+<li><p><strong>MatrixOutput</strong> – Whether or not to return the final system matrix ‘A’ to
+the caller of function ‘incompMPFA’.
+Logical.  Default value: MatrixOutput = FALSE.</p></li>
+<li><p><strong>Verbose</strong> – Whether or not to time portions of and emit informational
+messages throughout the computational process.
+Logical.  Default value dependent on global verbose
+setting in function ‘mrstVerbose’.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>state</strong> – contains following fields:</p>
+<ul>
+<li><dl class="simple">
+<dt>pressure         – Pressure values for all cells in the</dt><dd><p>discretised reservoir model, ‘G’.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>boundaryPressure – Pressure values for all boundary interfaces in</dt><dd><p>the discretised reservoir model, ‘G’.
+(not returned in <code class="xref mat mat-func docutils literal notranslate"><span class="pre">tensor</span> <span class="pre">assembly</span></code> version)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>flux             – Flux across global interfaces corresponding to</dt><dd><p>the rows of ‘G.faces.neighbors’.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>A                – System matrix.  Only returned if specifically</dt><dd><p>requested by setting option ‘MatrixOutput’.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>wellSol          – Well solution structure array, one element for each well in the</dt><dd><blockquote>
+<div><p>model, with new values for the fields:</p>
+</div></blockquote>
+<ul class="simple">
+<li><dl class="simple">
+<dt>flux     – Perforation fluxes through all perforations for</dt><dd><p>corresponding well.  The fluxes are interpreted
+as injection fluxes, meaning positive values
+correspond to injection into reservoir while
+negative values mean production/extraction out of
+reservoir.</p>
+</dd>
+</dl>
+</li>
+<li><p>pressure – Well pressure.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<p>EXAMPLE: <code class="xref mat mat-func docutils literal notranslate"><span class="pre">linearPressureTestMPFA</span></code>, <code class="xref mat mat-func docutils literal notranslate"><span class="pre">mpfaExample1</span></code>, <code class="xref mat mat-func docutils literal notranslate"><span class="pre">mpfaExample2</span></code>, <code class="xref mat mat-func docutils literal notranslate"><span class="pre">mpfatest</span></code></p>
+<p>SEE ALSO:
+<code class="xref mat mat-func docutils literal notranslate"><span class="pre">private/incompMPFAlegacy</span></code>, <code class="xref mat mat-func docutils literal notranslate"><span class="pre">private/incompMPFATensorAssembly</span></code></p>
+</dd></dl>
+
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="mimetic.html" class="btn btn-neutral float-left" title="mimetic: Mimetic solvers for pressure problems" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mrst_api.html" class="btn btn-neutral float-right" title="mrst_api: API for writing C/C++ for MRST" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019, SINTEF Digital.
+      <span class="lastupdated">Last updated on Sep 23, 2021.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

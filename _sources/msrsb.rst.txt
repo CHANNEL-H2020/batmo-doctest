@@ -1,0 +1,27 @@
+`msrsb`: Multiscale Restriction-Smoothed Basis method for pressure
+*******************************************
+.. include:: mrst/msrsb/README
+
+Utilities
+===============================
+.. automodule:: msrsb
+	:members:
+
+.. automodule:: msrsb.utils
+	:members:
+
+.. automodule:: msrsb.accelerated
+	:members:
+
+.. automodule:: msrsb.coarsegrid
+	:members:
+
+.. automodule:: msrsb.iterative
+	:members:
+
+.. automodule:: msrsb.msfv
+	:members:
+
+Examples
+===============================
+.. include:: examples/examples_msrsb.txt

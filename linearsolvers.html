@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>linearsolvers: &mdash; The Matlab Reservoir Simulation Toolbox 2019b documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="matlab_bgl:" href="matlab_bgl.html" />
+    <link rel="prev" title="libgeometry:" href="libgeometry.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> The Matlab Reservoir Simulation Toolbox
+            <img src="_static/mrstlogo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                2019b
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="core.html">Core functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-core.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-core</span></code>: Automatic Differentiation Core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-props.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-props</span></code>: PVT, fluid models and other properties for the AD-solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-blackoil.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-blackoil</span></code>: Black-oil solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-eor.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-eor</span></code>: Enhanced oil recovery solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-mechanics.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-mechanics</span></code>: Coupled flow and mechanics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adjoint.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">adjoint</span></code>: Two-phase, incompressible adjoint solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agglom.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">agglom</span></code>: Flow and property-based coarse-grid generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="blackoil-sequential.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">blackoil-sequential</span></code>: Sequential implicit black-oil solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">book</span></code>: Book examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coarsegrid.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">coarsegrid</span></code>: Generation of coarse grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compositional.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">compositional</span></code>: Equation-of-state compositional solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="co2lab.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">co2lab</span></code>: Numerical CO<sub>2</sub> laboratory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deckformat.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">deckformat</span></code>: Reading and conversion of input decks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dfm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dfm</span></code>: Discrete fracture matrix implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dg.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dg</span></code>: Discontinous Galerkin discretizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="diagnostics.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">diagnostics</span></code>: Flow diagnostics functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dual_porosity.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dual-porosity</span></code>: Dual porosity/permeability model for fractures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fvbiot.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">fvbiot</span></code>: Consistent finite-volume discretizations for poroelasticity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geochemistry.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">geochemistry</span></code>: Surface geochemistry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heterogeneity.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">heterogeneity</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="hfm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">hfm</span></code>: Hierarchical and embedded fractures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="incomp.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">incomp</span></code>: Solvers for incompressible flow and transport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgeometry.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">libgeometry</span></code>:</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">linearsolvers</span></code>:</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="matlab_bgl.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">matlab_bgl</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mimetic.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mimetic</span></code>: Mimetic solvers for pressure problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpfa.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mpfa</span></code>: Multi-point flux approximation solvers for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mrst_api.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mrst_api</span></code>: API for writing C/C++ for MRST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mrst-gui.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mrst-gui</span></code>: Graphical user-interfaces for MRST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msfvm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msfvm</span></code>: Multiscale Finite-Volume method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msmfem.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msmfem</span></code>: Multiscale Mixed Finite-Element method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msrsb.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msrsb</span></code>: Multiscale Restriction-Smoothed Basis method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nwm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">nwm</span></code>: Near Wellbore Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opm_gridprocessing.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">opm_gridprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimization.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">optimization</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="re-mpfa.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">re-mpfa</span></code>: Richards’ equation with multi-point flux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvent.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">solvent</span></code>: Solvent solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spe10.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">spe10</span></code>: Access to the SPE10 benchmark case</a></li>
+<li class="toctree-l1"><a class="reference internal" href="steady-state.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">steady-state</span></code> Steady-state upscaling of functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="streamlines.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">streamlines</span></code>: Compute streamlines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triangle.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">triangle</span></code>: Triangular grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upscaling.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">upscaling</span></code>: Upscaling of reservoir problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vem.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">vem</span></code>: Virtual element method on general grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vemmech.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">vemmech</span></code>: Mechanics for general grids using the virtual element method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wellpaths.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">wellpaths</span></code>: Generation of wells using general curves</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">The Matlab Reservoir Simulation Toolbox</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><code class="xref mat mat-func docutils literal notranslate"><span class="pre">linearsolvers</span></code>:</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/linearsolvers.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="module-linearsolvers">
+<span id="linearsolvers"></span><h1><code class="xref mat mat-func docutils literal notranslate"><span class="pre">linearsolvers</span></code>:<a class="headerlink" href="#module-linearsolvers" title="Permalink to this headline"></a></h1>
+<dl class="mat function">
+<dt class="sig sig-object mat" id="linearsolvers.buildLinearSolvers">
+<span class="sig-name descname"><span class="pre">buildLinearSolvers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#linearsolvers.buildLinearSolvers" title="Permalink to this definition"></a></dt>
+<dd><p>Build linear solvers</p>
+</dd></dl>
+
+<span class="target" id="module-linearsolvers.amgcl"></span><dl class="mat script">
+<dt class="sig sig-object mat" id="linearsolvers.amgcl.Contents">
+<span class="sig-name descname"><span class="pre">Contents</span></span><a class="headerlink" href="#linearsolvers.amgcl.Contents" title="Permalink to this definition"></a></dt>
+<dd><p>AMGCL</p>
+<dl class="simple">
+<dt>Files</dt><dd><p>callAMGCL - Invoke AMGCL Linear Solver Software</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="linearsolvers.amgcl.callAMGCL">
+<span class="sig-name descname"><span class="pre">callAMGCL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">A</span></em>, <em class="sig-param"><span class="pre">b</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#linearsolvers.amgcl.callAMGCL" title="Permalink to this definition"></a></dt>
+<dd><p>Invoke AMGCL Linear Solver Software</p>
+<p class="rubric">Description:</p>
+<p>Solves the system of simultaneous linear equations</p>
+<blockquote>
+<div><p>Ax = b</p>
+</div></blockquote>
+<p>in which the coefficient matrix ‘A’ is sparse.  Single right-hand side
+vector.</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span> <span class="n">x</span>              <span class="p">=</span> <span class="n">callAMGCL</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+ <span class="n">x</span>              <span class="p">=</span> <span class="n">callAMGCL</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="s">&#39;pn1&#39;</span><span class="p">,</span> <span class="n">pv1</span><span class="p">,</span> <span class="p">...)</span>
+
+<span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">err</span><span class="p">]</span>        <span class="p">=</span> <span class="n">callAMGCL</span><span class="p">(...)</span>
+<span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">err</span><span class="p">,</span> <span class="n">nIter</span><span class="p">]</span> <span class="p">=</span> <span class="n">callAMGCL</span><span class="p">(...)</span>
+</pre></div>
+</div>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> – Coefficient matrix.</p></li>
+<li><p><strong>b</strong> – System right-hand side vector.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul>
+<li><dl>
+<dt><strong>isTransposed</strong> – Whether or not the coefficient matrix is transposed on</dt><dd><blockquote>
+<div><p>input.  This simplifies converting MATLAB’s CSC matrix
+format to AMGCL’s CSR matrix input format.  Default
+value: <code class="xref mat mat-func docutils literal notranslate"><span class="pre">isTransposed</span> <span class="pre">=</span> <span class="pre">false</span></code>.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p><strong>tolerance</strong> – Linear solver tolerance.  Corresponds to parameter
+‘solver.tol’ (relative residual reduction) of AMGCL.
+Default value: <code class="xref mat mat-func docutils literal notranslate"><span class="pre">tolerance</span> <span class="pre">=</span> <span class="pre">1.0e-6</span></code>.</p></li>
+<li><p><strong>maxIterations</strong> – Maximum number of linear iterations.  Overrides
+‘solver.maxiter’ if positive.  Default value:
+<code class="xref mat mat-func docutils literal notranslate"><span class="pre">maxIterations</span> <span class="pre">=</span> <span class="pre">0</span></code> (use AMGCL solver’s default,
+typically 100).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Additional keyword arguments passed on to function <a class="reference internal" href="#linearsolvers.amgcl.utils.getAMGCLMexStruct" title="linearsolvers.amgcl.utils.getAMGCLMexStruct"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">getAMGCLMexStruct</span></code></a>.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> – Solution vector.</p></li>
+<li><p><strong>err</strong> – Norm of residual at end of solution process.</p></li>
+<li><p><strong>nIter</strong> – Number of linear iterations.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mldivide</span></code>, <a class="reference internal" href="#linearsolvers.amgcl.utils.amgcl_matlab" title="linearsolvers.amgcl.utils.amgcl_matlab"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">amgcl_matlab</span></code></a>, <a class="reference internal" href="#linearsolvers.amgcl.utils.getAMGCLMexStruct" title="linearsolvers.amgcl.utils.getAMGCLMexStruct"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">getAMGCLMexStruct</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<span class="target" id="module-linearsolvers.amgcl.utils"></span><dl class="mat script">
+<dt class="sig sig-object mat" id="linearsolvers.amgcl.utils.Contents">
+<span class="sig-name descname"><span class="pre">Contents</span></span><a class="headerlink" href="#linearsolvers.amgcl.utils.Contents" title="Permalink to this definition"></a></dt>
+<dd><p>UTILS</p>
+<dl class="simple">
+<dt>Files</dt><dd><p>amgcl                   - Undocumented Utility Function
+amgcl_matlab            - MEX-gateway to AMGCL Linear Solver Software
+amgcl_matlab_simple     - MEX-gateway to AMGCL Linear Solver Software
+callAMGCL_cpr           - Invoke AMGCL Linear Solver Software in CPR Mode
+getAMGCLDependencyPaths - Locate AMGCL Build Prerequisites on Current Computer System
+getAMGCLMexStruct       - Undocumented Utility Function
+resetAMGCL              - Undocumented Utility Function
+translateOptionsAMGCL   - Translate AMGCL String Option Value to Integer Code</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="linearsolvers.amgcl.utils.amgcl">
+<span class="sig-name descname"><span class="pre">amgcl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">mat</span></em>, <em class="sig-param"><span class="pre">rhs</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#linearsolvers.amgcl.utils.amgcl" title="Permalink to this definition"></a></dt>
+<dd><p>Undocumented Utility Function</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="linearsolvers.amgcl.utils.amgcl_matlab">
+<span class="sig-name descname"><span class="pre">amgcl_matlab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#linearsolvers.amgcl.utils.amgcl_matlab" title="Permalink to this definition"></a></dt>
+<dd><p>MEX-gateway to AMGCL Linear Solver Software</p>
+<p>For more information about AMGCL, please see:
+Documentation: <a class="reference external" href="http://amgcl.readthedocs.io/en/latest/">http://amgcl.readthedocs.io/en/latest/</a>
+GitHub repository: <a class="reference external" href="https://github.com/ddemidov/amgcl/tree/master/examples">https://github.com/ddemidov/amgcl/tree/master/examples</a></p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span> <span class="n">x</span>              <span class="p">=</span> <span class="n">amgcl_matlab</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">amg_opt</span><span class="p">,</span> <span class="n">tol</span><span class="p">,</span> <span class="n">maxIter</span><span class="p">,</span> <span class="n">id</span><span class="p">)</span>
+
+<span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">err</span><span class="p">]</span>        <span class="p">=</span> <span class="n">amgcl_matlab</span><span class="p">(...)</span>
+<span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">err</span><span class="p">,</span> <span class="n">nIter</span><span class="p">]</span> <span class="p">=</span> <span class="n">amgcl_matlab</span><span class="p">(...)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> – Sparse coefficient matrix of system of simultaneous linear
+equations.</p></li>
+<li><p><strong>b</strong> – System right-hand side.</p></li>
+<li><p><strong>amg_opt</strong> – AMGCL options structure as defined by function
+<a class="reference internal" href="#linearsolvers.amgcl.utils.getAMGCLMexStruct" title="linearsolvers.amgcl.utils.getAMGCLMexStruct"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">getAMGCLMexStruct</span></code></a>.</p></li>
+<li><p><strong>tol</strong> – Relative residual reduction tolerance.  Positive scalar.</p></li>
+<li><p><strong>maxIter</strong> – Maximum number of linear iterations.</p></li>
+<li><p><strong>id</strong> – Solver method ID.  Integer.  Supported values are <code class="xref mat mat-func docutils literal notranslate"><span class="pre">1</span></code> for the
+regular solver and <code class="xref mat mat-func docutils literal notranslate"><span class="pre">2</span></code> for the CPR solver.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>x</strong> – Solution vector.</p></li>
+<li><p><strong>err</strong> – Norm of residual at end of solution process.</p></li>
+<li><p><strong>nIter</strong> – Number of linear iterations.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For first-time use, this gateway will attempt to build a MEX-file using
+the configured C++ compiler. In order to do this, the paths to the
+dependencies AMGCL and BOOST can be specified via global variables, or
+the dependencies can be automatically downloaded by MRST if Internet
+access is available.</p>
+<p>For instance, this can be done by executing the following:
+global BOOSTPATH AMGCLPATH
+% Define paths
+BOOSTPATH = ‘/path/to/boost’;
+AMGCLPATH = ‘/path/to/amgcl-repo’;
+% Build the binaries
+amgcl_matlab();</p>
+<p>In addition, you will require a working C++ compiler (see mex -setup).</p>
+<p>This gateway was last tested with commit</p>
+<blockquote>
+<div><p>a551614040f0a7b793b41a4a63386675ca61d8da</p>
+</div></blockquote>
+<p>of the AMGCL software (from GitHub: <a class="reference external" href="https://github.com/ddemidov/amgcl">https://github.com/ddemidov/amgcl</a>).</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Linux (Ubuntu 18.04.2 LTS):</dt><dd><p>GCC   7.4.0
+Boost 1.70.0</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Linux (Mint 17.2):</dt><dd><p>GCC   4.9.4
+Boost 1.63.0</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>MS Windows 10 (1809):</dt><dd><p>MSVC 19.16.27032.1  (Visual Studio 2017 15.9.15)
+Boost 1.70.0</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#linearsolvers.amgcl.callAMGCL" title="linearsolvers.amgcl.callAMGCL"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">callAMGCL</span></code></a>, <a class="reference internal" href="#linearsolvers.amgcl.utils.getAMGCLMexStruct" title="linearsolvers.amgcl.utils.getAMGCLMexStruct"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">getAMGCLMexStruct</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="linearsolvers.amgcl.utils.amgcl_matlab_block">
+<span class="sig-name descname"><span class="pre">amgcl_matlab_block</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#linearsolvers.amgcl.utils.amgcl_matlab_block" title="Permalink to this definition"></a></dt>
+<dd><p>MEX-gateway to AMGCL Linear Solver Software</p>
+<p>For more information about AMGCL, please see:
+Documentation: <a class="reference external" href="http://amgcl.readthedocs.io/en/latest/">http://amgcl.readthedocs.io/en/latest/</a>
+GitHub repository: <a class="reference external" href="https://github.com/ddemidov/amgcl/tree/master/examples">https://github.com/ddemidov/amgcl/tree/master/examples</a></p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span> <span class="n">x</span>              <span class="p">=</span> <span class="n">amgcl_matlab</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">amg_opt</span><span class="p">,</span> <span class="n">tol</span><span class="p">,</span> <span class="n">maxIter</span><span class="p">,</span> <span class="n">id</span><span class="p">)</span>
+
+<span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">err</span><span class="p">]</span>        <span class="p">=</span> <span class="n">amgcl_matlab</span><span class="p">(...)</span>
+<span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">err</span><span class="p">,</span> <span class="n">nIter</span><span class="p">]</span> <span class="p">=</span> <span class="n">amgcl_matlab</span><span class="p">(...)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> – Sparse coefficient matrix of system of simultaneous linear
+equations.</p></li>
+<li><p><strong>b</strong> – System right-hand side.</p></li>
+<li><p><strong>amg_opt</strong> – AMGCL options structure as defined by function
+<a class="reference internal" href="#linearsolvers.amgcl.utils.getAMGCLMexStruct" title="linearsolvers.amgcl.utils.getAMGCLMexStruct"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">getAMGCLMexStruct</span></code></a>.</p></li>
+<li><p><strong>tol</strong> – Relative residual reduction tolerance.  Positive scalar.</p></li>
+<li><p><strong>maxIter</strong> – Maximum number of linear iterations.</p></li>
+<li><p><strong>id</strong> – Solver method ID.  Integer.  Supported values are <code class="xref mat mat-func docutils literal notranslate"><span class="pre">1</span></code> for the
+regular solver and <code class="xref mat mat-func docutils literal notranslate"><span class="pre">2</span></code> for the CPR solver.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>x</strong> – Solution vector.</p></li>
+<li><p><strong>err</strong> – Norm of residual at end of solution process.</p></li>
+<li><p><strong>nIter</strong> – Number of linear iterations.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For first-time use, this gateway will attempt to build a MEX-file using
+the configured C++ compiler. In order to do this, the paths to the
+dependencies AMGCL and BOOST can be specified via global variables, or
+the dependencies can be automatically downloaded by MRST if Internet
+access is available.</p>
+<p>For instance, this can be done by executing the following:
+global BOOSTPATH AMGCLPATH
+% Define paths
+BOOSTPATH = ‘/path/to/boost’;
+AMGCLPATH = ‘/path/to/amgcl-repo’;
+% Build the binaries
+amgcl_matlab();</p>
+<p>In addition, you will require a working C++ compiler (see mex -setup).</p>
+<p>This gateway was last tested with commit</p>
+<blockquote>
+<div><p>a551614040f0a7b793b41a4a63386675ca61d8da</p>
+</div></blockquote>
+<p>of the AMGCL software (from GitHub: <a class="reference external" href="https://github.com/ddemidov/amgcl">https://github.com/ddemidov/amgcl</a>).</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Linux (Ubuntu 18.04.2 LTS):</dt><dd><p>GCC   7.4.0
+Boost 1.70.0</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Linux (Mint 17.2):</dt><dd><p>GCC   4.9.4
+Boost 1.63.0</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>MS Windows 10 (1809):</dt><dd><p>MSVC 19.16.27032.1  (Visual Studio 2017 15.9.15)
+Boost 1.70.0</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#linearsolvers.amgcl.callAMGCL" title="linearsolvers.amgcl.callAMGCL"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">callAMGCL</span></code></a>, <a class="reference internal" href="#linearsolvers.amgcl.utils.getAMGCLMexStruct" title="linearsolvers.amgcl.utils.getAMGCLMexStruct"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">getAMGCLMexStruct</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="linearsolvers.amgcl.utils.amgcl_matlab_simple">
+<span class="sig-name descname"><span class="pre">amgcl_matlab_simple</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#linearsolvers.amgcl.utils.amgcl_matlab_simple" title="Permalink to this definition"></a></dt>
+<dd><p>MEX-gateway to AMGCL Linear Solver Software</p>
+<p>For more information about AMGCL, please see:
+Documentation: <a class="reference external" href="http://amgcl.readthedocs.io/en/latest/">http://amgcl.readthedocs.io/en/latest/</a>
+GitHub repository: <a class="reference external" href="https://github.com/ddemidov/amgcl/tree/master/examples">https://github.com/ddemidov/amgcl/tree/master/examples</a></p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span> <span class="n">x</span>              <span class="p">=</span> <span class="n">amgcl_matlab</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">amg_opt</span><span class="p">,</span> <span class="n">tol</span><span class="p">,</span> <span class="n">maxIter</span><span class="p">,</span> <span class="n">id</span><span class="p">)</span>
+
+<span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">err</span><span class="p">]</span>        <span class="p">=</span> <span class="n">amgcl_matlab</span><span class="p">(...)</span>
+<span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">err</span><span class="p">,</span> <span class="n">nIter</span><span class="p">]</span> <span class="p">=</span> <span class="n">amgcl_matlab</span><span class="p">(...)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> – Sparse coefficient matrix of system of simultaneous linear
+equations.</p></li>
+<li><p><strong>b</strong> – System right-hand side.</p></li>
+<li><p><strong>amg_opt</strong> – AMGCL options structure as defined by function
+<a class="reference internal" href="#linearsolvers.amgcl.utils.getAMGCLMexStruct" title="linearsolvers.amgcl.utils.getAMGCLMexStruct"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">getAMGCLMexStruct</span></code></a>.</p></li>
+<li><p><strong>tol</strong> – Relative residual reduction tolerance.  Positive scalar.</p></li>
+<li><p><strong>maxIter</strong> – Maximum number of linear iterations.</p></li>
+<li><p><strong>id</strong> – Solver method ID.  Integer.  Supported values are <code class="xref mat mat-func docutils literal notranslate"><span class="pre">1</span></code> for the
+regular solver and <code class="xref mat mat-func docutils literal notranslate"><span class="pre">2</span></code> for the CPR solver.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>x</strong> – Solution vector.</p></li>
+<li><p><strong>err</strong> – Norm of residual at end of solution process.</p></li>
+<li><p><strong>nIter</strong> – Number of linear iterations.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For first-time use, this gateway will attempt to build a MEX-file using
+the configured C++ compiler. In order to do this, the paths to the
+dependencies AMGCL and BOOST must be specified via global variables.</p>
+<p>For instance, this can be done by executing the following:
+global BOOSTPATH AMGCLPATH
+% Define paths
+BOOSTPATH = ‘/path/to/boost’;
+AMGCLPATH = ‘/path/to/amgcl-repo’;
+% Build the binaries
+amgcl_matlab();</p>
+<p>In addition, you will require a working C++ compiler (see mex -setup).</p>
+<p>This gateway was last tested with commit</p>
+<blockquote>
+<div><p>91348b025144b61a2d3b7417988373d0dc8c8d00</p>
+</div></blockquote>
+<p>of the AMGCL software (from GitHub: <a class="reference external" href="https://github.com/ddemidov/amgcl">https://github.com/ddemidov/amgcl</a>).</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Linux (Mint 17.2):</dt><dd><p>GCC   4.9.4
+Boost 1.63.0</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>MS Windows 10 (1607):</dt><dd><p>MSVC  19.16.27024.1 (Visual Studio 15.9)
+Boost 1.68.0</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#linearsolvers.amgcl.callAMGCL" title="linearsolvers.amgcl.callAMGCL"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">callAMGCL</span></code></a>, <a class="reference internal" href="#linearsolvers.amgcl.utils.getAMGCLMexStruct" title="linearsolvers.amgcl.utils.getAMGCLMexStruct"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">getAMGCLMexStruct</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="linearsolvers.amgcl.utils.callAMGCL_cpr">
+<span class="sig-name descname"><span class="pre">callAMGCL_cpr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">A</span></em>, <em class="sig-param"><span class="pre">b</span></em>, <em class="sig-param"><span class="pre">block_size</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#linearsolvers.amgcl.utils.callAMGCL_cpr" title="Permalink to this definition"></a></dt>
+<dd><p>Invoke AMGCL Linear Solver Software in CPR Mode</p>
+<p class="rubric">Description:</p>
+<p>Solves the system of simultaneous linear equations</p>
+<blockquote>
+<div><p>Ax = b</p>
+</div></blockquote>
+<p>in which the coefficient matrix ‘A’ is sparse.  Single right-hand side
+vector.</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span> <span class="n">x</span>              <span class="p">=</span> <span class="n">callAMGCL_cpr</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">block_size</span><span class="p">)</span>
+ <span class="n">x</span>              <span class="p">=</span> <span class="n">callAMGCL_cpr</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">block_size</span><span class="p">,</span> <span class="s">&#39;pn1&#39;</span><span class="p">,</span> <span class="n">pv1</span><span class="p">,</span> <span class="p">...)</span>
+
+<span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">err</span><span class="p">]</span>        <span class="p">=</span> <span class="n">callAMGCL_cpr</span><span class="p">(...)</span>
+<span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">err</span><span class="p">,</span> <span class="n">nIter</span><span class="p">]</span> <span class="p">=</span> <span class="n">callAMGCL_cpr</span><span class="p">(...)</span>
+</pre></div>
+</div>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> – Coefficient matrix.</p></li>
+<li><p><strong>b</strong> – System right-hand side vector.</p></li>
+<li><p><strong>block_size</strong> – Size of sub-blocks.  Positive integer.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul>
+<li><dl>
+<dt><strong>isTransposed</strong> – Whether or not the coefficient matrix is transposed on</dt><dd><blockquote>
+<div><p>input.  This simplifies converting MATLAB’s CSC matrix
+format to AMGCL’s CSR matrix input format.  Default
+value: <code class="xref mat mat-func docutils literal notranslate"><span class="pre">isTransposed</span> <span class="pre">=</span> <span class="pre">false</span></code>.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p><strong>cellMajorOrder</strong> – Whether or not the coefficient matrix already is in
+cell-major ordering (i.e., whether or not the degrees
+of freedom are grouped by cell).  If set, this makes
+the call into AMGCL proper less expensive than
+otherwise.</p></li>
+<li><p><strong>tolerance</strong> – Linear solver tolerance.  Corresponds to parameter
+‘solver.tol’ (relative residual reduction) of AMGCL.
+Default value: <code class="xref mat mat-func docutils literal notranslate"><span class="pre">tolerance</span> <span class="pre">=</span> <span class="pre">1.0e-6</span></code>.</p></li>
+<li><p><strong>maxIterations</strong> – Maximum number of linear iterations.  Overrides
+‘solver.maxiter’ if positive.  Default value:
+<code class="xref mat mat-func docutils literal notranslate"><span class="pre">maxIterations</span> <span class="pre">=</span> <span class="pre">0</span></code> (use AMGCL solver’s default,
+typically 100).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Additional keyword arguments passed on to function <a class="reference internal" href="#linearsolvers.amgcl.utils.getAMGCLMexStruct" title="linearsolvers.amgcl.utils.getAMGCLMexStruct"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">getAMGCLMexStruct</span></code></a>.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> – Solution vector.</p></li>
+<li><p><strong>err</strong> – Norm of residual at end of solution process.</p></li>
+<li><p><strong>nIter</strong> – Number of linear iterations.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#linearsolvers.amgcl.callAMGCL" title="linearsolvers.amgcl.callAMGCL"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">callAMGCL</span></code></a>, <a class="reference internal" href="#linearsolvers.amgcl.utils.amgcl_matlab" title="linearsolvers.amgcl.utils.amgcl_matlab"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">amgcl_matlab</span></code></a>, <a class="reference internal" href="#linearsolvers.amgcl.utils.getAMGCLMexStruct" title="linearsolvers.amgcl.utils.getAMGCLMexStruct"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">getAMGCLMexStruct</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="linearsolvers.amgcl.utils.getAMGCLDependencyPaths">
+<span class="sig-name descname"><span class="pre">getAMGCLDependencyPaths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#linearsolvers.amgcl.utils.getAMGCLDependencyPaths" title="Permalink to this definition"></a></dt>
+<dd><p>Locate AMGCL Build Prerequisites on Current Computer System</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">amgclpath</span><span class="p">,</span> <span class="n">boostpath</span><span class="p">]</span> <span class="p">=</span> <span class="n">getAMGCLDependencyPaths</span>
+<span class="p">[</span><span class="n">amgclpath</span><span class="p">,</span> <span class="n">boostpath</span><span class="p">]</span> <span class="p">=</span> <span class="n">getAMGCLDependencyPaths</span><span class="p">(</span><span class="s">&#39;pn1&#39;</span><span class="p">,</span> <span class="n">pv1</span><span class="p">,</span> <span class="p">...)</span>
+</pre></div>
+</div>
+<dl class="field-list">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><p><strong>amgcl_rev</strong> – Specific Git revision to download from AMGCL’s GitHub
+repository if necessary.  Character vector.  Default value:</p>
+<blockquote>
+<div><p>amgcl_rev = ‘a551614040f0a7b793b41a4a63386675ca61d8da’.</p>
+</div></blockquote>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>amgclpath</strong> – Location of AMGCL source code.  Character vector.</p></li>
+<li><p><strong>boostpath</strong> – Location of Boost library headers.  Character vector.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="core.html#core.utils.githubDownload" title="core.utils.githubDownload"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">githubDownload</span></code></a>, <a class="reference internal" href="#linearsolvers.amgcl.utils.amgcl_matlab" title="linearsolvers.amgcl.utils.amgcl_matlab"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">amgcl_matlab</span></code></a>, <a class="reference internal" href="#linearsolvers.amgcl.callAMGCL" title="linearsolvers.amgcl.callAMGCL"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">callAMGCL</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="linearsolvers.amgcl.utils.getAMGCLMexStruct">
+<span class="sig-name descname"><span class="pre">getAMGCLMexStruct</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#linearsolvers.amgcl.utils.getAMGCLMexStruct" title="Permalink to this definition"></a></dt>
+<dd><p>Undocumented Utility Function</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="linearsolvers.amgcl.utils.resetAMGCL">
+<span class="sig-name descname"><span class="pre">resetAMGCL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#linearsolvers.amgcl.utils.resetAMGCL" title="Permalink to this definition"></a></dt>
+<dd><p>Undocumented Utility Function</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="linearsolvers.amgcl.utils.translateOptionsAMGCL">
+<span class="sig-name descname"><span class="pre">translateOptionsAMGCL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">name</span></em>, <em class="sig-param"><span class="pre">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#linearsolvers.amgcl.utils.translateOptionsAMGCL" title="Permalink to this definition"></a></dt>
+<dd><p>Translate AMGCL String Option Value to Integer Code</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="p">=</span> <span class="n">translateOptionsAMGCL</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Option name.  Character vector.  Must be one of ‘precondtioner’,
+‘coarsening’, ‘relaxation’, or ‘solver’.</p></li>
+<li><p><strong>value</strong> – Option value.  String (character vector) pertaining to ‘name’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>n</strong> – Integer option value known to underlying MEX gateway.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#linearsolvers.amgcl.callAMGCL" title="linearsolvers.amgcl.callAMGCL"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">callAMGCL</span></code></a>, <a class="reference internal" href="#linearsolvers.amgcl.utils.amgcl_matlab" title="linearsolvers.amgcl.utils.amgcl_matlab"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">amgcl_matlab</span></code></a>, <a class="reference internal" href="#linearsolvers.amgcl.utils.getAMGCLMexStruct" title="linearsolvers.amgcl.utils.getAMGCLMexStruct"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">getAMGCLMexStruct</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="libgeometry.html" class="btn btn-neutral float-left" title="libgeometry:" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="matlab_bgl.html" class="btn btn-neutral float-right" title="matlab_bgl:" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019, SINTEF Digital.
+      <span class="lastupdated">Last updated on Sep 23, 2021.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

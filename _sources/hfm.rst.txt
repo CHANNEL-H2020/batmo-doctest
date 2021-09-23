@@ -1,0 +1,22 @@
+`hfm`: Hierarchical and embedded fractures
+*******************************************
+.. include:: mrst/hfm/README
+
+.. automodule:: hfm.utils
+	:members:
+
+.. automodule:: hfm.rsbsupport
+	:members:
+
+.. automodule:: hfm.processing
+	:members:
+
+.. automodule:: hfm.gridding
+	:members:
+
+.. automodule:: hfm.plotting
+	:members:
+
+Examples
+===============================
+.. include:: examples/examples_hfm.txt

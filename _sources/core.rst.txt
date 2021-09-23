@@ -1,0 +1,117 @@
+Core functionality
+**********************************
+
+.. include:: mrst/core/README.txt
+
+Plotting routines
+===============================
+A number of plotting routines are found as a part of MRST core. Different
+routines allow for plotting of general unstructured grids, as well as data
+located in cells, on faces or on nodes. For more interactive tools that build
+upon this functionality, see the `mrst-gui` module.
+
+.. automodule:: core.plotting
+	:members:
+
+Grid generation, processing and manipulation
+===============================
+.. automodule:: core.gridprocessing
+	:members:
+
+Test grids
+-------------------------------
+.. automodule:: core.gridprocessing.testgrids
+	:members:
+
+Parameters, states and forces
+===============================
+Input to solvers
+-------------------------------
+
+.. automodule:: core.solvers
+	:members:
+
+.. automodule:: core.params
+	:members:
+
+Petrophysical properties
+-------------------------------
+
+.. automodule:: core.params.rock
+	:members:
+
+Wells, boundary conditions and source terms
+-------------------------------
+.. automodule:: core.params.wells_and_bc
+	:members:
+
+Utilities
+===============================
+Various utilities
+-------------------------------
+The MRST core has a number of different utilies. Some routines, e.g. `mrstModule`
+and `mrstPath`, help MRST manage add-ons and extensions, while others are useful
+when writing scripts, functions and new solvers.
+
+.. automodule:: core.utils
+	:members:
+
+
+.. automodule:: core.utils.gridtools
+  :members:
+
+.. automodule:: core.utils.inout
+  :members:
+
+.. automodule:: core.utils.inout.eclipse.deckinput_simple
+  :members:
+
+.. automodule:: core.utils.paper_manager.papers
+  :members:
+
+.. automodule:: core.utils.paper_manager
+  :members:
+
+.. automodule:: core.utils.equil
+	:members:
+
+Module explorer
+-------------------------------
+The modules in MRST can be explored interactively, making it easy to access
+examples and relevant documentation.
+
+.. automodule:: core.utils.explore
+	:members:
+
+Dataset manager
+-------------------------------
+A large number of publicly available test datasets are available in MRST. The
+dataset manager makes it straightforward to download and work with test cases,
+provided by SINTEF and other institutions.
+
+.. automodule:: core.utils.dataset_manager
+	:members:
+
+.. automodule:: core.utils.dataset_manager.gui
+  :members:
+
+.. automodule:: core.utils.dataset_manager.utils
+  :members:
+
+
+Units
+===============================
+MRST uses strict SI units internally. In order to make examples easier to read,
+we have included many specific units as functions. This makes it possible to
+write examples without introducing messy conversion factors.
+
+.. automodule:: core.utils.units
+  :members:
+
+.. automodule:: core.utils.units.constants
+  :members:
+
+
+Examples
+===============================
+.. include:: examples/examples_core.txt

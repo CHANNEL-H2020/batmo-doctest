@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design Principles &mdash; The Matlab Reservoir Simulation Toolbox 2019b documentation</title>
+      <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../../../" id="documentation_options" src="../../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../../_static/jquery.js"></script>
+        <script src="../../../../../../_static/underscore.js"></script>
+        <script src="../../../../../../_static/doctools.js"></script>
+    <script src="../../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../../../index.html" class="icon icon-home"> The Matlab Reservoir Simulation Toolbox
+            <img src="../../../../../../_static/mrstlogo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                2019b
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../core.html">Core functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../ad-core.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-core</span></code>: Automatic Differentiation Core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../ad-props.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-props</span></code>: PVT, fluid models and other properties for the AD-solvers</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../../index.html">The Matlab Reservoir Simulation Toolbox</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Design Principles</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../../../_sources/mrst/linearsolvers/amgcl/dependencies/amgcl-7f4206dadfa0755c0495bf49cb743005d3ba154b/docs/design.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="design-principles">
+<h1>Design Principles<a class="headerlink" href="#design-principles" title="Permalink to this headline"></a></h1>
+<p>AMGCL uses the compile-time <a class="reference external" href="https://en.wikipedia.org/wiki/Policy-based_design">policy-based design</a> approach, which allows users
+of the library to compose their own version of the AMG method from the provided
+components. This also allows for easily extending the library when required.</p>
+<div class="section" id="components">
+<h2>Components<a class="headerlink" href="#components" title="Permalink to this headline"></a></h2>
+<p>AMGCL provides the following components:</p>
+<ul class="simple">
+<li><p><strong>Backends</strong> – classes that define matrix and vector types and operations
+necessary during the solution phase of the algorithm. When an AMG hierarchy
+is constructed, it is moved to the specified backend. The approach enables
+transparent acceleration of the solution phase with <a class="reference external" href="https://www.openmp.org/">OpenMP</a>, <a class="reference external" href="https://www.khronos.org/opencl/">OpenCL</a>, or
+<a class="reference external" href="https://developer.nvidia.com/cuda-toolkit">CUDA</a> technologies, and also makes tight integration with user-defined data
+structures possible.</p></li>
+<li><p><strong>Value types</strong> – enable transparent solution of complex or non-scalar
+systems. Most often, a value type is simply a <code class="docutils literal notranslate"><span class="pre">double</span></code>, but it is possible
+to use small statically-sized matrices as value type, which may increase
+cache-locality, or convergence ratio, or both, when the system matrix has a
+block structure.</p></li>
+<li><p><strong>Matrix adapters</strong> – allow AMGCL to construct a solver from some common
+matrix formats. Internally, the <a class="reference external" href="http://netlib.org/linalg/html_templates/node91.html">CRS</a> format is used, but it is easy to adapt
+any matrix format that allows row-wise iteration over its non-zero elements.</p></li>
+<li><p><strong>Coarsening strategies</strong> – various options for creating coarse systems in
+the AMG hierarchy. A coarsening strategy takes the system matrix <img class="math" src="../../../../../../_images/math/211284f68205c3e66773eaf026f32a0acdd3dfb3.png" alt="A"/> at
+the current level, and returns prolongation operator <img class="math" src="../../../../../../_images/math/c2aa3dff9bffb099e9dff196fd36aed56ec16baf.png" alt="P"/> and the
+corresponding restriction operator <img class="math" src="../../../../../../_images/math/1ebe654cc7b8f2a0d8100aa5825cf2b9021adbbc.png" alt="R"/>.</p></li>
+<li><p><strong>Relaxation methods</strong> – or smoothers, that are used on each level of the
+AMG hierarchy during solution phase.</p></li>
+<li><p><strong>Preconditioners</strong> – aside from the AMG, AMGCL implements preconditioners
+for some common problem types. For example, there is a Schur complement
+pressure correction preconditioner for Navie-Stokes type problems, or CPR
+preconditioner for reservoir simulations. Also, it is possible to use single
+level relaxation method as a preconditioner.</p></li>
+<li><p><strong>Iterative solvers</strong> – Krylov subspace methods that may be combined with
+the AMG (or other) preconditioners in order to solve the linear system.</p></li>
+</ul>
+<p>To illustrate this, here is an example of defining a solver type that
+combines a BiCGStab iterative method <a class="reference internal" href="bibliography.html#barr94" id="id1"><span>[Barr94]</span></a> preconditioned with smoothed
+aggregation AMG that uses SPAI(0) (sparse approximate inverse smoother)
+<a class="reference internal" href="bibliography.html#brgr02" id="id2"><span>[BrGr02]</span></a> as relaxation. The solver uses the
+<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">amgcl::backend::builtin</span></code> backend (accelerated with OpenMP), and
+double precision scalars as value type.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;amgcl/backend/builtin.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;amgcl/make_solver.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;amgcl/amg.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;amgcl/coarsening/smoothed_aggregation.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;amgcl/relaxation/spai0.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;amgcl/solver/bicgstab.hpp&gt;</span><span class="cp"></span>
+
+<span class="k">typedef</span> <span class="n">amgcl</span><span class="o">::</span><span class="n">backend</span><span class="o">::</span><span class="n">builtin</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">Backend</span><span class="p">;</span>
+
+<span class="k">typedef</span> <span class="n">amgcl</span><span class="o">::</span><span class="n">make_solver</span><span class="o">&lt;</span>
+    <span class="n">amgcl</span><span class="o">::</span><span class="n">amg</span><span class="o">&lt;</span>
+        <span class="n">Backend</span><span class="p">,</span>
+        <span class="n">amgcl</span><span class="o">::</span><span class="n">coarsening</span><span class="o">::</span><span class="n">smoothed_aggregation</span><span class="p">,</span>
+        <span class="n">amgcl</span><span class="o">::</span><span class="n">relaxation</span><span class="o">::</span><span class="n">spai0</span>
+        <span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">amgcl</span><span class="o">::</span><span class="n">solver</span><span class="o">::</span><span class="n">bicgstab</span><span class="o">&lt;</span><span class="n">Backend</span><span class="o">&gt;</span>
+    <span class="o">&gt;</span> <span class="n">Solver</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline"></a></h2>
+<p>Each component in AMGCL defines its own parameters by declaring a <code class="docutils literal notranslate"><span class="pre">param</span></code>
+subtype. When a class wraps several subclasses, it includes parameters of its
+children into its own <code class="docutils literal notranslate"><span class="pre">param</span></code>. For example, parameters for the
+<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">amgcl::make_solver&lt;Precond,</span> <span class="pre">Solver&gt;</span></code> are declared as</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">params</span> <span class="p">{</span>
+    <span class="k">typename</span> <span class="n">Precond</span><span class="o">::</span><span class="n">params</span> <span class="n">precond</span><span class="p">;</span>
+    <span class="k">typename</span> <span class="n">Solver</span><span class="o">::</span><span class="n">params</span> <span class="n">solver</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Knowing that, you can easily lookup parameter definitions and set parameters
+for individual components. For example, we can set the desired tolerance and
+maximum number of iterations for the iterative solver in the above example like
+this:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Solver</span><span class="o">::</span><span class="n">params</span> <span class="n">prm</span><span class="p">;</span>
+<span class="n">prm</span><span class="p">.</span><span class="n">solver</span><span class="p">.</span><span class="n">tol</span> <span class="o">=</span> <span class="mf">1e-3</span><span class="p">;</span>
+<span class="n">prm</span><span class="p">.</span><span class="n">solver</span><span class="p">.</span><span class="n">maxiter</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="n">Solver</span> <span class="nf">solve</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">ptr</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">val</span><span class="p">),</span> <span class="n">prm</span> <span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="runtime-interface">
+<h2>Runtime interface<a class="headerlink" href="#runtime-interface" title="Permalink to this headline"></a></h2>
+<p>The compile-time configuration of AMGCL solvers is not always convenient,
+especially if the solvers are used inside a software package or another
+library. The runtime interface allows to shift some of the configuraton
+decisions to runtime. The classes inside <code class="xref cpp cpp-any docutils literal notranslate"><span class="pre">amgcl::runtime</span></code> namespace
+correspond to their compile-time alternatives, but the only template parameter
+you need to specify is the backend.</p>
+<p>Since there is no way to know the parameter structure at compile time, the
+runtime classes accept parameters only in form of
+<code class="docutils literal notranslate"><span class="pre">boost::property_tree::ptree</span></code>. The actual components of the method are set
+through the parameter tree as well. For example, the solver above could be
+constructed at runtime in the following way:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;amgcl/backend/builtin.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;amgcl/make_solver.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;amgcl/amg.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;amgcl/coarsening/runtime.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;amgcl/relaxation/runtime.hpp&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;amgcl/solver/runtime.hpp&gt;</span><span class="cp"></span>
+
+<span class="k">typedef</span> <span class="n">amgcl</span><span class="o">::</span><span class="n">backend</span><span class="o">::</span><span class="n">builtin</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">Backend</span><span class="p">;</span>
+
+<span class="k">typedef</span> <span class="n">amgcl</span><span class="o">::</span><span class="n">make_solver</span><span class="o">&lt;</span>
+    <span class="n">amgcl</span><span class="o">::</span><span class="n">amg</span><span class="o">&lt;</span>
+        <span class="n">Backend</span><span class="p">,</span>
+        <span class="n">amgcl</span><span class="o">::</span><span class="n">runtime</span><span class="o">::</span><span class="n">coarsening</span><span class="o">::</span><span class="n">wrapper</span><span class="p">,</span>
+        <span class="n">amgcl</span><span class="o">::</span><span class="n">runtime</span><span class="o">::</span><span class="n">relaxation</span><span class="o">::</span><span class="n">wrapper</span>
+        <span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">amgcl</span><span class="o">::</span><span class="n">runtime</span><span class="o">::</span><span class="n">solver</span><span class="o">::</span><span class="n">wrapper</span><span class="o">&lt;</span><span class="n">Backend</span><span class="o">&gt;</span>
+    <span class="o">&gt;</span> <span class="n">Solver</span><span class="p">;</span>
+
+<span class="n">boost</span><span class="o">::</span><span class="n">property_tree</span><span class="o">::</span><span class="n">ptree</span> <span class="n">prm</span><span class="p">;</span>
+
+<span class="n">prm</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="s">&quot;solver.type&quot;</span><span class="p">,</span> <span class="s">&quot;bicgstab&quot;</span><span class="p">);</span>
+<span class="n">prm</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="s">&quot;solver.tol&quot;</span><span class="p">,</span> <span class="mf">1e-3</span><span class="p">);</span>
+<span class="n">prm</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="s">&quot;solver.maxiter&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+<span class="n">prm</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="s">&quot;precond.coarsening.type&quot;</span><span class="p">,</span> <span class="s">&quot;smoothed_aggregation&quot;</span><span class="p">);</span>
+<span class="n">prm</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="s">&quot;precond.relax.type&quot;</span><span class="p">,</span> <span class="s">&quot;spai0&quot;</span><span class="p">);</span>
+
+<span class="n">Solver</span> <span class="nf">solve</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">ptr</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">val</span><span class="p">),</span> <span class="n">prm</span> <span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019, SINTEF Digital.
+      <span class="lastupdated">Last updated on Sep 23, 2021.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

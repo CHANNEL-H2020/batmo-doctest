@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AMGCL documentation &mdash; The Matlab Reservoir Simulation Toolbox 2019b documentation</title>
+      <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../../../" id="documentation_options" src="../../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../../_static/jquery.js"></script>
+        <script src="../../../../../../_static/underscore.js"></script>
+        <script src="../../../../../../_static/doctools.js"></script>
+    <script src="../../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../../../index.html" class="icon icon-home"> The Matlab Reservoir Simulation Toolbox
+            <img src="../../../../../../_static/mrstlogo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                2019b
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../core.html">Core functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../ad-core.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-core</span></code>: Automatic Differentiation Core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../ad-props.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-props</span></code>: PVT, fluid models and other properties for the AD-solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../ad-blackoil.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-blackoil</span></code>: Black-oil solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../ad-eor.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-eor</span></code>: Enhanced oil recovery solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../ad-mechanics.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-mechanics</span></code>: Coupled flow and mechanics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../adjoint.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">adjoint</span></code>: Two-phase, incompressible adjoint solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../agglom.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">agglom</span></code>: Flow and property-based coarse-grid generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../blackoil-sequential.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">blackoil-sequential</span></code>: Sequential implicit black-oil solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../book.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">book</span></code>: Book examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../coarsegrid.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">coarsegrid</span></code>: Generation of coarse grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../compositional.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">compositional</span></code>: Equation-of-state compositional solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../co2lab.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">co2lab</span></code>: Numerical CO<sub>2</sub> laboratory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../deckformat.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">deckformat</span></code>: Reading and conversion of input decks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../dfm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dfm</span></code>: Discrete fracture matrix implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../dg.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dg</span></code>: Discontinous Galerkin discretizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../diagnostics.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">diagnostics</span></code>: Flow diagnostics functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../dual_porosity.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dual-porosity</span></code>: Dual porosity/permeability model for fractures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../fvbiot.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">fvbiot</span></code>: Consistent finite-volume discretizations for poroelasticity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../geochemistry.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">geochemistry</span></code>: Surface geochemistry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../heterogeneity.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">heterogeneity</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../hfm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">hfm</span></code>: Hierarchical and embedded fractures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../incomp.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">incomp</span></code>: Solvers for incompressible flow and transport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../libgeometry.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">libgeometry</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../linearsolvers.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">linearsolvers</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../matlab_bgl.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">matlab_bgl</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../mimetic.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mimetic</span></code>: Mimetic solvers for pressure problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../mpfa.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mpfa</span></code>: Multi-point flux approximation solvers for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../mrst_api.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mrst_api</span></code>: API for writing C/C++ for MRST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../mrst-gui.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mrst-gui</span></code>: Graphical user-interfaces for MRST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../msfvm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msfvm</span></code>: Multiscale Finite-Volume method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../msmfem.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msmfem</span></code>: Multiscale Mixed Finite-Element method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../msrsb.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msrsb</span></code>: Multiscale Restriction-Smoothed Basis method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../nwm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">nwm</span></code>: Near Wellbore Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../opm_gridprocessing.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">opm_gridprocessing</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../optimization.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">optimization</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../re-mpfa.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">re-mpfa</span></code>: Richards’ equation with multi-point flux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../solvent.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">solvent</span></code>: Solvent solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../spe10.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">spe10</span></code>: Access to the SPE10 benchmark case</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../steady-state.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">steady-state</span></code> Steady-state upscaling of functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../streamlines.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">streamlines</span></code>: Compute streamlines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../triangle.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">triangle</span></code>: Triangular grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../upscaling.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">upscaling</span></code>: Upscaling of reservoir problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../vem.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">vem</span></code>: Virtual element method on general grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../vemmech.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">vemmech</span></code>: Mechanics for general grids using the virtual element method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../wellpaths.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">wellpaths</span></code>: Generation of wells using general curves</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../../index.html">The Matlab Reservoir Simulation Toolbox</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>AMGCL documentation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../../../_sources/mrst/linearsolvers/amgcl/dependencies/amgcl-7f4206dadfa0755c0495bf49cb743005d3ba154b/docs/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="amgcl-documentation">
+<h1>AMGCL documentation<a class="headerlink" href="#amgcl-documentation" title="Permalink to this headline"></a></h1>
+<p>AMGCL is a header-only C++ library for solving large sparse linear systems with
+algebraic multigrid (AMG) method. AMG is one of the most effective iterative
+methods for solution of equation systems arising, for example, from
+discretizing PDEs on unstructured grids <a class="reference internal" href="bibliography.html#brmh85" id="id1"><span>[BrMH85]</span></a>, <a class="reference internal" href="bibliography.html#stue99" id="id2"><span>[Stue99]</span></a>, <a class="reference internal" href="bibliography.html#tros01" id="id3"><span>[TrOS01]</span></a>. The
+method can be used as a black-box solver for various computational problems,
+since it does not require any information about the underlying geometry. AMG is
+often used not as a standalone solver but as a preconditioner within an
+iterative solver (e.g.  Conjugate Gradients, BiCGStab, or GMRES).</p>
+<p>The library has minimal dependencies, and provides both shared-memory and
+distributed memory (MPI) versions of the algorithms.  The AMG hierarchy is
+constructed on a CPU and then is transferred into one of the provided backends.
+This allows for transparent acceleration of the solution phase with help of
+OpenCL, CUDA, or OpenMP technologies. Users may provide their own backends
+which enables tight integration between AMGCL and the user code.</p>
+<p>The source code is available under liberal MIT license at
+<a class="reference external" href="https://github.com/ddemidov/amgcl">https://github.com/ddemidov/amgcl</a>.</p>
+<div class="section" id="referencing">
+<h2>Referencing<a class="headerlink" href="#referencing" title="Permalink to this headline"></a></h2>
+<p>D. Demidov. AMGCL: An efficient, flexible, and extensible algebraic multigrid
+implementation. Lobachevskii Journal of Mathematics, 40(5):535–546, May 2019.
+<a class="reference external" href="https://doi.org/10.1134/S1995080219050056">doi</a> <a class="reference external" href="https://rdcu.be/bHFsY">pdf</a></p>
+<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@Article</span><span class="p">{</span><span class="nl">Demidov2019</span><span class="p">,</span>
+    <span class="na">author</span><span class="p">=</span><span class="s">&quot;Demidov, D.&quot;</span><span class="p">,</span>
+    <span class="na">title</span><span class="p">=</span><span class="s">&quot;AMGCL: An Efficient, Flexible, and Extensible Algebraic Multigrid Implementation&quot;</span><span class="p">,</span>
+    <span class="na">journal</span><span class="p">=</span><span class="s">&quot;Lobachevskii Journal of Mathematics&quot;</span><span class="p">,</span>
+    <span class="na">year</span><span class="p">=</span><span class="s">&quot;2019&quot;</span><span class="p">,</span>
+    <span class="na">month</span><span class="p">=</span><span class="s">&quot;May&quot;</span><span class="p">,</span>
+    <span class="na">day</span><span class="p">=</span><span class="s">&quot;01&quot;</span><span class="p">,</span>
+    <span class="na">volume</span><span class="p">=</span><span class="s">&quot;40&quot;</span><span class="p">,</span>
+    <span class="na">number</span><span class="p">=</span><span class="s">&quot;5&quot;</span><span class="p">,</span>
+    <span class="na">pages</span><span class="p">=</span><span class="s">&quot;535--546&quot;</span><span class="p">,</span>
+    <span class="na">issn</span><span class="p">=</span><span class="s">&quot;1818-9962&quot;</span><span class="p">,</span>
+    <span class="na">doi</span><span class="p">=</span><span class="s">&quot;10.1134/S1995080219050056&quot;</span><span class="p">,</span>
+    <span class="na">url</span><span class="p">=</span><span class="s">&quot;https://doi.org/10.1134/S1995080219050056&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="contents">
+<h2>Contents:<a class="headerlink" href="#contents" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="amg_overview.html">Algebraic Multigrid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design.html">Design Principles</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="design.html#components">Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design.html#parameters">Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design.html#runtime-interface">Runtime interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#solving-poisson-s-equation">Solving Poisson’s equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#input-formats">Input formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#setting-parameters">Setting parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#assembling-matrix-for-poisson-s-equation">Assembling matrix for Poisson’s equation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">Distributed Memory Solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benchmarks.html">Benchmarks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="benchmarks.html#shared-memory-benchmarks">Shared Memory Benchmarks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="benchmarks.html#distributed-memory-benchmarks">Distributed Memory Benchmarks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019, SINTEF Digital.
+      <span class="lastupdated">Last updated on Sep 23, 2021.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

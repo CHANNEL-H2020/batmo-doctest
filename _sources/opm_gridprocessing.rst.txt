@@ -1,0 +1,6 @@
+`opm_gridprocessing`
+*******************************************
+.. include:: mrst/opm_gridprocessing/README
+
+.. automodule:: opm_gridprocessing
+	:members:

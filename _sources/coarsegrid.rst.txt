@@ -1,0 +1,20 @@
+`coarsegrid`: Generation of coarse grids
+*******************************************
+.. include:: mrst/coarsegrid/README.txt
+
+Utilities
+===============================
+.. automodule:: coarsegrid
+	:members:
+
+.. automodule:: coarsegrid.utils
+	:members:
+
+Plotting
+===============================
+.. automodule:: coarsegrid.plotting
+	:members:
+
+Examples
+===============================
+.. include:: examples/examples_coarsegrid.txt

@@ -1,0 +1,9 @@
+`spe10`: Access to the SPE10 benchmark case
+*******************************************
+.. include:: mrst/spe10/README
+
+.. automodule:: spe10
+	:members:
+
+.. automodule:: spe10.base_case
+	:members:

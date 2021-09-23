@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>optimization &mdash; The Matlab Reservoir Simulation Toolbox 2019b documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="re-mpfa: Richards’ equation with multi-point flux" href="re-mpfa.html" />
+    <link rel="prev" title="opm_gridprocessing" href="opm_gridprocessing.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> The Matlab Reservoir Simulation Toolbox
+            <img src="_static/mrstlogo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                2019b
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="core.html">Core functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-core.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-core</span></code>: Automatic Differentiation Core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-props.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-props</span></code>: PVT, fluid models and other properties for the AD-solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-blackoil.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-blackoil</span></code>: Black-oil solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-eor.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-eor</span></code>: Enhanced oil recovery solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ad-mechanics.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">ad-mechanics</span></code>: Coupled flow and mechanics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adjoint.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">adjoint</span></code>: Two-phase, incompressible adjoint solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agglom.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">agglom</span></code>: Flow and property-based coarse-grid generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="blackoil-sequential.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">blackoil-sequential</span></code>: Sequential implicit black-oil solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">book</span></code>: Book examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coarsegrid.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">coarsegrid</span></code>: Generation of coarse grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compositional.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">compositional</span></code>: Equation-of-state compositional solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="co2lab.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">co2lab</span></code>: Numerical CO<sub>2</sub> laboratory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deckformat.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">deckformat</span></code>: Reading and conversion of input decks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dfm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dfm</span></code>: Discrete fracture matrix implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dg.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dg</span></code>: Discontinous Galerkin discretizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="diagnostics.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">diagnostics</span></code>: Flow diagnostics functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dual_porosity.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">dual-porosity</span></code>: Dual porosity/permeability model for fractures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fvbiot.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">fvbiot</span></code>: Consistent finite-volume discretizations for poroelasticity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geochemistry.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">geochemistry</span></code>: Surface geochemistry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heterogeneity.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">heterogeneity</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="hfm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">hfm</span></code>: Hierarchical and embedded fractures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="incomp.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">incomp</span></code>: Solvers for incompressible flow and transport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libgeometry.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">libgeometry</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linearsolvers.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">linearsolvers</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab_bgl.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">matlab_bgl</span></code>:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mimetic.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mimetic</span></code>: Mimetic solvers for pressure problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpfa.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mpfa</span></code>: Multi-point flux approximation solvers for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mrst_api.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mrst_api</span></code>: API for writing C/C++ for MRST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mrst-gui.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">mrst-gui</span></code>: Graphical user-interfaces for MRST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msfvm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msfvm</span></code>: Multiscale Finite-Volume method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msmfem.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msmfem</span></code>: Multiscale Mixed Finite-Element method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="msrsb.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">msrsb</span></code>: Multiscale Restriction-Smoothed Basis method for pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nwm.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">nwm</span></code>: Near Wellbore Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opm_gridprocessing.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">opm_gridprocessing</span></code></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">optimization</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-optimization.objectives">Objective functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#utilities">Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="re-mpfa.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">re-mpfa</span></code>: Richards’ equation with multi-point flux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvent.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">solvent</span></code>: Solvent solvers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spe10.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">spe10</span></code>: Access to the SPE10 benchmark case</a></li>
+<li class="toctree-l1"><a class="reference internal" href="steady-state.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">steady-state</span></code> Steady-state upscaling of functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="streamlines.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">streamlines</span></code>: Compute streamlines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="triangle.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">triangle</span></code>: Triangular grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upscaling.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">upscaling</span></code>: Upscaling of reservoir problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vem.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">vem</span></code>: Virtual element method on general grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vemmech.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">vemmech</span></code>: Mechanics for general grids using the virtual element method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wellpaths.html"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">wellpaths</span></code>: Generation of wells using general curves</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">The Matlab Reservoir Simulation Toolbox</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><code class="xref mat mat-func docutils literal notranslate"><span class="pre">optimization</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/optimization.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="optimization">
+<h1><code class="xref mat mat-func docutils literal notranslate"><span class="pre">optimization</span></code><a class="headerlink" href="#optimization" title="Permalink to this headline"></a></h1>
+<p>The optimization module contains routines for solving optimal control problems with (forward and adjoint) solvers based on the automatic differentiation framework found in ad-core and ad-blackoil. The module contains a quasi-Newton optimization routine using BFGS-updated Hessians, but can easily be set up to use any (non-MRST) optimization code.</p>
+<div class="section" id="module-optimization.objectives">
+<span id="objective-functions"></span><h2>Objective functions<a class="headerlink" href="#module-optimization.objectives" title="Permalink to this headline"></a></h2>
+<dl class="mat script">
+<dt class="sig sig-object mat" id="optimization.objectives.Contents">
+<span class="sig-name descname"><span class="pre">Contents</span></span><a class="headerlink" href="#optimization.objectives.Contents" title="Permalink to this definition"></a></dt>
+<dd><p>Files
+matchObservedOW - Compute mismatch-function
+NPVBlackOil     - Compute net present value of a schedule with well solutions
+NPVOW           - Compute net present value of a schedule with well solutions
+NPVOWPolymer    - Compute net present value of a schedule with well solutions</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="optimization.objectives.NPVBlackOil">
+<span class="sig-name descname"><span class="pre">NPVBlackOil</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">states</span></em>, <em class="sig-param"><span class="pre">schedule</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimization.objectives.NPVBlackOil" title="Permalink to this definition"></a></dt>
+<dd><p>Compute net present value of a schedule with well solutions</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="optimization.objectives.NPVOW">
+<span class="sig-name descname"><span class="pre">NPVOW</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">states</span></em>, <em class="sig-param"><span class="pre">schedule</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimization.objectives.NPVOW" title="Permalink to this definition"></a></dt>
+<dd><p>Compute net present value of a schedule with well solutions</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="optimization.objectives.NPVOWPolymer">
+<span class="sig-name descname"><span class="pre">NPVOWPolymer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">G</span></em>, <em class="sig-param"><span class="pre">wellSols</span></em>, <em class="sig-param"><span class="pre">schedule</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimization.objectives.NPVOWPolymer" title="Permalink to this definition"></a></dt>
+<dd><p>Compute net present value of a schedule with well solutions</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="optimization.objectives.matchObservedOW">
+<span class="sig-name descname"><span class="pre">matchObservedOW</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">states</span></em>, <em class="sig-param"><span class="pre">schedule</span></em>, <em class="sig-param"><span class="pre">observed</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimization.objectives.matchObservedOW" title="Permalink to this definition"></a></dt>
+<dd><p>Compute mismatch-function</p>
+</dd></dl>
+
+</div>
+<div class="section" id="utilities">
+<h2>Utilities<a class="headerlink" href="#utilities" title="Permalink to this headline"></a></h2>
+<div class="section" id="id1">
+<h3>Optimization<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h3>
+<span class="target" id="module-optimization.optim"></span><dl class="mat script">
+<dt class="sig sig-object mat" id="optimization.optim.Contents">
+<span class="sig-name descname"><span class="pre">Contents</span></span><a class="headerlink" href="#optimization.optim.Contents" title="Permalink to this definition"></a></dt>
+<dd><p>OPTIM</p>
+<dl class="simple">
+<dt>Files</dt><dd><p>argmaxCubic - find max of cubic polynomial through p1, p2
+lineSearch  - lineSearch – helper function which performs line search based on
+unitBoxBFGS - Iterative line search optimization using BFGS intended for scaled</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat class">
+<dt class="sig sig-object mat" id="optimization.optim.LimitedMemoryHessian">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">LimitedMemoryHessian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimization.optim.LimitedMemoryHessian" title="Permalink to this definition"></a></dt>
+<dd><p>LimitedMemoryHessian: simple implementation of limited memory
+approxiamtion of invere Hessian (for use in L-BFGS)
+see: unitBoxBFGS (option limitedMemory)</p>
+<dl class="mat method">
+<dt class="sig sig-object mat" id="optimization.optim.LimitedMemoryHessian.full">
+<span class="sig-name descname"><span class="pre">full</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">H</span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimization.optim.LimitedMemoryHessian.full" title="Permalink to this definition"></a></dt>
+<dd><p>Create full matrix, only intended for debugging purposes</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="optimization.optim.LimitedMemoryHessian.mtimes">
+<span class="sig-name descname"><span class="pre">mtimes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">H</span></em>, <em class="sig-param"><span class="pre">v</span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimization.optim.LimitedMemoryHessian.mtimes" title="Permalink to this definition"></a></dt>
+<dd><p>apply mulitplication H*v</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="optimization.optim.LimitedMemoryHessian.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">H</span></em>, <em class="sig-param"><span class="pre">s</span></em>, <em class="sig-param"><span class="pre">y</span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimization.optim.LimitedMemoryHessian.update" title="Permalink to this definition"></a></dt>
+<dd><p>store new vectors</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="optimization.optim.LimitedMemoryHessian.S">
+<span class="sig-name descname"><span class="pre">S</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'[]'</span></em><a class="headerlink" href="#optimization.optim.LimitedMemoryHessian.S" title="Permalink to this definition"></a></dt>
+<dd><p>m recent control/param diffs</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="optimization.optim.LimitedMemoryHessian.Y">
+<span class="sig-name descname"><span class="pre">Y</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'[]'</span></em><a class="headerlink" href="#optimization.optim.LimitedMemoryHessian.Y" title="Permalink to this definition"></a></dt>
+<dd><p>m recent gradient diffs</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="optimization.optim.LimitedMemoryHessian.initScale">
+<span class="sig-name descname"><span class="pre">initScale</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#optimization.optim.LimitedMemoryHessian.initScale" title="Permalink to this definition"></a></dt>
+<dd><p>scaling for H0 (defualt 1)</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="optimization.optim.LimitedMemoryHessian.initStrategy">
+<span class="sig-name descname"><span class="pre">initStrategy</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#optimization.optim.LimitedMemoryHessian.initStrategy" title="Permalink to this definition"></a></dt>
+<dd><p>‘static’ : H0k = H0 (default)</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="optimization.optim.LimitedMemoryHessian.itCount">
+<span class="sig-name descname"><span class="pre">itCount</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'0'</span></em><a class="headerlink" href="#optimization.optim.LimitedMemoryHessian.itCount" title="Permalink to this definition"></a></dt>
+<dd><p>update iteration count</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="optimization.optim.LimitedMemoryHessian.m">
+<span class="sig-name descname"><span class="pre">m</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#optimization.optim.LimitedMemoryHessian.m" title="Permalink to this definition"></a></dt>
+<dd><p>number of vectors stored (default 5)</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="optimization.optim.LimitedMemoryHessian.nullspace">
+<span class="sig-name descname"><span class="pre">nullspace</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'[]'</span></em><a class="headerlink" href="#optimization.optim.LimitedMemoryHessian.nullspace" title="Permalink to this definition"></a></dt>
+<dd><p>nullspace of active subspace</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="optimization.optim.LimitedMemoryHessian.sign">
+<span class="sig-name descname"><span class="pre">sign</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#optimization.optim.LimitedMemoryHessian.sign" title="Permalink to this definition"></a></dt>
+<dd><p>sign of Hessian(default 1)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="optimization.optim.argmaxCubic">
+<span class="sig-name descname"><span class="pre">argmaxCubic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">p1</span></em>, <em class="sig-param"><span class="pre">p2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimization.optim.argmaxCubic" title="Permalink to this definition"></a></dt>
+<dd><p>find max of cubic polynomial through p1, p2
+shift values:</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="optimization.optim.lineSearch">
+<span class="sig-name descname"><span class="pre">lineSearch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">u0</span></em>, <em class="sig-param"><span class="pre">v0</span></em>, <em class="sig-param"><span class="pre">g0</span></em>, <em class="sig-param"><span class="pre">d</span></em>, <em class="sig-param"><span class="pre">f</span></em>, <em class="sig-param"><span class="pre">opt</span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimization.optim.lineSearch" title="Permalink to this definition"></a></dt>
+<dd><p>lineSearch – helper function which performs line search based on
+Wolfe-conditions.</p>
+<p>SYNOPSIS:
+[u, v, g, info] = lineSearch(u0, v0, g0, d, f, c, opt)</p>
+<p>PARAMETERS:
+u0 :  current control vector
+v0 :  current objective value
+g0 :  current gradient
+d  :  search direction, returns an error unless d’<a href="#id2"><span class="problematic" id="id3">*</span></a>g0 &gt; 0
+f  :  objective function s.t. [v,g] = f(u)
+c  :  struct with linear inequality and equality constraints
+opt:  struct of parameters for line search</p>
+<p>RETURNS:
+u    : control vector found along d
+v    : objective value for u
+g    : gradient for u
+info :  struct containing fields:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>flag<span class="classifier">1 for success (Wolfe conditions satisfied)</span></dt><dd><p>-1 max step-length reached without satisfying Wolfe-conds
+-2 line search failed in maxIt iterations (returns most recent
+control without further considerations)</p>
+</dd>
+</dl>
+<p>step : step-length
+nits : number of iterations used</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="optimization.optim.unitBoxBFGS">
+<span class="sig-name descname"><span class="pre">unitBoxBFGS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">u0</span></em>, <em class="sig-param"><span class="pre">f</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimization.optim.unitBoxBFGS" title="Permalink to this definition"></a></dt>
+<dd><p>Iterative line search optimization using BFGS intended for scaled
+problems, i.e., 0&lt;=u&lt;=1 and f~O(1)</p>
+<p>SYNOPSIS:
+[v, u, history] = unitBoxBFGS(u0, f, …)</p>
+<p>PARAMETERS
+u0    : inital guess nx1 vector with 0&lt;= u0 &lt;= 1 and feasible wrt</p>
+<blockquote>
+<div><p>any additional constraints</p>
+</div></blockquote>
+<dl class="simple">
+<dt>f<span class="classifier">function handle s.t., [v,g] = f(u) returns</span></dt><dd><p>v : objective value
+g : objective nx1 gradient vector</p>
+</dd>
+</dl>
+<dl class="field-list">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><ul>
+<li><dl>
+<dt><strong>‘maximize’</strong> – Boolean option (false will minimize objective)</dt><dd><blockquote>
+<div><p>Default: true</p>
+</div></blockquote>
+<ul class="simple">
+<li><p><strong>‘stepInit’</strong> – Initial step (gradient scaling). If not provided
+(or set to nan), the following scaling will be used:
+stepInit = maxInitialUpdate/max(<a href="#id4"><span class="problematic" id="id5">|initial gradient|</span></a>)</p></li>
+<li><p><strong>‘maxInitialUpdate’</strong> – as described above. Default: 0.05</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<dl>
+<dt>Stopping criteria options</dt><dd><dl class="simple">
+<dt>‘gradTol’<span class="classifier">Absolute tollerance of inf-norm of projected gradient.</span></dt><dd><p>Default: 1e-3</p>
+</dd>
+</dl>
+<p>‘objChangeTol’  : Absolute objective update tollerance. Default: 5e-4
+‘maxIt’         : Maximal number of iterations. Default: 25</p>
+</dd>
+<dt>Line-search options</dt><dd><p>‘lineSearchMaxIt’ : Maximal number of line-search iterations. Default: 5
+‘stepIncreaseTol’ : Maximal step increase factor between line</p>
+<blockquote>
+<div><p>search iterations. Deafult: 10</p>
+</div></blockquote>
+<p>‘wolfe1’,         : Objective improvement condition. Default: 1e-4
+‘wolfe2’,         : Gradient reduction condition. Default: 0.9</p>
+</dd>
+<dt>Hessian approximation options</dt><dd><dl class="simple">
+<dt>‘useBFGS’<span class="classifier">If false pure gradient search will be used.</span></dt><dd><p>Deafult: true</p>
+</dd>
+<dt>‘limitedMemory’<span class="classifier">If false, full Hessian approximations will be</span></dt><dd><p>made (in general not recommended), otherwise
+L-BFGS (see LimitedMemoryHessian.m).
+Default: true</p>
+</dd>
+<dt>‘lbfgsNum’<span class="classifier">Number of vector-pairs stored for L-BFGS.</span></dt><dd><p>: Default: 5</p>
+</dd>
+<dt>‘lbfgsStrategy’<span class="classifier">‘static’ or ‘dynamic’ (see LimitedMemoryHessian.m)</span></dt><dd><p>Default: ‘dynamic’</p>
+</dd>
+</dl>
+</dd>
+<dt>Linear constraints options</dt><dd><dl>
+<dt>‘linEq’<span class="classifier">Linear equality constraints given as structure with</span></dt><dd><p>fields ‘A’ and ‘b’ to enforce A*u=b</p>
+</dd>
+<dt>‘linIneq’<span class="classifier">Linear inequality constraints <em>in addition to</em> the default</span></dt><dd><p>box constraints (0 &lt;= u &lt;= 1). Given as structure with
+fields ‘A’ and ‘b’ to enforce A*u&lt;=b</p>
+</dd>
+<dt>‘enforceFeasible’<span class="classifier">If true, will attempt to repair problematic</span></dt><dd><p>constraint handling/violations by projection. A
+NOTE: A non-feasible initial guess, will always be
+attempted to be made feasible.
+Default: false</p>
+</dd>
+</dl>
+</dd>
+<dt>Plotting and output options</dt><dd><dl class="simple">
+<dt>‘plotEvolution’<span class="classifier">Plot progess of optimization in figure.</span></dt><dd><p>Default: true</p>
+</dd>
+<dt>‘outputHessian’<span class="classifier">Output Hessian approximation for each iteration</span></dt><dd><p>in history-structure. Deafault: false</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>RETURNS:
+v       : Optimal or best objective value
+u       : Control/parameter vector corresponding to v
+history : Structure containing for each iteration:</p>
+<blockquote>
+<div><p>‘val’   : objective value
+‘u’     : control/parameter vector
+‘pg’    : norm of projected gradient
+‘alpha’ : line-search step length
+‘lsit’  : number of line-search iterations
+‘lsfl’  : line-search flag
+‘hess’  : Hessian inverse approximation (if requested)</p>
+</div></blockquote>
+</dd></dl>
+
+<span class="target" id="module-optimization.utils"></span><dl class="mat script">
+<dt class="sig sig-object mat" id="optimization.utils.Contents">
+<span class="sig-name descname"><span class="pre">Contents</span></span><a class="headerlink" href="#optimization.utils.Contents" title="Permalink to this definition"></a></dt>
+<dd><p>UTILS</p>
+<dl class="simple">
+<dt>Files</dt><dd><p>control2schedule         - Convert control vector u to schedule
+evalObjective            - Objective (and gradient) evaluation function based on input control vector u
+initSimpleScaledADIFluid - version of initSimpleScaledADIFluid with additional relperm scaling
+scaleConstraints         - Linear constraint scaling
+schedule2control         - Convert schedule to control vector
+setupConstraints         - Setup linear constraints for scaled problem. Assumes linConst applies to</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="optimization.utils.addModelParameter">
+<span class="sig-name descname"><span class="pre">addModelParameter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">params</span></em>, <em class="sig-param"><span class="pre">problem</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimization.utils.addModelParameter" title="Permalink to this definition"></a></dt>
+<dd><p>Undocumented Utility Function</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="optimization.utils.addParameter">
+<span class="sig-name descname"><span class="pre">addParameter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">params</span></em>, <em class="sig-param"><span class="pre">SimulatorSetup</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimization.utils.addParameter" title="Permalink to this definition"></a></dt>
+<dd><p>Simple utility function for adding a new parameter to a list of
+parameters.
+See  ModelParameter.m for more information about the parameters class.</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="optimization.utils.computeEnsembleSimulationObjective">
+<span class="sig-name descname"><span class="pre">computeEnsembleSimulationObjective</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">setupFn</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimization.utils.computeEnsembleSimulationObjective" title="Permalink to this definition"></a></dt>
+<dd><p>This is an undocumented utility function for OptimizationProblem which
+runs a and saves similations/objectives/adjoints for requested
+realizations</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="optimization.utils.control2schedule">
+<span class="sig-name descname"><span class="pre">control2schedule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">u</span></em>, <em class="sig-param"><span class="pre">schedule</span></em>, <em class="sig-param"><span class="pre">scaling</span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimization.utils.control2schedule" title="Permalink to this definition"></a></dt>
+<dd><p>Convert control vector u to schedule</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="optimization.utils.controlLogicFunc">
+<span class="sig-name descname"><span class="pre">controlLogicFunc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">schedule</span></em>, <em class="sig-param"><span class="pre">report</span></em>, <em class="sig-param"><span class="pre">cnum</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimization.utils.controlLogicFunc" title="Permalink to this definition"></a></dt>
+<dd><p>Undocumented Utility Function</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="optimization.utils.evalObjective">
+<span class="sig-name descname"><span class="pre">evalObjective</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">u</span></em>, <em class="sig-param"><span class="pre">obj</span></em>, <em class="sig-param"><span class="pre">state0</span></em>, <em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">schedule_org</span></em>, <em class="sig-param"><span class="pre">scaling</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimization.utils.evalObjective" title="Permalink to this definition"></a></dt>
+<dd><p>Objective (and gradient) evaluation function based on input control vector u</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="optimization.utils.evaluateMatch">
+<span class="sig-name descname"><span class="pre">evaluateMatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">pvec</span></em>, <em class="sig-param"><span class="pre">obj</span></em>, <em class="sig-param"><span class="pre">setup</span></em>, <em class="sig-param"><span class="pre">parameters</span></em>, <em class="sig-param"><span class="pre">states_ref</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimization.utils.evaluateMatch" title="Permalink to this definition"></a></dt>
+<dd><p>Utility function (for optimization) that simulates a model with parameters obtained
+from the vector ‘pvec’ (scaled parameters) and computes mismatch with respect a
+reference output state ‘states_ref’</p>
+<p class="rubric">Synopsis:</p>
+<div class="highlight-octave notranslate"><div class="highlight"><pre><span></span>  <span class="n">misfitVal</span> <span class="p">=</span> <span class="n">evaluateMatch</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">setup</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">states_ref</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;pn&#39;</span><span class="p">,</span> <span class="n">pv</span><span class="p">,</span> <span class="p">...])</span>
+
+<span class="p">[</span><span class="n">misfitVal</span><span class="p">,</span> <span class="n">sesitivities</span><span class="p">]</span> <span class="p">=</span> <span class="n">evaluateMatch</span><span class="p">(...)</span>
+<span class="p">[</span><span class="n">misfitVal</span><span class="p">,</span> <span class="n">sesitivities</span><span class="p">,</span> <span class="n">wellSols</span><span class="p">,</span> <span class="n">states</span><span class="p">]</span> <span class="p">=</span> <span class="n">evaluateMatch</span><span class="p">(...)</span>
+<span class="p">[</span><span class="n">misfitVal</span><span class="p">,</span> <span class="o">~</span><span class="p">,</span> <span class="n">wellSols</span><span class="p">,</span> <span class="n">states</span><span class="p">]</span> <span class="p">=</span> <span class="n">evaluateMatch</span><span class="p">(...,</span><span class="s">&#39;Gradient&#39;</span><span class="p">,</span><span class="s">&#39;none&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">Description:</p>
+<p>For a given parameter array p, compute mistmach and sesitivities with regards to parameter p</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pvec</strong> – An array containing the parameters’ values scaled in unit-interval [0 ,1]</p></li>
+<li><p><strong>obj</strong> – Objective function that evaluates the diferences/match between
+states evaluated at parameters p (states(p)) and the reference state states_ref</p></li>
+<li><p><strong>setup</strong> – Simulation setup structure containing: state0, model, and schedule.</p></li>
+<li><p><strong>parameters</strong> – cell-array of parameters of class ModelParameter</p></li>
+<li><p><strong>states_ref</strong> – Physical model states corresponding to the reference.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul>
+<li><p><strong>‘Gradient’</strong> – Method to calculate the sensitivities/gradient:
+‘AdjointAD’:        Compute parameter sensitivities</p>
+<blockquote>
+<div><p>using adjoint simulation  (default)</p>
+</div></blockquote>
+<dl class="simple">
+<dt>‘PerturbationADNUM’: Compute parameter sensitivities</dt><dd><p>using perturbations (first-order forward finite diferences)</p>
+</dd>
+</dl>
+<p>‘none’:              Avoind computing parameters sensitivities</p>
+</li>
+<li><p><strong>‘PerturbationSize’</strong> – small value &lt;&lt;1 to perturb parameter p (default = 1e-7)</p></li>
+<li><p><strong>‘objScaling’</strong> – scaling value for the objective function obj/objScaling.</p></li>
+<li><p><strong>‘AdjointLinearSolver’</strong> – Subclass of <code class="xref mat mat-func docutils literal notranslate"><span class="pre">LinearSolverAD</span></code> suitable for solving the
+adjoint linear systems.</p></li>
+<li><p><strong>‘NonlinearSolver’</strong> – Subclass of <code class="xref mat mat-func docutils literal notranslate"><span class="pre">NonLinearSolver</span></code> suitable for solving the
+non linear systems of the forward model.</p></li>
+<li><p><strong>‘Verbose’</strong> – Indicate if extra output is to be printed such as
+detailed convergence reports and so on.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>misfitVal</strong> – Diference between states(p) and states_ref</p></li>
+<li><p><strong>sesitivities</strong> – Gradient of misfitVal with respect p</p></li>
+<li><p><strong>wellSols</strong> – Well solution at each control step (or timestep if
+‘OutputMinisteps’ is enabled.)</p></li>
+<li><p><strong>states</strong> – State at each control step (or timestep if
+‘OutputMinisteps’ is enabled.)</p></li>
+</ul>
+</dd>
+</dl>
+<p>SEE ALSO:
+<a class="reference internal" href="#optimization.utils.evalObjective" title="optimization.utils.evalObjective"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">evalObjective</span></code></a>, <a class="reference internal" href="ad-core.html#ad_core.simulators.computeSensitivitiesAdjointAD" title="ad_core.simulators.computeSensitivitiesAdjointAD"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">computeSensitivitiesAdjointAD</span></code></a>, <a class="reference internal" href="#optimization.optim.unitBoxBFGS" title="optimization.optim.unitBoxBFGS"><code class="xref mat mat-func docutils literal notranslate"><span class="pre">unitBoxBFGS</span></code></a></p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="optimization.utils.initSimpleScaledADIFluid">
+<span class="sig-name descname"><span class="pre">initSimpleScaledADIFluid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimization.utils.initSimpleScaledADIFluid" title="Permalink to this definition"></a></dt>
+<dd><p>version of initSimpleScaledADIFluid with additional relperm scaling</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="optimization.utils.processAdjointGradients">
+<span class="sig-name descname"><span class="pre">processAdjointGradients</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">grad</span></em>, <em class="sig-param"><span class="pre">ws</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimization.utils.processAdjointGradients" title="Permalink to this definition"></a></dt>
+<dd><p>Undocumented Utility Function</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="optimization.utils.processBounds">
+<span class="sig-name descname"><span class="pre">processBounds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">W</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimization.utils.processBounds" title="Permalink to this definition"></a></dt>
+<dd><p>Undocumented Utility Function</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="optimization.utils.scaleConstraints">
+<span class="sig-name descname"><span class="pre">scaleConstraints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">linConst</span></em>, <em class="sig-param"><span class="pre">scaling</span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimization.utils.scaleConstraints" title="Permalink to this definition"></a></dt>
+<dd><p>Linear constraint scaling</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="optimization.utils.schedule2control">
+<span class="sig-name descname"><span class="pre">schedule2control</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">schedule</span></em>, <em class="sig-param"><span class="pre">scaling</span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimization.utils.schedule2control" title="Permalink to this definition"></a></dt>
+<dd><p>Convert schedule to control vector</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="optimization.utils.setupConstraints">
+<span class="sig-name descname"><span class="pre">setupConstraints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">linConst</span></em>, <em class="sig-param"><span class="pre">schedule</span></em>, <em class="sig-param"><span class="pre">scaling</span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimization.utils.setupConstraints" title="Permalink to this definition"></a></dt>
+<dd><p>Setup linear constraints for scaled problem. Assumes linConst applies to
+all control steps.</p>
+</dd></dl>
+
+<dl class="mat function">
+<dt class="sig sig-object mat" id="optimization.utils.setupSimulationControlMappings">
+<span class="sig-name descname"><span class="pre">setupSimulationControlMappings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">schedule</span></em>, <em class="sig-param"><span class="pre">bounds</span></em>, <em class="sig-param"><span class="pre">controllableWells</span></em><span class="sig-paren">)</span><a class="headerlink" href="#optimization.utils.setupSimulationControlMappings" title="Permalink to this definition"></a></dt>
+<dd><p>setup a map-structure to scaled control-vector from schedule (see OptimizationProblem)</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline"></a></h2>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="opm_gridprocessing.html" class="btn btn-neutral float-left" title="opm_gridprocessing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="re-mpfa.html" class="btn btn-neutral float-right" title="re-mpfa: Richards’ equation with multi-point flux" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019, SINTEF Digital.
+      <span class="lastupdated">Last updated on Sep 23, 2021.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

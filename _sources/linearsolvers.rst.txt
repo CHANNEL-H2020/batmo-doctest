@@ -1,0 +1,16 @@
+`linearsolvers`:
+*******************************************
+
+
+.. automodule:: linearsolvers
+	:members:
+
+.. automodule:: linearsolvers.amgcl
+	:members:
+	
+.. automodule:: linearsolvers.amgcl.utils
+	:members:
+	
+Examples
+===============================
+.. include:: examples/examples_linearsolvers.txt

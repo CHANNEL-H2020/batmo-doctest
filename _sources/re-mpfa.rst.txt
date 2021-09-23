@@ -1,0 +1,10 @@
+`re-mpfa`: Richards' equation with multi-point flux 
+***************************************************
+
+.. automodule:: re_mpfa.functions
+	:members:
+	
+	
+Examples
+===============================
+.. include:: examples/examples_re_mpfa.txt
