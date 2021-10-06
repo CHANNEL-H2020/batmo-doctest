@@ -1,8 +1,0 @@
-`book`: Book examples
-*******************************************
-
-.. include:: mrst/book/README
-
-Examples
-===============================
-.. include:: examples/examples_book.txt

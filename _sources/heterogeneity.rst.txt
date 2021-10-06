@@ -1,9 +1,0 @@
-`heterogeneity`
-*******************************************
-
-.. automodule:: heterogeneity.utils
-	:members:
-
-Examples
-===============================
-.. include:: examples/examples_heterogeneity.txt

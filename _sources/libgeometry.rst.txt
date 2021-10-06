@@ -1,3 +1,0 @@
-`libgeometry`:
-*******************************************
-.. include:: mrst/libgeometry/README

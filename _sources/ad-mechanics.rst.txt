@@ -1,8 +1,0 @@
-`ad-mechanics`: Coupled flow and mechanics
-*******************************************
-
-.. include:: mrst/ad_mechanics/README.txt
-
-Examples
-===============================
-.. include:: examples/examples_ad_mechanics.txt

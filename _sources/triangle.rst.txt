@@ -1,5 +1,0 @@
-`triangle`: Triangular grids
-*******************************************
-
-.. automodule:: triangle
-	:members:

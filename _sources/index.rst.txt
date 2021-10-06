@@ -1,70 +1,24 @@
-Welcome to the MRST quick documentation!
-============================================================
+.. BATMO documentation master file, created by
+   sphinx-quickstart on Thu Sep 30 20:16:46 2021.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+BATMO documentation
+=================================
 
 .. toctree::
-   :maxdepth: 3
 
-   core
-   ad-core
-   ad-props
-   ad-blackoil
-   ad-eor
-   ad-mechanics
-   adjoint 
-   agglom   
-   blackoil-sequential
-   book   
-   coarsegrid   
-   compositional
-   co2lab  
-   deckformat   
-   dfm   
-   dg    
-   diagnostics
-   dual_porosity
-   fvbiot 
-   geochemistry
-   geothermal 
-   heterogeneity   
-   hfm
-   incomp
-   libgeometry      
-   linearsolvers   
-   matlab_bgl
-   mimetic
-   mpfa   
-   mrst_api   
-   mrst-gui   
-   msfvm
-   msmfem
-   msrsb
-   nwm   
-   opm_gridprocessing
-   optimization
-   re-mpfa   
-   solvent   
-   spe10   
-   steady-state  
-   streamlines
-   triangle  
-   upscaling
-   vag   
-   vem
-   vemmech
-   wellpaths
-   doc_templates
+   installation
+   batterymodel
+   genmodels
+   electrodes
+   electrolyte
+   inputs
+   bibliography
+       
+Indices and tables
+==================
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

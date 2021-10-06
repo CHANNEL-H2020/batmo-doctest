@@ -1,3 +1,0 @@
-`mrst_api`: API for writing C/C++ for MRST
-*******************************************
-.. include:: mrst/mrst_api/README

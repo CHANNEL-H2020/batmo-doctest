@@ -1,6 +1,0 @@
-`mrst-gui`: Graphical user-interfaces for MRST
-*******************************************
-.. include:: mrst/mrst_gui/README
-
-.. automodule:: mrst_gui
-	:members:
