@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Electrode components &mdash; BATMO  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Electrolyte components" href="electrolyte.html" />
+    <link rel="prev" title="Generic models" href="genmodels.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> BATMO
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation instruction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="batterymodel.html">Battery model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="genmodels.html">Generic models</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Electrode components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="electrolyte.html">Electrolyte components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inputs.html">Input classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Reference lists</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">BATMO</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Electrode components</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/electrodes.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="module-Electrochemistry.Electrodes">
+<span id="electrode-components"></span><h1>Electrode components<a class="headerlink" href="#module-Electrochemistry.Electrodes" title="Permalink to this headline"></a></h1>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="Electrochemistry.Electrodes.Electrode">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Electrode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">paramobj</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Electrochemistry.Electrodes.Electrode" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref mat mat-class docutils literal notranslate"><span class="pre">PhysicalModel</span></code></p>
+<p>The Electrode model is made of two sub-models : an electrode active component (see
+<a class="reference internal" href="#Electrochemistry.ElectrodeActiveComponent" title="Electrochemistry.ElectrodeActiveComponent"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">Electrochemistry.ElectrodeActiveComponent</span></code></a>) and a current collector (see
+<a class="reference internal" href="#Electrochemistry.CurrentCollector" title="Electrochemistry.CurrentCollector"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">Electrochemistry.CurrentCollector</span></code></a>)</p>
+<p>paramobj is instance of <a class="reference internal" href="inputs.html#Electrochemistry.Electrodes.ElectrodeInputParams" title="Electrochemistry.Electrodes.ElectrodeInputParams"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">Electrochemistry.Electrodes.ElectrodeInputParams</span></code></a></p>
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="Electrochemistry.Electrodes.Electrode.ElectrodeActiveComponent">
+<span class="sig-name descname"><span class="pre">ElectrodeActiveComponent</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#Electrochemistry.Electrodes.Electrode.ElectrodeActiveComponent" title="Permalink to this definition"></a></dt>
+<dd><p>instance of <a class="reference internal" href="#Electrochemistry.ElectrodeActiveComponent" title="Electrochemistry.ElectrodeActiveComponent"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">Electrochemistry.ElectrodeActiveComponent</span></code></a></p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="Electrochemistry.Electrodes.Electrode.CurrentCollector">
+<span class="sig-name descname"><span class="pre">CurrentCollector</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#Electrochemistry.Electrodes.Electrode.CurrentCollector" title="Permalink to this definition"></a></dt>
+<dd><p>instance of <a class="reference internal" href="#Electrochemistry.CurrentCollector" title="Electrochemistry.CurrentCollector"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">Electrochemistry.CurrentCollector</span></code></a></p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="Electrochemistry.Electrodes.Electrode.setupElectrodeActiveComponent">
+<span class="sig-name descname"><span class="pre">setupElectrodeActiveComponent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">paramobj</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Electrochemistry.Electrodes.Electrode.setupElectrodeActiveComponent" title="Permalink to this definition"></a></dt>
+<dd><p>paramobj is instanceo of ElectrodeActiveComponentInputParams
+standard instantiation (ActiveMaterial is specified in ElectrodeActiveComponent instantiation)</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="Electrochemistry.Electrodes.Electrode.setupCurrentCollector">
+<span class="sig-name descname"><span class="pre">setupCurrentCollector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">paramobj</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Electrochemistry.Electrodes.Electrode.setupCurrentCollector" title="Permalink to this definition"></a></dt>
+<dd><p>standard instantiation</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="Electrochemistry.Electrodes.Electrode.updateCoupling">
+<span class="sig-name descname"><span class="pre">updateCoupling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">state</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Electrochemistry.Electrodes.Electrode.updateCoupling" title="Permalink to this definition"></a></dt>
+<dd><p>setup coupling terms between the current collector and the electrode active component</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="Electrochemistry.Electrodes.Electrode.updateTemperatureCoupling">
+<span class="sig-name descname"><span class="pre">updateTemperatureCoupling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">state</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Electrochemistry.Electrodes.Electrode.updateTemperatureCoupling" title="Permalink to this definition"></a></dt>
+<dd><p>setup coupling terms between the current collector and the electrode active component</p>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-Electrochemistry"></span><dl class="mat class">
+<dt class="sig sig-object mat" id="Electrochemistry.ElectrodeActiveComponent">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">ElectrodeActiveComponent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">paramobj</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Electrochemistry.ElectrodeActiveComponent" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="genmodels.html#Electrochemistry.ElectroChemicalComponent" title="Electrochemistry.ElectroChemicalComponent"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">Electrochemistry.ElectroChemicalComponent</span></code></a></p>
+<p><code class="docutils literal notranslate"><span class="pre">paramobj</span></code> is instance of <a class="reference internal" href="inputs.html#Electrochemistry.ElectrodeActiveComponentInputParams" title="Electrochemistry.ElectrodeActiveComponentInputParams"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ElectrodeActiveComponentInputParams</span></code></a></p>
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="Electrochemistry.ElectrodeActiveComponent.ActiveMaterial">
+<span class="sig-name descname"><span class="pre">ActiveMaterial</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#Electrochemistry.ElectrodeActiveComponent.ActiveMaterial" title="Permalink to this definition"></a></dt>
+<dd><p>instance of <a class="reference internal" href="#Electrochemistry.Electrodes.ActiveMaterial" title="Electrochemistry.Electrodes.ActiveMaterial"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">hello</span></code></a></p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="Electrochemistry.ElectrodeActiveComponent.volumeFraction">
+<span class="sig-name descname"><span class="pre">volumeFraction</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#Electrochemistry.ElectrodeActiveComponent.volumeFraction" title="Permalink to this definition"></a></dt>
+<dd><p>Volume fraction</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="Electrochemistry.ElectrodeActiveComponent.porosity">
+<span class="sig-name descname"><span class="pre">porosity</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#Electrochemistry.ElectrodeActiveComponent.porosity" title="Permalink to this definition"></a></dt>
+<dd><p>Porosity</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="Electrochemistry.ElectrodeActiveComponent.thickness">
+<span class="sig-name descname"><span class="pre">thickness</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#Electrochemistry.ElectrodeActiveComponent.thickness" title="Permalink to this definition"></a></dt>
+<dd><p>Thickness</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="Electrochemistry.ElectrodeActiveComponent.InterDiffusionCoefficient">
+<span class="sig-name descname"><span class="pre">InterDiffusionCoefficient</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#Electrochemistry.ElectrodeActiveComponent.InterDiffusionCoefficient" title="Permalink to this definition"></a></dt>
+<dd><p>Inter particle diffusion coefficient parameter (diffusion between the particles)</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="Electrochemistry.ElectrodeActiveComponent.thermalConductivity">
+<span class="sig-name descname"><span class="pre">thermalConductivity</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#Electrochemistry.ElectrodeActiveComponent.thermalConductivity" title="Permalink to this definition"></a></dt>
+<dd><p>Intrinsic Thermal conductivity</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="Electrochemistry.ElectrodeActiveComponent.heatCapacity">
+<span class="sig-name descname"><span class="pre">heatCapacity</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#Electrochemistry.ElectrodeActiveComponent.heatCapacity" title="Permalink to this definition"></a></dt>
+<dd><p>Intrinsic Heat capacity</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="Electrochemistry.ElectrodeActiveComponent.EffectiveThermalConductivity">
+<span class="sig-name descname"><span class="pre">EffectiveThermalConductivity</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#Electrochemistry.ElectrodeActiveComponent.EffectiveThermalConductivity" title="Permalink to this definition"></a></dt>
+<dd><p>Effective Thermal Conductivity</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="Electrochemistry.ElectrodeActiveComponent.EffectiveHeatCapacity">
+<span class="sig-name descname"><span class="pre">EffectiveHeatCapacity</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#Electrochemistry.ElectrodeActiveComponent.EffectiveHeatCapacity" title="Permalink to this definition"></a></dt>
+<dd><p>Effective Heat Capacity</p>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-Electrochemistry.Electrodes"></span><dl class="mat class">
+<dt class="sig sig-object mat" id="Electrochemistry.Electrodes.ActiveMaterial">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">ActiveMaterial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">paramobj</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Electrochemistry.Electrodes.ActiveMaterial" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref mat mat-class docutils literal notranslate"><span class="pre">PhysicalModel</span></code></p>
+</dd></dl>
+
+<span class="target" id="module-Electrochemistry"></span><dl class="mat class">
+<dt class="sig sig-object mat" id="Electrochemistry.CurrentCollector">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">CurrentCollector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">paramobj</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Electrochemistry.CurrentCollector" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="genmodels.html#Electrochemistry.ElectronicComponent" title="Electrochemistry.ElectronicComponent"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">Electrochemistry.ElectronicComponent</span></code></a></p>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="genmodels.html" class="btn btn-neutral float-left" title="Generic models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="electrolyte.html" class="btn btn-neutral float-right" title="Electrolyte components" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Simon Clark.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

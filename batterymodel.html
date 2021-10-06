@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Battery model &mdash; BATMO  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Generic models" href="genmodels.html" />
+    <link rel="prev" title="Installation instruction" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> BATMO
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation instruction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Battery model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="genmodels.html">Generic models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="electrodes.html">Electrode components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="electrolyte.html">Electrolyte components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inputs.html">Input classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Reference lists</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">BATMO</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Battery model</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/batterymodel.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="battery-model">
+<h1>Battery model<a class="headerlink" href="#battery-model" title="Permalink to this headline"></a></h1>
+<p>We use multimodel approach and the battery is made of sub-models also called components.</p>
+<span class="target" id="module-Battery"></span><dl class="mat class">
+<dt class="sig sig-object mat" id="Battery.Battery">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Battery</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">paramobj</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Battery.Battery" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref mat mat-class docutils literal notranslate"><span class="pre">PhysicalModel</span></code></p>
+<p>The battery model consists of</p>
+<ul class="simple">
+<li><p>an Electrolyte model given in <a class="reference internal" href="#Battery.Battery.Electrolyte" title="Battery.Battery.Electrolyte"><code class="xref mat mat-attr docutils literal notranslate"><span class="pre">Electrolyte</span></code></a> property</p></li>
+<li><p>a Negative Electrode Model given in <a class="reference internal" href="#Battery.Battery.NegativeElectrode" title="Battery.Battery.NegativeElectrode"><code class="xref mat mat-attr docutils literal notranslate"><span class="pre">NegativeElectrode</span></code></a> property</p></li>
+<li><p>a Positive Electrode Model given in <a class="reference internal" href="#Battery.Battery.PositiveElectrode" title="Battery.Battery.PositiveElectrode"><code class="xref mat mat-attr docutils literal notranslate"><span class="pre">PositiveElectrode</span></code></a> property</p></li>
+<li><p>a Thermal model given in <a class="reference internal" href="#Battery.Battery.ThermalModel" title="Battery.Battery.ThermalModel"><code class="xref mat mat-attr docutils literal notranslate"><span class="pre">ThermalModel</span></code></a> property</p></li>
+</ul>
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="Battery.Battery.Electrolyte">
+<span class="sig-name descname"><span class="pre">Electrolyte</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#Battery.Battery.Electrolyte" title="Permalink to this definition"></a></dt>
+<dd><p>Electrolyte model, instance of <code class="xref mat mat-class docutils literal notranslate"><span class="pre">Electrolyte</span></code></p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="Battery.Battery.NegativeElectrode">
+<span class="sig-name descname"><span class="pre">NegativeElectrode</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#Battery.Battery.NegativeElectrode" title="Permalink to this definition"></a></dt>
+<dd><p>Negative Electrode Model, instance of <a class="reference internal" href="electrodes.html#Electrochemistry.Electrodes.Electrode" title="Electrochemistry.Electrodes.Electrode"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">Electrode</span></code></a></p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="Battery.Battery.PositiveElectrode">
+<span class="sig-name descname"><span class="pre">PositiveElectrode</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#Battery.Battery.PositiveElectrode" title="Permalink to this definition"></a></dt>
+<dd><p>Positive Electrode Model, instance of <a class="reference internal" href="electrodes.html#Electrochemistry.Electrodes.Electrode" title="Electrochemistry.Electrodes.Electrode"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">Electrode</span></code></a></p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="Battery.Battery.ThermalModel">
+<span class="sig-name descname"><span class="pre">ThermalModel</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#Battery.Battery.ThermalModel" title="Permalink to this definition"></a></dt>
+<dd><p>Thermal model, instance of <code class="xref mat mat-class docutils literal notranslate"><span class="pre">ThermalComponent</span></code></p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="Battery.Battery.SOC">
+<span class="sig-name descname"><span class="pre">SOC</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#Battery.Battery.SOC" title="Permalink to this definition"></a></dt>
+<dd><p>State Of Charge</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="Battery.Battery.initT">
+<span class="sig-name descname"><span class="pre">initT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#Battery.Battery.initT" title="Permalink to this definition"></a></dt>
+<dd><p>Initial temperature</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="Battery.Battery.Ucut">
+<span class="sig-name descname"><span class="pre">Ucut</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#Battery.Battery.Ucut" title="Permalink to this definition"></a></dt>
+<dd><p>Voltage cut</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="Battery.Battery.couplingTerms">
+<span class="sig-name descname"><span class="pre">couplingTerms</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#Battery.Battery.couplingTerms" title="Permalink to this definition"></a></dt>
+<dd><p>Coupling terms</p>
+</dd></dl>
+
+<dl class="mat attribute">
+<dt class="sig sig-object mat" id="Battery.Battery.cmin">
+<span class="sig-name descname"><span class="pre">cmin</span></span><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#Battery.Battery.cmin" title="Permalink to this definition"></a></dt>
+<dd><p>mininum concentration used in capping</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="Battery.Battery.setupThermalModel">
+<span class="sig-name descname"><span class="pre">setupThermalModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">paramobj</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Battery.Battery.setupThermalModel" title="Permalink to this definition"></a></dt>
+<dd><p>Setup the thermal model <a class="reference internal" href="#Battery.Battery.ThermalModel" title="Battery.Battery.ThermalModel"><code class="xref mat mat-attr docutils literal notranslate"><span class="pre">ThermalModel</span></code></a>. Here, <code class="code docutils literal notranslate"><span class="pre">paramobj</span></code> is instance of
+<code class="xref mat mat-class docutils literal notranslate"><span class="pre">ThermalComponentInputParams</span></code></p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="Battery.Battery.setupElectrode">
+<span class="sig-name descname"><span class="pre">setupElectrode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">paramobj</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Battery.Battery.setupElectrode" title="Permalink to this definition"></a></dt>
+<dd><p>Setup the electrode models (both <a class="reference internal" href="#Battery.Battery.NegativeElectrode" title="Battery.Battery.NegativeElectrode"><code class="xref mat mat-attr docutils literal notranslate"><span class="pre">NegativeElectrode</span></code></a> and <a class="reference internal" href="#Battery.Battery.PositiveElectrode" title="Battery.Battery.PositiveElectrode"><code class="xref mat mat-attr docutils literal notranslate"><span class="pre">PositiveElectrode</span></code></a>). Here, <code class="code docutils literal notranslate"><span class="pre">paramobj</span></code>
+is instance of <a class="reference internal" href="inputs.html#Electrochemistry.Electrodes.ElectrodeInputParams" title="Electrochemistry.Electrodes.ElectrodeInputParams"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ElectrodeInputParams</span></code></a></p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="Battery.Battery.setupElectrolyte">
+<span class="sig-name descname"><span class="pre">setupElectrolyte</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">paramobj</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Battery.Battery.setupElectrolyte" title="Permalink to this definition"></a></dt>
+<dd><p>Setup the electrolyte model <a class="reference internal" href="#Battery.Battery.Electrolyte" title="Battery.Battery.Electrolyte"><code class="xref mat mat-attr docutils literal notranslate"><span class="pre">Electrolyte</span></code></a>. Here, <code class="code docutils literal notranslate"><span class="pre">paramobj</span></code> is instance of
+<a class="reference internal" href="inputs.html#Electrochemistry.ElectrolyteInputParams" title="Electrochemistry.ElectrolyteInputParams"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ElectrolyteInputParams</span></code></a></p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="Battery.Battery.setupElectrolyteModel">
+<span class="sig-name descname"><span class="pre">setupElectrolyteModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Battery.Battery.setupElectrolyteModel" title="Permalink to this definition"></a></dt>
+<dd><p>Assign the electrolyte volume fractions in the different regions</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="Battery.Battery.setupInitialState">
+<span class="sig-name descname"><span class="pre">setupInitialState</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Battery.Battery.setupInitialState" title="Permalink to this definition"></a></dt>
+<dd><p>Setup the initial state</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="Battery.Battery.getEquations">
+<span class="sig-name descname"><span class="pre">getEquations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">state0</span></em>, <em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">dt</span></em>, <em class="sig-param"><span class="pre">drivingForces</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Battery.Battery.getEquations" title="Permalink to this definition"></a></dt>
+<dd><p>Assembly of the governing equation</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="Battery.Battery.updateTemperature">
+<span class="sig-name descname"><span class="pre">updateTemperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">state</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Battery.Battery.updateTemperature" title="Permalink to this definition"></a></dt>
+<dd><p>Dispatch the temperature in all the submodels</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="Battery.Battery.updateElectrolyteCoupling">
+<span class="sig-name descname"><span class="pre">updateElectrolyteCoupling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">state</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Battery.Battery.updateElectrolyteCoupling" title="Permalink to this definition"></a></dt>
+<dd><p>Assemble the electrolyte coupling by adding the ion sources from the electrodes</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="Battery.Battery.updateAccumTerms">
+<span class="sig-name descname"><span class="pre">updateAccumTerms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">state0</span></em>, <em class="sig-param"><span class="pre">dt</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Battery.Battery.updateAccumTerms" title="Permalink to this definition"></a></dt>
+<dd><p>Assemble the accumulation terms for transport equations (in electrolyte and electrodes)</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="Battery.Battery.updateThermalAccumTerms">
+<span class="sig-name descname"><span class="pre">updateThermalAccumTerms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">state</span></em>, <em class="sig-param"><span class="pre">state0</span></em>, <em class="sig-param"><span class="pre">dt</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Battery.Battery.updateThermalAccumTerms" title="Permalink to this definition"></a></dt>
+<dd><p>Assemble the accumulation term for the energy equation</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="Battery.Battery.updateThermalOhmicSourceTerms">
+<span class="sig-name descname"><span class="pre">updateThermalOhmicSourceTerms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">state</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Battery.Battery.updateThermalOhmicSourceTerms" title="Permalink to this definition"></a></dt>
+<dd><p>Assemble the ohmic source term <code class="code docutils literal notranslate"><span class="pre">state.jHeatOhmSource</span></code>, see <span id="id1">Latz and Zausch [<a class="reference internal" href="bibliography.html#id4" title="Arnulf Latz and Jochen Zausch. Multiscale modeling of lithium ion batteries: thermal aspects. jul 2016. URL: https://doi.org/10.1515%2Fnano.bjneah.6.102, doi:10.1515/nano.bjneah.6.102.">LZ16</a>]</span></p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="Battery.Battery.updateThermalChemicalSourceTerms">
+<span class="sig-name descname"><span class="pre">updateThermalChemicalSourceTerms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">state</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Battery.Battery.updateThermalChemicalSourceTerms" title="Permalink to this definition"></a></dt>
+<dd><p>Assemble the thermal source term from transport <code class="code docutils literal notranslate"><span class="pre">state.jHeatChemicalSource</span></code>, see <span id="id2">Latz and Zausch [<a class="reference internal" href="bibliography.html#id4" title="Arnulf Latz and Jochen Zausch. Multiscale modeling of lithium ion batteries: thermal aspects. jul 2016. URL: https://doi.org/10.1515%2Fnano.bjneah.6.102, doi:10.1515/nano.bjneah.6.102.">LZ16</a>]</span></p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="Battery.Battery.updateThermalReactionSourceTerms">
+<span class="sig-name descname"><span class="pre">updateThermalReactionSourceTerms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">state</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Battery.Battery.updateThermalReactionSourceTerms" title="Permalink to this definition"></a></dt>
+<dd><p>Assemble the source term from chemical reaction <code class="code docutils literal notranslate"><span class="pre">state.jHeatReactionSource</span></code>, see <span id="id3">Latz and Zausch [<a class="reference internal" href="bibliography.html#id4" title="Arnulf Latz and Jochen Zausch. Multiscale modeling of lithium ion batteries: thermal aspects. jul 2016. URL: https://doi.org/10.1515%2Fnano.bjneah.6.102, doi:10.1515/nano.bjneah.6.102.">LZ16</a>]</span></p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="Battery.Battery.updateElectrodeCoupling">
+<span class="sig-name descname"><span class="pre">updateElectrodeCoupling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">state</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Battery.Battery.updateElectrodeCoupling" title="Permalink to this definition"></a></dt>
+<dd><p>Setup the electrode coupling by updating the potential and concentration of the electrolyte in the active
+component of the electrodes. There, those quantities are considered as input and used to compute the reaction
+rate.</p>
+<p>WARNING : at the moment, we do not pass the concentrations</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="Battery.Battery.setupExternalCouplingNegativeElectrode">
+<span class="sig-name descname"><span class="pre">setupExternalCouplingNegativeElectrode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">state</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Battery.Battery.setupExternalCouplingNegativeElectrode" title="Permalink to this definition"></a></dt>
+<dd><p>Setup external electronic coupling of the negative electrode at the current collector</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="Battery.Battery.setupExternalCouplingPositiveElectrode">
+<span class="sig-name descname"><span class="pre">setupExternalCouplingPositiveElectrode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">state</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Battery.Battery.setupExternalCouplingPositiveElectrode" title="Permalink to this definition"></a></dt>
+<dd><p>Setup external electronic coupling of the positive electrode at the current collector</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation instruction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="genmodels.html" class="btn btn-neutral float-right" title="Generic models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Simon Clark.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

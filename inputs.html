@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Input classes &mdash; BATMO  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Reference lists" href="bibliography.html" />
+    <link rel="prev" title="Electrolyte components" href="electrolyte.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> BATMO
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation instruction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="batterymodel.html">Battery model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="genmodels.html">Generic models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="electrodes.html">Electrode components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="electrolyte.html">Electrolyte components</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Input classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#generic-models">Generic models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#electrode-components">Electrode components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#electrolyte-components">Electrolyte components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#battery">Battery</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Reference lists</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">BATMO</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Input classes</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/inputs.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="input-classes">
+<h1>Input classes<a class="headerlink" href="#input-classes" title="Permalink to this headline"></a></h1>
+<p>We need to propagate inputs in each of submodels. To do that we use a hierarchy of input classes that is sent
+recursively to the models. The input class is named accordingly to the model it corresponds to and its source is located
+in the same folder.</p>
+<div class="section" id="generic-models">
+<h2>Generic models<a class="headerlink" href="#generic-models" title="Permalink to this headline"></a></h2>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="Electrochemistry.ElectronicComponentInputParams">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">ElectronicComponentInputParams</span></span><a class="headerlink" href="#Electrochemistry.ElectronicComponentInputParams" title="Permalink to this definition"></a></dt>
+<dd><p>Input class for <a class="reference internal" href="genmodels.html#Electrochemistry.ElectronicComponent" title="Electrochemistry.ElectronicComponent"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ElectronicComponent</span></code></a></p>
+</dd></dl>
+
+<dl class="mat class">
+<dt class="sig sig-object mat" id="Electrochemistry.ElectroChemicalComponentInputParams">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">ElectroChemicalComponentInputParams</span></span><a class="headerlink" href="#Electrochemistry.ElectroChemicalComponentInputParams" title="Permalink to this definition"></a></dt>
+<dd><p>Input class for <a class="reference internal" href="genmodels.html#Electrochemistry.ElectronicComponent" title="Electrochemistry.ElectronicComponent"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ElectronicComponent</span></code></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="electrode-components">
+<h2>Electrode components<a class="headerlink" href="#electrode-components" title="Permalink to this headline"></a></h2>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="Electrochemistry.ElectrodeActiveComponentInputParams">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">ElectrodeActiveComponentInputParams</span></span><a class="headerlink" href="#Electrochemistry.ElectrodeActiveComponentInputParams" title="Permalink to this definition"></a></dt>
+<dd><p>Input class for <a class="reference internal" href="electrodes.html#Electrochemistry.ElectrodeActiveComponent" title="Electrochemistry.ElectrodeActiveComponent"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ElectrodeActiveComponent</span></code></a></p>
+</dd></dl>
+
+<dl class="mat class">
+<dt class="sig sig-object mat" id="Electrochemistry.Electrodes.ActiveMaterialInputParams">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">ActiveMaterialInputParams</span></span><a class="headerlink" href="#Electrochemistry.Electrodes.ActiveMaterialInputParams" title="Permalink to this definition"></a></dt>
+<dd><p>Input class for <a class="reference internal" href="electrodes.html#Electrochemistry.Electrodes.ActiveMaterial" title="Electrochemistry.Electrodes.ActiveMaterial"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">ActiveMaterial</span></code></a></p>
+</dd></dl>
+
+<dl class="mat class">
+<dt class="sig sig-object mat" id="Electrochemistry.CurrentCollectorInputParams">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">CurrentCollectorInputParams</span></span><a class="headerlink" href="#Electrochemistry.CurrentCollectorInputParams" title="Permalink to this definition"></a></dt>
+<dd><p>Input class for <a class="reference internal" href="electrodes.html#Electrochemistry.CurrentCollector" title="Electrochemistry.CurrentCollector"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">CurrentCollector</span></code></a></p>
+</dd></dl>
+
+<dl class="mat class">
+<dt class="sig sig-object mat" id="Electrochemistry.Electrodes.ElectrodeInputParams">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">ElectrodeInputParams</span></span><a class="headerlink" href="#Electrochemistry.Electrodes.ElectrodeInputParams" title="Permalink to this definition"></a></dt>
+<dd><p>Input class for <a class="reference internal" href="electrodes.html#Electrochemistry.Electrodes.Electrode" title="Electrochemistry.Electrodes.Electrode"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">Electrode</span></code></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="electrolyte-components">
+<h2>Electrolyte components<a class="headerlink" href="#electrolyte-components" title="Permalink to this headline"></a></h2>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="Electrochemistry.ElectrolyteInputParams">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">ElectrolyteInputParams</span></span><a class="headerlink" href="#Electrochemistry.ElectrolyteInputParams" title="Permalink to this definition"></a></dt>
+<dd><p>Input class for <a class="reference internal" href="electrolyte.html#Electrochemistry.Electrolyte" title="Electrochemistry.Electrolyte"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">Electrolyte</span></code></a></p>
+</dd></dl>
+
+<dl class="mat class">
+<dt class="sig sig-object mat" id="Electrochemistry.SeparatorInputParams">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">SeparatorInputParams</span></span><a class="headerlink" href="#Electrochemistry.SeparatorInputParams" title="Permalink to this definition"></a></dt>
+<dd><p>Input class for <a class="reference internal" href="electrolyte.html#Electrochemistry.Separator" title="Electrochemistry.Separator"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">Separator</span></code></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="battery">
+<h2>Battery<a class="headerlink" href="#battery" title="Permalink to this headline"></a></h2>
+<dl class="mat class">
+<dt class="sig sig-object mat" id="Battery.BatteryInputParams">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">BatteryInputParams</span></span><a class="headerlink" href="#Battery.BatteryInputParams" title="Permalink to this definition"></a></dt>
+<dd><p>Input class for <a class="reference internal" href="batterymodel.html#Battery.Battery" title="Battery.Battery"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">Battery</span></code></a></p>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="electrolyte.html" class="btn btn-neutral float-left" title="Electrolyte components" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bibliography.html" class="btn btn-neutral float-right" title="Reference lists" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Simon Clark.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
