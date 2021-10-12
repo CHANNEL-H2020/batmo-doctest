@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Battery 1D model &mdash; BATMO  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Battery 2D model" href="runBattery2D.html" />
+    <link rel="prev" title="Examples" href="../examples.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> BATMO
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation instruction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../batterymodel.html">Battery model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genmodels.html">Generic models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../electrodes.html">Electrode components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../electrolyte.html">Electrolyte components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../inputs.html">Input classes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../examples.html">Examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Battery 1D model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#we-setup-the-battery-geometry">We setup the battery geometry.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-battery-model-is-initialized-by-sending-paramobj-to-the-battery-class-constructor">The Battery model is initialized by sending paramobj to the Battery class constructor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#we-compute-the-cell-capacity-and-chose-a-discharge-rate">We compute the cell capacity and chose a discharge rate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#we-setup-the-schedule">We setup the schedule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#we-setup-the-initial-state">We setup the initial state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#we-process-output-and-recover-the-output-voltage-and-current-from-the-output-states">We process output and recover the output voltage and current from the output states.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#we-plot-the-the-output-voltage-and-current">We plot the the output voltage and current</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="runBattery2D.html">Battery 2D model</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Reference lists</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">BATMO</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../examples.html">Examples</a> &raquo;</li>
+      <li>Battery 1D model</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/publishedExamples/runBattery1D.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="battery-1d-model">
+<h1>Battery 1D model<a class="headerlink" href="#battery-1d-model" title="Permalink to this headline"></a></h1>
+<p><em>Generated from runBattery1D.m</em></p>
+<p>Include presentation of the test case (use rst format)</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% load MRST modules</span>
+<span class="n">mrstModule</span> <span class="n">add</span> <span class="n">ad</span><span class="o">-</span><span class="n">core</span> <span class="n">multimodel</span> <span class="n">mrst</span><span class="o">-</span><span class="n">gui</span> <span class="n">battery</span> <span class="n">mpfa</span>
+
+<span class="c">% We create an instance of BatteryInputParams. This class is used to initiate the battery simulator and it propagates</span>
+<span class="c">% all the parameters through out the submodels.</span>
+<span class="n">paramobj</span> <span class="p">=</span> <span class="n">BatteryInputParams</span><span class="p">();</span>
+
+<span class="c">% The input parameters can be given in json format. The json file is read and used to populate the paramobj object.</span>
+<span class="n">p</span> <span class="p">=</span> <span class="n">mfilename</span><span class="p">(</span><span class="s">&#39;fullpath&#39;</span><span class="p">);</span> <span class="n">p</span> <span class="p">=</span> <span class="n">fileparts</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+<span class="n">filename</span> <span class="p">=</span> <span class="n">fullfile</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="s">&#39;../Battery/lithiumbattery.json&#39;</span><span class="p">);</span>
+<span class="n">paramobj</span> <span class="p">=</span> <span class="n">jsonfileToParams</span><span class="p">(</span><span class="n">paramobj</span><span class="p">,</span> <span class="n">filename</span><span class="p">);</span>
+
+<span class="c">% Some shortcuts used for the sub-models</span>
+<span class="n">ne</span>      <span class="p">=</span> <span class="s">&#39;NegativeElectrode&#39;</span><span class="p">;</span>
+<span class="n">pe</span>      <span class="p">=</span> <span class="s">&#39;PositiveElectrode&#39;</span><span class="p">;</span>
+<span class="n">eac</span>     <span class="p">=</span> <span class="s">&#39;ElectrodeActiveComponent&#39;</span><span class="p">;</span>
+<span class="n">cc</span>      <span class="p">=</span> <span class="s">&#39;CurrentCollector&#39;</span><span class="p">;</span>
+<span class="n">elyte</span>   <span class="p">=</span> <span class="s">&#39;Electrolyte&#39;</span><span class="p">;</span>
+<span class="n">thermal</span> <span class="p">=</span> <span class="s">&#39;ThermalModel&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="section" id="we-setup-the-battery-geometry">
+<h2>We setup the battery geometry.<a class="headerlink" href="#we-setup-the-battery-geometry" title="Permalink to this headline"></a></h2>
+<p>Here, we use a 1D model and the class BatteryGenerator1D already contains the discretization parameters</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">gen</span> <span class="p">=</span> <span class="n">BatteryGenerator1D</span><span class="p">();</span>
+<span class="c">% We update pamobj with grid data</span>
+<span class="n">paramobj</span> <span class="p">=</span> <span class="n">gen</span><span class="p">.</span><span class="n">updateBatteryInputParams</span><span class="p">(</span><span class="n">paramobj</span><span class="p">);</span>
+
+<span class="c">% In this case, we change some of the values of the paramaters that were given in the json file to other values. This is</span>
+<span class="c">% done directly on the object paramobj.</span>
+<span class="n">paramobj</span><span class="p">.(</span><span class="n">ne</span><span class="p">).(</span><span class="n">cc</span><span class="p">).</span><span class="n">EffectiveElectricalConductivity</span> <span class="p">=</span> <span class="mi">100</span><span class="p">;</span>
+<span class="n">paramobj</span><span class="p">.(</span><span class="n">pe</span><span class="p">).(</span><span class="n">cc</span><span class="p">).</span><span class="n">EffectiveElectricalConductivity</span> <span class="p">=</span> <span class="mi">100</span><span class="p">;</span>
+<span class="n">paramobj</span><span class="p">.(</span><span class="n">thermal</span><span class="p">).</span><span class="n">externalHeatTransferCoefficient</span> <span class="p">=</span> <span class="mi">1000</span><span class="p">;</span>
+<span class="n">paramobj</span><span class="p">.(</span><span class="n">thermal</span><span class="p">).</span><span class="n">externalTemperature</span> <span class="p">=</span> <span class="n">paramobj</span><span class="p">.</span><span class="n">initT</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-battery-model-is-initialized-by-sending-paramobj-to-the-battery-class-constructor">
+<h2>The Battery model is initialized by sending paramobj to the Battery class constructor<a class="headerlink" href="#the-battery-model-is-initialized-by-sending-paramobj-to-the-battery-class-constructor" title="Permalink to this headline"></a></h2>
+<p>see <a class="reference internal" href="../batterymodel.html#Battery.Battery" title="Battery.Battery"><code class="xref mat mat-class docutils literal notranslate"><span class="pre">Battery.Battery</span></code></a></p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="p">=</span> <span class="n">Battery</span><span class="p">(</span><span class="n">paramobj</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="we-compute-the-cell-capacity-and-chose-a-discharge-rate">
+<h2>We compute the cell capacity and chose a discharge rate<a class="headerlink" href="#we-compute-the-cell-capacity-and-chose-a-discharge-rate" title="Permalink to this headline"></a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">C</span>      <span class="p">=</span> <span class="n">computeCellCapacity</span><span class="p">(</span><span class="n">model</span><span class="p">);</span>
+<span class="n">CRate</span>  <span class="p">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">5</span><span class="p">;</span>
+<span class="n">inputI</span> <span class="p">=</span> <span class="p">(</span><span class="n">C</span><span class="o">/</span><span class="n">hour</span><span class="p">)</span><span class="o">*</span><span class="n">CRate</span><span class="p">;</span> <span class="c">% current</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="we-setup-the-schedule">
+<h2>We setup the schedule<a class="headerlink" href="#we-setup-the-schedule" title="Permalink to this headline"></a></h2>
+<p>We use different time step for the activation phase (small time steps) and the following discharging phase</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% We start with rampup time steps to go through the activation phase</span>
+<span class="n">dt1</span>   <span class="p">=</span> <span class="n">rampupTimesteps</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+<span class="c">% We choose time steps for the rest of the simulation (discharge phase)</span>
+<span class="n">dt2</span>   <span class="p">=</span> <span class="mf">0.1</span><span class="o">*</span><span class="n">hour</span><span class="o">*</span><span class="nb">ones</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="c">% We concatenate the time steps</span>
+<span class="n">dt</span>    <span class="p">=</span> <span class="p">[</span><span class="n">dt1</span><span class="p">;</span> <span class="n">dt2</span><span class="p">];</span>
+<span class="n">times</span> <span class="p">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">;</span> <span class="n">cumsum</span><span class="p">(</span><span class="n">dt</span><span class="p">)];</span>
+<span class="n">tt</span>    <span class="p">=</span> <span class="n">times</span><span class="p">(</span><span class="mi">2</span> <span class="p">:</span> <span class="k">end</span><span class="p">);</span>
+<span class="n">step</span>  <span class="p">=</span> <span class="n">struct</span><span class="p">(</span><span class="s">&#39;val&#39;</span><span class="p">,</span> <span class="n">diff</span><span class="p">(</span><span class="n">times</span><span class="p">),</span> <span class="s">&#39;control&#39;</span><span class="p">,</span> <span class="nb">ones</span><span class="p">(</span><span class="nb">numel</span><span class="p">(</span><span class="n">tt</span><span class="p">),</span> <span class="mi">1</span><span class="p">));</span>
+
+<span class="c">% We set up a stopping function. Here, the simulation will stop if the output voltage reach a value smaller than 2. This</span>
+<span class="c">% stopping function will not be triggered in this case as we switch to voltage control when E=3.6 (see value of inputE</span>
+<span class="c">% below).</span>
+<span class="n">pe</span> <span class="p">=</span> <span class="s">&#39;PositiveElectrode&#39;</span><span class="p">;</span>
+<span class="n">cc</span> <span class="p">=</span> <span class="s">&#39;CurrentCollector&#39;</span><span class="p">;</span>
+<span class="n">stopFunc</span> <span class="p">=</span> <span class="p">@(</span><span class="n">model</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">state_prev</span><span class="p">)</span> <span class="p">(</span><span class="n">state</span><span class="p">.(</span><span class="n">pe</span><span class="p">).(</span><span class="n">cc</span><span class="p">).</span><span class="n">E</span> <span class="o">&lt;</span> <span class="mf">2.0</span><span class="p">);</span>
+
+<span class="n">tup</span> <span class="p">=</span> <span class="mf">0.1</span><span class="p">;</span> <span class="c">% rampup value for the current function, see rampupSwitchControl</span>
+<span class="n">inputE</span> <span class="p">=</span> <span class="mf">3.6</span><span class="p">;</span> <span class="c">% Value when current control switches to voltage control</span>
+<span class="n">srcfunc</span> <span class="p">=</span> <span class="p">@(</span><span class="n">time</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">E</span><span class="p">)</span> <span class="n">rampupSwitchControl</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">tup</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">inputI</span><span class="p">,</span> <span class="n">inputE</span><span class="p">);</span>
+
+<span class="c">% we setup the control by assigning a source and stop function.</span>
+<span class="n">control</span> <span class="p">=</span> <span class="nb">repmat</span><span class="p">(</span><span class="n">struct</span><span class="p">(</span><span class="s">&#39;src&#39;</span><span class="p">,</span> <span class="n">srcfunc</span><span class="p">,</span> <span class="s">&#39;stopFunction&#39;</span><span class="p">,</span> <span class="n">stopFunc</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+<span class="c">% This control is used to set up the schedule</span>
+<span class="n">schedule</span> <span class="p">=</span> <span class="n">struct</span><span class="p">(</span><span class="s">&#39;control&#39;</span><span class="p">,</span> <span class="n">control</span><span class="p">,</span> <span class="s">&#39;step&#39;</span><span class="p">,</span> <span class="n">step</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="we-setup-the-initial-state">
+<h2>We setup the initial state<a class="headerlink" href="#we-setup-the-initial-state" title="Permalink to this headline"></a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">initstate</span> <span class="p">=</span> <span class="n">model</span><span class="p">.</span><span class="n">setupInitialState</span><span class="p">();</span>
+
+<span class="c">% Setup nonlinear solver</span>
+<span class="n">nls</span> <span class="p">=</span> <span class="n">NonLinearSolver</span><span class="p">();</span>
+<span class="c">% Change default maximum iteration number in nonlinear solver</span>
+<span class="n">nls</span><span class="p">.</span><span class="n">maxIterations</span> <span class="p">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="c">% Change default behavior of nonlinear solver, in case of error</span>
+<span class="n">nls</span><span class="p">.</span><span class="n">errorOnFailure</span> <span class="p">=</span> <span class="n">false</span><span class="p">;</span>
+<span class="c">% Change default tolerance for nonlinear solver</span>
+<span class="n">model</span><span class="p">.</span><span class="n">nonlinearTolerance</span> <span class="p">=</span> <span class="mf">1e-5</span><span class="p">;</span>
+<span class="c">% Set verbosity</span>
+<span class="n">model</span><span class="p">.</span><span class="n">verbose</span> <span class="p">=</span> <span class="n">false</span><span class="p">;</span>
+
+<span class="c">% Run simulation</span>
+
+<span class="p">[</span><span class="n">wellSols</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">report</span><span class="p">]</span> <span class="p">=</span> <span class="n">simulateScheduleAD</span><span class="p">(</span><span class="n">initstate</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">schedule</span><span class="p">,</span> <span class="s">&#39;OutputMinisteps&#39;</span><span class="p">,</span> <span class="n">true</span><span class="p">,</span> <span class="s">&#39;NonLinearSolver&#39;</span><span class="p">,</span> <span class="n">nls</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Solving timestep 01/36:                           -&gt; 3 Milliseconds
+Solving timestep 02/36: 3 Milliseconds            -&gt; 6 Milliseconds
+Solving timestep 03/36: 6 Milliseconds            -&gt; 12 Milliseconds
+Solving timestep 04/36: 12 Milliseconds           -&gt; 25 Milliseconds
+Solving timestep 05/36: 25 Milliseconds           -&gt; 50 Milliseconds
+Solving timestep 06/36: 50 Milliseconds           -&gt; 100 Milliseconds
+Solving timestep 07/36: 100 Milliseconds          -&gt; 360 Seconds, 100 Milliseconds
+Solving timestep 08/36: 360 Seconds, 100 Milliseconds -&gt; 720 Seconds, 100 Milliseconds
+...
+</pre></div>
+</div>
+</div>
+<div class="section" id="we-process-output-and-recover-the-output-voltage-and-current-from-the-output-states">
+<h2>We process output and recover the output voltage and current from the output states.<a class="headerlink" href="#we-process-output-and-recover-the-output-voltage-and-current-from-the-output-states" title="Permalink to this headline"></a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">ind</span> <span class="p">=</span> <span class="n">cellfun</span><span class="p">(@(</span><span class="n">x</span><span class="p">)</span> <span class="n">not</span><span class="p">(</span><span class="nb">isempty</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">states</span><span class="p">);</span>
+<span class="n">states</span> <span class="p">=</span> <span class="n">states</span><span class="p">(</span><span class="n">ind</span><span class="p">);</span>
+<span class="n">Enew</span> <span class="p">=</span> <span class="n">cellfun</span><span class="p">(@(</span><span class="n">x</span><span class="p">)</span> <span class="n">x</span><span class="p">.(</span><span class="n">pe</span><span class="p">).(</span><span class="n">cc</span><span class="p">).</span><span class="n">E</span><span class="p">,</span> <span class="n">states</span><span class="p">);</span>
+<span class="n">Inew</span> <span class="p">=</span> <span class="n">cellfun</span><span class="p">(@(</span><span class="n">x</span><span class="p">)</span> <span class="n">x</span><span class="p">.(</span><span class="n">pe</span><span class="p">).(</span><span class="n">cc</span><span class="p">).</span><span class="n">I</span><span class="p">,</span> <span class="n">states</span><span class="p">);</span>
+<span class="n">time</span> <span class="p">=</span> <span class="n">cellfun</span><span class="p">(@(</span><span class="n">x</span><span class="p">)</span> <span class="n">x</span><span class="p">.</span><span class="n">time</span><span class="p">,</span> <span class="n">states</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="we-plot-the-the-output-voltage-and-current">
+<h2>We plot the the output voltage and current<a class="headerlink" href="#we-plot-the-the-output-voltage-and-current" title="Permalink to this headline"></a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">figure</span>
+<span class="n">plot</span><span class="p">((</span><span class="n">time</span><span class="o">/</span><span class="n">hour</span><span class="p">),</span> <span class="n">Enew</span><span class="p">,</span> <span class="s">&#39;*-&#39;</span><span class="p">,</span> <span class="s">&#39;linewidth&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">title</span><span class="p">(</span><span class="s">&#39;Potential (E)&#39;</span><span class="p">)</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;time (hours)&#39;</span><span class="p">)</span>
+
+<span class="n">figure</span>
+<span class="n">plot</span><span class="p">((</span><span class="n">time</span><span class="o">/</span><span class="n">hour</span><span class="p">),</span> <span class="n">Inew</span><span class="p">,</span> <span class="s">&#39;*-&#39;</span><span class="p">,</span> <span class="s">&#39;linewidth&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">title</span><span class="p">(</span><span class="s">&#39;Current (I)&#39;</span><span class="p">)</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;time (hours)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default" style="width: 100%">
+<img alt="../_images/runBattery1D_01.png" src="../_images/runBattery1D_01.png" />
+</div>
+<div class="figure align-default" style="width: 100%">
+<img alt="../_images/runBattery1D_02.png" src="../_images/runBattery1D_02.png" />
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../examples.html" class="btn btn-neutral float-left" title="Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="runBattery2D.html" class="btn btn-neutral float-right" title="Battery 2D model" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Simon Clark.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

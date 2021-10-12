@@ -1,19 +1,7 @@
-======================
-Electrochemical models
-======================
+======
+models
+======
 
-.. toctree::
-   :maxdepth: 0
-   electrodes
-   
-.. automodule:: Electrochemistry
-                
-   .. autoclass:: ElectronicComponent
-      :show-inheritance:
-      :members:
-      :exclude-members: ElectronicComponent
-
-   .. autoclass:: ElectroChemicalComponent
-      :show-inheritance:
-      :members:
-      :exclude-members: ElectroChemicalComponent
+.. autoclass:: Battery.Battery
+               :show-inheritance:
+               :members: setupThermalModel, SOC

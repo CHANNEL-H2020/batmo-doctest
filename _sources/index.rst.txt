@@ -6,7 +6,7 @@
 Project webpage: `https://batterymodel.com <https://batterymodel.com/>`_
 =======================================================================
    
-.. image:: batmologo.png
+.. image:: testAnimated.gif
    :width: 50%
    :align: center
    :target: https://batterymodel.com/
@@ -23,6 +23,7 @@ BATMO documentation
    electrodes
    electrolyte
    inputs
+   examples
    bibliography
        
 Indices and tables
