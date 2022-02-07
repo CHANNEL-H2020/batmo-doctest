@@ -76,8 +76,8 @@
 <p>We use multimodel approach and the battery is made of sub-models also called components.</p>
 <span class="target" id="module-Battery"></span><dl class="mat class">
 <dt class="sig sig-object mat" id="Battery.Battery">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Battery</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">paramobj</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Battery.Battery" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref mat mat-class docutils literal notranslate"><span class="pre">PhysicalModel</span></code></p>
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Battery</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">paramobj</span></em>, <em class="sig-param"><span class="pre">varargin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Battery.Battery" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref mat mat-class docutils literal notranslate"><span class="pre">home.xavier.Matlab.Projects.batmo.Utilities.BaseModel</span></code></p>
 <p>The battery model consists of</p>
 <ul class="simple">
 <li><p>an Electrolyte model given in <a class="reference internal" href="#Battery.Battery.Electrolyte" title="Battery.Battery.Electrolyte"><code class="xref mat mat-attr docutils literal notranslate"><span class="pre">Electrolyte</span></code></a> property</p></li>
@@ -182,6 +182,12 @@ is instance of <a class="reference internal" href="inputs.html#Electrochemistry.
 <dt class="sig sig-object mat" id="Battery.Battery.updateTemperature">
 <span class="sig-name descname"><span class="pre">updateTemperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">state</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Battery.Battery.updateTemperature" title="Permalink to this definition"></a></dt>
 <dd><p>Dispatch the temperature in all the submodels</p>
+</dd></dl>
+
+<dl class="mat method">
+<dt class="sig sig-object mat" id="Battery.Battery.getVariablesToUses">
+<span class="sig-name descname"><span class="pre">getVariablesToUses</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">model</span></em>, <em class="sig-param"><span class="pre">neq</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Battery.Battery.getVariablesToUses" title="Permalink to this definition"></a></dt>
+<dd><p>reduction will not work if not this is equalt to equations: if need one need to change LinearSolverAD.m</p>
 </dd></dl>
 
 <dl class="mat method">
